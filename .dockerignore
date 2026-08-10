@@ -1,0 +1,62 @@
+# Git and version control
+.git
+.gitignore
+.gitattributes
+
+# Node modules and dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store
+
+# Build outputs
+.next
+out
+dist
+build
+
+# Development
+# .env is allowed to be copied to the builder stage so Next.js can bake NEXT_PUBLIC_ vars
+# into the build. The production stage will NOT copy this file, keeping secrets safe.
+.env.local
+.env.*.local
+.DS_Store
+.swp
+.swo
+.vscode
+.idea
+*.iml
+
+# Testing
+coverage
+.nyc_output
+jest.config.js
+
+# Documentation
+README.md
+docs
+.github
+
+# Terraform/IaC
+terraform
+.terraform
+*.tfstate*
+infra
+
+# Docker
+Dockerfile
+docker-compose.yml
+docker-compose.dev.yml
+.dockerignore
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.circleci
+
+# Misc
+.turbo
+.vercel
+*.log
