@@ -280,3 +280,6 @@ export const maskString = (
   return start + maskChar.repeat(maskLength) + end
 }
 
+export const toSnakeCase = (text: string) => {
+  return text.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase()
+}

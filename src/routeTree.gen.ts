@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
 import { Route as Char123LocaleChar125AboutRouteImport } from './routes/{-$locale}/about'
+import { Route as Char123LocaleChar125RegisterRouteImport } from './routes/{-$locale}/register'
 import { Route as ApiTrpcSplatRouteImport } from './routes/api.trpc.$'
 
 const Char123LocaleChar125IndexRoute =
@@ -25,6 +26,12 @@ const Char123LocaleChar125AboutRoute =
     path: '/{-$locale}/about',
     getParentRoute: () => rootRouteImport,
   } as any)
+const Char123LocaleChar125RegisterRoute =
+  Char123LocaleChar125RegisterRouteImport.update({
+    id: '/{-$locale}/register',
+    path: '/{-$locale}/register',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiTrpcSplatRoute = ApiTrpcSplatRouteImport.update({
   id: '/api/trpc/$',
   path: '/api/trpc/$',
@@ -33,30 +40,44 @@ const ApiTrpcSplatRoute = ApiTrpcSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
+  '/{-$locale}/register': typeof Char123LocaleChar125RegisterRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
 }
 export interface FileRoutesByTo {
   '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
+  '/{-$locale}/register': typeof Char123LocaleChar125RegisterRoute
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
+  '/{-$locale}/register': typeof Char123LocaleChar125RegisterRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/{-$locale}/about' | '/{-$locale}/' | '/api/trpc/$'
+  fullPaths:
+    | '/{-$locale}/about'
+    | '/{-$locale}/register'
+    | '/{-$locale}/'
+    | '/api/trpc/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/{-$locale}/about' | '/{-$locale}' | '/api/trpc/$'
-  id: '__root__' | '/{-$locale}/about' | '/{-$locale}/' | '/api/trpc/$'
+  to:
+    '/{-$locale}/about' | '/{-$locale}/register' | '/{-$locale}' | '/api/trpc/$'
+  id:
+    | '__root__'
+    | '/{-$locale}/about'
+    | '/{-$locale}/register'
+    | '/{-$locale}/'
+    | '/api/trpc/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   Char123LocaleChar125AboutRoute: typeof Char123LocaleChar125AboutRoute
+  Char123LocaleChar125RegisterRoute: typeof Char123LocaleChar125RegisterRoute
   Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
   ApiTrpcSplatRoute: typeof ApiTrpcSplatRoute
 }
@@ -77,6 +98,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/{-$locale}/register': {
+      id: '/{-$locale}/register'
+      path: '/{-$locale}/register'
+      fullPath: '/{-$locale}/register'
+      preLoaderRoute: typeof Char123LocaleChar125RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/trpc/$': {
       id: '/api/trpc/$'
       path: '/api/trpc/$'
@@ -89,6 +117,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   Char123LocaleChar125AboutRoute: Char123LocaleChar125AboutRoute,
+  Char123LocaleChar125RegisterRoute: Char123LocaleChar125RegisterRoute,
   Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
   ApiTrpcSplatRoute: ApiTrpcSplatRoute,
 }
