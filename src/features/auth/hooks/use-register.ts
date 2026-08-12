@@ -3,50 +3,51 @@ import { useToastMessages } from '@/hooks'
 import { useTRPC } from '@/integrations/trpc/react'
 import type { UseMutationOptions } from '@/interfaces'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from '@tanstack/react-router'
+import { useMutation } from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { registerFormSchema } from '../schemas'
 import type { RegisterFormSchema } from '../types'
 
-// { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {}
-
-export const useRegister = () => {
+export const useRegister = ({
+  redirect = true,
+  redirectTo,
+  onSuccess,
+  onError,
+}: UseMutationOptions = {}) => {
   const defaultUrl = '/verify-email'
-  const router = useRouter()
   const toastMessages = useToastMessages(m.model_auth_title())
   const trpc = useTRPC()
+  const navigate = useNavigate()
 
   const form = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
-      username: '',
       email: '',
       password: '',
       confirmPassword: '',
     },
   })
 
-  // const { mutate, isPending } = useMutation(
-  //   trpc.auth.register.mutationOption({
-  //     onSuccess: (data, variables) => {
-  //       if (redirect) void router.push(redirectTo || '/')
-  //       toastMessages.onRegister.onSuccess()
-  //       onSuccess?.()
-  //     },
-  //     onError: (error) => {
-  //       form.setValue('password', '')
-  //       form.setValue('confirmPassword', '')
-  //       toastMessages.onRegister.onError(error)
-  //       onError?.()
-  //     },
-  //   }),
-  // )
+  const { mutate, isPending } = useMutation(
+    trpc.auth.register.mutationOptions({
+      onSuccess: () => {
+        if (redirect) void navigate({ to: redirectTo || '/' })
+        toastMessages.onRegister.onSuccess()
+        onSuccess?.()
+      },
+      onError: (error) => {
+        form.setValue('password', '')
+        form.setValue('confirmPassword', '')
+        toastMessages.onRegister.onError(error)
+        onError?.()
+      },
+    }),
+  )
 
   const onSubmit = (values: RegisterFormSchema) => {
-    console.log({ request: values })
+    mutate({ request: values })
   }
-
-  const isPending = false
 
   return { form, onSubmit, isPending, defaultUrl }
 }

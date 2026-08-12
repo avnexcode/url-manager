@@ -27,12 +27,6 @@ export const RegisterFormInner = ({
         label={m.model_auth_field_email()}
         required
       />
-      <InputText
-        name="username"
-        type="username"
-        label={m.model_auth_field_username()}
-        required
-      />
       <InputPassword
         name="password"
         label={m.model_auth_field_password()}

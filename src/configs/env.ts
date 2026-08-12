@@ -3,7 +3,9 @@ import { z } from 'zod'
 
 export const env = createEnv({
   server: {
-    SERVER_URL: z.string().url().optional(),
+    SERVER_URL: z.string().optional(),
+    SUPABASE_SERVICE_ROLE_KEY: z.string(),
+    SUPABASE_SECRET_JWT: z.string(),
   },
 
   /**
@@ -13,14 +15,28 @@ export const env = createEnv({
   clientPrefix: 'VITE_',
 
   client: {
-    VITE_APP_TITLE: z.string().min(1).optional(),
+    VITE_APP_TITLE: z.string().min(1),
+    VITE_BASE_URL: z.string().min(1),
+    VITE_SUPABASE_URL: z.string(),
+    VITE_SUPABASE_ANON_KEY: z.string(),
   },
 
   /**
    * What object holds the environment variables at runtime. This is usually
    * `process.env` or `import.meta.env`.
    */
-  runtimeEnv: import.meta.env,
+  // runtimeEnv: import.meta.env,
+  runtimeEnv: {
+    // server
+    SERVER_URL: process.env.SERVER_URL,
+    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    SUPABASE_SECRET_JWT: process.env.SUPABASE_SECRET_JWT,
+    // client
+    VITE_APP_TITLE: import.meta.env.VITE_APP_TITLE,
+    VITE_BASE_URL: import.meta.env.VITE_BASE_URL,
+    VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
+    VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
+  },
 
   /**
    * By default, this library will feed the environment variables directly to

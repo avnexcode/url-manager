@@ -14,3 +14,4 @@ export const queryParams = z.object({
     .default([{ id: 'createdAt', desc: true }]),
 })
 
+export * from './enum.validation'

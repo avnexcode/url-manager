@@ -1,0 +1,85 @@
+import type { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
+import { SupabaseService } from './supabase.service'
+
+export class FileService {
+  static getImageUrl = async (bucket: SUPABASE_BUCKET, path: string) => {
+    const timestamp = new Date().getTime().toString()
+
+    const publicUrl = await SupabaseService.storage.getPublicUrl(bucket, path)
+
+    const imageUrl = publicUrl + '?t=' + timestamp
+
+    return imageUrl
+  }
+
+  static uploadImage = async (
+    bucket: SUPABASE_BUCKET,
+    fileName: string,
+    image: string,
+  ): Promise<string> => {
+    const buffer = Buffer.from(image, 'base64')
+
+    const config = {
+      contentType: 'image/jpeg',
+      upsert: true,
+    }
+
+    const { path } = await SupabaseService.storage.uploadFile(bucket, {
+      fileName,
+      buffer,
+      config,
+    })
+
+    const imageUrl = await this.getImageUrl(bucket, path)
+
+    return imageUrl
+  }
+
+  static getFileName = (imageUrl: string) => {
+    const pathUrl = imageUrl.split('?')[0]
+
+    const url = new URL(pathUrl)
+
+    const pathSegments = url.pathname.split('/')
+
+    const fileName = pathSegments[pathSegments.length - 1]
+
+    return fileName
+  }
+
+  static deleteImageByUrl = async (
+    bucket: SUPABASE_BUCKET,
+    imageUrl: string,
+  ): Promise<void> => {
+    const fileName = this.getFileName(imageUrl)
+
+    await SupabaseService.storage.deleteFile(bucket, [fileName])
+  }
+
+  static deleteImageByUrls = async (
+    bucket: SUPABASE_BUCKET,
+    imageUrls: string[],
+  ): Promise<void> => {
+    const fileNames = imageUrls.map((url) => this.getFileName(url))
+
+    await SupabaseService.storage.deleteFile(bucket, fileNames)
+  }
+
+  static deleteFileByUrl = async (
+    bucket: SUPABASE_BUCKET,
+    fileUrls: string,
+  ): Promise<void> => {
+    const fileName = this.getFileName(fileUrls)
+
+    await SupabaseService.storage.deleteFile(bucket, [fileName])
+  }
+
+  static deleteFileByUrls = async (
+    bucket: SUPABASE_BUCKET,
+    fileUrls: string[],
+  ): Promise<void> => {
+    const fileNames = fileUrls.map((url) => this.getFileName(url))
+
+    await SupabaseService.storage.deleteFile(bucket, fileNames)
+  }
+}

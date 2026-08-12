@@ -15,6 +15,9 @@ export const Header = () => {
         <Button asChild>
           <Link to="/{-$locale}/about">About</Link>
         </Button>
+        <Button asChild>
+          <Link to="/{-$locale}/register">Register</Link>
+        </Button>
       </nav>
       <div className="flex items-center gap-2">
         <ThemeToggle />

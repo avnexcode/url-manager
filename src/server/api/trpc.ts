@@ -6,8 +6,9 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
+import { createSSRClient } from '@/lib/supabase/server'
 import { prisma as db } from '@/server/db'
-import { initTRPC } from '@trpc/server'
+import { initTRPC, TRPCError } from '@trpc/server'
 import superjson from 'superjson'
 import { ZodError } from 'zod'
 
@@ -24,8 +25,11 @@ import { ZodError } from 'zod'
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
+  const supabase = await createSSRClient()
+  const { data } = await supabase.auth.getUser()
   return {
     db,
+    user: data.user,
     ...opts,
   }
 }
@@ -96,6 +100,24 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
 })
 
 /**
+ * Authentication middleware
+ *
+ * Verifies that a user is authenticated before allowing access to a procedure.
+ * Throws UNAUTHORIZED error if no user is present in the context.
+ *
+ * @throws {TRPCError} UNAUTHORIZED - When user is not authenticated
+ */
+const authMiddleware = t.middleware(async ({ ctx, next }) => {
+  if (!ctx.user) {
+    throw new TRPCError({ code: 'UNAUTHORIZED', message: 'User unauthorized' })
+  }
+
+  return await next({
+    ctx: { ...ctx, auth: ctx.user },
+  })
+})
+
+/**
  * Public (unauthenticated) procedure
  *
  * This is the base piece you use to build new queries and mutations on your tRPC API. It does not
@@ -104,3 +126,14 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  */
 export const publicProcedure = t.procedure.use(timingMiddleware)
 
+/**
+ * Protected (authenticated) procedure
+ *
+ * If you want a query or mutation to ONLY be accessible to logged in users, use this. It verifies
+ * the session is valid and guarantees `ctx.user` is not null.
+ *
+ * @see https://trpc.io/docs/procedures
+ */
+export const protectedProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(authMiddleware)
