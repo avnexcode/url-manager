@@ -10,9 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
-import { Route as Char123LocaleChar125AboutRouteImport } from './routes/{-$locale}/about'
+import { Route as Char123LocaleChar125AuthenticatedRouteImport } from './routes/{-$locale}/_authenticated'
+import { Route as Char123LocaleChar125LoginRouteImport } from './routes/{-$locale}/login'
 import { Route as Char123LocaleChar125RegisterRouteImport } from './routes/{-$locale}/register'
 import { Route as ApiTrpcSplatRouteImport } from './routes/api.trpc.$'
+import { Route as Char123LocaleChar125AuthenticatedDashboardIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/index'
 
 const Char123LocaleChar125IndexRoute =
   Char123LocaleChar125IndexRouteImport.update({
@@ -20,10 +22,16 @@ const Char123LocaleChar125IndexRoute =
     path: '/{-$locale}/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const Char123LocaleChar125AboutRoute =
-  Char123LocaleChar125AboutRouteImport.update({
-    id: '/{-$locale}/about',
-    path: '/{-$locale}/about',
+const Char123LocaleChar125AuthenticatedRoute =
+  Char123LocaleChar125AuthenticatedRouteImport.update({
+    id: '/{-$locale}/_authenticated',
+    path: '/{-$locale}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char123LocaleChar125LoginRoute =
+  Char123LocaleChar125LoginRouteImport.update({
+    id: '/{-$locale}/login',
+    path: '/{-$locale}/login',
     getParentRoute: () => rootRouteImport,
   } as any)
 const Char123LocaleChar125RegisterRoute =
@@ -37,46 +45,66 @@ const ApiTrpcSplatRoute = ApiTrpcSplatRouteImport.update({
   path: '/api/trpc/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char123LocaleChar125AuthenticatedDashboardIndexRoute =
+  Char123LocaleChar125AuthenticatedDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => Char123LocaleChar125AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
+  '/{-$locale}': typeof Char123LocaleChar125AuthenticatedRouteWithChildren
+  '/{-$locale}/login': typeof Char123LocaleChar125LoginRoute
   '/{-$locale}/register': typeof Char123LocaleChar125RegisterRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
+  '/{-$locale}/dashboard/': typeof Char123LocaleChar125AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesByTo {
-  '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
-  '/{-$locale}/register': typeof Char123LocaleChar125RegisterRoute
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/login': typeof Char123LocaleChar125LoginRoute
+  '/{-$locale}/register': typeof Char123LocaleChar125RegisterRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
+  '/{-$locale}/dashboard': typeof Char123LocaleChar125AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
+  '/{-$locale}/_authenticated': typeof Char123LocaleChar125AuthenticatedRouteWithChildren
+  '/{-$locale}/login': typeof Char123LocaleChar125LoginRoute
   '/{-$locale}/register': typeof Char123LocaleChar125RegisterRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
+  '/{-$locale}/_authenticated/dashboard/': typeof Char123LocaleChar125AuthenticatedDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/{-$locale}/about'
+    | '/{-$locale}'
+    | '/{-$locale}/login'
     | '/{-$locale}/register'
     | '/{-$locale}/'
     | '/api/trpc/$'
+    | '/{-$locale}/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/{-$locale}/about' | '/{-$locale}/register' | '/{-$locale}' | '/api/trpc/$'
+    | '/{-$locale}'
+    | '/{-$locale}/login'
+    | '/{-$locale}/register'
+    | '/api/trpc/$'
+    | '/{-$locale}/dashboard'
   id:
     | '__root__'
-    | '/{-$locale}/about'
+    | '/{-$locale}/_authenticated'
+    | '/{-$locale}/login'
     | '/{-$locale}/register'
     | '/{-$locale}/'
     | '/api/trpc/$'
+    | '/{-$locale}/_authenticated/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  Char123LocaleChar125AboutRoute: typeof Char123LocaleChar125AboutRoute
+  Char123LocaleChar125AuthenticatedRoute: typeof Char123LocaleChar125AuthenticatedRouteWithChildren
+  Char123LocaleChar125LoginRoute: typeof Char123LocaleChar125LoginRoute
   Char123LocaleChar125RegisterRoute: typeof Char123LocaleChar125RegisterRoute
   Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
   ApiTrpcSplatRoute: typeof ApiTrpcSplatRoute
@@ -91,11 +119,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/{-$locale}/about': {
-      id: '/{-$locale}/about'
-      path: '/{-$locale}/about'
-      fullPath: '/{-$locale}/about'
-      preLoaderRoute: typeof Char123LocaleChar125AboutRouteImport
+    '/{-$locale}/_authenticated': {
+      id: '/{-$locale}/_authenticated'
+      path: '/{-$locale}'
+      fullPath: '/{-$locale}'
+      preLoaderRoute: typeof Char123LocaleChar125AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/{-$locale}/login': {
+      id: '/{-$locale}/login'
+      path: '/{-$locale}/login'
+      fullPath: '/{-$locale}/login'
+      preLoaderRoute: typeof Char123LocaleChar125LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/{-$locale}/register': {
@@ -112,11 +147,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiTrpcSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/{-$locale}/_authenticated/dashboard/': {
+      id: '/{-$locale}/_authenticated/dashboard/'
+      path: '/dashboard'
+      fullPath: '/{-$locale}/dashboard/'
+      preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof Char123LocaleChar125AuthenticatedRoute
+    }
   }
 }
 
+interface Char123LocaleChar125AuthenticatedRouteChildren {
+  Char123LocaleChar125AuthenticatedDashboardIndexRoute: typeof Char123LocaleChar125AuthenticatedDashboardIndexRoute
+}
+
+const Char123LocaleChar125AuthenticatedRouteChildren: Char123LocaleChar125AuthenticatedRouteChildren =
+  {
+    Char123LocaleChar125AuthenticatedDashboardIndexRoute:
+      Char123LocaleChar125AuthenticatedDashboardIndexRoute,
+  }
+
+const Char123LocaleChar125AuthenticatedRouteWithChildren =
+  Char123LocaleChar125AuthenticatedRoute._addFileChildren(
+    Char123LocaleChar125AuthenticatedRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
-  Char123LocaleChar125AboutRoute: Char123LocaleChar125AboutRoute,
+  Char123LocaleChar125AuthenticatedRoute:
+    Char123LocaleChar125AuthenticatedRouteWithChildren,
+  Char123LocaleChar125LoginRoute: Char123LocaleChar125LoginRoute,
   Char123LocaleChar125RegisterRoute: Char123LocaleChar125RegisterRoute,
   Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
   ApiTrpcSplatRoute: ApiTrpcSplatRoute,

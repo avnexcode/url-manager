@@ -35,10 +35,8 @@ export const ParaglideLocaleSwitcher = () => {
       <SelectTrigger
         aria-label={m.action_select({ model: m.common_language() })}
       >
-        <span className="flex items-center gap-2 capitalize">
-          {flags[currentLocale] ?? <Globe className="size-5" />}
-          <span className="uppercase">{currentLocale}</span>
-        </span>
+        {flags[currentLocale]}
+        <span className="uppercase">{currentLocale}</span>
       </SelectTrigger>
       <SelectContent position="popper" sideOffset={2} align="end">
         {renderElements({

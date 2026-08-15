@@ -73,7 +73,7 @@ export const ThemeToggle = () => {
       onClick={toggleMode}
       aria-label={label}
       title={label}
-      variant={'outline'}
+      variant={'default'}
     >
       {mode === 'auto' ? 'Auto' : mode === 'dark' ? 'Dark' : 'Light'}
     </Button>

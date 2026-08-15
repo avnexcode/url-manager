@@ -64,6 +64,8 @@ export class AuthService extends CommonService {
 
       await SettingService.create(db, { userId })
 
+      await this.auth.emailVerification(email)
+
       return user
     } catch (error) {
       if (userId) await this.auth.deleteUser(userId)

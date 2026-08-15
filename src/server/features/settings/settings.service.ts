@@ -65,7 +65,7 @@ export class SettingService extends CommonService {
 
     const settings = await Repository.findIdsByUsers(db, userIds)
 
-    return settings.map((settings) => settings.id)
+    return settings.map((setting) => setting.id)
   }
 
   static getIdByUser = async (

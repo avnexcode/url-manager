@@ -1,4 +1,4 @@
-import { cn } from '#/lib/utils.ts'
+import { cn } from '@/lib/utils'
 
 export const Skeleton = ({
   className,
@@ -7,7 +7,10 @@ export const Skeleton = ({
   return (
     <div
       data-slot="skeleton"
-      className={cn('animate-pulse rounded-md bg-accent', className)}
+      className={cn(
+        'animate-pulse rounded-base bg-secondary-background border-2 border-border',
+        className,
+      )}
       {...props}
     />
   )

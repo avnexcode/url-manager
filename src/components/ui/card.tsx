@@ -1,13 +1,13 @@
 import * as React from 'react'
 
-import { cn } from '#/lib/utils.ts'
+import { cn } from '@/lib/utils'
 
 export const Card = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
     <div
       data-slot="card"
       className={cn(
-        'flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm',
+        'rounded-base flex flex-col shadow-shadow border-2 gap-6 py-6 border-border bg-background text-foreground font-base',
         className,
       )}
       {...props}
@@ -23,7 +23,7 @@ export const CardHeader = ({
     <div
       data-slot="card-header"
       className={cn(
-        '@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
+        '@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-[data-slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
         className,
       )}
       {...props}
@@ -38,7 +38,7 @@ export const CardTitle = ({
   return (
     <div
       data-slot="card-title"
-      className={cn('leading-none font-semibold', className)}
+      className={cn('font-heading leading-none', className)}
       {...props}
     />
   )
@@ -51,7 +51,7 @@ export const CardDescription = ({
   return (
     <div
       data-slot="card-description"
-      className={cn('text-sm text-muted-foreground', className)}
+      className={cn('text-sm font-base', className)}
       {...props}
     />
   )

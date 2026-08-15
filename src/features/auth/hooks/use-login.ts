@@ -1,8 +1,7 @@
-'use client'
 import { useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
 import { SupabaseAuthErrorCode } from '@/lib/supabase/auth-error-code'
-import { supabase } from '@/lib/supabase/client'
+import { loginServerFn } from '@/lib/supabase/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { AuthError } from '@supabase/supabase-js'
 import { useForm } from 'react-hook-form'
@@ -10,13 +9,14 @@ import { toast } from 'sonner'
 import { loginFormSchema } from '../schemas'
 import type { LoginFormSchema } from '../types'
 import * as m from '@/generated/paraglide/messages'
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useRouter } from '@tanstack/react-router'
 
 export const useLogin = (
   email?: string,
   { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
 ) => {
   const navigate = useNavigate()
+  const router = useRouter()
   const toastMessages = useToastMessages(m.model_auth_title())
 
   const form = useForm<LoginFormSchema>({
@@ -26,29 +26,24 @@ export const useLogin = (
 
   const login = async (values: LoginFormSchema) => {
     try {
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.signInWithPassword(values)
-
-      if (error) {
-        form.setValue('password', '')
-        throw error
-      }
+      await loginServerFn({ data: values })
 
       toastMessages.onLogin.onSuccess()
       onSuccess?.()
 
-      if (session) {
+      await router.invalidate()
+
+      if (redirect) {
         if (redirectTo) {
           void navigate({ to: redirectTo })
-        } else if (redirect) {
-          navigate({ to: '/{-$locale}' })
+        } else {
+          void navigate({ to: '/{-$locale}' })
         }
       }
     } catch (error) {
       onError?.()
       const code = (error as AuthError).code
+      form.setValue('password', '')
       switch (code) {
         case SupabaseAuthErrorCode.invalid_credentials:
           toast.error(m.error_message_supabase_auth_invalid_credentials())

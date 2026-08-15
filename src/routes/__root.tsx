@@ -1,18 +1,21 @@
 import { AppProvider } from '@/components/layouts'
 import { Error404Page } from '@/features/error/pages'
 import { getLocale } from '@/generated/paraglide/runtime'
-import type { UserRole } from '@/lib/supabase/auth'
 import { fetchUser } from '@/lib/supabase/auth'
 import type { AppRouter } from '@/server/api/root'
 import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, redirect } from '@tanstack/react-router'
 import type { TRPCOptionsProxy } from '@trpc/tanstack-react-query'
+import type { UserResponse } from '@/server/features/user'
+import type { SettingResponse } from '@/server/features/settings'
 import appCss from '../styles/styles.css?url'
 
-interface MyRouterContext {
+export interface MyRouterContext {
   queryClient: QueryClient
   trpc: TRPCOptionsProxy<AppRouter>
-  user: { id: string; email?: string; role: UserRole } | null
+  user?: { id: string; email: string | undefined; username: string }
+  account?: UserResponse
+  setting?: SettingResponse
 }
 
 export const PATHS = {
@@ -27,11 +30,6 @@ export const PATHS = {
   ],
 }
 
-const PROTECTED_ROUTES = ['/admin', '/dashboard']
-
-const matchRoute = (pathname: string, routes: string[]) =>
-  routes.some((route) => pathname === route || pathname.startsWith(`${route}/`))
-
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   beforeLoad: async ({ location }) => {
     if (typeof document !== 'undefined') {
@@ -41,18 +39,28 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     const user = await fetchUser()
     const pathname = location.pathname
 
-    const isPublicRoute = PATHS.PUBLIC_ROUTES.includes(pathname)
-    const isProtectedRoute = matchRoute(pathname, PROTECTED_ROUTES)
-
-    if (user && isPublicRoute) {
+    if (user && PATHS.PUBLIC_ROUTES.includes(pathname)) {
       throw redirect({ to: PATHS.DEFAULT_REDIRECT })
     }
 
-    if (!user && isProtectedRoute) {
-      throw redirect({ to: PATHS.AUTH_REDIRECT })
-    }
+    return { user: user ?? undefined }
+  },
+  loader: async ({ context }) => {
+    if (!context.user) return {}
 
-    return { user }
+    const [account, setting] = await Promise.allSettled([
+      context.queryClient.ensureQueryData(
+        context.trpc.auth.getAccount.queryOptions(undefined),
+      ),
+      context.queryClient.ensureQueryData(
+        context.trpc.setting.getByUser.queryOptions(undefined),
+      ),
+    ])
+
+    return {
+      account: account.status === 'fulfilled' ? account.value : undefined,
+      setting: setting.status === 'fulfilled' ? setting.value : undefined,
+    }
   },
   head: () => ({
     meta: [

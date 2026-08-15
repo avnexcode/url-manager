@@ -1,10 +1,8 @@
+import { TanstackQueryProvider, getContext } from '@/providers/query-provider'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
 import type { ReactNode } from 'react'
 import { deLocalizeUrl, localizeUrl } from './generated/paraglide/runtime'
-import TanstackQueryProvider, {
-  getContext,
-} from './integrations/tanstack-query/root-provider'
 import { routeTree } from './routeTree.gen'
 
 export const getRouter = () => {

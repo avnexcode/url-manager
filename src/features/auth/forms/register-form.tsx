@@ -29,7 +29,7 @@ export const RegisterForm = ({
   isPending,
 }: RegisterFormProps) => {
   return (
-    <Card className="sm:bg-card w-full max-w-2xl border-0 bg-transparent shadow-none sm:rounded-xl sm:border sm:shadow-sm">
+    <Card className="w-full max-w-2xl">
       <CardHeader>
         <CardTitle>
           <Heading size={'h3'}>
@@ -59,7 +59,7 @@ export const RegisterForm = ({
         <span className="text-muted-foreground text-sm">
           {m.page_auth_form_register_footer_caption()}{' '}
           <Link
-            to="/{-$locale}"
+            to="/{-$locale}/login"
             className="font-medium text-blue-600/80 transition-colors hover:text-blue-600 hover:underline"
           >
             {m.page_auth_form_register_footer_caption_redirect()}

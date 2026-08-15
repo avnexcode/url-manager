@@ -1,6 +1,6 @@
 import * as m from '@/generated/paraglide/messages'
 import { useToastMessages } from '@/hooks'
-import { useTRPC } from '@/integrations/trpc/react'
+import { useTRPC } from '@/lib/trpc/react'
 import type { UseMutationOptions } from '@/interfaces'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'

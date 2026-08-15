@@ -1,12 +1,15 @@
-import { Heading } from '@/components'
 import { PageContainer, SectionContainer } from '@/components/layouts'
-import * as m from '@/generated/paraglide/messages'
+import { HeroSection } from '../components'
 
 export const HomePage = () => {
   return (
-    <PageContainer withHeader withFooter>
-      <SectionContainer container padded>
-        <Heading>{m.page_home_title()}</Heading>
+    <PageContainer>
+      <SectionContainer
+        container
+        padded
+        className="flex min-h-screen flex-col items-center justify-center px-4"
+      >
+        <HeroSection />
       </SectionContainer>
     </PageContainer>
   )
