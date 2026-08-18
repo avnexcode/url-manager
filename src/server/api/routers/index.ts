@@ -1,2 +1,5 @@
 export * from './auth.router'
+export * from './identifier.router'
+export * from './platform.router'
 export * from './setting.router'
+export * from './url.router'

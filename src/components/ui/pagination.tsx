@@ -61,7 +61,7 @@ export const PaginationLink = ({
           size,
         }),
         className,
-        isActive && 'bg-black text-white',
+        isActive && 'bg-foreground text-background',
       )}
       {...props}
     />

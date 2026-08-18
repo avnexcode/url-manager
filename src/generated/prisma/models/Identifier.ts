@@ -178,7 +178,7 @@ export type IdentifierGroupByOutputType = {
   visibility: $Enums.Visibility
   password: string | null
   thumbnail: string | null
-  userId: string | null
+  userId: string
   createdAt: Date
   updatedAt: Date
   _count: IdentifierCountAggregateOutputType | null
@@ -211,10 +211,10 @@ export type IdentifierWhereInput = {
   visibility?: Prisma.EnumVisibilityFilter<"Identifier"> | $Enums.Visibility
   password?: Prisma.StringNullableFilter<"Identifier"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Identifier"> | string | null
-  userId?: Prisma.StringNullableFilter<"Identifier"> | string | null
+  userId?: Prisma.StringFilter<"Identifier"> | string
   createdAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   urls?: Prisma.UrlListRelationFilter
 }
 
@@ -225,7 +225,7 @@ export type IdentifierOrderByWithRelationInput = {
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -242,10 +242,10 @@ export type IdentifierWhereUniqueInput = Prisma.AtLeast<{
   visibility?: Prisma.EnumVisibilityFilter<"Identifier"> | $Enums.Visibility
   password?: Prisma.StringNullableFilter<"Identifier"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Identifier"> | string | null
-  userId?: Prisma.StringNullableFilter<"Identifier"> | string | null
+  userId?: Prisma.StringFilter<"Identifier"> | string
   createdAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   urls?: Prisma.UrlListRelationFilter
 }, "id" | "slug">
 
@@ -256,7 +256,7 @@ export type IdentifierOrderByWithAggregationInput = {
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.IdentifierCountOrderByAggregateInput
@@ -274,7 +274,7 @@ export type IdentifierScalarWhereWithAggregatesInput = {
   visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Identifier"> | $Enums.Visibility
   password?: Prisma.StringNullableWithAggregatesFilter<"Identifier"> | string | null
   thumbnail?: Prisma.StringNullableWithAggregatesFilter<"Identifier"> | string | null
-  userId?: Prisma.StringNullableWithAggregatesFilter<"Identifier"> | string | null
+  userId?: Prisma.StringWithAggregatesFilter<"Identifier"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Identifier"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Identifier"> | Date | string
 }
@@ -288,7 +288,7 @@ export type IdentifierCreateInput = {
   thumbnail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutIdentifiersInput
+  user: Prisma.UserCreateNestedOneWithoutIdentifiersInput
   urls?: Prisma.UrlCreateNestedManyWithoutIdentifierInput
 }
 
@@ -299,7 +299,7 @@ export type IdentifierUncheckedCreateInput = {
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
-  userId?: string | null
+  userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   urls?: Prisma.UrlUncheckedCreateNestedManyWithoutIdentifierInput
@@ -314,7 +314,7 @@ export type IdentifierUpdateInput = {
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutIdentifiersNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutIdentifiersNestedInput
   urls?: Prisma.UrlUpdateManyWithoutIdentifierNestedInput
 }
 
@@ -325,7 +325,7 @@ export type IdentifierUncheckedUpdateInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   urls?: Prisma.UrlUncheckedUpdateManyWithoutIdentifierNestedInput
@@ -338,7 +338,7 @@ export type IdentifierCreateManyInput = {
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
-  userId?: string | null
+  userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -361,7 +361,7 @@ export type IdentifierUncheckedUpdateManyInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -539,7 +539,7 @@ export type IdentifierScalarWhereInput = {
   visibility?: Prisma.EnumVisibilityFilter<"Identifier"> | $Enums.Visibility
   password?: Prisma.StringNullableFilter<"Identifier"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Identifier"> | string | null
-  userId?: Prisma.StringNullableFilter<"Identifier"> | string | null
+  userId?: Prisma.StringFilter<"Identifier"> | string
   createdAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
 }
@@ -553,7 +553,7 @@ export type IdentifierCreateWithoutUrlsInput = {
   thumbnail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutIdentifiersInput
+  user: Prisma.UserCreateNestedOneWithoutIdentifiersInput
 }
 
 export type IdentifierUncheckedCreateWithoutUrlsInput = {
@@ -563,7 +563,7 @@ export type IdentifierUncheckedCreateWithoutUrlsInput = {
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
-  userId?: string | null
+  userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -593,7 +593,7 @@ export type IdentifierUpdateWithoutUrlsInput = {
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutIdentifiersNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutIdentifiersNestedInput
 }
 
 export type IdentifierUncheckedUpdateWithoutUrlsInput = {
@@ -603,7 +603,7 @@ export type IdentifierUncheckedUpdateWithoutUrlsInput = {
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -695,7 +695,7 @@ export type IdentifierSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Identifier$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   urls?: boolean | Prisma.Identifier$urlsArgs<ExtArgs>
   _count?: boolean | Prisma.IdentifierCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["identifier"]>
@@ -710,7 +710,7 @@ export type IdentifierSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Identifier$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["identifier"]>
 
 export type IdentifierSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -723,7 +723,7 @@ export type IdentifierSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Identifier$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["identifier"]>
 
 export type IdentifierSelectScalar = {
@@ -740,21 +740,21 @@ export type IdentifierSelectScalar = {
 
 export type IdentifierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "visibility" | "password" | "thumbnail" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["identifier"]>
 export type IdentifierInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Identifier$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   urls?: boolean | Prisma.Identifier$urlsArgs<ExtArgs>
   _count?: boolean | Prisma.IdentifierCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type IdentifierIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Identifier$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type IdentifierIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Identifier$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $IdentifierPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Identifier"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs> | null
+    user: Prisma.$UserPayload<ExtArgs>
     urls: Prisma.$UrlPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -764,7 +764,7 @@ export type $IdentifierPayload<ExtArgs extends runtime.Types.Extensions.Internal
     visibility: $Enums.Visibility
     password: string | null
     thumbnail: string | null
-    userId: string | null
+    userId: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["identifier"]>
@@ -1161,7 +1161,7 @@ readonly fields: IdentifierFieldRefs;
  */
 export interface Prisma__IdentifierClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.Identifier$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Identifier$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   urls<T extends Prisma.Identifier$urlsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Identifier$urlsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UrlPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1599,25 +1599,6 @@ export type IdentifierDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Identifiers to delete.
    */
   limit?: number
-}
-
-/**
- * Identifier.user
- */
-export type Identifier$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
 }
 
 /**

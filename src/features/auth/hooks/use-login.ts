@@ -1,15 +1,15 @@
+import * as m from '@/generated/paraglide/messages'
 import { useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
-import { SupabaseAuthErrorCode } from '@/lib/supabase/auth-error-code'
 import { loginServerFn } from '@/lib/supabase/auth'
+import { SupabaseAuthErrorCode } from '@/lib/supabase/auth-error-code'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { AuthError } from '@supabase/supabase-js'
+import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { loginFormSchema } from '../schemas'
 import type { LoginFormSchema } from '../types'
-import * as m from '@/generated/paraglide/messages'
-import { useNavigate, useRouter } from '@tanstack/react-router'
 
 export const useLogin = (
   email?: string,
@@ -33,13 +33,7 @@ export const useLogin = (
 
       await router.invalidate()
 
-      if (redirect) {
-        if (redirectTo) {
-          void navigate({ to: redirectTo })
-        } else {
-          void navigate({ to: '/{-$locale}' })
-        }
-      }
+      if (redirect) void navigate({ to: redirectTo || '/{-$locale}/dashboard' })
     } catch (error) {
       onError?.()
       const code = (error as AuthError).code

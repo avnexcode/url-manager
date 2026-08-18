@@ -11,7 +11,10 @@ export const alertVariants = cva(
     variants: {
       variant: {
         default: 'bg-main text-main-foreground',
-        destructive: 'bg-black text-white',
+        neutral: 'bg-secondary-background text-foreground',
+        destructive: 'bg-destructive text-destructive-foreground',
+        warning: 'bg-warning text-warning-foreground',
+        success: 'bg-success text-success-foreground',
       },
     },
     defaultVariants: {

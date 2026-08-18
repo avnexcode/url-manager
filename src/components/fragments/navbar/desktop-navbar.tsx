@@ -41,14 +41,14 @@ export const DesktopNavbar = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="group relative flex cursor-pointer items-center gap-2 border-2 border-border bg-secondary-background p-1 pr-3 shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2">
+        <button className="group relative flex cursor-pointer items-center gap-2 border-2 border-border bg-secondary-background p-1 pr-1 shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2">
           <Avatar className="size-8 rounded-none border-2 border-border">
             <AvatarImage
               src={user?.avatar ?? ''}
               crossOrigin="anonymous"
               referrerPolicy="no-referrer"
             />
-            <AvatarFallback className="rounded-none bg-main text-main-foreground font-heading text-sm">
+            <AvatarFallback className="rounded-none bg-main text-secondary-foreground font-heading text-sm">
               {user?.email.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -58,11 +58,13 @@ export const DesktopNavbar = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="mt-1 w-56 rounded-none border-2 border-border shadow-shadow"
+        className="mt-1 w-56 rounded-none border-2 border-border shadow-shadow bg-secondary-background"
         align="end"
       >
         <DropdownMenuLabel className="border-b-2 border-border pb-2">
-          <p className="font-heading truncate">{user?.email}</p>
+          <p className="font-heading truncate text-secondary-foreground">
+            {user?.email}
+          </p>
         </DropdownMenuLabel>
 
         <DropdownMenuGroup className="pt-1">
@@ -73,7 +75,7 @@ export const DesktopNavbar = () => {
               <DropdownMenuItem
                 key={route.label}
                 asChild
-                className="rounded-none cursor-pointer"
+                className="rounded-none cursor-pointer bg-secondary-background text-secondary-foreground"
               >
                 <Link to={route.href} className="flex items-center gap-2">
                   <Icon name={route.icon} />
@@ -88,7 +90,8 @@ export const DesktopNavbar = () => {
 
         <DropdownMenuItem
           onClick={handleLogout}
-          className="rounded-none text-destructive focus:text-destructive cursor-pointer"
+          variant="destructive"
+          className="rounded-none cursor-pointer bg-secondary-background"
         >
           <Icon name="LogOut" />
           Logout

@@ -18,7 +18,7 @@ export class SettingService extends CommonService {
   private static auth = SupabaseService.auth
 
   protected static override get baseModel() {
-    return this.m('model_setting_title')
+    return this.m.model_setting_title()
   }
 
   private static checkSettingExists = async (

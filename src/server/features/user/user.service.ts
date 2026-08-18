@@ -20,7 +20,7 @@ export class UserService extends CommonService {
   private static bucket = SUPABASE_BUCKET.Profile
 
   protected static override get baseModel() {
-    return this.m('model_user_title')
+    return this.m.model_user_title()
   }
 
   private static checkUserExists = async (

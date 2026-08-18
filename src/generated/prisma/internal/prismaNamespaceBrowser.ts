@@ -122,6 +122,7 @@ export const PlatformScalarFieldEnum = {
   id: 'id',
   title: 'title',
   slug: 'slug',
+  url: 'url',
   visibility: 'visibility',
   password: 'password',
   thumbnail: 'thumbnail',

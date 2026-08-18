@@ -15,7 +15,6 @@ export const useRegister = ({
   onSuccess,
   onError,
 }: UseMutationOptions = {}) => {
-  const defaultUrl = '/verify-email'
   const toastMessages = useToastMessages(m.model_auth_title())
   const trpc = useTRPC()
   const navigate = useNavigate()
@@ -32,7 +31,7 @@ export const useRegister = ({
   const { mutate, isPending } = useMutation(
     trpc.auth.register.mutationOptions({
       onSuccess: () => {
-        if (redirect) void navigate({ to: redirectTo || '/' })
+        if (redirect) void navigate({ to: redirectTo || '/{-$locale}' })
         toastMessages.onRegister.onSuccess()
         onSuccess?.()
       },
@@ -49,5 +48,5 @@ export const useRegister = ({
     mutate({ request: values })
   }
 
-  return { form, onSubmit, isPending, defaultUrl }
+  return { form, onSubmit, isPending }
 }

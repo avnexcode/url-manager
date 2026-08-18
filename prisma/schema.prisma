@@ -89,8 +89,8 @@ model Identifier {
   password   String?    @map("password") @db.VarChar(255)
   thumbnail  String?    @map("thumbnail") @db.Text
 
-  userId String? @map("user_id") @db.VarChar(36)
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "relation_identifier_user")
+  userId String @map("user_id") @db.VarChar(36)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "relation_identifier_user")
   urls   Url[]
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
@@ -109,12 +109,13 @@ model Platform {
   id         String     @id @default(uuid()) @map("id") @db.VarChar(36)
   title      String     @map("title") @db.VarChar(100)
   slug       String     @unique @map("slug") @db.VarChar(150)
+  url        String     @map("url") @db.Text
   visibility Visibility @default(PRIVATE) @map("visibility")
   password   String?    @map("password") @db.VarChar(255)
   thumbnail  String?    @map("thumbnail") @db.Text
 
-  userId String? @map("user_id") @db.VarChar(36)
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "relation_platform_user")
+  userId String @map("user_id") @db.VarChar(36)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "relation_platform_user")
   urls   Url[]
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()

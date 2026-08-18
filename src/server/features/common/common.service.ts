@@ -4,18 +4,10 @@ import { ErrorTRPCService } from '@/server/services'
 import type { TRPC_ERROR_CODE_KEY } from '@trpc/server'
 
 export abstract class CommonService {
+  protected static m = m
+
   protected static get baseModel(): string {
     return 'resource'
-  }
-
-  protected static m<TKey extends keyof typeof m>(
-    key: TKey,
-    ...args: Parameters<Extract<(typeof m)[TKey], (...args: any) => any>>
-  ): ReturnType<Extract<(typeof m)[TKey], (...args: any) => any>> {
-    const messageFn = m[key] as (...params: unknown[]) => string
-    return messageFn(...args) as ReturnType<
-      Extract<(typeof m)[TKey], (...args: any) => any>
-    >
   }
 
   protected static newError(opts: {

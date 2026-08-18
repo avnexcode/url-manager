@@ -11,7 +11,7 @@ export const GoBackButton = () => {
 
   return (
     <Button
-      variant="outline"
+      variant="default"
       onClick={handleGoBack}
       className="flex cursor-pointer items-center gap-2"
     >

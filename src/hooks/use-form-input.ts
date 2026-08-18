@@ -1,4 +1,6 @@
 import {
+  InputFile as BaseInputFile,
+  InputImage as BaseInputImage,
   InputPassword as BaseInputPassword,
   InputText as BaseInputText,
   InputTextArea as BaseInputTextArea,
@@ -13,5 +15,7 @@ export const useFormInput = <T extends FieldValues>() => {
     InputText: BaseInputText<T>,
     InputTextArea: BaseInputTextArea<T>,
     InputPassword: BaseInputPassword<T>,
+    InputImage: BaseInputImage<T>,
+    InputFile: BaseInputFile<T>,
   }
 }

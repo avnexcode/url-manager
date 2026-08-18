@@ -28,6 +28,7 @@ export type PlatformMinAggregateOutputType = {
   id: string | null
   title: string | null
   slug: string | null
+  url: string | null
   visibility: $Enums.Visibility | null
   password: string | null
   thumbnail: string | null
@@ -40,6 +41,7 @@ export type PlatformMaxAggregateOutputType = {
   id: string | null
   title: string | null
   slug: string | null
+  url: string | null
   visibility: $Enums.Visibility | null
   password: string | null
   thumbnail: string | null
@@ -52,6 +54,7 @@ export type PlatformCountAggregateOutputType = {
   id: number
   title: number
   slug: number
+  url: number
   visibility: number
   password: number
   thumbnail: number
@@ -66,6 +69,7 @@ export type PlatformMinAggregateInputType = {
   id?: true
   title?: true
   slug?: true
+  url?: true
   visibility?: true
   password?: true
   thumbnail?: true
@@ -78,6 +82,7 @@ export type PlatformMaxAggregateInputType = {
   id?: true
   title?: true
   slug?: true
+  url?: true
   visibility?: true
   password?: true
   thumbnail?: true
@@ -90,6 +95,7 @@ export type PlatformCountAggregateInputType = {
   id?: true
   title?: true
   slug?: true
+  url?: true
   visibility?: true
   password?: true
   thumbnail?: true
@@ -175,10 +181,11 @@ export type PlatformGroupByOutputType = {
   id: string
   title: string
   slug: string
+  url: string
   visibility: $Enums.Visibility
   password: string | null
   thumbnail: string | null
-  userId: string | null
+  userId: string
   createdAt: Date
   updatedAt: Date
   _count: PlatformCountAggregateOutputType | null
@@ -208,13 +215,14 @@ export type PlatformWhereInput = {
   id?: Prisma.StringFilter<"Platform"> | string
   title?: Prisma.StringFilter<"Platform"> | string
   slug?: Prisma.StringFilter<"Platform"> | string
+  url?: Prisma.StringFilter<"Platform"> | string
   visibility?: Prisma.EnumVisibilityFilter<"Platform"> | $Enums.Visibility
   password?: Prisma.StringNullableFilter<"Platform"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Platform"> | string | null
-  userId?: Prisma.StringNullableFilter<"Platform"> | string | null
+  userId?: Prisma.StringFilter<"Platform"> | string
   createdAt?: Prisma.DateTimeFilter<"Platform"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Platform"> | Date | string
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   urls?: Prisma.UrlListRelationFilter
 }
 
@@ -222,10 +230,11 @@ export type PlatformOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -239,13 +248,14 @@ export type PlatformWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PlatformWhereInput[]
   NOT?: Prisma.PlatformWhereInput | Prisma.PlatformWhereInput[]
   title?: Prisma.StringFilter<"Platform"> | string
+  url?: Prisma.StringFilter<"Platform"> | string
   visibility?: Prisma.EnumVisibilityFilter<"Platform"> | $Enums.Visibility
   password?: Prisma.StringNullableFilter<"Platform"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Platform"> | string | null
-  userId?: Prisma.StringNullableFilter<"Platform"> | string | null
+  userId?: Prisma.StringFilter<"Platform"> | string
   createdAt?: Prisma.DateTimeFilter<"Platform"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Platform"> | Date | string
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   urls?: Prisma.UrlListRelationFilter
 }, "id" | "slug">
 
@@ -253,10 +263,11 @@ export type PlatformOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PlatformCountOrderByAggregateInput
@@ -271,10 +282,11 @@ export type PlatformScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Platform"> | string
   title?: Prisma.StringWithAggregatesFilter<"Platform"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Platform"> | string
+  url?: Prisma.StringWithAggregatesFilter<"Platform"> | string
   visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Platform"> | $Enums.Visibility
   password?: Prisma.StringNullableWithAggregatesFilter<"Platform"> | string | null
   thumbnail?: Prisma.StringNullableWithAggregatesFilter<"Platform"> | string | null
-  userId?: Prisma.StringNullableWithAggregatesFilter<"Platform"> | string | null
+  userId?: Prisma.StringWithAggregatesFilter<"Platform"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Platform"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Platform"> | Date | string
 }
@@ -283,12 +295,13 @@ export type PlatformCreateInput = {
   id?: string
   title: string
   slug: string
+  url: string
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutPlatformsInput
+  user: Prisma.UserCreateNestedOneWithoutPlatformsInput
   urls?: Prisma.UrlCreateNestedManyWithoutPlatformInput
 }
 
@@ -296,10 +309,11 @@ export type PlatformUncheckedCreateInput = {
   id?: string
   title: string
   slug: string
+  url: string
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
-  userId?: string | null
+  userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   urls?: Prisma.UrlUncheckedCreateNestedManyWithoutPlatformInput
@@ -309,12 +323,13 @@ export type PlatformUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutPlatformsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPlatformsNestedInput
   urls?: Prisma.UrlUpdateManyWithoutPlatformNestedInput
 }
 
@@ -322,10 +337,11 @@ export type PlatformUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   urls?: Prisma.UrlUncheckedUpdateManyWithoutPlatformNestedInput
@@ -335,10 +351,11 @@ export type PlatformCreateManyInput = {
   id?: string
   title: string
   slug: string
+  url: string
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
-  userId?: string | null
+  userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -347,6 +364,7 @@ export type PlatformUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -358,10 +376,11 @@ export type PlatformUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -380,6 +399,7 @@ export type PlatformCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
@@ -392,6 +412,7 @@ export type PlatformMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
@@ -404,6 +425,7 @@ export type PlatformMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
@@ -479,6 +501,7 @@ export type PlatformCreateWithoutUserInput = {
   id?: string
   title: string
   slug: string
+  url: string
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
@@ -491,6 +514,7 @@ export type PlatformUncheckedCreateWithoutUserInput = {
   id?: string
   title: string
   slug: string
+  url: string
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
@@ -532,10 +556,11 @@ export type PlatformScalarWhereInput = {
   id?: Prisma.StringFilter<"Platform"> | string
   title?: Prisma.StringFilter<"Platform"> | string
   slug?: Prisma.StringFilter<"Platform"> | string
+  url?: Prisma.StringFilter<"Platform"> | string
   visibility?: Prisma.EnumVisibilityFilter<"Platform"> | $Enums.Visibility
   password?: Prisma.StringNullableFilter<"Platform"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Platform"> | string | null
-  userId?: Prisma.StringNullableFilter<"Platform"> | string | null
+  userId?: Prisma.StringFilter<"Platform"> | string
   createdAt?: Prisma.DateTimeFilter<"Platform"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Platform"> | Date | string
 }
@@ -544,22 +569,24 @@ export type PlatformCreateWithoutUrlsInput = {
   id?: string
   title: string
   slug: string
+  url: string
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutPlatformsInput
+  user: Prisma.UserCreateNestedOneWithoutPlatformsInput
 }
 
 export type PlatformUncheckedCreateWithoutUrlsInput = {
   id?: string
   title: string
   slug: string
+  url: string
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
-  userId?: string | null
+  userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -584,22 +611,24 @@ export type PlatformUpdateWithoutUrlsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutPlatformsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPlatformsNestedInput
 }
 
 export type PlatformUncheckedUpdateWithoutUrlsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -608,6 +637,7 @@ export type PlatformCreateManyUserInput = {
   id?: string
   title: string
   slug: string
+  url: string
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
@@ -619,6 +649,7 @@ export type PlatformUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -631,6 +662,7 @@ export type PlatformUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -643,6 +675,7 @@ export type PlatformUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -685,13 +718,14 @@ export type PlatformSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   title?: boolean
   slug?: boolean
+  url?: boolean
   visibility?: boolean
   password?: boolean
   thumbnail?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Platform$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   urls?: boolean | Prisma.Platform$urlsArgs<ExtArgs>
   _count?: boolean | Prisma.PlatformCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["platform"]>
@@ -700,32 +734,35 @@ export type PlatformSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   title?: boolean
   slug?: boolean
+  url?: boolean
   visibility?: boolean
   password?: boolean
   thumbnail?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Platform$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["platform"]>
 
 export type PlatformSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   slug?: boolean
+  url?: boolean
   visibility?: boolean
   password?: boolean
   thumbnail?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Platform$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["platform"]>
 
 export type PlatformSelectScalar = {
   id?: boolean
   title?: boolean
   slug?: boolean
+  url?: boolean
   visibility?: boolean
   password?: boolean
   thumbnail?: boolean
@@ -734,33 +771,34 @@ export type PlatformSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PlatformOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "visibility" | "password" | "thumbnail" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["platform"]>
+export type PlatformOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "url" | "visibility" | "password" | "thumbnail" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["platform"]>
 export type PlatformInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Platform$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   urls?: boolean | Prisma.Platform$urlsArgs<ExtArgs>
   _count?: boolean | Prisma.PlatformCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PlatformIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Platform$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type PlatformIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Platform$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $PlatformPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Platform"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs> | null
+    user: Prisma.$UserPayload<ExtArgs>
     urls: Prisma.$UrlPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
     slug: string
+    url: string
     visibility: $Enums.Visibility
     password: string | null
     thumbnail: string | null
-    userId: string | null
+    userId: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["platform"]>
@@ -1157,7 +1195,7 @@ readonly fields: PlatformFieldRefs;
  */
 export interface Prisma__PlatformClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.Platform$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Platform$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   urls<T extends Prisma.Platform$urlsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Platform$urlsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UrlPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1191,6 +1229,7 @@ export interface PlatformFieldRefs {
   readonly id: Prisma.FieldRef<"Platform", 'String'>
   readonly title: Prisma.FieldRef<"Platform", 'String'>
   readonly slug: Prisma.FieldRef<"Platform", 'String'>
+  readonly url: Prisma.FieldRef<"Platform", 'String'>
   readonly visibility: Prisma.FieldRef<"Platform", 'Visibility'>
   readonly password: Prisma.FieldRef<"Platform", 'String'>
   readonly thumbnail: Prisma.FieldRef<"Platform", 'String'>
@@ -1595,25 +1634,6 @@ export type PlatformDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Platforms to delete.
    */
   limit?: number
-}
-
-/**
- * Platform.user
- */
-export type Platform$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
 }
 
 /**

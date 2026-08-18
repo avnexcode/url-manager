@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
 import { Check, ChevronRight, Circle } from 'lucide-react'
+import { cva } from 'class-variance-authority'
 
 import { cn } from '#/lib/utils.ts'
 
@@ -105,21 +106,36 @@ export const DropdownMenuContent = ({
   )
 }
 
+export const dropdownMenuItemVariants = cva(
+  'relative gap-2 [&_svg]:pointer-events-none [&_svg]:w-4 [&_svg]:h-4 [&_svg]:shrink-0 flex cursor-default select-none items-center rounded-base border-2 border-transparent data-[inset=true]:pl-8 px-2 py-1.5 text-sm font-base outline-hidden transition-colors focus:border-border data-disabled:pointer-events-none data-disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default: 'bg-main text-main-foreground',
+        neutral: 'bg-secondary-background text-foreground focus:bg-accent focus:text-accent-foreground',
+        destructive: 'bg-main text-destructive focus:bg-destructive focus:text-destructive-foreground',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+)
+
 export const DropdownMenuItem = ({
   className,
   inset,
+  variant = 'default',
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
   inset?: boolean
+  variant?: 'default' | 'neutral' | 'destructive'
 }) => {
   return (
     <DropdownMenuPrimitive.Item
       data-slot="dropdown-menu-item"
       data-inset={inset}
-      className={cn(
-        'relative gap-2 [&_svg]:pointer-events-none [&_svg]:w-4 [&_svg]:h-4 [&_svg]:shrink-0 flex cursor-default select-none items-center rounded-base border-2 border-transparent data-[inset=true]:pl-8 bg-main px-2 py-1.5 text-sm font-base outline-hidden transition-colors focus:border-border data-disabled:pointer-events-none data-disabled:opacity-50',
-        className,
-      )}
+      className={cn(dropdownMenuItemVariants({ variant }), className)}
       {...props}
     />
   )

@@ -43,7 +43,7 @@ export const LoginForm = ({ form, onSubmit, isPending }: LoginFormProps) => {
           <div className="bg-foreground h-0.5 w-full" />
         </div>
         <FormProvider {...form}>
-          <LoginFormInner formId="admin-login-form" onSubmit={onSubmit} />
+          <LoginFormInner formId="login-form" onSubmit={onSubmit} />
         </FormProvider>
         <div className="text-muted-foreground w-full space-y-1 space-x-0_5 py-2 text-sm">
           <span>Forgot your password?</span>
@@ -56,7 +56,7 @@ export const LoginForm = ({ form, onSubmit, isPending }: LoginFormProps) => {
         </div>
       </CardContent>
       <CardFooter className="flex-col place-content-between gap-y-5 pt-5">
-        <Button form="admin-login-form" className="w-full" disabled={isPending}>
+        <Button form="login-form" className="w-full" disabled={isPending}>
           {isPending ? (
             <>
               <Loader2 className="animate-spin" />

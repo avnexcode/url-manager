@@ -11,7 +11,6 @@ export const useLogout = ({
   onSuccess,
   onError,
 }: UseMutationOptions = {}) => {
-  const defaultUrl = '/login'
   const navigate = useNavigate()
   const router = useRouter()
   const toastMessages = useToastMessages(m.model_auth_title())
@@ -25,7 +24,7 @@ export const useLogout = ({
 
       await router.invalidate()
 
-      if (redirect) void navigate({ to: redirectTo || defaultUrl })
+      if (redirect) void navigate({ to: redirectTo || '/{-$locale}/login' })
 
       toastMessages.onLogout.onSuccess()
       onSuccess?.()
@@ -43,5 +42,5 @@ export const useLogout = ({
     await logout()
   }
 
-  return { logout, handleLogout, isPending, defaultUrl }
+  return { logout, handleLogout, isPending }
 }

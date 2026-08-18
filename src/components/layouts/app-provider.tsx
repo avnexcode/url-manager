@@ -1,6 +1,5 @@
 import { getLocale } from '@/generated/paraglide/runtime'
 import TanStackQueryDevtools from '@/lib/tanstack-query/devtools'
-import { Providers } from '@/providers'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { HeadContent, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
@@ -16,7 +15,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         <HeadContent />
       </head>
       <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(79,184,178,0.24)]">
-        <Providers>{children}</Providers>
+        {children}
+        <Toaster position="top-center" />
         <TanStackDevtools
           config={{
             position: 'bottom-right',
@@ -30,7 +30,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
           ]}
         />
         <Scripts />
-        <Toaster position="top-center" />
       </body>
     </html>
   )

@@ -1,8 +1,9 @@
+import { PrismaPg } from '@prisma/adapter-pg'
+import type { Prisma } from '../src/generated/prisma/client.js'
 import { PrismaClient } from '../src/generated/prisma/client.js'
-
 import { getDatabaseUrl } from '../src/server/db/database-url.js'
 
-import { PrismaPg } from '@prisma/adapter-pg'
+import platformsData from './data/platform.json'
 
 const adapter = new PrismaPg({
   connectionString: getDatabaseUrl(),
@@ -13,19 +14,13 @@ const prisma = new PrismaClient({ adapter })
 async function main() {
   console.log('🌱 Seeding database...')
 
-  // Clear existing todos
-  await prisma.todo.deleteMany()
+  await prisma.platform.deleteMany()
 
-  // Create example todos
-  const todos = await prisma.todo.createMany({
-    data: [
-      { title: 'Buy groceries' },
-      { title: 'Read a book' },
-      { title: 'Workout' },
-    ],
+  const platforms = await prisma.platform.createMany({
+    data: platformsData as Prisma.PlatformCreateManyInput[],
   })
 
-  console.log(`✅ Created ${todos.count} todos`)
+  console.log(`✅ Created ${platforms.count} platforms`)
 }
 
 main()

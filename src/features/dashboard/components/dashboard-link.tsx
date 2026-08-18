@@ -1,11 +1,12 @@
 import { Heading, Icon } from '@/components'
 import { Button } from '@/components/ui/button'
+import type { LinkProps } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
 import type { icons } from 'lucide-react'
 
 type DashboardLinkProps = {
   label: string
-  url: string
+  url: LinkProps['to']
   icon: keyof typeof icons
 }
 

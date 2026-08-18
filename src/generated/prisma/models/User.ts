@@ -399,11 +399,6 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
-}
-
 export type UserCreateprovidersInput = {
   set: $Enums.LoginProvider[]
 }
@@ -445,12 +440,10 @@ export type UserCreateNestedOneWithoutIdentifiersInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneWithoutIdentifiersNestedInput = {
+export type UserUpdateOneRequiredWithoutIdentifiersNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutIdentifiersInput, Prisma.UserUncheckedCreateWithoutIdentifiersInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentifiersInput
   upsert?: Prisma.UserUpsertWithoutIdentifiersInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIdentifiersInput, Prisma.UserUpdateWithoutIdentifiersInput>, Prisma.UserUncheckedUpdateWithoutIdentifiersInput>
 }
@@ -461,12 +454,10 @@ export type UserCreateNestedOneWithoutPlatformsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneWithoutPlatformsNestedInput = {
+export type UserUpdateOneRequiredWithoutPlatformsNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPlatformsInput, Prisma.UserUncheckedCreateWithoutPlatformsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPlatformsInput
   upsert?: Prisma.UserUpsertWithoutPlatformsInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPlatformsInput, Prisma.UserUpdateWithoutPlatformsInput>, Prisma.UserUncheckedUpdateWithoutPlatformsInput>
 }

@@ -7,7 +7,7 @@ import { cva } from 'class-variance-authority'
 import { cn } from '#/lib/utils.ts'
 
 export const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-base text-sm font-base ring-offset-white transition-all gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-base text-sm font-base ring-offset-background transition-all gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
@@ -18,6 +18,19 @@ export const buttonVariants = cva(
           'bg-secondary-background text-foreground border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
         reverse:
           'text-main-foreground bg-main border-2 border-border hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',
+        destructive:
+          'text-destructive-foreground bg-destructive border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
+        destructiveNoShadow:
+          'text-destructive-foreground bg-destructive border-2 border-border',
+        destructiveReverse:
+          'text-destructive-foreground bg-destructive border-2 border-border hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',
+        secondary:
+          'text-secondary-foreground bg-secondary border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
+        outline:
+          'bg-transparent text-foreground border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
+        ghost:
+          'bg-transparent text-foreground border-2 border-transparent hover:bg-accent hover:text-accent-foreground hover:border-border',
+        link: 'text-foreground underline-offset-4 hover:underline border-2 border-transparent',
       },
       size: {
         default: 'h-10 px-4 py-2',

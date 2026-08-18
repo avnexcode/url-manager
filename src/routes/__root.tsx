@@ -6,16 +6,13 @@ import type { AppRouter } from '@/server/api/root'
 import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, redirect } from '@tanstack/react-router'
 import type { TRPCOptionsProxy } from '@trpc/tanstack-react-query'
-import type { UserResponse } from '@/server/features/user'
-import type { SettingResponse } from '@/server/features/settings'
+
 import appCss from '../styles/styles.css?url'
 
 export interface MyRouterContext {
   queryClient: QueryClient
   trpc: TRPCOptionsProxy<AppRouter>
   user?: { id: string; email: string | undefined; username: string }
-  account?: UserResponse
-  setting?: SettingResponse
 }
 
 export const PATHS = {
@@ -46,21 +43,14 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     return { user: user ?? undefined }
   },
   loader: async ({ context }) => {
-    if (!context.user) return {}
+    const { trpc, queryClient, user } = context
 
-    const [account, setting] = await Promise.allSettled([
-      context.queryClient.ensureQueryData(
-        context.trpc.auth.getAccount.queryOptions(undefined),
-      ),
-      context.queryClient.ensureQueryData(
-        context.trpc.setting.getByUser.queryOptions(undefined),
-      ),
+    if (!user) return {}
+
+    await Promise.allSettled([
+      queryClient.ensureQueryData(trpc.auth.getAccount.queryOptions()),
+      queryClient.ensureQueryData(trpc.setting.getByUser.queryOptions()),
     ])
-
-    return {
-      account: account.status === 'fulfilled' ? account.value : undefined,
-      setting: setting.status === 'fulfilled' ? setting.value : undefined,
-    }
   },
   head: () => ({
     meta: [
@@ -68,7 +58,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { title: 'URL Manager' },
     ],
-    links: [{ rel: 'stylesheet', href: appCss }],
+    links: [
+      { rel: 'icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: appCss },
+    ],
   }),
   shellComponent: AppProvider,
   notFoundComponent: Error404Page,

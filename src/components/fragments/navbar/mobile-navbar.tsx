@@ -64,6 +64,7 @@ export const MobileNavbar = () => {
                   <Button
                     asChild
                     key={route.href}
+                    variant={'secondary'}
                     onClick={() => setIsOpen(false)}
                     className="h-11 justify-start gap-3 rounded-none border-2 border-transparent px-3 text-base hover:border-border"
                   >
@@ -118,7 +119,7 @@ export const MobileNavbar = () => {
               </div>
             ) : (
               <Button
-                variant="default"
+                variant="destructive"
                 onClick={handleLogout}
                 className="w-full justify-start gap-3"
               >

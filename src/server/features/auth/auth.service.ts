@@ -18,7 +18,7 @@ export class AuthService extends CommonService {
       this.newError({
         code: 'BAD_REQUEST',
         message: capitalizeSentence(
-          this.m('schema_validation_password_confirm_password_do_not_match'),
+          this.m.schema_validation_password_confirm_password_do_not_match(),
         ),
       })
     }
@@ -32,11 +32,7 @@ export class AuthService extends CommonService {
     if (key === 'EMAIL') {
       const count = await UserRepository.countByEmail(db, value)
 
-      this.checkExists(
-        count !== 0,
-        'CONFLICT',
-        this.m('model_auth_field_email'),
-      )
+      this.checkExists(count !== 0, 'CONFLICT', this.m.model_auth_field_email())
     }
   }
 

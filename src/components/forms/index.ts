@@ -1,3 +1,6 @@
+export * from './input-file'
+export * from './input-image'
 export * from './input-password'
+export * from './input-select'
 export * from './input-text'
 export * from './input-text-area'
