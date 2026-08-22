@@ -1,23 +1,26 @@
+import type { LoginProvider } from '@/generated/prisma/enums'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import type { DBClient } from '@/server/db'
+import { FileService } from '@/server/services'
+import { SupabaseService } from '@/server/services/supabase.service'
+import { generateUsernameFromEmail } from '@/utils'
 import { CommonService } from '../common'
+import { SettingService } from '../settings'
 import type {
-  BulkDeleteUserRequest,
-  BulkDeleteUserResponse,
   CreateUserRequest,
   CreateUserResponse,
   DeleteUserRequest,
   DeleteUserResponse,
+  UpdateUserRequest,
+  UpdateUserResponse,
   UserResponse,
 } from './user.model'
 import { UserRepository as Repository } from './user.repository'
-import { SupabaseService } from '@/server/services/supabase.service'
-import { SettingService } from '../settings'
-import { FileService } from '@/server/services'
 
 export class UserService extends CommonService {
   private static auth = SupabaseService.auth
   private static bucket = SUPABASE_BUCKET.Profile
+  private static file = FileService
 
   protected static override get baseModel() {
     return this.m.model_user_title()
@@ -32,15 +35,6 @@ export class UserService extends CommonService {
     this.checkExists(count === 0)
   }
 
-  private static checkUsersExist = async (
-    db: DBClient,
-    ids: string[],
-  ): Promise<void> => {
-    const count = await Repository.countByIds(db, ids)
-
-    this.checkExists(count !== ids.length)
-  }
-
   static getById = async (db: DBClient, id: string): Promise<UserResponse> => {
     const user = await Repository.findById(db, id)
 
@@ -52,11 +46,47 @@ export class UserService extends CommonService {
     id: string,
     request: CreateUserRequest,
   ): Promise<CreateUserResponse> => {
-    const username = 'user-' + id.split('-').pop()
+    const { email } = request
+
+    const username = generateUsernameFromEmail({ email })
 
     const user = await Repository.insert(db, id, username, request)
 
     await this.auth.updateUsername(id, username)
+
+    return user
+  }
+
+  static update = async (
+    db: DBClient,
+    id: string,
+    request: UpdateUserRequest,
+  ): Promise<UpdateUserResponse> => {
+    const { username, provider } = request
+
+    const { username: oldUsername, providers } = await this.getById(db, id)
+
+    const countUsername = await Repository.countByUsername(db, username ?? '')
+
+    const conflict = countUsername !== 0 && username !== oldUsername
+
+    this.checkExists(conflict, 'CONFLICT', this.m.model_user_field_username())
+
+    const isProviderExists = provider
+      ? providers.includes(provider.toLocaleUpperCase() as LoginProvider)
+      : true
+
+    let data = request
+
+    if (isProviderExists) {
+      data = { ...request, provider: undefined }
+    }
+
+    const user = await Repository.update(db, id, data)
+
+    if (username) {
+      await this.auth.updateUsername(id, username)
+    }
 
     return user
   }
@@ -69,37 +99,14 @@ export class UserService extends CommonService {
 
     await this.checkUserExists(db, id)
 
-    await SettingService.deleteByUser(db, id)
+    await SettingService.delete(db, { userId: id })
 
     const user = await Repository.destroy(db, request)
 
     if (user.image) {
-      await FileService.deleteImageByUrl(this.bucket, user.image)
+      await this.file.deleteFileByUrls(this.bucket, [user.image])
     }
 
     return user
-  }
-
-  static deleteMany = async (
-    db: DBClient,
-    request: BulkDeleteUserRequest,
-  ): Promise<BulkDeleteUserResponse> => {
-    const { ids } = request
-
-    await this.checkUsersExist(db, ids)
-
-    await SettingService.deleteManyByUsers(db, ids)
-
-    const users = await Repository.destroyMany(db, request)
-
-    const imageUrls = users
-      .map((user) => user.image)
-      .filter((image): image is string => image !== null)
-
-    if (imageUrls.length) {
-      await FileService.deleteImageByUrls(this.bucket, imageUrls)
-    }
-
-    return users
   }
 }

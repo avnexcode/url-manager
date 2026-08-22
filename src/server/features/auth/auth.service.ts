@@ -114,9 +114,4 @@ export class AuthService extends CommonService {
     await UserService.delete(db, { id })
     await this.auth.deleteUser(id)
   }
-
-  static deleteManyUsers = async (db: DBClient, ids: string[]) => {
-    await UserService.deleteMany(db, { ids })
-    await this.auth.deleteManyUsers(ids)
-  }
 }

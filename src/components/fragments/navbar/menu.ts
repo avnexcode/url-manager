@@ -1,11 +1,11 @@
 import * as m from '@/generated/paraglide/messages'
 import type { LinkProps } from '@tanstack/react-router'
-import type { icons } from 'lucide-react'
+import type { IconName } from '@/components/icon'
 
 export type RouteProps = {
   href: LinkProps['to']
   label: string
-  icon: keyof typeof icons
+  icon: IconName
 }
 
 export const routeList: RouteProps[] = [

@@ -47,33 +47,6 @@ export class FileService {
     return fileName
   }
 
-  static deleteImageByUrl = async (
-    bucket: SUPABASE_BUCKET,
-    imageUrl: string,
-  ): Promise<void> => {
-    const fileName = this.getFileName(imageUrl)
-
-    await SupabaseService.storage.deleteFile(bucket, [fileName])
-  }
-
-  static deleteImageByUrls = async (
-    bucket: SUPABASE_BUCKET,
-    imageUrls: string[],
-  ): Promise<void> => {
-    const fileNames = imageUrls.map((url) => this.getFileName(url))
-
-    await SupabaseService.storage.deleteFile(bucket, fileNames)
-  }
-
-  static deleteFileByUrl = async (
-    bucket: SUPABASE_BUCKET,
-    fileUrls: string,
-  ): Promise<void> => {
-    const fileName = this.getFileName(fileUrls)
-
-    await SupabaseService.storage.deleteFile(bucket, [fileName])
-  }
-
   static deleteFileByUrls = async (
     bucket: SUPABASE_BUCKET,
     fileUrls: string[],

@@ -1,8 +1,6 @@
 import type { DBClient } from '@/server/db'
 import { CommonRepository } from '../common'
 import type {
-  BulkDeleteUserRequest,
-  BulkDeleteUserResponse,
   CreateUserRequest,
   CreateUserResponse,
   DeleteUserRequest,
@@ -20,12 +18,6 @@ export class UserRepository extends CommonRepository {
     const user = await db.user.findUnique({ where: { id } })
 
     return user
-  }
-
-  static countByIds = async (db: DBClient, ids: string[]): Promise<number> => {
-    const count = db.user.count({ where: { id: { in: ids } } })
-
-    return count
   }
 
   static countById = async (db: DBClient, id: string): Promise<number> => {
@@ -102,21 +94,5 @@ export class UserRepository extends CommonRepository {
     })
 
     return user
-  }
-
-  static destroyMany = async (
-    db: DBClient,
-    request: BulkDeleteUserRequest,
-  ): Promise<BulkDeleteUserResponse> => {
-    const { ids } = request
-
-    const users = await db.user.findMany({
-      where: { id: { in: ids } },
-      select: { id: true, image: true },
-    })
-
-    await db.user.deleteMany({ where: { id: { in: ids } } })
-
-    return users
   }
 }

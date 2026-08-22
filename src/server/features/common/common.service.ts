@@ -1,4 +1,5 @@
 import * as m from '@/generated/paraglide/messages'
+import { UrlFilter } from '@/server/filters'
 import type { Trend } from '@/server/models'
 import { ErrorTRPCService } from '@/server/services'
 import type { TRPC_ERROR_CODE_KEY } from '@trpc/server'
@@ -42,6 +43,16 @@ export abstract class CommonService {
   ): T {
     const isNullish = value === null || value === undefined
     if (isNullish) this.throwError(code, customModel)
+    return value
+  }
+
+  protected static checkBlockedUrl(
+    value: string,
+    code: TRPC_ERROR_CODE_KEY = 'BAD_REQUEST',
+    customModel?: string,
+    options?: { blockSubdomains?: boolean },
+  ): string {
+    if (UrlFilter.isBlocked(value, options)) this.throwError(code, customModel)
     return value
   }
 

@@ -1,6 +1,10 @@
 import { Heading, Icon } from '@/components'
-import { ConfirmDialog } from '@/components/actions'
-import { PageLimit, PagePagination, PageSearch } from '@/components/fragments'
+import {
+  ConfirmDialog,
+  PageLimit,
+  PagePagination,
+  PageSearch,
+} from '@/components/fragments'
 import {
   MainLayout,
   PageContainer,
@@ -12,15 +16,14 @@ import * as m from '@/generated/paraglide/messages'
 import { useQueryParams, useSelectionSet } from '@/hooks'
 import { useTRPC } from '@/lib/trpc/react'
 import { renderElements } from '@/utils'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Link } from '@tanstack/react-router'
+import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { PlatformCard, PlatformCardSkeleton } from '../components'
 import { useBulkDeletePlatforms } from '../hooks'
+import { ActionLink } from '@/components/elements'
 
 export const PlatformPage = () => {
   const trpc = useTRPC()
-  const queryClient = useQueryClient()
 
   const { queryParams, handleUpdateQuery } = useQueryParams()
 
@@ -31,46 +34,43 @@ export const PlatformPage = () => {
   const allPlatformIds = platforms?.data.map((platform) => platform.id) ?? []
 
   const {
-    selectedArray: platformIds,
+    selectedList: platformIds,
     selectedCount,
     toggle,
     isSelected,
     toggleAll,
     isAllSelected,
     isIndeterminate,
+    clearSelection,
   } = useSelectionSet(allPlatformIds)
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const { onBulkDelete, isPending } = useBulkDeletePlatforms({
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: trpc.platform.getAll.queryKey(),
-      })
-    },
+  const { onBulkDelete, isPending, variables } = useBulkDeletePlatforms({
+    onSuccess: () => clearSelection(),
+    onError: () => clearSelection(),
     redirect: false,
   })
 
   const onDelete = () => onBulkDelete({ ids: platformIds })
 
+  const isPlatformPending = (platformId: string) => {
+    return isPending && (variables?.request.ids.includes(platformId) ?? false)
+  }
+
   return (
     <PageContainer withHeader withFooter>
-      <SectionContainer container padded className="min-h-screen pb-5">
+      <SectionContainer container padded className="min-h-screen">
         <MainLayout
           headerContent={
             <>
-              <Heading size={'h2'} className="capitalize">
-                {m.model_platform_title()}
-              </Heading>
-              <Link to={'/{-$locale}/dashboard/platform/create'}>
-                <Button className="w-full font-semibold">
-                  <Icon name="CirclePlus" />
-                  Add Platform
-                </Button>
-              </Link>
+              <Heading size={'h2'}>{m.page_platform_title()}</Heading>
+              <ActionLink
+                action="createNew"
+                to="/{-$locale}/dashboard/platform/create"
+              />
             </>
           }
-          className="space-y-5"
         >
           <header className="my-3">
             <div className="my-3 flex flex-col justify-between gap-x-10 gap-y-3 sm:flex-row sm:items-center">
@@ -104,28 +104,15 @@ export const PlatformPage = () => {
               ) : null}
 
               {selectedCount > 0 ? (
-                <>
-                  <Button
-                    variant={'destructive'}
-                    size={'sm'}
-                    disabled={isPending}
-                    className="h-7 max-w-fit rounded-sm text-xs"
-                    onClick={() => {
-                      setIsOpen(true)
-                    }}
-                  >
-                    <Icon name="Trash2" />
-                    Delete {selectedCount} Platforms
-                  </Button>
-                  <ConfirmDialog
-                    variant="delete"
-                    model={m.model_platform_title()}
-                    open={isOpen}
-                    onOpenChange={setIsOpen}
-                    onConfirm={onDelete}
-                    isPending={isPending}
-                  />
-                </>
+                <Button
+                  variant={'destructive'}
+                  size={'sm'}
+                  disabled={isPending}
+                  className="h-7 max-w-fit rounded-sm text-xs"
+                  onClick={() => setIsOpen(true)}
+                >
+                  <Icon name="Trash2" />({selectedCount}) {m.action_delete()}
+                </Button>
               ) : platforms?.data.length !== 0 ? (
                 <Button
                   variant={'neutral'}
@@ -133,8 +120,7 @@ export const PlatformPage = () => {
                   disabled
                   className="h-7 max-w-fit rounded-sm text-xs"
                 >
-                  <Icon name="Trash2" />
-                  Delete 0 Platforms
+                  <Icon name="Trash2" />({selectedCount}) {m.action_delete()}
                 </Button>
               ) : null}
             </div>
@@ -156,9 +142,12 @@ export const PlatformPage = () => {
                         toggle(platform.id, checked)
                       }
                       checked={isSelected(platform.id)}
+                      isPending={isPlatformPending(platform.id)}
                     />
                   )
                 },
+                isLoading: isPlatformsLoading,
+                fallback: <>Tidak ada data</>,
               })}
           <footer>
             <PagePagination
@@ -171,6 +160,14 @@ export const PlatformPage = () => {
             />
           </footer>
         </MainLayout>
+        <ConfirmDialog
+          variant="delete"
+          model={m.model_platform_title()}
+          open={isOpen}
+          onOpenChange={setIsOpen}
+          onConfirm={onDelete}
+          isPending={isPending}
+        />
       </SectionContainer>
     </PageContainer>
   )

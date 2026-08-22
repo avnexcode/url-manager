@@ -22,6 +22,9 @@ const config = defineConfig({
     viteReact(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
+  build: {
+    chunkSizeWarningLimit: 900,
+  },
 })
 
 export default config

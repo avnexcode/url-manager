@@ -3,7 +3,11 @@ import { TRPCProvider } from '@/lib/trpc/react'
 import type { AppRouter } from '@/server/api/root'
 import { QueryClient } from '@tanstack/react-query'
 import { createIsomorphicFn } from '@tanstack/react-start'
-import { createTRPCClient, httpBatchStreamLink } from '@trpc/client'
+import {
+  createTRPCClient,
+  httpBatchStreamLink,
+  TRPCClientError,
+} from '@trpc/client'
 import { createTRPCOptionsProxy } from '@trpc/tanstack-react-query'
 import type { ReactNode } from 'react'
 import superjson from 'superjson'
@@ -35,6 +39,28 @@ export const getContext = () => {
     defaultOptions: {
       dehydrate: { serializeData: superjson.serialize },
       hydrate: { deserializeData: superjson.deserialize },
+      queries: {
+        staleTime: 5 * 60 * 1000,
+        gcTime: 10 * 60 * 1000,
+        retry: (failureCount, error) => {
+          if (
+            error instanceof TRPCClientError &&
+            error.data.httpStatus &&
+            error.data.httpStatus >= 400 &&
+            error.data.httpStatus < 500
+          ) {
+            return false
+          }
+          return failureCount < 3
+        },
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+      },
+      mutations: {
+        onError: () => {
+          alert('Something went wrong!')
+        },
+      },
     },
   })
 
@@ -42,10 +68,8 @@ export const getContext = () => {
     client: trpcClient,
     queryClient: queryClient,
   })
-  const context = {
-    queryClient,
-    trpc: serverHelpers,
-  }
+
+  const context = { queryClient, trpc: serverHelpers }
 
   return context
 }

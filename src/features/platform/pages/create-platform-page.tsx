@@ -16,13 +16,8 @@ export const CreatePlatformPage = () => {
       <SectionContainer container padded className="min-h-screen">
         <MainLayout
           headerContent={
-            <>
-              <Heading size={'h2'} className="capitalize">
-                {m.model_platform_title()}
-              </Heading>
-            </>
+            <Heading size={'h2'}>{m.page_platform_title()}</Heading>
           }
-          className="space-y-5"
         >
           <CreatePlatformForm
             form={form}

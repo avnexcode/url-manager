@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
+import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
 import { Check, ChevronRight, Circle } from 'lucide-react'
 import { cva } from 'class-variance-authority'
 
@@ -112,8 +112,10 @@ export const dropdownMenuItemVariants = cva(
     variants: {
       variant: {
         default: 'bg-main text-main-foreground',
-        neutral: 'bg-secondary-background text-foreground focus:bg-accent focus:text-accent-foreground',
-        destructive: 'bg-main text-destructive focus:bg-destructive focus:text-destructive-foreground',
+        neutral:
+          'bg-secondary-background text-foreground focus:bg-accent focus:text-accent-foreground',
+        destructive:
+          'bg-main text-destructive focus:bg-destructive focus:text-destructive-foreground',
       },
     },
     defaultVariants: {

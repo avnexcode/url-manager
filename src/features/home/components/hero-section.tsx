@@ -23,7 +23,7 @@ export const HeroSection = () => {
         </p>
       </div>
       <div className="flex flex-col items-center gap-6 sm:flex-row">
-        <Link to="/{-$locale}/dashboard">
+        <Link preload={false} to="/{-$locale}/dashboard">
           <Button size="lg" variant="default" className="px-8 font-bold">
             Get Started
             <ArrowRight className="ml-2 h-5 w-5" />

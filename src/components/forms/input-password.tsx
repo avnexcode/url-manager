@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import { forwardRef, useState } from 'react'
 import type { FieldValues, Path } from 'react-hook-form'
 import { Controller, useFormContext } from 'react-hook-form'
-import { TogglePasswordVisibility } from '../toggle-password-visibility'
+import { TogglePasswordVisibility } from '../elements/toggle-password-visibility'
 
 type InputPasswordProps<T extends FieldValues> = Omit<
   React.ComponentPropsWithoutRef<'input'>,

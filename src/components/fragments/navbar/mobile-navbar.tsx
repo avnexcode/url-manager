@@ -18,6 +18,7 @@ import {
   SheetTrigger,
 } from '../../ui/sheet'
 import { routeList } from './menu'
+import * as m from '@/generated/paraglide/messages'
 
 export const MobileNavbar = () => {
   const { user, isAuthenticated } = useAuth()
@@ -68,7 +69,7 @@ export const MobileNavbar = () => {
                     onClick={() => setIsOpen(false)}
                     className="h-11 justify-start gap-3 rounded-none border-2 border-transparent px-3 text-base hover:border-border"
                   >
-                    <Link to={route.href}>
+                    <Link preload={false} to={route.href}>
                       <Icon name={route.icon} className="size-4" />
                       {route.label}
                     </Link>
@@ -79,7 +80,7 @@ export const MobileNavbar = () => {
 
           {/* Footer: user info + auth action */}
           <SheetFooter className="flex-col border-t-2 border-border p-4 gap-3">
-            {isAuthenticated && user ? (
+            {isAuthenticated ? (
               <>
                 <div className="flex flex-col gap-1 border-2 border-border bg-secondary-background p-1">
                   <div className="flex items-center gap-2 text-sm font-base">
@@ -124,7 +125,7 @@ export const MobileNavbar = () => {
                 className="w-full justify-start gap-3"
               >
                 <Icon name="LogOut" className="size-4" />
-                Logout
+                {m.action_logout()}
               </Button>
             )}
           </SheetFooter>

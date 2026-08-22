@@ -1,3 +1,4 @@
+import { ImageCropDialog } from '@/components/fragments'
 import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import * as m from '@/generated/paraglide/messages'
@@ -15,6 +16,8 @@ type InputImageprops<T extends FieldValues> = {
   className?: string
   image?: string | null
   defaultImage?: string
+  aspect?: number
+  cropEnabled?: boolean
 }
 
 export const InputImage = <T extends FieldValues>({
@@ -24,6 +27,8 @@ export const InputImage = <T extends FieldValues>({
   className,
   image,
   defaultImage,
+  aspect = 1,
+  cropEnabled = true,
 }: InputImageprops<T>) => {
   const form = useFormContext<T>()
   const inputFileRef = useRef<HTMLInputElement>(null)
@@ -52,6 +57,16 @@ export const InputImage = <T extends FieldValues>({
   }, [selectedImage])
 
   const previewSrc = selectedImagePreview ?? image ?? defaultImage ?? null
+
+  // state khusus untuk alur crop (gambar mentah sebelum dipotong)
+  const [pendingRawSrc, setPendingRawSrc] = useState<string | null>(null)
+  const [pendingFileName, setPendingFileName] = useState('')
+  const [cropDialogOpen, setCropDialogOpen] = useState(false)
+
+  const cleanupPendingRawSrc = () => {
+    if (pendingRawSrc) URL.revokeObjectURL(pendingRawSrc)
+    setPendingRawSrc(null)
+  }
 
   return (
     <Controller
@@ -117,11 +132,40 @@ export const InputImage = <T extends FieldValues>({
             className="hidden"
             onChange={(e) => {
               const file = e.target.files?.[0]
-              field.onChange(file)
+              if (!file) return
+
+              if (!cropEnabled) {
+                field.onChange(file)
+                return
+              }
+
+              const objectUrl = URL.createObjectURL(file)
+              setPendingRawSrc(objectUrl)
+              setPendingFileName(file.name)
+              setCropDialogOpen(true)
+
+              // reset value agar file yang sama bisa dipilih ulang setelah cancel
+              e.target.value = ''
             }}
           />
 
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+
+          <ImageCropDialog
+            open={cropDialogOpen}
+            imageSrc={pendingRawSrc}
+            fileName={pendingFileName}
+            aspect={aspect}
+            onCancel={() => {
+              setCropDialogOpen(false)
+              cleanupPendingRawSrc()
+            }}
+            onCropComplete={(croppedFile) => {
+              field.onChange(croppedFile)
+              setCropDialogOpen(false)
+              cleanupPendingRawSrc()
+            }}
+          />
         </Field>
       )}
     />

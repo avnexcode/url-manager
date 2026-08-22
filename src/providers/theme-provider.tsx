@@ -1,9 +1,9 @@
+import type { ResolvedTheme, Theme } from '@/contexts/theme-context'
+import { ThemeContext } from '@/contexts/theme-context'
 import { useAuth } from '@/hooks/use-auth'
 import { useTRPC } from '@/lib/trpc/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useCallback, useEffect, useState } from 'react'
-import { ThemeContext } from '@/contexts/theme-context'
-import type { ResolvedTheme, Theme } from '@/contexts/theme-context'
 
 const STORAGE_KEY = 'theme'
 
@@ -91,12 +91,12 @@ export const ThemeProvider: React.FC<React.PropsWithChildren> = ({
   }, [])
 
   useEffect(() => {
-    if (!isAuthenticated || !setting) return
+    if (!isAuthenticated) return
     const dbTheme = dbThemeToTheme(setting.theme)
     setThemeState(dbTheme)
     applyTheme(dbTheme)
     window.localStorage.setItem(STORAGE_KEY, dbTheme)
-  }, [isAuthenticated, setting?.theme])
+  }, [isAuthenticated, setting.theme])
 
   useEffect(() => {
     setResolvedTheme(resolveTheme(theme))
@@ -119,14 +119,13 @@ export const ThemeProvider: React.FC<React.PropsWithChildren> = ({
       applyTheme(newTheme)
       window.localStorage.setItem(STORAGE_KEY, newTheme)
 
-      if (isAuthenticated && setting?.id) {
+      if (isAuthenticated && setting.id) {
         updateSetting({
-          id: setting.id,
           request: { theme: themeToDbTheme(newTheme) },
         })
       }
     },
-    [isAuthenticated, setting?.id, updateSetting],
+    [isAuthenticated, setting.id, updateSetting],
   )
 
   return (

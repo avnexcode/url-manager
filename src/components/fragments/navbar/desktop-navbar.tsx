@@ -14,6 +14,7 @@ import { useAuth } from '@/hooks'
 import { renderElements } from '@/utils'
 import { Link } from '@tanstack/react-router'
 import { routeList } from './menu'
+import * as m from '@/generated//paraglide/messages'
 
 export const DesktopNavbar = () => {
   const { user, isAuthenticated } = useAuth()
@@ -26,13 +27,13 @@ export const DesktopNavbar = () => {
           to="/{-$locale}/login"
           className="inline-flex h-10 items-center gap-2 border-2 border-border bg-secondary-background px-4 text-sm font-base text-foreground shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"
         >
-          Login
+          {m.page_auth_login_title()}
         </Link>
         <Link
           to="/{-$locale}/register"
           className="inline-flex h-10 items-center gap-2 border-2 border-border bg-main px-4 text-sm font-base text-main-foreground shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"
         >
-          Register
+          {m.page_auth_register_title()}
         </Link>
       </div>
     )
@@ -42,14 +43,14 @@ export const DesktopNavbar = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="group relative flex cursor-pointer items-center gap-2 border-2 border-border bg-secondary-background p-1 pr-1 shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2">
-          <Avatar className="size-8 rounded-none border-2 border-border">
+          <Avatar className="size-8 rounded-none">
             <AvatarImage
-              src={user?.avatar ?? ''}
+              src={user.image ?? user.avatar ?? ''}
               crossOrigin="anonymous"
               referrerPolicy="no-referrer"
             />
             <AvatarFallback className="rounded-none bg-main text-secondary-foreground font-heading text-sm">
-              {user?.email.charAt(0).toUpperCase()}
+              {user.email.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
 
@@ -63,7 +64,7 @@ export const DesktopNavbar = () => {
       >
         <DropdownMenuLabel className="border-b-2 border-border pb-2">
           <p className="font-heading truncate text-secondary-foreground">
-            {user?.email}
+            {user.email}
           </p>
         </DropdownMenuLabel>
 
@@ -77,7 +78,11 @@ export const DesktopNavbar = () => {
                 asChild
                 className="rounded-none cursor-pointer bg-secondary-background text-secondary-foreground"
               >
-                <Link to={route.href} className="flex items-center gap-2">
+                <Link
+                  preload={false}
+                  to={route.href}
+                  className="flex items-center gap-2"
+                >
                   <Icon name={route.icon} />
                   {route.label}
                 </Link>

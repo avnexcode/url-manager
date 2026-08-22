@@ -15,6 +15,26 @@ export default [
     },
   },
   {
-    ignores: ['eslint.config.js', 'prettier.config.js'],
+    ignores: [
+      // Config files
+      'eslint.config.js',
+      'prettier.config.js',
+
+      // Build output & caches
+      'dist/**',
+      '.output/**',
+      '.tanstack/**',
+      '.nitro/**',
+      '.vinxi/**',
+      'project.inlang/**',
+
+      // Generated files
+      'src/generated/**',
+      'src/routeTree.gen.ts',
+
+      // Tooling & server configs
+      '.vscode/**',
+      'nginx/**',
+    ],
   },
 ]

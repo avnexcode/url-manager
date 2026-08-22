@@ -4,7 +4,6 @@ import type { DBClient } from '@/server/db'
 import type { QueryParams } from '@/server/models'
 import { FileService } from '@/server/services'
 import { generateSlug } from '@/utils'
-import { randomUUID } from 'node:crypto'
 import { CommonService } from '../common'
 import type {
   BulkDeletePlatformsRequest,
@@ -21,6 +20,7 @@ import { PlatformRepository as Repository } from './platform.repository'
 
 export class PlatformService extends CommonService {
   private static bucket = SUPABASE_BUCKET.Platform
+  private static file = FileService
 
   protected static override get baseModel() {
     return this.m.model_platform_title()
@@ -94,9 +94,11 @@ export class PlatformService extends CommonService {
     userId: string,
     request: CreatePlatformRequest,
   ): Promise<CreatePlatformResponse> => {
-    const { title } = request
+    const { title, url } = request
 
-    const slug = generateSlug({ text: title, withId: true, uuid: randomUUID() })
+    this.checkBlockedUrl(url)
+
+    const slug = generateSlug({ text: title })
 
     await this.checkConflict(db, 'title', userId, title)
 
@@ -111,9 +113,11 @@ export class PlatformService extends CommonService {
     userId: string,
     request: UpdatePlatformRequest,
   ): Promise<UpdatePlatformResponse> => {
-    const { title } = request
+    const { title, url } = request
 
     await this.checkPlatformExists(db, userId, id)
+
+    this.checkBlockedUrl(url)
 
     const { title: oldTitle } = await this.getById(db, userId, id)
 
@@ -142,7 +146,7 @@ export class PlatformService extends CommonService {
     const imageUrls = [platform.thumbnail].filter(Boolean) as string[]
 
     if (imageUrls.length) {
-      await FileService.deleteImageByUrls(this.bucket, imageUrls)
+      await this.file.deleteFileByUrls(this.bucket, imageUrls)
     }
 
     return platform
@@ -164,7 +168,7 @@ export class PlatformService extends CommonService {
       .filter(Boolean) as string[]
 
     if (imageUrls.length) {
-      await FileService.deleteImageByUrls(this.bucket, imageUrls)
+      await this.file.deleteFileByUrls(this.bucket, imageUrls)
     }
 
     return platforms

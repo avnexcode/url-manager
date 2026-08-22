@@ -1,8 +1,6 @@
 type GenerateSlugParams = {
   /** The text to convert into a URL-friendly slug */
   text: string | undefined
-  /** Optional UUID to append as suffix when withId is true */
-  uuid?: string
   /** Whether to append UUID suffix to the generated slug (default: false) */
   withId?: boolean
 }
@@ -71,8 +69,7 @@ type GenerateSlugParams = {
  */
 export const generateSlug = ({
   text,
-  uuid,
-  withId = false,
+  withId = true,
 }: GenerateSlugParams): string => {
   // Validate input is a non-empty string
   if (!text || typeof text !== 'string') {
@@ -104,11 +101,8 @@ export const generateSlug = ({
     )
   }
 
-  // Append UUID suffix if requested
   if (withId) {
-    if (!uuid) {
-      throw new Error('UUID is required when withId = true')
-    }
+    const uuid = crypto.randomUUID()
 
     // Extract first segment of UUID (before first hyphen) or use entire UUID
     const uuidPrefix = uuid.includes('-')

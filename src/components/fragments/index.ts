@@ -1,5 +1,5 @@
-export * from './copy-button'
-export * from './copy-text-wrapper'
+export * from './confirm-dialog'
+export * from './image-crop-dialog'
 export * from './page-limit'
 export * from './page-pagination'
 export * from './page-search'

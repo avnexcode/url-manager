@@ -5,15 +5,16 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Skeleton } from '@/components/ui/skeleton'
 import { getVisibility } from '@/lib/get-enum-label'
 import { cn } from '@/lib/utils'
-import type { PlatformResponse } from '@/server/features/platform'
 import { Link } from '@tanstack/react-router'
 import { LockKeyhole, LockOpen } from 'lucide-react'
+import type { PlatformResponse } from '../types'
 
 type PlatformCardProps = {
   platform: PlatformResponse
   checked: boolean
   onCheckedChange: (checked: boolean) => void
   className?: string
+  isPending: boolean
 }
 
 const THUMBNAIL_SIZE = 'size-14'
@@ -28,7 +29,7 @@ const PlatformThumbnail = ({ thumbnail, title }: PlatformThumbnailProps) => {
     <div
       className={cn(
         THUMBNAIL_SIZE,
-        'relative shrink-0 overflow-hidden bg-muted',
+        'relative shrink-0 overflow-hidden bg-muted border-2',
       )}
     >
       {thumbnail ? (
@@ -55,19 +56,37 @@ export const PlatformCard = ({
   checked,
   onCheckedChange,
   className,
+  isPending,
 }: PlatformCardProps) => {
   return (
     <div
-      className={cn('flex flex-col items-center gap-2 sm:flex-row', className)}
+      className={cn(
+        'flex flex-col items-center gap-2 sm:flex-row',
+        isPending && 'opacity-50',
+        className,
+      )}
     >
       <div className="flex w-full flex-row items-center justify-center gap-3 sm:gap-5">
-        <Checkbox checked={checked} onCheckedChange={onCheckedChange} />
+        <Checkbox
+          checked={checked}
+          onCheckedChange={onCheckedChange}
+          disabled={isPending}
+        />
         <Link
+          preload={false}
           to={`/{-$locale}/dashboard/platform/$id/view`}
           params={{ id: platform.id }}
-          className="block w-full"
+          className={cn(
+            'block w-full',
+            isPending && 'pointer-events-none cursor-not-allowed',
+          )}
+          aria-disabled={isPending}
+          tabIndex={isPending ? -1 : undefined}
+          onClick={(e) => {
+            if (isPending) e.preventDefault()
+          }}
         >
-          <Card className="relative w-full bg-secondary-background">
+          <Card className="relative w-full bg-secondary-background py-2">
             <CardContent className="flex w-72 items-center gap-3 truncate text-lg font-semibold capitalize sm:w-96 md:w-full">
               <PlatformThumbnail
                 thumbnail={platform.thumbnail}
@@ -113,7 +132,7 @@ export const PlatformCardSkeleton = () => {
       <div className="flex w-full flex-row items-center justify-center gap-3 sm:gap-5">
         <Skeleton className="size-5 shrink-0" />
         <div className="block w-full">
-          <Card className="relative w-full bg-secondary-background">
+          <Card className="relative w-full bg-secondary-background py-2">
             <CardContent className="flex w-72 items-center gap-3 sm:w-96 md:w-full">
               <Skeleton className={cn(THUMBNAIL_SIZE, 'shrink-0')} />
               <div className="flex min-w-0 flex-1 items-center gap-2">

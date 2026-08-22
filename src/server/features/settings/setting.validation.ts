@@ -19,9 +19,5 @@ export const updateSettingRequest = createSettingRequest
   })
 
 export const deleteSettingRequest = z.object({
-  id: z.uuid().min(1),
-})
-
-export const bulkDeleteSetttingRequest = z.object({
-  ids: z.array(z.uuid()),
+  userId: z.uuid().min(1),
 })

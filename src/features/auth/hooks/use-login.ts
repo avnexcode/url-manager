@@ -1,7 +1,7 @@
 import * as m from '@/generated/paraglide/messages'
 import { useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
-import { loginServerFn } from '@/lib/supabase/auth'
+import { signIn } from '@/lib/supabase/auth'
 import { SupabaseAuthErrorCode } from '@/lib/supabase/auth-error-code'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { AuthError } from '@supabase/supabase-js'
@@ -26,7 +26,7 @@ export const useLogin = (
 
   const login = async (values: LoginFormSchema) => {
     try {
-      await loginServerFn({ data: values })
+      await signIn({ data: values })
 
       toastMessages.onLogin.onSuccess()
       onSuccess?.()

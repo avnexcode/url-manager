@@ -1,5 +1,4 @@
 import { env } from '@/configs/env'
-import { ParaglideLocaleSwitcher, ThemeToggle } from '@/components/actions'
 import { Link } from '@tanstack/react-router'
 import { DesktopNavbar, MobileNavbar } from '../fragments/navbar'
 import { Heading } from '../heading'
@@ -19,8 +18,6 @@ export const Header = () => {
 
         {/* Desktop: actions + navbar */}
         <div className="hidden items-center gap-3 lg:flex">
-          <ThemeToggle />
-          <ParaglideLocaleSwitcher />
           <DesktopNavbar />
         </div>
 

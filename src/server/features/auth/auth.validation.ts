@@ -62,8 +62,3 @@ export const resetPasswordRequest = z
 export const deleteAccountRequest = z.object({
   password: z.string().min(1),
 })
-
-export const oauthCompleteProfileRequest = z.object({
-  fullName: z.string().min(1).max(150).trim().toLowerCase(),
-  nationalId: z.string().min(1).length(16).trim(),
-})

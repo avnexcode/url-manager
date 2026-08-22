@@ -1,18 +1,18 @@
 import * as m from '@/generated/paraglide/messages'
-import { useToastMessages } from '@/hooks'
+import { useAuth, useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
-import { useTRPC } from '@/lib/trpc/react'
-import type { PlatformResponse } from '@/server/features/platform'
-import { useNavigate } from '@tanstack/react-router'
-import { useEffect, useMemo, useState } from 'react'
-import type { UpdatePlatformFormSchema } from '../types'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { updatePlatformFormSchema } from '../schemas'
-import { useMutation } from '@tanstack/react-query'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import { deleteImageByUrl, uploadImage } from '@/lib/supabase/image-upload'
+import { useTRPC } from '@/lib/trpc/react'
+import { generateSlug } from '@/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
+import { useEffect, useMemo, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { updatePlatformFormSchema } from '../schemas'
+import type { PlatformResponse, UpdatePlatformFormSchema } from '../types'
 
 const toFormValues = (platform: PlatformResponse): UpdatePlatformFormSchema => {
   return {
@@ -27,8 +27,10 @@ export const useUpdatePlatform = (
   platform: PlatformResponse,
   { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
 ) => {
+  const { user } = useAuth()
   const toastMessages = useToastMessages(m.model_platform_title())
   const trpc = useTRPC()
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
   const [isUploading, setIsUploading] = useState(false)
 
@@ -55,9 +57,20 @@ export const useUpdatePlatform = (
 
   const { mutateAsync, isPending } = useMutation(
     trpc.platform.update.mutationOptions({
-      onSuccess: () => {
+      onSuccess: async () => {
+        await Promise.allSettled([
+          queryClient.invalidateQueries({
+            queryKey: trpc.platform.getById.queryKey({ id: platform.id }),
+          }),
+          queryClient.invalidateQueries({
+            queryKey: trpc.platform.getAll.queryKey(),
+          }),
+        ])
         if (redirect) {
-          void navigate({ to: redirectTo || '/{-$locale}/dashboard/platform' })
+          void navigate({
+            to: redirectTo || '/{-$locale}/dashboard/platform/$id/view',
+            params: { id: platform.id },
+          })
         }
         toastMessages.onUpdate.onSuccess()
         onSuccess?.()
@@ -77,7 +90,7 @@ export const useUpdatePlatform = (
       if (values.thumbnail) {
         setIsUploading(true)
 
-        const fileName = `${values.title.toLocaleLowerCase()}.png`
+        const fileName = `${user.username}-th-${generateSlug({ text: values.title })}.png`
 
         thumbnailUrl = await uploadImage(
           SUPABASE_BUCKET.Platform,
@@ -103,7 +116,7 @@ export const useUpdatePlatform = (
       })
     } catch {
       if (thumbnailUrl && newThumbnail) {
-        await deleteImageByUrl(SUPABASE_BUCKET.Profile, thumbnailUrl)
+        await deleteImageByUrl(SUPABASE_BUCKET.Platform, thumbnailUrl)
       }
     }
   }

@@ -1,43 +1,43 @@
 import { useState } from 'react'
 
-export const useSelectionSet = <T>(allIds: T[]) => {
-  const [selectedIds, setSelectedIds] = useState<Set<T>>(new Set())
+export const useSelectionSet = <T>(allItems: T[]) => {
+  const [selectedItems, setSelectedItems] = useState<Set<T>>(new Set())
 
-  const toggle = (id: T, checked: boolean) => {
-    setSelectedIds((prev) => {
+  const toggle = (item: T, checked: boolean) => {
+    setSelectedItems((prev) => {
       const next = new Set(prev)
-      checked ? next.add(id) : next.delete(id)
+      checked ? next.add(item) : next.delete(item)
       return next
     })
   }
 
-  const isSelected = (id: T): boolean => selectedIds.has(id)
+  const isSelected = (item: T): boolean => selectedItems.has(item)
 
   const toggleAll = (checked: boolean) => {
-    setSelectedIds(checked ? new Set(allIds) : new Set())
+    setSelectedItems(checked ? new Set(allItems) : new Set())
   }
 
   const isAllSelected =
-    allIds.length > 0 && allIds.every((id) => selectedIds.has(id))
+    allItems.length > 0 && allItems.every((item) => selectedItems.has(item))
 
   const isIndeterminate =
-    allIds.some((id) => selectedIds.has(id)) && !isAllSelected
+    allItems.some((item) => selectedItems.has(item)) && !isAllSelected
 
-  const selectedArray = [...selectedIds]
+  const selectedList = [...selectedItems]
 
-  const selectedCount = selectedIds.size
+  const selectedCount = selectedItems.size
 
-  const clear = () => setSelectedIds(new Set())
+  const clearSelection = () => setSelectedItems(new Set())
 
   return {
-    selectedIds,
-    selectedArray,
+    selectedItems,
+    selectedList,
     selectedCount,
     toggle,
     isSelected,
     toggleAll,
     isAllSelected,
     isIndeterminate,
-    clear,
+    clearSelection,
   }
 }

@@ -31,7 +31,7 @@ export const CreatePlatformForm = ({
       </CardContent>
       <CardFooter className="flex-col-reverse place-content-end gap-4 pt-5 xl:flex-row">
         <Button variant={'neutral'} className="w-full px-20 xl:w-fit" asChild>
-          <Link to={'/{-$locale}/dashboard/platform'}>
+          <Link preload={false} to={'/{-$locale}/dashboard/platform'}>
             {m.page_shared_form_footer_cancel_button()}
           </Link>
         </Button>

@@ -1,4 +1,6 @@
 export * from './enum-to-object'
 export * from './format-string'
 export * from './render-elements'
+export * from './seo'
 export * from './slug-generator'
+export * from './username-generator'

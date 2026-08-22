@@ -2,7 +2,7 @@ import * as m from '@/generated/paraglide/messages'
 import { useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
 import { useTRPC } from '@/lib/trpc/react'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 
 export const useDeletePlatform = ({
@@ -13,11 +13,15 @@ export const useDeletePlatform = ({
 }: UseMutationOptions = {}) => {
   const toastMessages = useToastMessages(m.model_platform_title())
   const trpc = useTRPC()
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
 
   const { mutate, isPending } = useMutation(
     trpc.platform.delete.mutationOptions({
-      onSuccess: () => {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: trpc.platform.getAll.queryKey(),
+        })
         if (redirect) {
           void navigate({ to: redirectTo || '/{-$locale}/dashboard/platform' })
         }

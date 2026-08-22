@@ -8,6 +8,8 @@ import { routeTree } from './routeTree.gen'
 export const getRouter = () => {
   const context = getContext()
 
+  const { queryClient } = context
+
   const router = createTanStackRouter({
     routeTree,
     rewrite: {
@@ -19,16 +21,16 @@ export const getRouter = () => {
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
 
-    Wrap: (props: { children: ReactNode }) => {
+    Wrap: ({ children }: { children: ReactNode }) => {
       return (
         <TanstackQueryProvider context={context}>
-          {props.children}
+          {children}
         </TanstackQueryProvider>
       )
     },
   })
 
-  setupRouterSsrQueryIntegration({ router, queryClient: context.queryClient })
+  setupRouterSsrQueryIntegration({ router, queryClient })
 
   return router
 }

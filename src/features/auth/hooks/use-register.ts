@@ -31,7 +31,7 @@ export const useRegister = ({
   const { mutate, isPending } = useMutation(
     trpc.auth.register.mutationOptions({
       onSuccess: () => {
-        if (redirect) void navigate({ to: redirectTo || '/{-$locale}' })
+        if (redirect) void navigate({ to: redirectTo || '/{-$locale}/login' })
         toastMessages.onRegister.onSuccess()
         onSuccess?.()
       },

@@ -24,18 +24,13 @@ export const settingRouter = createTRPCRouter({
   ),
 
   update: protectedProcedure
-    .input(z.object({ id: z.uuid(), request: updateSettingRequest }))
+    .input(z.object({ request: updateSettingRequest }))
     .mutation(async ({ ctx, input }): Promise<UpdateSettingResponse> => {
       const { db, auth } = ctx
-      const { id, request } = input
+      const { request } = input
       try {
-        const settings = await SettingService.updateByUser(
-          db,
-          auth.id,
-          id,
-          request,
-        )
-        return settings
+        const setting = await SettingService.update(db, auth.id, request)
+        return setting
       } catch (error) {
         return errorFilter(error)
       }

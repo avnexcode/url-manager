@@ -1,17 +1,18 @@
 import * as m from '@/generated/paraglide/messages'
-import { useToastMessages } from '@/hooks'
+import { useAuth, useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import { deleteImageByUrl, uploadImage } from '@/lib/supabase/image-upload'
 import { useTRPC } from '@/lib/trpc/react'
+import { generateSlug } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { createPlatformFormSchema } from '../schemas'
 import type { CreatePlatformFormSchema } from '../types'
-import { toast } from 'sonner'
 
 export const useCreatePlatform = ({
   redirect = true,
@@ -19,8 +20,10 @@ export const useCreatePlatform = ({
   onSuccess,
   onError,
 }: UseMutationOptions = {}) => {
+  const { user } = useAuth()
   const toastMessages = useToastMessages(m.model_platform_title())
   const trpc = useTRPC()
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
   const [isUploading, setIsUploading] = useState(false)
 
@@ -37,7 +40,10 @@ export const useCreatePlatform = ({
 
   const { mutateAsync, isPending } = useMutation(
     trpc.platform.create.mutationOptions({
-      onSuccess: () => {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: trpc.platform.getAll.queryKey(),
+        })
         if (redirect) {
           void navigate({ to: redirectTo || '/{-$locale}/dashboard/platform' })
         }
@@ -58,7 +64,7 @@ export const useCreatePlatform = ({
       if (values.thumbnail) {
         setIsUploading(true)
 
-        const fileName = `${values.title.toLocaleLowerCase()}.png`
+        const fileName = `${user.username}-th-${generateSlug({ text: values.title })}.png`
 
         thumbnailUrl = await uploadImage(
           SUPABASE_BUCKET.Platform,

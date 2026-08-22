@@ -4,7 +4,7 @@ import {
   updatePasswordRequest,
 } from '@/server/features/auth'
 import type { UpdateUserResponse, UserResponse } from '@/server/features/user'
-import { UserService } from '@/server/features/user'
+import { updateUserRequest, UserService } from '@/server/features/user'
 import { errorFilter } from '@/server/filters'
 import z from 'zod'
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc'
@@ -28,13 +28,26 @@ export const authRouter = createTRPCRouter({
     async ({ ctx }): Promise<UserResponse> => {
       const { auth, db } = ctx
       try {
-        const userAccount = await UserService.getById(db, auth.id)
-        return userAccount
+        const account = await UserService.getById(db, auth.id)
+        return account
       } catch (error) {
         return errorFilter(error)
       }
     },
   ),
+
+  updateAccount: protectedProcedure
+    .input(z.object({ request: updateUserRequest }))
+    .mutation(async ({ ctx, input }): Promise<UpdateUserResponse> => {
+      const { auth, db } = ctx
+      const { request } = input
+      try {
+        const account = await UserService.update(db, auth.id, request)
+        return account
+      } catch (error) {
+        return errorFilter(error)
+      }
+    }),
 
   updatePassword: protectedProcedure
     .input(z.object({ request: updatePasswordRequest }))

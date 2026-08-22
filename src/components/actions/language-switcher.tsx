@@ -62,7 +62,6 @@ export const ParaglideLocaleSwitcher = () => {
 
     if (isAuthenticated && setting?.id) {
       updateSetting({
-        id: setting.id,
         request: { language: locale.toUpperCase() as 'EN' | 'ID' },
       })
     }

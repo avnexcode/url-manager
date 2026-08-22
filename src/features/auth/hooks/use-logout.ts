@@ -1,7 +1,7 @@
 import * as m from '@/generated/paraglide/messages'
 import { useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
-import { logoutServerFn } from '@/lib/supabase/auth'
+import { signOut } from '@/lib/supabase/auth'
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
 
@@ -20,7 +20,7 @@ export const useLogout = ({
     try {
       setIsPending(true)
 
-      await logoutServerFn()
+      await signOut()
 
       await router.invalidate()
 
