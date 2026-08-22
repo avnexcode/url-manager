@@ -52,7 +52,7 @@ const PlatformThumbnail = ({ thumbnail, title }: PlatformThumbnailProps) => {
 }
 
 export const PlatformCard = ({
-  platform,
+  platform: { id, title, visibility, password, thumbnail },
   checked,
   onCheckedChange,
   className,
@@ -75,7 +75,7 @@ export const PlatformCard = ({
         <Link
           preload={false}
           to={`/{-$locale}/dashboard/platform/$id/view`}
-          params={{ id: platform.id }}
+          params={{ id }}
           className={cn(
             'block w-full',
             isPending && 'pointer-events-none cursor-not-allowed',
@@ -88,12 +88,9 @@ export const PlatformCard = ({
         >
           <Card className="relative w-full bg-secondary-background py-2">
             <CardContent className="flex w-72 items-center gap-3 truncate text-lg font-semibold capitalize sm:w-96 md:w-full">
-              <PlatformThumbnail
-                thumbnail={platform.thumbnail}
-                title={platform.title}
-              />
+              <PlatformThumbnail thumbnail={thumbnail} title={title} />
               <div className="flex min-w-0 items-center gap-1">
-                {platform.password ? (
+                {password ? (
                   <LockKeyhole
                     size={20}
                     className="shrink-0 text-red-500 dark:text-red-600"
@@ -104,7 +101,7 @@ export const PlatformCard = ({
                     className="shrink-0 text-green-500 dark:text-green-600"
                   />
                 )}
-                <span className="truncate">{platform.title}</span>
+                <span className="truncate">{title}</span>
               </div>
             </CardContent>
 
@@ -112,12 +109,12 @@ export const PlatformCard = ({
               variant="default"
               className={cn(
                 'absolute top-0.5 right-2 scale-75 font-semibold tracking-[3px] text-white uppercase md:top-2 md:scale-85 xl:scale-100',
-                platform.visibility === 'PRIVATE'
+                visibility === 'PRIVATE'
                   ? 'bg-red-500'
                   : 'bg-blue-500 dark:bg-blue-400',
               )}
             >
-              {getVisibility({ visibility: platform.visibility })}
+              {getVisibility({ visibility })}
             </Badge>
           </Card>
         </Link>

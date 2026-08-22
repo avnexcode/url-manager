@@ -23,7 +23,7 @@ export const DashboardPage = () => {
             />
             <DashboardLink
               label={m.model_identifier_title()}
-              url="/{-$locale}"
+              url="/{-$locale}/dashboard/identifier"
             />
           </main>
         </MainLayout>

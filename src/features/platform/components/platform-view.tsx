@@ -67,7 +67,7 @@ export const PlatformView = ({
       <div className="flex w-full flex-col gap-0">
         <div className="from-primary/10 via-primary/5 bg-linear-to-br to-transparent">
           <div className="flex flex-col gap-4 px-4 py-5 sm:flex-row sm:items-start sm:gap-6 sm:px-6 sm:py-7">
-            <Avatar className="h-20 w-20 shrink-0 self-center rounded-none shadow-md sm:h-24 sm:w-24 sm:self-start">
+            <Avatar className="h-40 w-40 shrink-0 self-center rounded-none shadow-md sm:self-start">
               <AvatarImage
                 src={thumbnail ?? ''}
                 crossOrigin="anonymous"
@@ -75,7 +75,7 @@ export const PlatformView = ({
                 className="object-cover"
               />
               <AvatarFallback className="bg-primary/20 text-primary rounded-none">
-                <Icon name="ImageOff" className="h-8 w-8 sm:h-10 sm:w-10" />
+                <Icon name="ImageOff" className="h-20 w-20" />
               </AvatarFallback>
             </Avatar>
 
@@ -102,8 +102,8 @@ export const PlatformView = ({
                     <Icon name="LockOpen" size={11} className="shrink-0" />
                   )}
                   {isLocked
-                    ? m.component_platform_view_lock_status_locked()
-                    : m.component_platform_view_lock_status_open()}
+                    ? m.component_view_lock_status_locked()
+                    : m.component_view_lock_status_open()}
                 </span>
 
                 <Badge
@@ -148,7 +148,7 @@ export const PlatformView = ({
 
         <div className="px-4 py-4 sm:px-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-            {m.component_platform_view_public_url_label()}
+            {m.component_view_public_url_label()}
           </p>
 
           <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
@@ -187,7 +187,7 @@ export const PlatformView = ({
         <div className="px-4 py-5 sm:px-6">
           <header className="mb-4 flex items-center justify-between">
             <Heading size="h4" as="h2">
-              {m.component_platform_view_url_list_heading()}
+              {m.component_view_url_list_heading()}
             </Heading>
           </header>
 
@@ -195,7 +195,7 @@ export const PlatformView = ({
             <div className="flex min-h-32 flex-col items-center justify-center gap-2 rounded-none border-2 border-dashed border-border bg-secondary-background py-10 text-center">
               <Icon name="Link" className="h-8 w-8 text-muted-foreground/50" />
               <p className="text-sm text-muted-foreground">
-                {m.component_platform_view_url_list_empty()}
+                {m.component_view_url_list_empty()}
               </p>
             </div>
           </main>

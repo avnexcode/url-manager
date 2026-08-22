@@ -14,7 +14,7 @@ import superjson from 'superjson'
 
 const getUrl = () => {
   if (typeof window !== 'undefined') return '/api/trpc'
-  return `${env.SERVER_URL ?? `http://localhost:3000`}/api/trpc`
+  return `${env.SERVER_URL}/api/trpc`
 }
 
 const getHeaders = createIsomorphicFn()

@@ -197,6 +197,7 @@
   "page_home_title": "Beranda",
   "page_dashboard_title": "Dasbor",
   "page_platform_title": "Platform",
+  "page_identifier_title": "Pengenal",
 
   "component_navbar_item_dashboard": "Dasbor",
   "component_navbar_item_account": "Akun",
@@ -204,11 +205,11 @@
   "component_navbar_item_identifier": "Pengenal",
   "component_navbar_item_setting": "Pengaturan",
 
-  "component_platform_view_lock_status_locked": "Dilindungi Kata Sandi",
-  "component_platform_view_lock_status_open": "Akses Terbuka",
-  "component_platform_view_public_url_label": "URL Publik",
-  "component_platform_view_url_list_heading": "Daftar URL",
-  "component_platform_view_url_list_empty": "Belum ada URL yang ditambahkan",
+  "component_view_lock_status_locked": "Dilindungi Kata Sandi",
+  "component_view_lock_status_open": "Akses Terbuka",
+  "component_view_public_url_label": "URL Publik",
+  "component_view_url_list_heading": "Daftar URL",
+  "component_view_url_list_empty": "Belum ada URL yang ditambahkan",
 
   "component_dialog_delete_title": "Apakah Anda yakin ingin menghapus {model} ini?",
   "component_dialog_delete_description": "Tindakan ini tidak dapat dibatalkan. Ini akan menghapus {model} Anda secara permanen dan menghapus data Anda dari server kami.",

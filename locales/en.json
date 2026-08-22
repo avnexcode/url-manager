@@ -197,6 +197,7 @@
   "page_home_title": "Home",
   "page_dashboard_title": "Dashboard",
   "page_platform_title": "Platform",
+  "page_identifier_title": "Identifier",
 
   "component_navbar_item_dashboard": "Dashboard",
   "component_navbar_item_account": "Account",
@@ -204,11 +205,11 @@
   "component_navbar_item_identifier": "Identifier",
   "component_navbar_item_setting": "Setting",
 
-  "component_platform_view_lock_status_locked": "Password Protected",
-  "component_platform_view_lock_status_open": "Open Access",
-  "component_platform_view_public_url_label": "Public URL",
-  "component_platform_view_url_list_heading": "URL's List",
-  "component_platform_view_url_list_empty": "No URLs added yet",
+  "component_view_lock_status_locked": "Password Protected",
+  "component_view_lock_status_open": "Open Access",
+  "component_view_public_url_label": "Public URL",
+  "component_view_url_list_heading": "URL's List",
+  "component_view_url_list_empty": "No URLs added yet",
 
   "component_dialog_delete_title": "Are you absolutely sure you want to delete this {model}?",
   "component_dialog_delete_description": "This action cannot be undone. This will permanently delete your {model} and remove your data from our servers.",
