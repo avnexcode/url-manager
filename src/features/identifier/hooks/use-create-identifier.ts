@@ -30,6 +30,7 @@ export const useCreateIdentifier = ({
   const form = useForm<CreateIdentifierFormSchema>({
     defaultValues: {
       title: '',
+      description: '',
       password: '',
       thumbnail: null,
       visibility: 'PRIVATE',
@@ -48,6 +49,7 @@ export const useCreateIdentifier = ({
             to: redirectTo || '/{-$locale}/dashboard/identifier',
           })
         }
+        form.reset()
         toastMessages.onCreate.onSuccess()
         onSuccess?.()
       },
@@ -87,7 +89,7 @@ export const useCreateIdentifier = ({
       await mutateAsync({ request: { ...values, thumbnail: thumbnailUrl } })
     } catch {
       if (thumbnailUrl) {
-        await deleteImageByUrl(SUPABASE_BUCKET.Profile, thumbnailUrl)
+        await deleteImageByUrl(SUPABASE_BUCKET.Identifier, thumbnailUrl)
       }
     }
   }

@@ -1,3 +1,6 @@
 export * from './heading'
 export * from './icon'
+export * from './qr-image-dialog'
+export * from './image-preview'
+export * from './image-thumbnail'
 export * from './loader'

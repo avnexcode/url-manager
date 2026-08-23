@@ -1,5 +1,5 @@
 import { Heading, Icon } from '@/components'
-import { ActionLink } from '@/components/elements'
+import { ActionLink, EmptyState } from '@/components/elements'
 import {
   ConfirmDialog,
   PageLimit,
@@ -147,7 +147,9 @@ export const IdentifierPage = () => {
                   )
                 },
                 isLoading: isIdentifiersLoading,
-                fallback: <>Tidak ada data</>,
+                fallback: (
+                  <EmptyState title={m.component_identifier_empty_state()} />
+                ),
               })}
           <footer>
             <PagePagination

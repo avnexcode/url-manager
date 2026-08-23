@@ -12,7 +12,7 @@ export class FileService {
     return imageUrl
   }
 
-  static uploadImage = async (
+  static uploadImageString = async (
     bucket: SUPABASE_BUCKET,
     fileName: string,
     image: string,
@@ -20,7 +20,28 @@ export class FileService {
     const buffer = Buffer.from(image, 'base64')
 
     const config = {
-      contentType: 'image/jpeg',
+      contentType: 'image/png',
+      upsert: true,
+    }
+
+    const { path } = await SupabaseService.storage.uploadFile(bucket, {
+      fileName,
+      buffer,
+      config,
+    })
+
+    const imageUrl = await this.getImageUrl(bucket, path)
+
+    return imageUrl
+  }
+
+  static uploadImageBuffer = async (
+    bucket: SUPABASE_BUCKET,
+    fileName: string,
+    buffer: Buffer<ArrayBufferLike>,
+  ): Promise<string> => {
+    const config = {
+      contentType: 'image/png',
       upsert: true,
     }
 

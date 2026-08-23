@@ -16,7 +16,7 @@ export const CreateIdentifierFormInner = ({
 }: CreateIdentifierFormInnerProps) => {
   const form = useFormContext<CreateIdentifierFormSchema>()
 
-  const { InputText, InputPassword, InputImage } =
+  const { InputText, InputTextArea, InputPassword, InputImage } =
     useFormInput<CreateIdentifierFormSchema>()
 
   return (
@@ -29,6 +29,10 @@ export const CreateIdentifierFormInner = ({
         name="title"
         label={m.model_identifier_field_title()}
         required
+      />
+      <InputTextArea
+        name="description"
+        label={m.model_identifier_field_description()}
       />
       <InputSelect<CreateIdentifierFormSchema, 'visibility'>
         name="visibility"

@@ -1,7 +1,7 @@
 [
   {
     "title": "Promo Akhir Tahun",
-    "slug": "i-promo-akhir-tahun-52a18508",
+    "slug": "promo-akhir-tahun-52a18508",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -9,7 +9,7 @@
   },
   {
     "title": "Undangan Pernikahan",
-    "slug": "i-undangan-pernikahan-163809fa",
+    "slug": "undangan-pernikahan-163809fa",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -17,7 +17,7 @@
   },
   {
     "title": "Katalog Produk",
-    "slug": "i-katalog-produk-96f0d421",
+    "slug": "katalog-produk-96f0d421",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -25,7 +25,7 @@
   },
   {
     "title": "Lebaran 2026",
-    "slug": "i-lebaran-2026-8a1931b9",
+    "slug": "lebaran-2026-8a1931b9",
     "visibility": "PRIVATE",
     "password": "pw_a65974",
     "thumbnail": null,
@@ -33,7 +33,7 @@
   },
   {
     "title": "Campaign Instagram Ads",
-    "slug": "i-campaign-instagram-ads-cb398eb4",
+    "slug": "campaign-instagram-ads-cb398eb4",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -41,7 +41,7 @@
   },
   {
     "title": "Portofolio Desain",
-    "slug": "i-portofolio-desain-16c270ac",
+    "slug": "portofolio-desain-16c270ac",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -49,7 +49,7 @@
   },
   {
     "title": "CV Digital",
-    "slug": "i-cv-digital-d557c114",
+    "slug": "cv-digital-d557c114",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -57,7 +57,7 @@
   },
   {
     "title": "Link Bio Utama",
-    "slug": "i-link-bio-utama-0bafd46a",
+    "slug": "link-bio-utama-0bafd46a",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -65,7 +65,7 @@
   },
   {
     "title": "Event Tahunan",
-    "slug": "i-event-tahunan-f59734b6",
+    "slug": "event-tahunan-f59734b6",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -73,7 +73,7 @@
   },
   {
     "title": "Webinar Marketing",
-    "slug": "i-webinar-marketing-178edd46",
+    "slug": "webinar-marketing-178edd46",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -81,7 +81,7 @@
   },
   {
     "title": "Diskon Flash Sale",
-    "slug": "i-diskon-flash-sale-a6312a0d",
+    "slug": "diskon-flash-sale-a6312a0d",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -89,7 +89,7 @@
   },
   {
     "title": "Peluncuran Produk Baru",
-    "slug": "i-peluncuran-produk-baru-40659fb8",
+    "slug": "peluncuran-produk-baru-40659fb8",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -97,7 +97,7 @@
   },
   {
     "title": "Kampanye Donasi",
-    "slug": "i-kampanye-donasi-b7dfa866",
+    "slug": "kampanye-donasi-b7dfa866",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -105,7 +105,7 @@
   },
   {
     "title": "Materi Pelatihan",
-    "slug": "i-materi-pelatihan-a0132500",
+    "slug": "materi-pelatihan-a0132500",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -113,7 +113,7 @@
   },
   {
     "title": "Panduan Onboarding",
-    "slug": "i-panduan-onboarding-8f9136af",
+    "slug": "panduan-onboarding-8f9136af",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -121,7 +121,7 @@
   },
   {
     "title": "Reuni Angkatan",
-    "slug": "i-reuni-angkatan-1df77115",
+    "slug": "reuni-angkatan-1df77115",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -129,7 +129,7 @@
   },
   {
     "title": "Undangan Ulang Tahun",
-    "slug": "i-undangan-ulang-tahun-7b83f5be",
+    "slug": "undangan-ulang-tahun-7b83f5be",
     "visibility": "PRIVATE",
     "password": "pw_a1d8e5",
     "thumbnail": null,
@@ -137,7 +137,7 @@
   },
   {
     "title": "Sertifikat Pelatihan",
-    "slug": "i-sertifikat-pelatihan-388a9cc3",
+    "slug": "sertifikat-pelatihan-388a9cc3",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -145,7 +145,7 @@
   },
   {
     "title": "Dokumentasi Proyek",
-    "slug": "i-dokumentasi-proyek-db385004",
+    "slug": "dokumentasi-proyek-db385004",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -153,7 +153,7 @@
   },
   {
     "title": "Formulir Pendaftaran",
-    "slug": "i-formulir-pendaftaran-395cb5f1",
+    "slug": "formulir-pendaftaran-395cb5f1",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -161,7 +161,7 @@
   },
   {
     "title": "Katalog Jasa",
-    "slug": "i-katalog-jasa-3339ed7a",
+    "slug": "katalog-jasa-3339ed7a",
     "visibility": "PRIVATE",
     "password": "pw_aecc72",
     "thumbnail": null,
@@ -169,7 +169,7 @@
   },
   {
     "title": "Company Profile",
-    "slug": "i-company-profile-c5cf66fb",
+    "slug": "company-profile-c5cf66fb",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -177,7 +177,7 @@
   },
   {
     "title": "Media Kit",
-    "slug": "i-media-kit-f097a997",
+    "slug": "media-kit-f097a997",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -185,7 +185,7 @@
   },
   {
     "title": "Press Release",
-    "slug": "i-press-release-280cb1b2",
+    "slug": "press-release-280cb1b2",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -193,7 +193,7 @@
   },
   {
     "title": "Rilis Aplikasi Mobile",
-    "slug": "i-rilis-aplikasi-mobile-d3443946",
+    "slug": "rilis-aplikasi-mobile-d3443946",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -201,7 +201,7 @@
   },
   {
     "title": "Kampanye Sosial",
-    "slug": "i-kampanye-sosial-0bead8de",
+    "slug": "kampanye-sosial-0bead8de",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -209,7 +209,7 @@
   },
   {
     "title": "Voucher Belanja",
-    "slug": "i-voucher-belanja-880720c2",
+    "slug": "voucher-belanja-880720c2",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -217,7 +217,7 @@
   },
   {
     "title": "Survey Kepuasan Pelanggan",
-    "slug": "i-survey-kepuasan-pelanggan-910a87ce",
+    "slug": "survey-kepuasan-pelanggan-910a87ce",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -225,7 +225,7 @@
   },
   {
     "title": "Portal Karir",
-    "slug": "i-portal-karir-34c88ce7",
+    "slug": "portal-karir-34c88ce7",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -233,7 +233,7 @@
   },
   {
     "title": "Materi Presentasi",
-    "slug": "i-materi-presentasi-9348c838",
+    "slug": "materi-presentasi-9348c838",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -241,7 +241,7 @@
   },
   {
     "title": "Booklet Digital",
-    "slug": "i-booklet-digital-ee37665a",
+    "slug": "booklet-digital-ee37665a",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -249,7 +249,7 @@
   },
   {
     "title": "Brosur Kegiatan",
-    "slug": "i-brosur-kegiatan-1ace2ba2",
+    "slug": "brosur-kegiatan-1ace2ba2",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -257,7 +257,7 @@
   },
   {
     "title": "Undangan Seminar",
-    "slug": "i-undangan-seminar-f3f67fd2",
+    "slug": "undangan-seminar-f3f67fd2",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -265,7 +265,7 @@
   },
   {
     "title": "Jadwal Acara",
-    "slug": "i-jadwal-acara-f6651557",
+    "slug": "jadwal-acara-f6651557",
     "visibility": "PRIVATE",
     "password": "pw_5981fc",
     "thumbnail": null,
@@ -273,7 +273,7 @@
   },
   {
     "title": "Katalog Wisata",
-    "slug": "i-katalog-wisata-f140c426",
+    "slug": "katalog-wisata-f140c426",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -281,7 +281,7 @@
   },
   {
     "title": "Panduan Instalasi",
-    "slug": "i-panduan-instalasi-42e9b10b",
+    "slug": "panduan-instalasi-42e9b10b",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -289,7 +289,7 @@
   },
   {
     "title": "Dokumen Kerjasama",
-    "slug": "i-dokumen-kerjasama-e4014934",
+    "slug": "dokumen-kerjasama-e4014934",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -297,7 +297,7 @@
   },
   {
     "title": "Modul Pembelajaran",
-    "slug": "i-modul-pembelajaran-758e4283",
+    "slug": "modul-pembelajaran-758e4283",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -305,7 +305,7 @@
   },
   {
     "title": "Roadmap Produk",
-    "slug": "i-roadmap-produk-f42ea837",
+    "slug": "roadmap-produk-f42ea837",
     "visibility": "PRIVATE",
     "password": "pw_5040b8",
     "thumbnail": null,
@@ -313,7 +313,7 @@
   },
   {
     "title": "Rangkuman Rapat",
-    "slug": "i-rangkuman-rapat-37e1d67d",
+    "slug": "rangkuman-rapat-37e1d67d",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -321,7 +321,7 @@
   },
   {
     "title": "Kampanye Fundraising",
-    "slug": "i-kampanye-fundraising-f4333eb2",
+    "slug": "kampanye-fundraising-f4333eb2",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -329,7 +329,7 @@
   },
   {
     "title": "Undangan Pelatihan",
-    "slug": "i-undangan-pelatihan-fd0ae60a",
+    "slug": "undangan-pelatihan-fd0ae60a",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -337,7 +337,7 @@
   },
   {
     "title": "Formulir Feedback",
-    "slug": "i-formulir-feedback-da434727",
+    "slug": "formulir-feedback-da434727",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -345,7 +345,7 @@
   },
   {
     "title": "Katalog Merchandise",
-    "slug": "i-katalog-merchandise-55f50e32",
+    "slug": "katalog-merchandise-55f50e32",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -353,7 +353,7 @@
   },
   {
     "title": "Materi Sosialisasi",
-    "slug": "i-materi-sosialisasi-67838041",
+    "slug": "materi-sosialisasi-67838041",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -361,7 +361,7 @@
   },
   {
     "title": "Panduan Pengguna",
-    "slug": "i-panduan-pengguna-964a1fd2",
+    "slug": "panduan-pengguna-964a1fd2",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -369,7 +369,7 @@
   },
   {
     "title": "Rilis Fitur Baru",
-    "slug": "i-rilis-fitur-baru-9cb7492d",
+    "slug": "rilis-fitur-baru-9cb7492d",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -377,7 +377,7 @@
   },
   {
     "title": "Undangan Peluncuran",
-    "slug": "i-undangan-peluncuran-abc288dc",
+    "slug": "undangan-peluncuran-abc288dc",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,
@@ -385,7 +385,7 @@
   },
   {
     "title": "Dokumen Legal",
-    "slug": "i-dokumen-legal-eab30251",
+    "slug": "dokumen-legal-eab30251",
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null,
@@ -393,7 +393,7 @@
   },
   {
     "title": "Arsip Kegiatan",
-    "slug": "i-arsip-kegiatan-8aaa70cb",
+    "slug": "arsip-kegiatan-8aaa70cb",
     "visibility": "PRIVATE",
     "password": null,
     "thumbnail": null,

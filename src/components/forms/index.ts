@@ -1,3 +1,4 @@
+export * from './form-skeleton'
 export * from './input-avatar'
 export * from './input-file'
 export * from './input-image'

@@ -18,7 +18,7 @@ export const EditIdentifierFormInner = ({
 }: EditIdentifierFormInnerProps) => {
   const form = useFormContext<UpdateIdentifierFormSchema>()
 
-  const { InputText, InputPassword, InputImage } =
+  const { InputText, InputTextArea, InputPassword, InputImage } =
     useFormInput<UpdateIdentifierFormSchema>()
 
   return (
@@ -31,6 +31,10 @@ export const EditIdentifierFormInner = ({
         name="title"
         label={m.model_identifier_field_title()}
         required
+      />
+      <InputTextArea
+        name="description"
+        label={m.model_identifier_field_description()}
       />
       <InputSelect<UpdateIdentifierFormSchema, 'visibility'>
         name="visibility"

@@ -1,4 +1,4 @@
-import { Icon } from '@/components'
+import { ImageThumbnail, ImageThumbnailSkeleton } from '@/components'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -15,43 +15,6 @@ type IdentifierCardProps = {
   onCheckedChange: (checked: boolean) => void
   className?: string
   isPending: boolean
-}
-
-const THUMBNAIL_SIZE = 'size-14'
-
-type IdentifierThumbnailProps = {
-  thumbnail: IdentifierResponse['thumbnail']
-  title: IdentifierResponse['title']
-}
-
-const IdentifierThumbnail = ({
-  thumbnail,
-  title,
-}: IdentifierThumbnailProps) => {
-  return (
-    <div
-      className={cn(
-        THUMBNAIL_SIZE,
-        'relative shrink-0 overflow-hidden bg-muted border-2',
-      )}
-    >
-      {thumbnail ? (
-        <img
-          src={thumbnail}
-          alt={title}
-          loading="lazy"
-          className="size-full object-cover"
-          onError={(e) => {
-            e.currentTarget.style.display = 'none'
-          }}
-        />
-      ) : (
-        <div className="flex size-full items-center justify-center">
-          <Icon name="ImageOff" size={18} className="text-muted-foreground" />
-        </div>
-      )}
-    </div>
-  )
 }
 
 export const IdentifierCard = ({
@@ -91,7 +54,7 @@ export const IdentifierCard = ({
         >
           <Card className="relative w-full bg-secondary-background py-2">
             <CardContent className="flex w-72 items-center gap-3 truncate text-lg font-semibold capitalize sm:w-96 md:w-full">
-              <IdentifierThumbnail thumbnail={thumbnail} title={title} />
+              <ImageThumbnail thumbnail={thumbnail} title={title} />
               <div className="flex min-w-0 items-center gap-1">
                 {password ? (
                   <LockKeyhole
@@ -134,7 +97,7 @@ export const IdentifierCardSkeleton = () => {
         <div className="block w-full">
           <Card className="relative w-full bg-secondary-background py-2">
             <CardContent className="flex w-72 items-center gap-3 sm:w-96 md:w-full">
-              <Skeleton className={cn(THUMBNAIL_SIZE, 'shrink-0')} />
+              <ImageThumbnailSkeleton />
               <div className="flex min-w-0 flex-1 items-center gap-2">
                 <Skeleton className="size-5 shrink-0" />
                 <Skeleton className="h-5 w-36 sm:w-60" />

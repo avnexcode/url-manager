@@ -1,8 +1,11 @@
 import { PrismaPg } from '@prisma/adapter-pg'
-import type { Prisma } from '../src/generated/prisma/client.js'
 import { PrismaClient } from '../src/generated/prisma/client.js'
 import { getDatabaseUrl } from '../src/server/db/database-url.js'
 
+import { IdentifierService } from '@/server/features/identifier/identifier.service.js'
+import { bulkCreateIdentifiersRequest } from '@/server/features/identifier/identifier.validation.js'
+import { PlatformService } from '@/server/features/platform/platform.service.js'
+import { bulkCreatePlatformsRequest } from '@/server/features/platform/platform.validation.js'
 import identifiersData from './data/identifier.json'
 import platformsData from './data/platform.json'
 
@@ -18,13 +21,21 @@ async function main() {
   await prisma.platform.deleteMany()
   await prisma.identifier.deleteMany()
 
-  const platforms = await prisma.platform.createMany({
-    data: platformsData as Prisma.PlatformCreateManyInput[],
-  })
+  const parsedPlatforms = bulkCreatePlatformsRequest.parse(platformsData)
 
-  const identifiers = await prisma.identifier.createMany({
-    data: identifiersData as Prisma.IdentifierCreateManyInput[],
-  })
+  const platforms = await PlatformService.createMany(
+    prisma,
+    '991b0f1e-1a66-4f43-bf54-0e005a2d3ec7',
+    parsedPlatforms,
+  )
+
+  const parsedIdentifiers = bulkCreateIdentifiersRequest.parse(identifiersData)
+
+  const identifiers = await IdentifierService.createMany(
+    prisma,
+    '991b0f1e-1a66-4f43-bf54-0e005a2d3ec7',
+    parsedIdentifiers,
+  )
 
   console.log(`✅ Created ${platforms.count} platforms`)
   console.log(`✅ Created ${identifiers.count} identifiers`)

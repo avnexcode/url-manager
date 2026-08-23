@@ -12,8 +12,12 @@ async function main() {
   console.log('🌱 Deleting database...')
 
   const platforms = await prisma.platform.deleteMany()
+  const identifiers = await prisma.identifier.deleteMany()
+  const urls = await prisma.url.deleteMany()
 
   console.log(`✅ Deleted ${platforms.count} platforms`)
+  console.log(`✅ Deleted ${identifiers.count} identifiers`)
+  console.log(`✅ Deleted ${urls.count} urls`)
 }
 
 main()

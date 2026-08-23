@@ -27,7 +27,7 @@ export const Route = createFileRoute(
   head: ({ loaderData, params }) =>
     seo({
       title: loaderData ? `${loaderData.title}` : m.page_identifier_title(),
-      description: loaderData?.thumbnail ? undefined : undefined,
+      description: loaderData?.description ? undefined : undefined,
       image: loaderData?.thumbnail ?? undefined,
       url: `${env.VITE_BASE_URL}/identifier/${loaderData?.slug ?? params.id}`,
       robots: false,

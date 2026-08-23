@@ -25,8 +25,8 @@ export const platformRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { params } = input
       try {
-        const platpforms = await PlatformService.getAll(db, auth.id, params)
-        return platpforms
+        const platforms = await PlatformService.getAll(db, auth.id, params)
+        return platforms
       } catch (error) {
         return errorFilter(error)
       }
@@ -38,8 +38,8 @@ export const platformRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { id } = input
       try {
-        const platpform = await PlatformService.getById(db, auth.id, id)
-        return platpform
+        const platform = await PlatformService.getById(db, auth.id, id)
+        return platform
       } catch (error) {
         return errorFilter(error)
       }

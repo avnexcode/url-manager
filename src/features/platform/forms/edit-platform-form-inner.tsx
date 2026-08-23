@@ -18,7 +18,7 @@ export const EditPlatformFormInner = ({
 }: EditPlatformFormInnerProps) => {
   const form = useFormContext<UpdatePlatformFormSchema>()
 
-  const { InputText, InputPassword, InputImage } =
+  const { InputText, InputTextArea, InputPassword, InputImage } =
     useFormInput<UpdatePlatformFormSchema>()
 
   return (
@@ -28,6 +28,10 @@ export const EditPlatformFormInner = ({
       className="space-y-5"
     >
       <InputText name="title" label={m.model_platform_field_title()} required />
+      <InputTextArea
+        name="description"
+        label={m.model_platform_field_description()}
+      />
       <InputText name="url" label={m.model_platform_field_url()} required />
       <InputSelect<UpdatePlatformFormSchema, 'visibility'>
         name="visibility"

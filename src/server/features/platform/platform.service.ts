@@ -2,10 +2,14 @@ import type { QueryResponse } from '@/interfaces'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import type { DBClient } from '@/server/db'
 import type { QueryParams } from '@/server/models'
-import { FileService } from '@/server/services'
+import { FileService, QrCodeService } from '@/server/services'
 import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
+import { UserService } from '../user'
 import type {
+  BaseCreatePlatformRequest,
+  BulkCreatePlatformsRequest,
+  BulkCreatePlatformsResponse,
   BulkDeletePlatformsRequest,
   BulkDeletePlatformsResponse,
   CreatePlatformRequest,
@@ -28,20 +32,18 @@ export class PlatformService extends CommonService {
 
   private static checkPlatformExists = async (
     db: DBClient,
-    userId: string,
     id: string,
   ): Promise<void> => {
-    const count = await Repository.countById(db, userId, id)
+    const count = await Repository.countById(db, id)
 
     this.checkExists(count === 0)
   }
 
   private static checkPlatformsExist = async (
     db: DBClient,
-    userId: string,
     ids: string[],
   ): Promise<void> => {
-    const count = await Repository.countByIds(db, userId, ids)
+    const count = await Repository.countByIds(db, ids)
 
     this.checkExists(count !== ids.length)
   }
@@ -98,13 +100,67 @@ export class PlatformService extends CommonService {
 
     this.checkBlockedUrl(url)
 
-    const slug = generateSlug({ text: title })
-
     await this.checkConflict(db, 'title', userId, title)
 
-    const platform = await Repository.insert(db, { userId, slug, ...request })
+    let slug = generateSlug({ text: title })
 
-    return platform
+    const existsSLugCount = await Repository.countBySlug(db, slug)
+
+    if (existsSLugCount > 0) {
+      slug = generateSlug({ text: title })
+    }
+
+    const { username } = await UserService.getById(db, userId)
+
+    const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
+      this.bucket,
+      'PLATFORM',
+      { username, slug },
+    )
+
+    const requestData = { userId, slug, qrEncodedValue, qrCodeUrl, ...request }
+
+    return await Repository.insert(db, requestData)
+  }
+
+  static createMany = async (
+    db: DBClient,
+    userId: string,
+    requests: BulkCreatePlatformsRequest,
+  ): Promise<BulkCreatePlatformsResponse> => {
+    await Promise.all(
+      requests.map(async ({ title, url }) => {
+        this.checkBlockedUrl(url)
+        await this.checkConflict(db, 'title', userId, title)
+      }),
+    )
+
+    const { username } = await UserService.getById(db, userId)
+
+    const usedSlugs = new Set<string>()
+    const requestData: BaseCreatePlatformRequest[] = []
+
+    for (const item of requests) {
+      let slug = generateSlug({ text: item.title })
+      let existsSlugCount = await Repository.countBySlug(db, slug)
+
+      while (existsSlugCount > 0 || usedSlugs.has(slug)) {
+        slug = generateSlug({ text: item.title })
+        existsSlugCount = await Repository.countBySlug(db, slug)
+      }
+
+      usedSlugs.add(slug)
+
+      const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
+        this.bucket,
+        'PLATFORM',
+        { username, slug },
+      )
+
+      requestData.push({ userId, slug, qrEncodedValue, qrCodeUrl, ...item })
+    }
+
+    return await Repository.insertMany(db, requestData)
   }
 
   static update = async (
@@ -115,21 +171,55 @@ export class PlatformService extends CommonService {
   ): Promise<UpdatePlatformResponse> => {
     const { title, url } = request
 
-    await this.checkPlatformExists(db, userId, id)
+    await this.checkPlatformExists(db, id)
 
-    this.checkBlockedUrl(url)
+    if (url) {
+      this.checkBlockedUrl(url)
+    }
 
-    const { title: oldTitle } = await this.getById(db, userId, id)
+    const existingPlatform = await this.getById(db, userId, id)
 
-    const countTitle = await Repository.countByUserAndTitle(db, userId, title)
+    let slug = existingPlatform.slug
 
-    const conflict = countTitle !== 0 && title !== oldTitle
+    if (title) {
+      const countTitle = await Repository.countByUserAndTitle(db, userId, title)
 
-    this.checkExists(conflict, 'CONFLICT', this.m.model_platform_field_title())
+      const isSimilarTitle =
+        title.toLowerCase() === existingPlatform.title.toLowerCase()
 
-    const platform = await Repository.update(db, id, userId, request)
+      const conflict = countTitle !== 0 && !isSimilarTitle
 
-    return platform
+      this.checkExists(
+        conflict,
+        'CONFLICT',
+        this.m.model_platform_field_title(),
+      )
+
+      if (!isSimilarTitle) {
+        slug = generateSlug({ text: title })
+      }
+    }
+
+    const { username } = await UserService.getById(db, userId)
+
+    let qrEncodedValue = existingPlatform.qrEncodedValue
+    let qrCodeUrl = existingPlatform.qrCodeUrl
+
+    if (slug !== existingPlatform.slug) {
+      await FileService.deleteFileByUrls(this.bucket, [qrCodeUrl])
+
+      const qrCode = await QrCodeService.generate(this.bucket, 'PLATFORM', {
+        username,
+        slug,
+      })
+
+      qrEncodedValue = qrCode.qrEncodedValue
+      qrCodeUrl = qrCode.qrCodeUrl
+    }
+
+    const requestData = { slug, qrEncodedValue, qrCodeUrl, ...request }
+
+    return await Repository.update(db, id, userId, requestData)
   }
 
   static delete = async (
@@ -139,11 +229,13 @@ export class PlatformService extends CommonService {
   ): Promise<DeletePlatformResponse> => {
     const { id } = request
 
-    await this.checkPlatformExists(db, userId, id)
+    await this.checkPlatformExists(db, id)
 
     const platform = await Repository.destroy(db, userId, request)
 
-    const imageUrls = [platform.thumbnail].filter(Boolean) as string[]
+    const imageUrls = [platform.thumbnail, platform.qrCodeUrl].filter(
+      Boolean,
+    ) as string[]
 
     if (imageUrls.length) {
       await this.file.deleteFileByUrls(this.bucket, imageUrls)
@@ -159,12 +251,12 @@ export class PlatformService extends CommonService {
   ): Promise<BulkDeletePlatformsResponse> => {
     const { ids } = request
 
-    await this.checkPlatformsExist(db, userId, ids)
+    await this.checkPlatformsExist(db, ids)
 
     const platforms = await Repository.destroyMany(db, userId, request)
 
     const imageUrls = platforms
-      .flatMap((platform) => [platform.thumbnail])
+      .flatMap((platform) => [platform.thumbnail, platform.qrCodeUrl])
       .filter(Boolean) as string[]
 
     if (imageUrls.length) {

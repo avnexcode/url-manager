@@ -1,53 +1,52 @@
-import { Icon } from '@/components'
+import {
+  Icon,
+  ImagePreview,
+  ImagePreviewSkeleton,
+  QrImageDialog,
+} from '@/components'
 import {
   ActionButton,
   ActionLink,
-  CopyButton,
+  EmptyState,
   ExternalLink,
 } from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
 import { Heading } from '@/components/heading'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { env } from '@/configs/env'
+import { Skeleton } from '@/components/ui/skeleton'
 import * as m from '@/generated/paraglide/messages'
-import { useAuth } from '@/hooks'
 import { getVisibility } from '@/lib/get-enum-label'
 import { useTRPC } from '@/lib/trpc/react'
 import { cn } from '@/lib/utils'
-import { capitalizeWords } from '@/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useDeletePlatform } from '../hooks/use-delete-platform'
 import type { PlatformResponse } from '../types'
-
-const BASE_URL = env.VITE_BASE_URL
-
-const getSlugSuffix = (slug: string) => {
-  const suffix = slug.includes('-')
-    ? slug.substring(slug.lastIndexOf('-') + 1)
-    : slug
-
-  return suffix
-}
 
 type PlatformViewProps = {
   platform: PlatformResponse
 }
 
 export const PlatformView = ({
-  platform: { id, title, slug, url, visibility, password, thumbnail },
+  platform: {
+    id,
+    title,
+    description,
+    url,
+    visibility,
+    password,
+    thumbnail,
+    qrCodeUrl,
+    qrEncodedValue,
+  },
 }: PlatformViewProps) => {
-  const { user } = useAuth()
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isQrOpen, setIsQrOpen] = useState<boolean>(false)
 
   const trpc = useTRPC()
   const queryClient = useQueryClient()
-
-  const publicUrl = password
-    ? `${BASE_URL}/${user.username}/p/${getSlugSuffix(slug)}?password=${password}`
-    : `${BASE_URL}/${user.username}/p/${getSlugSuffix(slug)}`
 
   const { onDelete, isPending } = useDeletePlatform({
     onSuccess: () => {
@@ -67,17 +66,7 @@ export const PlatformView = ({
       <div className="flex w-full flex-col gap-0">
         <div className="from-primary/10 via-primary/5 bg-linear-to-br to-transparent">
           <div className="flex flex-col gap-4 px-4 py-5 sm:flex-row sm:items-start sm:gap-6 sm:px-6 sm:py-7">
-            <Avatar className="h-40 w-40 shrink-0 self-center rounded-none shadow-md sm:self-start">
-              <AvatarImage
-                src={thumbnail ?? ''}
-                crossOrigin="anonymous"
-                referrerPolicy="no-referrer"
-                className="object-cover"
-              />
-              <AvatarFallback className="bg-primary/20 text-primary rounded-none">
-                <Icon name="ImageOff" className="h-20 w-20" />
-              </AvatarFallback>
-            </Avatar>
+            <ImagePreview thumbnail={thumbnail} title={title} />
 
             <div className="flex min-w-0 flex-1 flex-col gap-2">
               <Heading
@@ -124,6 +113,15 @@ export const PlatformView = ({
               >
                 {url}
               </p>
+
+              {description && (
+                <>
+                  <Separator />
+                  <p className="text-sm text-muted-foreground line-clamp-2">
+                    {description}
+                  </p>
+                </>
+              )}
             </div>
 
             <div className="flex shrink-0 items-center gap-2 self-end">
@@ -144,32 +142,20 @@ export const PlatformView = ({
           </div>
         </div>
 
-        <Separator />
-
         <div className="px-4 py-4 sm:px-6">
-          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-            {m.component_view_public_url_label()}
-          </p>
-
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
-            <div className="flex min-w-0 flex-1 items-center gap-2 rounded-none border-2 border-border bg-secondary-background px-3 py-2">
-              <Icon
-                name="Link"
-                className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
-              />
-              <span
-                className="min-w-0 flex-1 truncate font-mono text-xs text-foreground"
-                title={publicUrl}
+          <div className="flex flex-col gap-2 sm:flex-row justify-end">
+            {qrCodeUrl && (
+              <Button
+                type="button"
+                variant="neutral"
+                size="sm"
+                onClick={() => setIsQrOpen(true)}
+                className="w-full gap-2 sm:w-auto"
               >
-                {publicUrl}
-              </span>
-              <CopyButton
-                label={`Copy Public URL ${capitalizeWords(title)}`}
-                copyText={publicUrl}
-                size="icon"
-                className="h-6 w-6 shrink-0"
-              />
-            </div>
+                <Icon name="QrCode" className="size-4 capitalize" />
+                {m.component_view_show_qr()}
+              </Button>
+            )}
 
             <ExternalLink
               action="visit"
@@ -182,8 +168,6 @@ export const PlatformView = ({
           </div>
         </div>
 
-        <Separator />
-
         <div className="px-4 py-5 sm:px-6">
           <header className="mb-4 flex items-center justify-between">
             <Heading size="h4" as="h2">
@@ -192,12 +176,15 @@ export const PlatformView = ({
           </header>
 
           <main className="w-full">
-            <div className="flex min-h-32 flex-col items-center justify-center gap-2 rounded-none border-2 border-dashed border-border bg-secondary-background py-10 text-center">
-              <Icon name="Link" className="h-8 w-8 text-muted-foreground/50" />
-              <p className="text-sm text-muted-foreground">
-                {m.component_view_url_list_empty()}
-              </p>
-            </div>
+            <EmptyState
+              title={m.component_url_empty_state()}
+              action={
+                <ActionLink
+                  action="createNew"
+                  to="/{-$locale}/dashboard/url/create"
+                />
+              }
+            />
           </main>
         </div>
       </div>
@@ -210,6 +197,72 @@ export const PlatformView = ({
         onConfirm={handleDelete}
         isPending={isPending}
       />
+
+      <QrImageDialog
+        open={isQrOpen}
+        onOpenChange={setIsQrOpen}
+        qrCodeUrl={qrCodeUrl}
+        qrEncodedValue={qrEncodedValue}
+      />
     </>
+  )
+}
+
+export const PlatformViewSkeleton = () => {
+  return (
+    <div className="flex w-full flex-col gap-0">
+      <div className="from-primary/10 via-primary/5 bg-linear-to-br to-transparent">
+        <div className="flex flex-col gap-4 px-4 py-5 sm:flex-row sm:items-start sm:gap-6 sm:px-6 sm:py-7">
+          <ImagePreviewSkeleton />
+
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
+            {/* Heading */}
+            <Skeleton className="h-7 w-48 max-w-full" />
+
+            {/* Lock status + visibility badges */}
+            <div className="flex flex-wrap items-center gap-2">
+              <Skeleton className="h-5.5 w-20 rounded-none" />
+              <Skeleton className="h-5.5 w-16 rounded-none" />
+            </div>
+
+            {/* URL text */}
+            <Skeleton className="h-4 w-56 max-w-full" />
+
+            {/* Description (separator + 2 lines) */}
+            <Skeleton className="h-px w-full" />
+            <Skeleton className="h-4 w-full max-w-md" />
+            <Skeleton className="h-4 w-3/4 max-w-sm" />
+          </div>
+
+          {/* Edit + Delete action buttons */}
+          <div className="flex shrink-0 items-center gap-2 self-end">
+            <Skeleton className="size-9 shrink-0" />
+            <Skeleton className="size-9 shrink-0" />
+          </div>
+        </div>
+      </div>
+
+      {/* QR + Visit buttons */}
+      <div className="px-4 py-4 sm:px-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
+          <Skeleton className="h-9 w-full sm:w-28" />
+          <Skeleton className="h-9 w-full sm:w-24" />
+        </div>
+      </div>
+
+      {/* URL list section */}
+      <div className="px-4 py-5 sm:px-6">
+        <header className="mb-4 flex items-center justify-between">
+          <Skeleton className="h-6 w-32" />
+        </header>
+
+        <main className="w-full">
+          <div className="flex min-h-32 w-full flex-col items-center justify-center gap-3 rounded-none border-2 border-dashed border-border py-10">
+            <Skeleton className="h-4 w-40" />
+            <Skeleton className="h-9 w-32" />
+          </div>
+        </main>
+      </div>
+    </div>
   )
 }

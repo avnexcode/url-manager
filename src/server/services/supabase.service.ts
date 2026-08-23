@@ -98,7 +98,7 @@ class SupabaseStorageService {
 
   static uploadFile = async (
     bucket: SUPABASE_BUCKET,
-    options: { fileName: string; buffer: Buffer<ArrayBuffer>; config: {} },
+    options: { fileName: string; buffer: Buffer<ArrayBufferLike>; config: {} },
   ): Promise<{ id: string; path: string; fullPath: string }> => {
     const { fileName, buffer, config } = options
 

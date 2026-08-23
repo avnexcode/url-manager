@@ -19,6 +19,7 @@ const toFormValues = (
 ): UpdateIdentifierFormSchema => {
   return {
     title: identifier.title,
+    description: identifier.description,
     visibility: identifier.visibility,
     password: identifier.password,
   }

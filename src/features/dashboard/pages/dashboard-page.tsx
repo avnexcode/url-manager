@@ -25,6 +25,10 @@ export const DashboardPage = () => {
               label={m.model_identifier_title()}
               url="/{-$locale}/dashboard/identifier"
             />
+            <DashboardLink
+              label={m.model_url_title()}
+              url="/{-$locale}/dashboard/url"
+            />
           </main>
         </MainLayout>
       </SectionContainer>

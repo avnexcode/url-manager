@@ -17,6 +17,7 @@ import type { PlatformResponse, UpdatePlatformFormSchema } from '../types'
 const toFormValues = (platform: PlatformResponse): UpdatePlatformFormSchema => {
   return {
     title: platform.title,
+    description: platform.description,
     url: platform.url,
     visibility: platform.visibility,
     password: platform.password,

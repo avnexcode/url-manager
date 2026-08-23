@@ -2,14 +2,15 @@ import type { DBClient } from '@/server/db'
 import type { QueryParams } from '@/server/models'
 import { CommonRepository } from '../common'
 import type {
-  BaseIdentifierRequest,
+  BaseCreateIdentifierRequest,
+  BaseUpdateIdentifierRequest,
+  BulkCreateIdentifiersResponse,
   BulkDeleteIdentifiersRequest,
   BulkDeleteIdentifiersResponse,
   CreateIdentifierResponse,
   DeleteIdentifierRequest,
   DeleteIdentifierResponse,
   IdentifierResponse,
-  UpdateIdentifierRequest,
   UpdateIdentifierResponse,
 } from './identifier.model'
 
@@ -63,22 +64,14 @@ export class IdentifierRepository extends CommonRepository {
     return count
   }
 
-  static countByIds = async (
-    db: DBClient,
-    userId: string,
-    ids: string[],
-  ): Promise<number> => {
-    const count = db.identifier.count({ where: { userId, id: { in: ids } } })
+  static countByIds = async (db: DBClient, ids: string[]): Promise<number> => {
+    const count = db.identifier.count({ where: { id: { in: ids } } })
 
     return count
   }
 
-  static countById = async (
-    db: DBClient,
-    userId: string,
-    id: string,
-  ): Promise<number> => {
-    const count = await db.identifier.count({ where: { userId, id } })
+  static countById = async (db: DBClient, id: string): Promise<number> => {
+    const count = await db.identifier.count({ where: { id } })
 
     return count
   }
@@ -95,9 +88,21 @@ export class IdentifierRepository extends CommonRepository {
     return count
   }
 
+  static countBySlug = async (db: DBClient, slug: string): Promise<number> => {
+    const hashSegment = slug.split('-').pop()
+
+    const count = await db.identifier.count({
+      where: hashSegment
+        ? { slug: { endsWith: hashSegment, mode: 'insensitive' } }
+        : { slug: { equals: slug, mode: 'insensitive' } },
+    })
+
+    return count
+  }
+
   static insert = async (
     db: DBClient,
-    request: BaseIdentifierRequest,
+    request: BaseCreateIdentifierRequest,
   ): Promise<CreateIdentifierResponse> => {
     const identifier = await db.identifier.create({
       data: request,
@@ -107,11 +112,23 @@ export class IdentifierRepository extends CommonRepository {
     return identifier
   }
 
+  static insertMany = async (
+    db: DBClient,
+    requests: BaseCreateIdentifierRequest[],
+  ): Promise<BulkCreateIdentifiersResponse> => {
+    const data = await db.identifier.createManyAndReturn({
+      data: requests,
+      omit: { userId: true, updatedAt: true },
+    })
+
+    return { data, count: data.length }
+  }
+
   static update = async (
     db: DBClient,
     id: string,
     userId: string,
-    request: UpdateIdentifierRequest,
+    request: BaseUpdateIdentifierRequest,
   ): Promise<UpdateIdentifierResponse> => {
     const identifier = await db.identifier.update({
       where: { userId, id },
@@ -131,7 +148,7 @@ export class IdentifierRepository extends CommonRepository {
 
     const identifier = await db.identifier.delete({
       where: { userId, id },
-      select: { id: true, thumbnail: true },
+      select: { id: true, thumbnail: true, qrCodeUrl: true },
     })
 
     return identifier
@@ -146,7 +163,7 @@ export class IdentifierRepository extends CommonRepository {
 
     const identifiers = await db.identifier.findMany({
       where: { userId, id: { in: ids } },
-      select: { id: true, thumbnail: true },
+      select: { id: true, thumbnail: true, qrCodeUrl: true },
     })
 
     await db.identifier.deleteMany({ where: { id: { in: ids } } })

@@ -1,3 +1,4 @@
+import { Loader } from '@/components'
 import { Providers } from '@/providers'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
@@ -14,4 +15,7 @@ export const Route = createFileRoute('/{-$locale}/_authenticated')({
       </Providers>
     )
   },
+  pendingComponent: Loader,
+  pendingMs: 300,
+  pendingMinMs: 500,
 })

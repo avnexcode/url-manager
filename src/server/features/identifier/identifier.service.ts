@@ -2,10 +2,14 @@ import type { QueryResponse } from '@/interfaces'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import type { DBClient } from '@/server/db'
 import type { QueryParams } from '@/server/models'
-import { FileService } from '@/server/services'
+import { FileService, QrCodeService } from '@/server/services'
 import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
+import { UserService } from '../user'
 import type {
+  BaseCreateIdentifierRequest,
+  BulkCreateIdentifiersRequest,
+  BulkCreateIdentifiersResponse,
   BulkDeleteIdentifiersRequest,
   BulkDeleteIdentifiersResponse,
   CreateIdentifierRequest,
@@ -28,20 +32,18 @@ export class IdentifierService extends CommonService {
 
   private static checkIdentifierExists = async (
     db: DBClient,
-    userId: string,
     id: string,
   ): Promise<void> => {
-    const count = await Repository.countById(db, userId, id)
+    const count = await Repository.countById(db, id)
 
     this.checkExists(count === 0)
   }
 
   private static checkIdentifiersExist = async (
     db: DBClient,
-    userId: string,
     ids: string[],
   ): Promise<void> => {
-    const count = await Repository.countByIds(db, userId, ids)
+    const count = await Repository.countByIds(db, ids)
 
     this.checkExists(count !== ids.length)
   }
@@ -96,13 +98,66 @@ export class IdentifierService extends CommonService {
   ): Promise<CreateIdentifierResponse> => {
     const { title } = request
 
-    const slug = generateSlug({ text: title })
-
     await this.checkConflict(db, 'title', userId, title)
 
-    const identifier = await Repository.insert(db, { userId, slug, ...request })
+    let slug = generateSlug({ text: title })
 
-    return identifier
+    const existsSLugCount = await Repository.countBySlug(db, slug)
+
+    if (existsSLugCount > 0) {
+      slug = generateSlug({ text: title })
+    }
+
+    const { username } = await UserService.getById(db, userId)
+
+    const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
+      this.bucket,
+      'IDENTIFIER',
+      { username, slug },
+    )
+
+    const requestData = { userId, slug, qrEncodedValue, qrCodeUrl, ...request }
+
+    return await Repository.insert(db, requestData)
+  }
+
+  static createMany = async (
+    db: DBClient,
+    userId: string,
+    requests: BulkCreateIdentifiersRequest,
+  ): Promise<BulkCreateIdentifiersResponse> => {
+    await Promise.all(
+      requests.map(async ({ title }) => {
+        await this.checkConflict(db, 'title', userId, title)
+      }),
+    )
+
+    const { username } = await UserService.getById(db, userId)
+
+    const usedSlugs = new Set<string>()
+    const requestData: BaseCreateIdentifierRequest[] = []
+
+    for (const item of requests) {
+      let slug = generateSlug({ text: item.title })
+      let existsSlugCount = await Repository.countBySlug(db, slug)
+
+      while (existsSlugCount > 0 || usedSlugs.has(slug)) {
+        slug = generateSlug({ text: item.title })
+        existsSlugCount = await Repository.countBySlug(db, slug)
+      }
+
+      usedSlugs.add(slug)
+
+      const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
+        this.bucket,
+        'IDENTIFIER',
+        { username, slug },
+      )
+
+      requestData.push({ userId, slug, qrEncodedValue, qrCodeUrl, ...item })
+    }
+
+    return await Repository.insertMany(db, requestData)
   }
 
   static update = async (
@@ -113,23 +168,51 @@ export class IdentifierService extends CommonService {
   ): Promise<UpdateIdentifierResponse> => {
     const { title } = request
 
-    await this.checkIdentifierExists(db, userId, id)
+    await this.checkIdentifierExists(db, id)
 
-    const { title: oldTitle } = await this.getById(db, userId, id)
+    const existingIdentifier = await this.getById(db, userId, id)
 
-    const countTitle = await Repository.countByUserAndTitle(db, userId, title)
+    let slug = existingIdentifier.slug
 
-    const conflict = countTitle !== 0 && title !== oldTitle
+    if (title) {
+      const countTitle = await Repository.countByUserAndTitle(db, userId, title)
 
-    this.checkExists(
-      conflict,
-      'CONFLICT',
-      this.m.model_identifier_field_title(),
-    )
+      const isSimilarTitle =
+        title.toLowerCase() === existingIdentifier.title.toLowerCase()
 
-    const identifier = await Repository.update(db, id, userId, request)
+      const conflict = countTitle !== 0 && !isSimilarTitle
 
-    return identifier
+      this.checkExists(
+        conflict,
+        'CONFLICT',
+        this.m.model_identifier_field_title(),
+      )
+
+      if (!isSimilarTitle) {
+        slug = generateSlug({ text: title })
+      }
+    }
+
+    const { username } = await UserService.getById(db, userId)
+
+    let qrEncodedValue = existingIdentifier.qrEncodedValue
+    let qrCodeUrl = existingIdentifier.qrCodeUrl
+
+    if (slug !== existingIdentifier.slug) {
+      await FileService.deleteFileByUrls(this.bucket, [qrCodeUrl])
+
+      const qrCode = await QrCodeService.generate(this.bucket, 'IDENTIFIER', {
+        username,
+        slug,
+      })
+
+      qrEncodedValue = qrCode.qrEncodedValue
+      qrCodeUrl = qrCode.qrCodeUrl
+    }
+
+    const requestData = { slug, qrEncodedValue, qrCodeUrl, ...request }
+
+    return await Repository.update(db, id, userId, requestData)
   }
 
   static delete = async (
@@ -139,11 +222,13 @@ export class IdentifierService extends CommonService {
   ): Promise<DeleteIdentifierResponse> => {
     const { id } = request
 
-    await this.checkIdentifierExists(db, userId, id)
+    await this.checkIdentifierExists(db, id)
 
     const identifier = await Repository.destroy(db, userId, request)
 
-    const imageUrls = [identifier.thumbnail].filter(Boolean) as string[]
+    const imageUrls = [identifier.thumbnail, identifier.qrCodeUrl].filter(
+      Boolean,
+    ) as string[]
 
     if (imageUrls.length) {
       await this.file.deleteFileByUrls(this.bucket, imageUrls)
@@ -159,12 +244,12 @@ export class IdentifierService extends CommonService {
   ): Promise<BulkDeleteIdentifiersResponse> => {
     const { ids } = request
 
-    await this.checkIdentifiersExist(db, userId, ids)
+    await this.checkIdentifiersExist(db, ids)
 
     const identifiers = await Repository.destroyMany(db, userId, request)
 
     const imageUrls = identifiers
-      .flatMap((identifier) => [identifier.thumbnail])
+      .flatMap((identifier) => [identifier.thumbnail, identifier.qrCodeUrl])
       .filter(Boolean) as string[]
 
     if (imageUrls.length) {

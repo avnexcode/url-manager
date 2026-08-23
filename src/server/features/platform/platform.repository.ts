@@ -2,14 +2,15 @@ import type { DBClient } from '@/server/db'
 import type { QueryParams } from '@/server/models'
 import { CommonRepository } from '../common'
 import type {
-  BasePlatformRequest,
-  BulkDeletePlatformsResponse,
+  BaseCreatePlatformRequest,
+  BaseUpdatePlatformRequest,
+  BulkCreatePlatformsResponse,
   BulkDeletePlatformsRequest,
+  BulkDeletePlatformsResponse,
   CreatePlatformResponse,
   DeletePlatformRequest,
   DeletePlatformResponse,
   PlatformResponse,
-  UpdatePlatformRequest,
   UpdatePlatformResponse,
 } from './platform.model'
 
@@ -63,22 +64,14 @@ export class PlatformRepository extends CommonRepository {
     return count
   }
 
-  static countByIds = async (
-    db: DBClient,
-    userId: string,
-    ids: string[],
-  ): Promise<number> => {
-    const count = db.platform.count({ where: { userId, id: { in: ids } } })
+  static countByIds = async (db: DBClient, ids: string[]): Promise<number> => {
+    const count = db.platform.count({ where: { id: { in: ids } } })
 
     return count
   }
 
-  static countById = async (
-    db: DBClient,
-    userId: string,
-    id: string,
-  ): Promise<number> => {
-    const count = await db.platform.count({ where: { userId, id } })
+  static countById = async (db: DBClient, id: string): Promise<number> => {
+    const count = await db.platform.count({ where: { id } })
 
     return count
   }
@@ -95,9 +88,21 @@ export class PlatformRepository extends CommonRepository {
     return count
   }
 
+  static countBySlug = async (db: DBClient, slug: string): Promise<number> => {
+    const hashSegment = slug.split('-').pop()
+
+    const count = await db.platform.count({
+      where: hashSegment
+        ? { slug: { endsWith: hashSegment, mode: 'insensitive' } }
+        : { slug: { equals: slug, mode: 'insensitive' } },
+    })
+
+    return count
+  }
+
   static insert = async (
     db: DBClient,
-    request: BasePlatformRequest,
+    request: BaseCreatePlatformRequest,
   ): Promise<CreatePlatformResponse> => {
     const platform = await db.platform.create({
       data: request,
@@ -107,11 +112,23 @@ export class PlatformRepository extends CommonRepository {
     return platform
   }
 
+  static insertMany = async (
+    db: DBClient,
+    requests: BaseCreatePlatformRequest[],
+  ): Promise<BulkCreatePlatformsResponse> => {
+    const data = await db.platform.createManyAndReturn({
+      data: requests,
+      omit: { userId: true, updatedAt: true },
+    })
+
+    return { data, count: data.length }
+  }
+
   static update = async (
     db: DBClient,
     id: string,
     userId: string,
-    request: UpdatePlatformRequest,
+    request: BaseUpdatePlatformRequest,
   ): Promise<UpdatePlatformResponse> => {
     const platform = await db.platform.update({
       where: { userId, id },
@@ -131,7 +148,7 @@ export class PlatformRepository extends CommonRepository {
 
     const platform = await db.platform.delete({
       where: { userId, id },
-      select: { id: true, thumbnail: true },
+      select: { id: true, thumbnail: true, qrCodeUrl: true },
     })
 
     return platform
@@ -146,7 +163,7 @@ export class PlatformRepository extends CommonRepository {
 
     const platforms = await db.platform.findMany({
       where: { userId, id: { in: ids } },
-      select: { id: true, thumbnail: true },
+      select: { id: true, thumbnail: true, qrCodeUrl: true },
     })
 
     await db.platform.deleteMany({ where: { id: { in: ids } } })

@@ -1,14 +1,26 @@
 import type { Identifier, Prisma } from '@/generated/prisma/client'
 import type z from 'zod'
 import type {
-  baseIdentifierRequest,
+  baseCreateIdentifierRequest,
+  baseUpdateIdentifierRequest,
+  bulkCreateIdentifiersRequest,
   bulkDeleteIdentifiersRequest,
   createIdentifierRequest,
   deleteIdentifierRequest,
   updateIdentifierRequest,
 } from './identifier.validation'
 
-export type BaseIdentifierRequest = z.infer<typeof baseIdentifierRequest>
+export type BaseCreateIdentifierRequest = z.infer<
+  typeof baseCreateIdentifierRequest
+>
+
+export type BulkCreateIdentifiersRequest = z.infer<
+  typeof bulkCreateIdentifiersRequest
+>
+
+export type BaseUpdateIdentifierRequest = z.infer<
+  typeof baseUpdateIdentifierRequest
+>
 
 export type CreateIdentifierRequest = z.infer<typeof createIdentifierRequest>
 
@@ -26,8 +38,16 @@ export type IdentifierResponse = Prisma.IdentifierGetPayload<{
 
 export type CreateIdentifierResponse = Omit<Identifier, 'userId' | 'updatedAt'>
 
+export type BulkCreateIdentifiersResponse = {
+  data: CreateIdentifierResponse[]
+  count: number
+}
+
 export type UpdateIdentifierResponse = Omit<Identifier, 'userId' | 'createdAt'>
 
-export type DeleteIdentifierResponse = Pick<Identifier, 'id' | 'thumbnail'>
+export type DeleteIdentifierResponse = Pick<
+  Identifier,
+  'id' | 'thumbnail' | 'qrCodeUrl'
+>
 
 export type BulkDeleteIdentifiersResponse = DeleteIdentifierResponse[]

@@ -6,18 +6,41 @@ type CopyTextWrapperProps = {
   iconClassName?: string
 }
 
+const copyToClipboard = async (text: string): Promise<boolean> => {
+  try {
+    if (window.isSecureContext) {
+      await navigator.clipboard.writeText(text)
+    } else {
+      const textArea = document.createElement('textarea')
+      textArea.value = text
+      textArea.style.position = 'fixed'
+      textArea.style.opacity = '0'
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+    }
+    return true
+  } catch (err) {
+    console.error('Failed to copy text: ', err)
+    return false
+  }
+}
+
 export const CopyTextWrapper = forwardRef<
   HTMLSpanElement,
   React.HTMLAttributes<HTMLSpanElement> & CopyTextWrapperProps
 >(({ children, className, iconClassName, ...props }, ref) => {
   const [copied, setCopied] = useState(false)
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     const text = typeof children === 'string' ? children : String(children)
-    navigator.clipboard.writeText(text).then(() => {
+    const success = await copyToClipboard(text)
+    if (success) {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    })
+    }
   }
 
   return (

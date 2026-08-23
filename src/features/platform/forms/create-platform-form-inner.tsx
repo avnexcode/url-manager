@@ -16,7 +16,7 @@ export const CreatePlatformFormInner = ({
 }: CreatePlatformFormInnerProps) => {
   const form = useFormContext<CreatePlatformFormSchema>()
 
-  const { InputText, InputPassword, InputImage } =
+  const { InputText, InputTextArea, InputPassword, InputImage } =
     useFormInput<CreatePlatformFormSchema>()
 
   return (
@@ -26,6 +26,10 @@ export const CreatePlatformFormInner = ({
       className="space-y-5"
     >
       <InputText name="title" label={m.model_platform_field_title()} required />
+      <InputTextArea
+        name="description"
+        label={m.model_platform_field_description()}
+      />
       <InputText name="url" label={m.model_platform_field_url()} required />
       <InputSelect<CreatePlatformFormSchema, 'visibility'>
         name="visibility"

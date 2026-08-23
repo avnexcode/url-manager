@@ -23,6 +23,19 @@ export const createPlatformFormSchema = z.object({
         }),
       ),
     ),
+  description: z
+    .string()
+    .max(
+      255,
+      capitalizeSentence(
+        m.schema_validation_string_max({
+          field: m.model_url_field_description(),
+          max: 255,
+        }),
+      ),
+    )
+    .optional()
+    .nullable(),
   url: z.url({
     error: (issue) =>
       issue.input === undefined || issue.input === ''

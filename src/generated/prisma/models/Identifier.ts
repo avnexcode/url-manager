@@ -28,9 +28,12 @@ export type IdentifierMinAggregateOutputType = {
   id: string | null
   title: string | null
   slug: string | null
+  description: string | null
   visibility: $Enums.Visibility | null
   password: string | null
   thumbnail: string | null
+  qrCodeUrl: string | null
+  qrEncodedValue: string | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -40,9 +43,12 @@ export type IdentifierMaxAggregateOutputType = {
   id: string | null
   title: string | null
   slug: string | null
+  description: string | null
   visibility: $Enums.Visibility | null
   password: string | null
   thumbnail: string | null
+  qrCodeUrl: string | null
+  qrEncodedValue: string | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -52,9 +58,12 @@ export type IdentifierCountAggregateOutputType = {
   id: number
   title: number
   slug: number
+  description: number
   visibility: number
   password: number
   thumbnail: number
+  qrCodeUrl: number
+  qrEncodedValue: number
   userId: number
   createdAt: number
   updatedAt: number
@@ -66,9 +75,12 @@ export type IdentifierMinAggregateInputType = {
   id?: true
   title?: true
   slug?: true
+  description?: true
   visibility?: true
   password?: true
   thumbnail?: true
+  qrCodeUrl?: true
+  qrEncodedValue?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -78,9 +90,12 @@ export type IdentifierMaxAggregateInputType = {
   id?: true
   title?: true
   slug?: true
+  description?: true
   visibility?: true
   password?: true
   thumbnail?: true
+  qrCodeUrl?: true
+  qrEncodedValue?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -90,9 +105,12 @@ export type IdentifierCountAggregateInputType = {
   id?: true
   title?: true
   slug?: true
+  description?: true
   visibility?: true
   password?: true
   thumbnail?: true
+  qrCodeUrl?: true
+  qrEncodedValue?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -175,9 +193,12 @@ export type IdentifierGroupByOutputType = {
   id: string
   title: string
   slug: string
+  description: string | null
   visibility: $Enums.Visibility
   password: string | null
   thumbnail: string | null
+  qrCodeUrl: string
+  qrEncodedValue: string
   userId: string
   createdAt: Date
   updatedAt: Date
@@ -208,9 +229,12 @@ export type IdentifierWhereInput = {
   id?: Prisma.StringFilter<"Identifier"> | string
   title?: Prisma.StringFilter<"Identifier"> | string
   slug?: Prisma.StringFilter<"Identifier"> | string
+  description?: Prisma.StringNullableFilter<"Identifier"> | string | null
   visibility?: Prisma.EnumVisibilityFilter<"Identifier"> | $Enums.Visibility
   password?: Prisma.StringNullableFilter<"Identifier"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Identifier"> | string | null
+  qrCodeUrl?: Prisma.StringFilter<"Identifier"> | string
+  qrEncodedValue?: Prisma.StringFilter<"Identifier"> | string
   userId?: Prisma.StringFilter<"Identifier"> | string
   createdAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
@@ -222,9 +246,12 @@ export type IdentifierOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
+  qrCodeUrl?: Prisma.SortOrder
+  qrEncodedValue?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -239,9 +266,12 @@ export type IdentifierWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.IdentifierWhereInput[]
   NOT?: Prisma.IdentifierWhereInput | Prisma.IdentifierWhereInput[]
   title?: Prisma.StringFilter<"Identifier"> | string
+  description?: Prisma.StringNullableFilter<"Identifier"> | string | null
   visibility?: Prisma.EnumVisibilityFilter<"Identifier"> | $Enums.Visibility
   password?: Prisma.StringNullableFilter<"Identifier"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Identifier"> | string | null
+  qrCodeUrl?: Prisma.StringFilter<"Identifier"> | string
+  qrEncodedValue?: Prisma.StringFilter<"Identifier"> | string
   userId?: Prisma.StringFilter<"Identifier"> | string
   createdAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
@@ -253,9 +283,12 @@ export type IdentifierOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
+  qrCodeUrl?: Prisma.SortOrder
+  qrEncodedValue?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -271,9 +304,12 @@ export type IdentifierScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Identifier"> | string
   title?: Prisma.StringWithAggregatesFilter<"Identifier"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Identifier"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Identifier"> | string | null
   visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Identifier"> | $Enums.Visibility
   password?: Prisma.StringNullableWithAggregatesFilter<"Identifier"> | string | null
   thumbnail?: Prisma.StringNullableWithAggregatesFilter<"Identifier"> | string | null
+  qrCodeUrl?: Prisma.StringWithAggregatesFilter<"Identifier"> | string
+  qrEncodedValue?: Prisma.StringWithAggregatesFilter<"Identifier"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Identifier"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Identifier"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Identifier"> | Date | string
@@ -283,9 +319,12 @@ export type IdentifierCreateInput = {
   id?: string
   title: string
   slug: string
+  description?: string | null
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
+  qrCodeUrl: string
+  qrEncodedValue: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutIdentifiersInput
@@ -296,9 +335,12 @@ export type IdentifierUncheckedCreateInput = {
   id?: string
   title: string
   slug: string
+  description?: string | null
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
+  qrCodeUrl: string
+  qrEncodedValue: string
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -309,9 +351,12 @@ export type IdentifierUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutIdentifiersNestedInput
@@ -322,9 +367,12 @@ export type IdentifierUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -335,9 +383,12 @@ export type IdentifierCreateManyInput = {
   id?: string
   title: string
   slug: string
+  description?: string | null
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
+  qrCodeUrl: string
+  qrEncodedValue: string
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -347,9 +398,12 @@ export type IdentifierUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -358,9 +412,12 @@ export type IdentifierUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -380,9 +437,12 @@ export type IdentifierCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
+  qrCodeUrl?: Prisma.SortOrder
+  qrEncodedValue?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -392,9 +452,12 @@ export type IdentifierMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
+  qrCodeUrl?: Prisma.SortOrder
+  qrEncodedValue?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -404,9 +467,12 @@ export type IdentifierMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   password?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
+  qrCodeUrl?: Prisma.SortOrder
+  qrEncodedValue?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -483,9 +549,12 @@ export type IdentifierCreateWithoutUserInput = {
   id?: string
   title: string
   slug: string
+  description?: string | null
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
+  qrCodeUrl: string
+  qrEncodedValue: string
   createdAt?: Date | string
   updatedAt?: Date | string
   urls?: Prisma.UrlCreateNestedManyWithoutIdentifierInput
@@ -495,9 +564,12 @@ export type IdentifierUncheckedCreateWithoutUserInput = {
   id?: string
   title: string
   slug: string
+  description?: string | null
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
+  qrCodeUrl: string
+  qrEncodedValue: string
   createdAt?: Date | string
   updatedAt?: Date | string
   urls?: Prisma.UrlUncheckedCreateNestedManyWithoutIdentifierInput
@@ -536,9 +608,12 @@ export type IdentifierScalarWhereInput = {
   id?: Prisma.StringFilter<"Identifier"> | string
   title?: Prisma.StringFilter<"Identifier"> | string
   slug?: Prisma.StringFilter<"Identifier"> | string
+  description?: Prisma.StringNullableFilter<"Identifier"> | string | null
   visibility?: Prisma.EnumVisibilityFilter<"Identifier"> | $Enums.Visibility
   password?: Prisma.StringNullableFilter<"Identifier"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Identifier"> | string | null
+  qrCodeUrl?: Prisma.StringFilter<"Identifier"> | string
+  qrEncodedValue?: Prisma.StringFilter<"Identifier"> | string
   userId?: Prisma.StringFilter<"Identifier"> | string
   createdAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Identifier"> | Date | string
@@ -548,9 +623,12 @@ export type IdentifierCreateWithoutUrlsInput = {
   id?: string
   title: string
   slug: string
+  description?: string | null
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
+  qrCodeUrl: string
+  qrEncodedValue: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutIdentifiersInput
@@ -560,9 +638,12 @@ export type IdentifierUncheckedCreateWithoutUrlsInput = {
   id?: string
   title: string
   slug: string
+  description?: string | null
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
+  qrCodeUrl: string
+  qrEncodedValue: string
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -588,9 +669,12 @@ export type IdentifierUpdateWithoutUrlsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutIdentifiersNestedInput
@@ -600,9 +684,12 @@ export type IdentifierUncheckedUpdateWithoutUrlsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -612,9 +699,12 @@ export type IdentifierCreateManyUserInput = {
   id?: string
   title: string
   slug: string
+  description?: string | null
   visibility?: $Enums.Visibility
   password?: string | null
   thumbnail?: string | null
+  qrCodeUrl: string
+  qrEncodedValue: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -623,9 +713,12 @@ export type IdentifierUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   urls?: Prisma.UrlUpdateManyWithoutIdentifierNestedInput
@@ -635,9 +728,12 @@ export type IdentifierUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   urls?: Prisma.UrlUncheckedUpdateManyWithoutIdentifierNestedInput
@@ -647,9 +743,12 @@ export type IdentifierUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -689,9 +788,12 @@ export type IdentifierSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   title?: boolean
   slug?: boolean
+  description?: boolean
   visibility?: boolean
   password?: boolean
   thumbnail?: boolean
+  qrCodeUrl?: boolean
+  qrEncodedValue?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -704,9 +806,12 @@ export type IdentifierSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   title?: boolean
   slug?: boolean
+  description?: boolean
   visibility?: boolean
   password?: boolean
   thumbnail?: boolean
+  qrCodeUrl?: boolean
+  qrEncodedValue?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -717,9 +822,12 @@ export type IdentifierSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   title?: boolean
   slug?: boolean
+  description?: boolean
   visibility?: boolean
   password?: boolean
   thumbnail?: boolean
+  qrCodeUrl?: boolean
+  qrEncodedValue?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -730,15 +838,18 @@ export type IdentifierSelectScalar = {
   id?: boolean
   title?: boolean
   slug?: boolean
+  description?: boolean
   visibility?: boolean
   password?: boolean
   thumbnail?: boolean
+  qrCodeUrl?: boolean
+  qrEncodedValue?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type IdentifierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "visibility" | "password" | "thumbnail" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["identifier"]>
+export type IdentifierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "visibility" | "password" | "thumbnail" | "qrCodeUrl" | "qrEncodedValue" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["identifier"]>
 export type IdentifierInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   urls?: boolean | Prisma.Identifier$urlsArgs<ExtArgs>
@@ -761,9 +872,12 @@ export type $IdentifierPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: string
     title: string
     slug: string
+    description: string | null
     visibility: $Enums.Visibility
     password: string | null
     thumbnail: string | null
+    qrCodeUrl: string
+    qrEncodedValue: string
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -1195,9 +1309,12 @@ export interface IdentifierFieldRefs {
   readonly id: Prisma.FieldRef<"Identifier", 'String'>
   readonly title: Prisma.FieldRef<"Identifier", 'String'>
   readonly slug: Prisma.FieldRef<"Identifier", 'String'>
+  readonly description: Prisma.FieldRef<"Identifier", 'String'>
   readonly visibility: Prisma.FieldRef<"Identifier", 'Visibility'>
   readonly password: Prisma.FieldRef<"Identifier", 'String'>
   readonly thumbnail: Prisma.FieldRef<"Identifier", 'String'>
+  readonly qrCodeUrl: Prisma.FieldRef<"Identifier", 'String'>
+  readonly qrEncodedValue: Prisma.FieldRef<"Identifier", 'String'>
   readonly userId: Prisma.FieldRef<"Identifier", 'String'>
   readonly createdAt: Prisma.FieldRef<"Identifier", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Identifier", 'DateTime'>

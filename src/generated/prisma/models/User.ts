@@ -205,6 +205,7 @@ export type UserWhereInput = {
   setting?: Prisma.XOR<Prisma.SettingNullableScalarRelationFilter, Prisma.SettingWhereInput> | null
   identifiers?: Prisma.IdentifierListRelationFilter
   platforms?: Prisma.PlatformListRelationFilter
+  urls?: Prisma.UrlListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -219,6 +220,7 @@ export type UserOrderByWithRelationInput = {
   setting?: Prisma.SettingOrderByWithRelationInput
   identifiers?: Prisma.IdentifierOrderByRelationAggregateInput
   platforms?: Prisma.PlatformOrderByRelationAggregateInput
+  urls?: Prisma.UrlOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -236,6 +238,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   setting?: Prisma.XOR<Prisma.SettingNullableScalarRelationFilter, Prisma.SettingWhereInput> | null
   identifiers?: Prisma.IdentifierListRelationFilter
   platforms?: Prisma.PlatformListRelationFilter
+  urls?: Prisma.UrlListRelationFilter
 }, "id" | "username" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -278,6 +281,7 @@ export type UserCreateInput = {
   setting?: Prisma.SettingCreateNestedOneWithoutUserInput
   identifiers?: Prisma.IdentifierCreateNestedManyWithoutUserInput
   platforms?: Prisma.PlatformCreateNestedManyWithoutUserInput
+  urls?: Prisma.UrlCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -292,6 +296,7 @@ export type UserUncheckedCreateInput = {
   setting?: Prisma.SettingUncheckedCreateNestedOneWithoutUserInput
   identifiers?: Prisma.IdentifierUncheckedCreateNestedManyWithoutUserInput
   platforms?: Prisma.PlatformUncheckedCreateNestedManyWithoutUserInput
+  urls?: Prisma.UrlUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -306,6 +311,7 @@ export type UserUpdateInput = {
   setting?: Prisma.SettingUpdateOneWithoutUserNestedInput
   identifiers?: Prisma.IdentifierUpdateManyWithoutUserNestedInput
   platforms?: Prisma.PlatformUpdateManyWithoutUserNestedInput
+  urls?: Prisma.UrlUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -320,6 +326,7 @@ export type UserUncheckedUpdateInput = {
   setting?: Prisma.SettingUncheckedUpdateOneWithoutUserNestedInput
   identifiers?: Prisma.IdentifierUncheckedUpdateManyWithoutUserNestedInput
   platforms?: Prisma.PlatformUncheckedUpdateManyWithoutUserNestedInput
+  urls?: Prisma.UrlUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -462,6 +469,20 @@ export type UserUpdateOneRequiredWithoutPlatformsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPlatformsInput, Prisma.UserUpdateWithoutPlatformsInput>, Prisma.UserUncheckedUpdateWithoutPlatformsInput>
 }
 
+export type UserCreateNestedOneWithoutUrlsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUrlsInput, Prisma.UserUncheckedCreateWithoutUrlsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUrlsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUrlsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUrlsInput, Prisma.UserUncheckedCreateWithoutUrlsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUrlsInput
+  upsert?: Prisma.UserUpsertWithoutUrlsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUrlsInput, Prisma.UserUpdateWithoutUrlsInput>, Prisma.UserUncheckedUpdateWithoutUrlsInput>
+}
+
 export type UserCreateWithoutSettingInput = {
   id?: string
   username: string
@@ -473,6 +494,7 @@ export type UserCreateWithoutSettingInput = {
   updatedAt?: Date | string
   identifiers?: Prisma.IdentifierCreateNestedManyWithoutUserInput
   platforms?: Prisma.PlatformCreateNestedManyWithoutUserInput
+  urls?: Prisma.UrlCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSettingInput = {
@@ -486,6 +508,7 @@ export type UserUncheckedCreateWithoutSettingInput = {
   updatedAt?: Date | string
   identifiers?: Prisma.IdentifierUncheckedCreateNestedManyWithoutUserInput
   platforms?: Prisma.PlatformUncheckedCreateNestedManyWithoutUserInput
+  urls?: Prisma.UrlUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSettingInput = {
@@ -515,6 +538,7 @@ export type UserUpdateWithoutSettingInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   identifiers?: Prisma.IdentifierUpdateManyWithoutUserNestedInput
   platforms?: Prisma.PlatformUpdateManyWithoutUserNestedInput
+  urls?: Prisma.UrlUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSettingInput = {
@@ -528,6 +552,7 @@ export type UserUncheckedUpdateWithoutSettingInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   identifiers?: Prisma.IdentifierUncheckedUpdateManyWithoutUserNestedInput
   platforms?: Prisma.PlatformUncheckedUpdateManyWithoutUserNestedInput
+  urls?: Prisma.UrlUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutIdentifiersInput = {
@@ -541,6 +566,7 @@ export type UserCreateWithoutIdentifiersInput = {
   updatedAt?: Date | string
   setting?: Prisma.SettingCreateNestedOneWithoutUserInput
   platforms?: Prisma.PlatformCreateNestedManyWithoutUserInput
+  urls?: Prisma.UrlCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIdentifiersInput = {
@@ -554,6 +580,7 @@ export type UserUncheckedCreateWithoutIdentifiersInput = {
   updatedAt?: Date | string
   setting?: Prisma.SettingUncheckedCreateNestedOneWithoutUserInput
   platforms?: Prisma.PlatformUncheckedCreateNestedManyWithoutUserInput
+  urls?: Prisma.UrlUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIdentifiersInput = {
@@ -583,6 +610,7 @@ export type UserUpdateWithoutIdentifiersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   setting?: Prisma.SettingUpdateOneWithoutUserNestedInput
   platforms?: Prisma.PlatformUpdateManyWithoutUserNestedInput
+  urls?: Prisma.UrlUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIdentifiersInput = {
@@ -596,6 +624,7 @@ export type UserUncheckedUpdateWithoutIdentifiersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   setting?: Prisma.SettingUncheckedUpdateOneWithoutUserNestedInput
   platforms?: Prisma.PlatformUncheckedUpdateManyWithoutUserNestedInput
+  urls?: Prisma.UrlUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPlatformsInput = {
@@ -609,6 +638,7 @@ export type UserCreateWithoutPlatformsInput = {
   updatedAt?: Date | string
   setting?: Prisma.SettingCreateNestedOneWithoutUserInput
   identifiers?: Prisma.IdentifierCreateNestedManyWithoutUserInput
+  urls?: Prisma.UrlCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPlatformsInput = {
@@ -622,6 +652,7 @@ export type UserUncheckedCreateWithoutPlatformsInput = {
   updatedAt?: Date | string
   setting?: Prisma.SettingUncheckedCreateNestedOneWithoutUserInput
   identifiers?: Prisma.IdentifierUncheckedCreateNestedManyWithoutUserInput
+  urls?: Prisma.UrlUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPlatformsInput = {
@@ -651,6 +682,7 @@ export type UserUpdateWithoutPlatformsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   setting?: Prisma.SettingUpdateOneWithoutUserNestedInput
   identifiers?: Prisma.IdentifierUpdateManyWithoutUserNestedInput
+  urls?: Prisma.UrlUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlatformsInput = {
@@ -664,6 +696,79 @@ export type UserUncheckedUpdateWithoutPlatformsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   setting?: Prisma.SettingUncheckedUpdateOneWithoutUserNestedInput
   identifiers?: Prisma.IdentifierUncheckedUpdateManyWithoutUserNestedInput
+  urls?: Prisma.UrlUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUrlsInput = {
+  id?: string
+  username: string
+  email: string
+  avatar?: string | null
+  image?: string | null
+  providers?: Prisma.UserCreateprovidersInput | $Enums.LoginProvider[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  setting?: Prisma.SettingCreateNestedOneWithoutUserInput
+  identifiers?: Prisma.IdentifierCreateNestedManyWithoutUserInput
+  platforms?: Prisma.PlatformCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUrlsInput = {
+  id?: string
+  username: string
+  email: string
+  avatar?: string | null
+  image?: string | null
+  providers?: Prisma.UserCreateprovidersInput | $Enums.LoginProvider[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  setting?: Prisma.SettingUncheckedCreateNestedOneWithoutUserInput
+  identifiers?: Prisma.IdentifierUncheckedCreateNestedManyWithoutUserInput
+  platforms?: Prisma.PlatformUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUrlsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUrlsInput, Prisma.UserUncheckedCreateWithoutUrlsInput>
+}
+
+export type UserUpsertWithoutUrlsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUrlsInput, Prisma.UserUncheckedUpdateWithoutUrlsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUrlsInput, Prisma.UserUncheckedCreateWithoutUrlsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUrlsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUrlsInput, Prisma.UserUncheckedUpdateWithoutUrlsInput>
+}
+
+export type UserUpdateWithoutUrlsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providers?: Prisma.UserUpdateprovidersInput | $Enums.LoginProvider[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  setting?: Prisma.SettingUpdateOneWithoutUserNestedInput
+  identifiers?: Prisma.IdentifierUpdateManyWithoutUserNestedInput
+  platforms?: Prisma.PlatformUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUrlsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providers?: Prisma.UserUpdateprovidersInput | $Enums.LoginProvider[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  setting?: Prisma.SettingUncheckedUpdateOneWithoutUserNestedInput
+  identifiers?: Prisma.IdentifierUncheckedUpdateManyWithoutUserNestedInput
+  platforms?: Prisma.PlatformUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -674,11 +779,13 @@ export type UserUncheckedUpdateWithoutPlatformsInput = {
 export type UserCountOutputType = {
   identifiers: number
   platforms: number
+  urls: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   identifiers?: boolean | UserCountOutputTypeCountIdentifiersArgs
   platforms?: boolean | UserCountOutputTypeCountPlatformsArgs
+  urls?: boolean | UserCountOutputTypeCountUrlsArgs
 }
 
 /**
@@ -705,6 +812,13 @@ export type UserCountOutputTypeCountPlatformsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.PlatformWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUrlsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UrlWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -718,6 +832,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   setting?: boolean | Prisma.User$settingArgs<ExtArgs>
   identifiers?: boolean | Prisma.User$identifiersArgs<ExtArgs>
   platforms?: boolean | Prisma.User$platformsArgs<ExtArgs>
+  urls?: boolean | Prisma.User$urlsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -759,6 +874,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   setting?: boolean | Prisma.User$settingArgs<ExtArgs>
   identifiers?: boolean | Prisma.User$identifiersArgs<ExtArgs>
   platforms?: boolean | Prisma.User$platformsArgs<ExtArgs>
+  urls?: boolean | Prisma.User$urlsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -770,6 +886,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     setting: Prisma.$SettingPayload<ExtArgs> | null
     identifiers: Prisma.$IdentifierPayload<ExtArgs>[]
     platforms: Prisma.$PlatformPayload<ExtArgs>[]
+    urls: Prisma.$UrlPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1177,6 +1294,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   setting<T extends Prisma.User$settingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$settingArgs<ExtArgs>>): Prisma.Prisma__SettingClient<runtime.Types.Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   identifiers<T extends Prisma.User$identifiersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$identifiersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IdentifierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   platforms<T extends Prisma.User$platformsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$platformsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  urls<T extends Prisma.User$urlsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$urlsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UrlPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1671,6 +1789,30 @@ export type User$platformsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.PlatformScalarFieldEnum | Prisma.PlatformScalarFieldEnum[]
+}
+
+/**
+ * User.urls
+ */
+export type User$urlsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Url
+   */
+  select?: Prisma.UrlSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Url
+   */
+  omit?: Prisma.UrlOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UrlInclude<ExtArgs> | null
+  where?: Prisma.UrlWhereInput
+  orderBy?: Prisma.UrlOrderByWithRelationInput | Prisma.UrlOrderByWithRelationInput[]
+  cursor?: Prisma.UrlWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UrlScalarFieldEnum | Prisma.UrlScalarFieldEnum[]
 }
 
 /**

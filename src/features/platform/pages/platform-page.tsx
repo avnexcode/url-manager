@@ -20,7 +20,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { PlatformCard, PlatformCardSkeleton } from '../components'
 import { useBulkDeletePlatforms } from '../hooks'
-import { ActionLink } from '@/components/elements'
+import { ActionLink, EmptyState } from '@/components/elements'
 
 export const PlatformPage = () => {
   const trpc = useTRPC()
@@ -65,10 +65,12 @@ export const PlatformPage = () => {
           headerContent={
             <>
               <Heading size={'h2'}>{m.page_platform_title()}</Heading>
-              <ActionLink
-                action="createNew"
-                to="/{-$locale}/dashboard/platform/create"
-              />
+              {platforms?.meta && platforms.meta.total > 0 && (
+                <ActionLink
+                  action="createNew"
+                  to="/{-$locale}/dashboard/platform/create"
+                />
+              )}
             </>
           }
         >
@@ -147,7 +149,17 @@ export const PlatformPage = () => {
                   )
                 },
                 isLoading: isPlatformsLoading,
-                fallback: <>Tidak ada data</>,
+                fallback: (
+                  <EmptyState
+                    title={m.component_platform_empty_state()}
+                    action={
+                      <ActionLink
+                        action="createNew"
+                        to="/{-$locale}/dashboard/platform/create"
+                      />
+                    }
+                  />
+                ),
               })}
           <footer>
             <PagePagination

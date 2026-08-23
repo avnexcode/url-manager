@@ -30,6 +30,7 @@ export const useCreatePlatform = ({
   const form = useForm<CreatePlatformFormSchema>({
     defaultValues: {
       title: '',
+      description: '',
       url: '',
       password: '',
       thumbnail: null,
@@ -47,6 +48,7 @@ export const useCreatePlatform = ({
         if (redirect) {
           void navigate({ to: redirectTo || '/{-$locale}/dashboard/platform' })
         }
+        form.reset()
         toastMessages.onCreate.onSuccess()
         onSuccess?.()
       },
@@ -86,7 +88,7 @@ export const useCreatePlatform = ({
       await mutateAsync({ request: { ...values, thumbnail: thumbnailUrl } })
     } catch {
       if (thumbnailUrl) {
-        await deleteImageByUrl(SUPABASE_BUCKET.Profile, thumbnailUrl)
+        await deleteImageByUrl(SUPABASE_BUCKET.Platform, thumbnailUrl)
       }
     }
   }

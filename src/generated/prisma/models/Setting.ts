@@ -29,8 +29,8 @@ export type SettingMinAggregateOutputType = {
   theme: $Enums.Theme | null
   language: $Enums.Language | null
   publicAccess: boolean | null
-  publicPlatformAccess: boolean | null
   publicIdentifierAccess: boolean | null
+  publicPlatformAccess: boolean | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -41,8 +41,8 @@ export type SettingMaxAggregateOutputType = {
   theme: $Enums.Theme | null
   language: $Enums.Language | null
   publicAccess: boolean | null
-  publicPlatformAccess: boolean | null
   publicIdentifierAccess: boolean | null
+  publicPlatformAccess: boolean | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -53,8 +53,8 @@ export type SettingCountAggregateOutputType = {
   theme: number
   language: number
   publicAccess: number
-  publicPlatformAccess: number
   publicIdentifierAccess: number
+  publicPlatformAccess: number
   userId: number
   createdAt: number
   updatedAt: number
@@ -67,8 +67,8 @@ export type SettingMinAggregateInputType = {
   theme?: true
   language?: true
   publicAccess?: true
-  publicPlatformAccess?: true
   publicIdentifierAccess?: true
+  publicPlatformAccess?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -79,8 +79,8 @@ export type SettingMaxAggregateInputType = {
   theme?: true
   language?: true
   publicAccess?: true
-  publicPlatformAccess?: true
   publicIdentifierAccess?: true
+  publicPlatformAccess?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -91,8 +91,8 @@ export type SettingCountAggregateInputType = {
   theme?: true
   language?: true
   publicAccess?: true
-  publicPlatformAccess?: true
   publicIdentifierAccess?: true
+  publicPlatformAccess?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -176,8 +176,8 @@ export type SettingGroupByOutputType = {
   theme: $Enums.Theme
   language: $Enums.Language
   publicAccess: boolean
-  publicPlatformAccess: boolean
   publicIdentifierAccess: boolean
+  publicPlatformAccess: boolean
   userId: string
   createdAt: Date
   updatedAt: Date
@@ -209,8 +209,8 @@ export type SettingWhereInput = {
   theme?: Prisma.EnumThemeFilter<"Setting"> | $Enums.Theme
   language?: Prisma.EnumLanguageFilter<"Setting"> | $Enums.Language
   publicAccess?: Prisma.BoolFilter<"Setting"> | boolean
-  publicPlatformAccess?: Prisma.BoolFilter<"Setting"> | boolean
   publicIdentifierAccess?: Prisma.BoolFilter<"Setting"> | boolean
+  publicPlatformAccess?: Prisma.BoolFilter<"Setting"> | boolean
   userId?: Prisma.StringFilter<"Setting"> | string
   createdAt?: Prisma.DateTimeFilter<"Setting"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Setting"> | Date | string
@@ -222,8 +222,8 @@ export type SettingOrderByWithRelationInput = {
   theme?: Prisma.SortOrder
   language?: Prisma.SortOrder
   publicAccess?: Prisma.SortOrder
-  publicPlatformAccess?: Prisma.SortOrder
   publicIdentifierAccess?: Prisma.SortOrder
+  publicPlatformAccess?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -239,8 +239,8 @@ export type SettingWhereUniqueInput = Prisma.AtLeast<{
   theme?: Prisma.EnumThemeFilter<"Setting"> | $Enums.Theme
   language?: Prisma.EnumLanguageFilter<"Setting"> | $Enums.Language
   publicAccess?: Prisma.BoolFilter<"Setting"> | boolean
-  publicPlatformAccess?: Prisma.BoolFilter<"Setting"> | boolean
   publicIdentifierAccess?: Prisma.BoolFilter<"Setting"> | boolean
+  publicPlatformAccess?: Prisma.BoolFilter<"Setting"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Setting"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Setting"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -251,8 +251,8 @@ export type SettingOrderByWithAggregationInput = {
   theme?: Prisma.SortOrder
   language?: Prisma.SortOrder
   publicAccess?: Prisma.SortOrder
-  publicPlatformAccess?: Prisma.SortOrder
   publicIdentifierAccess?: Prisma.SortOrder
+  publicPlatformAccess?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -269,8 +269,8 @@ export type SettingScalarWhereWithAggregatesInput = {
   theme?: Prisma.EnumThemeWithAggregatesFilter<"Setting"> | $Enums.Theme
   language?: Prisma.EnumLanguageWithAggregatesFilter<"Setting"> | $Enums.Language
   publicAccess?: Prisma.BoolWithAggregatesFilter<"Setting"> | boolean
-  publicPlatformAccess?: Prisma.BoolWithAggregatesFilter<"Setting"> | boolean
   publicIdentifierAccess?: Prisma.BoolWithAggregatesFilter<"Setting"> | boolean
+  publicPlatformAccess?: Prisma.BoolWithAggregatesFilter<"Setting"> | boolean
   userId?: Prisma.StringWithAggregatesFilter<"Setting"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Setting"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Setting"> | Date | string
@@ -281,8 +281,8 @@ export type SettingCreateInput = {
   theme?: $Enums.Theme
   language?: $Enums.Language
   publicAccess?: boolean
-  publicPlatformAccess?: boolean
   publicIdentifierAccess?: boolean
+  publicPlatformAccess?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSettingInput
@@ -293,8 +293,8 @@ export type SettingUncheckedCreateInput = {
   theme?: $Enums.Theme
   language?: $Enums.Language
   publicAccess?: boolean
-  publicPlatformAccess?: boolean
   publicIdentifierAccess?: boolean
+  publicPlatformAccess?: boolean
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -305,8 +305,8 @@ export type SettingUpdateInput = {
   theme?: Prisma.EnumThemeFieldUpdateOperationsInput | $Enums.Theme
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   publicAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publicIdentifierAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSettingNestedInput
@@ -317,8 +317,8 @@ export type SettingUncheckedUpdateInput = {
   theme?: Prisma.EnumThemeFieldUpdateOperationsInput | $Enums.Theme
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   publicAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publicIdentifierAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -329,8 +329,8 @@ export type SettingCreateManyInput = {
   theme?: $Enums.Theme
   language?: $Enums.Language
   publicAccess?: boolean
-  publicPlatformAccess?: boolean
   publicIdentifierAccess?: boolean
+  publicPlatformAccess?: boolean
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -341,8 +341,8 @@ export type SettingUpdateManyMutationInput = {
   theme?: Prisma.EnumThemeFieldUpdateOperationsInput | $Enums.Theme
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   publicAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publicIdentifierAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -352,8 +352,8 @@ export type SettingUncheckedUpdateManyInput = {
   theme?: Prisma.EnumThemeFieldUpdateOperationsInput | $Enums.Theme
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   publicAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publicIdentifierAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -369,8 +369,8 @@ export type SettingCountOrderByAggregateInput = {
   theme?: Prisma.SortOrder
   language?: Prisma.SortOrder
   publicAccess?: Prisma.SortOrder
-  publicPlatformAccess?: Prisma.SortOrder
   publicIdentifierAccess?: Prisma.SortOrder
+  publicPlatformAccess?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -381,8 +381,8 @@ export type SettingMaxOrderByAggregateInput = {
   theme?: Prisma.SortOrder
   language?: Prisma.SortOrder
   publicAccess?: Prisma.SortOrder
-  publicPlatformAccess?: Prisma.SortOrder
   publicIdentifierAccess?: Prisma.SortOrder
+  publicPlatformAccess?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -393,8 +393,8 @@ export type SettingMinOrderByAggregateInput = {
   theme?: Prisma.SortOrder
   language?: Prisma.SortOrder
   publicAccess?: Prisma.SortOrder
-  publicPlatformAccess?: Prisma.SortOrder
   publicIdentifierAccess?: Prisma.SortOrder
+  publicPlatformAccess?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -449,8 +449,8 @@ export type SettingCreateWithoutUserInput = {
   theme?: $Enums.Theme
   language?: $Enums.Language
   publicAccess?: boolean
-  publicPlatformAccess?: boolean
   publicIdentifierAccess?: boolean
+  publicPlatformAccess?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -460,8 +460,8 @@ export type SettingUncheckedCreateWithoutUserInput = {
   theme?: $Enums.Theme
   language?: $Enums.Language
   publicAccess?: boolean
-  publicPlatformAccess?: boolean
   publicIdentifierAccess?: boolean
+  publicPlatformAccess?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -487,8 +487,8 @@ export type SettingUpdateWithoutUserInput = {
   theme?: Prisma.EnumThemeFieldUpdateOperationsInput | $Enums.Theme
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   publicAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publicIdentifierAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -498,8 +498,8 @@ export type SettingUncheckedUpdateWithoutUserInput = {
   theme?: Prisma.EnumThemeFieldUpdateOperationsInput | $Enums.Theme
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   publicAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publicIdentifierAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publicPlatformAccess?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -511,8 +511,8 @@ export type SettingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   theme?: boolean
   language?: boolean
   publicAccess?: boolean
-  publicPlatformAccess?: boolean
   publicIdentifierAccess?: boolean
+  publicPlatformAccess?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -524,8 +524,8 @@ export type SettingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   theme?: boolean
   language?: boolean
   publicAccess?: boolean
-  publicPlatformAccess?: boolean
   publicIdentifierAccess?: boolean
+  publicPlatformAccess?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -537,8 +537,8 @@ export type SettingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   theme?: boolean
   language?: boolean
   publicAccess?: boolean
-  publicPlatformAccess?: boolean
   publicIdentifierAccess?: boolean
+  publicPlatformAccess?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -550,14 +550,14 @@ export type SettingSelectScalar = {
   theme?: boolean
   language?: boolean
   publicAccess?: boolean
-  publicPlatformAccess?: boolean
   publicIdentifierAccess?: boolean
+  publicPlatformAccess?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SettingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "theme" | "language" | "publicAccess" | "publicPlatformAccess" | "publicIdentifierAccess" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["setting"]>
+export type SettingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "theme" | "language" | "publicAccess" | "publicIdentifierAccess" | "publicPlatformAccess" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["setting"]>
 export type SettingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -578,8 +578,8 @@ export type $SettingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     theme: $Enums.Theme
     language: $Enums.Language
     publicAccess: boolean
-    publicPlatformAccess: boolean
     publicIdentifierAccess: boolean
+    publicPlatformAccess: boolean
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -1011,8 +1011,8 @@ export interface SettingFieldRefs {
   readonly theme: Prisma.FieldRef<"Setting", 'Theme'>
   readonly language: Prisma.FieldRef<"Setting", 'Language'>
   readonly publicAccess: Prisma.FieldRef<"Setting", 'Boolean'>
-  readonly publicPlatformAccess: Prisma.FieldRef<"Setting", 'Boolean'>
   readonly publicIdentifierAccess: Prisma.FieldRef<"Setting", 'Boolean'>
+  readonly publicPlatformAccess: Prisma.FieldRef<"Setting", 'Boolean'>
   readonly userId: Prisma.FieldRef<"Setting", 'String'>
   readonly createdAt: Prisma.FieldRef<"Setting", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Setting", 'DateTime'>

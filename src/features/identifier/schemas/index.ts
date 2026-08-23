@@ -23,6 +23,19 @@ export const createIdentifierFormSchema = z.object({
         }),
       ),
     ),
+  description: z
+    .string()
+    .max(
+      255,
+      capitalizeSentence(
+        m.schema_validation_string_max({
+          field: m.model_identifier_field_description(),
+          max: 255,
+        }),
+      ),
+    )
+    .optional()
+    .nullable(),
   visibility: z.enum(visibility),
   password: z
     .string()
@@ -47,7 +60,7 @@ export const createIdentifierFormSchema = z.object({
       ),
     })
     .refine(
-      (file) => file.size <= 10 * 1024 * 1024, // max 10 MB
+      (file) => file.size <= 2 * 1024 * 1024, // max 2 MB
       {
         message: capitalizeSentence(
           m.schema_validation_file_max_size({

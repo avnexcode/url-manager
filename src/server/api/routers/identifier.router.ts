@@ -26,8 +26,12 @@ export const identifierRouter = createTRPCRouter({
         const { auth, db } = ctx
         const { params } = input
         try {
-          const platpforms = await IdentifierService.getAll(db, auth.id, params)
-          return platpforms
+          const identifiers = await IdentifierService.getAll(
+            db,
+            auth.id,
+            params,
+          )
+          return identifiers
         } catch (error) {
           return errorFilter(error)
         }
@@ -40,8 +44,8 @@ export const identifierRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { id } = input
       try {
-        const platpform = await IdentifierService.getById(db, auth.id, id)
-        return platpform
+        const identifier = await IdentifierService.getById(db, auth.id, id)
+        return identifier
       } catch (error) {
         return errorFilter(error)
       }

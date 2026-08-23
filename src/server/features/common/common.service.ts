@@ -17,6 +17,7 @@ export abstract class CommonService {
     cause?: unknown
   }): never {
     const { code, message, cause } = opts
+
     return ErrorTRPCService.new(code, message, cause)
   }
 
@@ -25,6 +26,7 @@ export abstract class CommonService {
     customModel?: string,
   ): never {
     const field = customModel ?? this.baseModel
+
     return ErrorTRPCService.throw(code, field)
   }
 
@@ -42,7 +44,9 @@ export abstract class CommonService {
     customModel?: string,
   ): T {
     const isNullish = value === null || value === undefined
+
     if (isNullish) this.throwError(code, customModel)
+
     return value
   }
 
@@ -53,6 +57,7 @@ export abstract class CommonService {
     options?: { blockSubdomains?: boolean },
   ): string {
     if (UrlFilter.isBlocked(value, options)) this.throwError(code, customModel)
+
     return value
   }
 
