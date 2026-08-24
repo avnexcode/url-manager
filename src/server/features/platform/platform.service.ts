@@ -21,6 +21,7 @@ import type {
   UpdatePlatformResponse,
 } from './platform.model'
 import { PlatformRepository as Repository } from './platform.repository'
+import { UrlService } from '../url'
 
 export class PlatformService extends CommonService {
   private static bucket = SUPABASE_BUCKET.Platform
@@ -72,9 +73,10 @@ export class PlatformService extends CommonService {
   ): Promise<QueryResponse<PlatformResponse>> => {
     const { page, limit, search } = params
 
-    const total = await Repository.countAll(db, userId, search)
-
-    const data = await Repository.findMany(db, userId, params)
+    const [total, data] = await Promise.all([
+      Repository.countAll(db, userId, search),
+      Repository.findMany(db, userId, params),
+    ])
 
     const lastPage = Math.ceil(total / limit)
 
@@ -120,7 +122,9 @@ export class PlatformService extends CommonService {
 
     const requestData = { userId, slug, qrEncodedValue, qrCodeUrl, ...request }
 
-    return await Repository.insert(db, requestData)
+    const platform = await Repository.insert(db, requestData)
+
+    return platform
   }
 
   static createMany = async (
@@ -160,7 +164,9 @@ export class PlatformService extends CommonService {
       requestData.push({ userId, slug, qrEncodedValue, qrCodeUrl, ...item })
     }
 
-    return await Repository.insertMany(db, requestData)
+    const platforms = await Repository.insertMany(db, requestData)
+
+    return platforms
   }
 
   static update = async (
@@ -219,7 +225,9 @@ export class PlatformService extends CommonService {
 
     const requestData = { slug, qrEncodedValue, qrCodeUrl, ...request }
 
-    return await Repository.update(db, id, userId, requestData)
+    const platform = await Repository.update(db, id, userId, requestData)
+
+    return platform
   }
 
   static delete = async (
@@ -230,6 +238,12 @@ export class PlatformService extends CommonService {
     const { id } = request
 
     await this.checkPlatformExists(db, id)
+
+    const urlIds = await UrlService.getIdsByRelation(db, { platformId: id })
+
+    if (urlIds.length) {
+      await UrlService.deleteMany(db, userId, { ids: urlIds })
+    }
 
     const platform = await Repository.destroy(db, userId, request)
 
@@ -252,6 +266,12 @@ export class PlatformService extends CommonService {
     const { ids } = request
 
     await this.checkPlatformsExist(db, ids)
+
+    const urlIds = await UrlService.getIdsByRelation(db, { platformId: ids })
+
+    if (urlIds.length) {
+      await UrlService.deleteMany(db, userId, { ids: urlIds })
+    }
 
     const platforms = await Repository.destroyMany(db, userId, request)
 

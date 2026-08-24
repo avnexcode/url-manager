@@ -4,17 +4,34 @@ import {
   PageContainer,
   SectionContainer,
 } from '@/components/layouts'
+import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import * as m from '@/generated/paraglide/messages'
-import { useState } from 'react'
+import { Route } from '@/routes/{-$locale}/_authenticated/dashboard/url/create'
+import type { LinkProps } from '@tanstack/react-router'
+import { useMemo, useState } from 'react'
 import { CreateUrlForm } from '../forms'
 import { useCreateUrl } from '../hooks'
-import { Label } from '@/components/ui/label'
 
 export const CreateUrlPage = () => {
   const [redirect, setRedirect] = useState<boolean>(true)
 
-  const { form, onSubmit, isPending } = useCreateUrl()
+  const { from, id } = Route.useSearch()
+
+  const redirectTo = useMemo(() => {
+    if (from === 'platform' && id) {
+      return `/{-$locale}/dashboard/platform/${id}/view`
+    }
+    if (from === 'identifier' && id) {
+      return `/{-$locale}/dashboard/identifier/${id}/view`
+    }
+    return '/{-$locale}/dashboard/url'
+  }, [from, id]) as LinkProps['to']
+
+  const { form, onSubmit, isPending } = useCreateUrl(
+    { redirect, redirectTo },
+    { from, id },
+  )
 
   return (
     <PageContainer withHeader withFooter>
@@ -38,6 +55,7 @@ export const CreateUrlPage = () => {
             form={form}
             onSubmit={onSubmit}
             isPending={isPending}
+            cancelTo={redirectTo}
           />
         </MainLayout>
       </SectionContainer>

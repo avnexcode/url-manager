@@ -9,7 +9,7 @@ import type { ActionVariant, ButtonSize } from './action-button'
 import { ACTION_VARIANT_CONFIG, ICON_SIZE_CLASS } from './action-button'
 
 type ActionLinkProps = Omit<React.ComponentProps<'a'>, 'href' | 'children'> &
-  Pick<LinkProps, 'to' | 'replace' | 'preload'> & {
+  Pick<LinkProps, 'to' | 'replace' | 'preload' | 'search'> & {
     action: ActionVariant
     disabled?: boolean
     size?: ButtonSize

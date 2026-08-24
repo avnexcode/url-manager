@@ -4,6 +4,7 @@ import type { UseMutationOptions } from '@/interfaces'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import { deleteImageByUrl, uploadImage } from '@/lib/supabase/image-upload'
 import { useTRPC } from '@/lib/trpc/react'
+import type { CreateUrlSearchSchema } from '@/routes/{-$locale}/_authenticated/dashboard/url/create'
 import { generateSlug } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -14,12 +15,10 @@ import { toast } from 'sonner'
 import { createUrlFormSchema } from '../schemas'
 import type { CreateUrlFormSchema } from '../types'
 
-export const useCreateUrl = ({
-  redirect = true,
-  redirectTo,
-  onSuccess,
-  onError,
-}: UseMutationOptions = {}) => {
+export const useCreateUrl = (
+  { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
+  { from, id }: CreateUrlSearchSchema,
+) => {
   const { user } = useAuth()
   const toastMessages = useToastMessages(m.model_url_title())
   const trpc = useTRPC()
@@ -33,8 +32,8 @@ export const useCreateUrl = ({
       url: '',
       description: '',
       thumbnail: null,
-      identifierId: null,
-      platformId: null,
+      identifierId: from === 'identifier' ? id : null,
+      platformId: from === 'platform' ? id : null,
     },
     resolver: zodResolver(createUrlFormSchema),
   })

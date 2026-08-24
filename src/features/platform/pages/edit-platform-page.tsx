@@ -9,7 +9,7 @@ import { useTRPC } from '@/lib/trpc/react'
 import { Route } from '@/routes/{-$locale}/_authenticated/dashboard/platform/$id/edit'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { EditPlatformForm } from '../forms'
-import { useUpdatePlatform } from '../hooks/use-update-platform'
+import { useUpdatePlatform } from '../hooks'
 
 export const EditPlatformPage = () => {
   const { id } = Route.useParams()

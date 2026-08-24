@@ -1,3 +1,7 @@
+import { SelectIdentifierForm } from '@/features/identifier/forms'
+import { useSelectIdentifier } from '@/features/identifier/hooks'
+import { SelectPlatformForm } from '@/features/platform/forms'
+import { useSelectPlatform } from '@/features/platform/hooks'
 import * as m from '@/generated/paraglide/messages'
 import { useFormInput } from '@/hooks'
 import { useFormContext } from 'react-hook-form'
@@ -19,6 +23,12 @@ export const EditUrlFormInner = ({
   const { InputText, InputTextArea, InputImage } =
     useFormInput<UpdateUrlFormSchema>()
 
+  const selectIdentifierHook =
+    useSelectIdentifier<UpdateUrlFormSchema>('identifierId')
+
+  const selectPlatformHook =
+    useSelectPlatform<UpdateUrlFormSchema>('platformId')
+
   return (
     <form
       id={formId}
@@ -36,6 +46,16 @@ export const EditUrlFormInner = ({
         label={m.model_url_field_thumbnail()}
         className="w-full"
         image={thumbnail}
+      />
+      <SelectIdentifierForm<UpdateUrlFormSchema>
+        name="identifierId"
+        label={m.model_identifier_title()}
+        hookProps={selectIdentifierHook}
+      />
+      <SelectPlatformForm<UpdateUrlFormSchema>
+        name="platformId"
+        label={m.model_platform_title()}
+        hookProps={selectPlatformHook}
       />
     </form>
   )

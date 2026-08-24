@@ -29,10 +29,13 @@ import { Route as Char123LocaleChar125AuthenticatedDashboardPlatformCreateRouteI
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/index'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/$id/route'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlCreateRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/create'
+import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/$id/index'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/$id/edit'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/$id/view'
+import { Route as Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/platform/$id/index'
 import { Route as Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRouteImport } from './routes/{-$locale}/_authenticated/dashboard/platform/$id/edit'
 import { Route as Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRouteImport } from './routes/{-$locale}/_authenticated/dashboard/platform/$id/view'
+import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/$id/index'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIdEditRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/$id/edit'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIdViewRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/$id/view'
 
@@ -166,6 +169,15 @@ const Char123LocaleChar125AuthenticatedDashboardUrlCreateRoute =
     getParentRoute: () =>
       Char123LocaleChar125AuthenticatedDashboardUrlRouteRoute,
   } as any)
+const Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRoute =
+  Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRouteImport.update(
+    {
+      id: '/',
+      path: '/',
+      getParentRoute: () =>
+        Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRoute,
+    } as any,
+  )
 const Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute =
   Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRouteImport.update({
     id: '/edit',
@@ -180,6 +192,13 @@ const Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute =
     getParentRoute: () =>
       Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRoute,
   } as any)
+const Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRoute =
+  Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () =>
+      Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRoute,
+  } as any)
 const Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute =
   Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRouteImport.update({
     id: '/edit',
@@ -193,6 +212,13 @@ const Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRoute =
     path: '/view',
     getParentRoute: () =>
       Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRoute,
+  } as any)
+const Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRoute =
+  Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () =>
+      Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRoute,
   } as any)
 const Char123LocaleChar125AuthenticatedDashboardUrlIdEditRoute =
   Char123LocaleChar125AuthenticatedDashboardUrlIdEditRouteImport.update({
@@ -236,6 +262,9 @@ export interface FileRoutesByFullPath {
   '/{-$locale}/dashboard/platform/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRoute
   '/{-$locale}/dashboard/url/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdEditRoute
   '/{-$locale}/dashboard/url/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdViewRoute
+  '/{-$locale}/dashboard/identifier/$id/': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRoute
+  '/{-$locale}/dashboard/platform/$id/': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRoute
+  '/{-$locale}/dashboard/url/$id/': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
@@ -245,9 +274,6 @@ export interface FileRoutesByTo {
   '/{-$locale}/account': typeof Char123LocaleChar125AuthenticatedAccountRoute
   '/{-$locale}/setting': typeof Char123LocaleChar125AuthenticatedSettingRoute
   '/{-$locale}/dashboard': typeof Char123LocaleChar125AuthenticatedDashboardIndexRoute
-  '/{-$locale}/dashboard/identifier/$id': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRouteWithChildren
-  '/{-$locale}/dashboard/platform/$id': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRouteWithChildren
-  '/{-$locale}/dashboard/url/$id': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRouteWithChildren
   '/{-$locale}/dashboard/identifier/create': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierCreateRoute
   '/{-$locale}/dashboard/platform/create': typeof Char123LocaleChar125AuthenticatedDashboardPlatformCreateRoute
   '/{-$locale}/dashboard/url/create': typeof Char123LocaleChar125AuthenticatedDashboardUrlCreateRoute
@@ -260,6 +286,9 @@ export interface FileRoutesByTo {
   '/{-$locale}/dashboard/platform/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRoute
   '/{-$locale}/dashboard/url/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdEditRoute
   '/{-$locale}/dashboard/url/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdViewRoute
+  '/{-$locale}/dashboard/identifier/$id': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRoute
+  '/{-$locale}/dashboard/platform/$id': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRoute
+  '/{-$locale}/dashboard/url/$id': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -289,6 +318,9 @@ export interface FileRoutesById {
   '/{-$locale}/_authenticated/dashboard/platform/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRoute
   '/{-$locale}/_authenticated/dashboard/url/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdEditRoute
   '/{-$locale}/_authenticated/dashboard/url/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdViewRoute
+  '/{-$locale}/_authenticated/dashboard/identifier/$id/': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRoute
+  '/{-$locale}/_authenticated/dashboard/platform/$id/': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRoute
+  '/{-$locale}/_authenticated/dashboard/url/$id/': typeof Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -319,6 +351,9 @@ export interface FileRouteTypes {
     | '/{-$locale}/dashboard/platform/$id/view'
     | '/{-$locale}/dashboard/url/$id/edit'
     | '/{-$locale}/dashboard/url/$id/view'
+    | '/{-$locale}/dashboard/identifier/$id/'
+    | '/{-$locale}/dashboard/platform/$id/'
+    | '/{-$locale}/dashboard/url/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/{-$locale}'
@@ -328,9 +363,6 @@ export interface FileRouteTypes {
     | '/{-$locale}/account'
     | '/{-$locale}/setting'
     | '/{-$locale}/dashboard'
-    | '/{-$locale}/dashboard/identifier/$id'
-    | '/{-$locale}/dashboard/platform/$id'
-    | '/{-$locale}/dashboard/url/$id'
     | '/{-$locale}/dashboard/identifier/create'
     | '/{-$locale}/dashboard/platform/create'
     | '/{-$locale}/dashboard/url/create'
@@ -343,6 +375,9 @@ export interface FileRouteTypes {
     | '/{-$locale}/dashboard/platform/$id/view'
     | '/{-$locale}/dashboard/url/$id/edit'
     | '/{-$locale}/dashboard/url/$id/view'
+    | '/{-$locale}/dashboard/identifier/$id'
+    | '/{-$locale}/dashboard/platform/$id'
+    | '/{-$locale}/dashboard/url/$id'
   id:
     | '__root__'
     | '/{-$locale}/_authenticated'
@@ -371,6 +406,9 @@ export interface FileRouteTypes {
     | '/{-$locale}/_authenticated/dashboard/platform/$id/view'
     | '/{-$locale}/_authenticated/dashboard/url/$id/edit'
     | '/{-$locale}/_authenticated/dashboard/url/$id/view'
+    | '/{-$locale}/_authenticated/dashboard/identifier/$id/'
+    | '/{-$locale}/_authenticated/dashboard/platform/$id/'
+    | '/{-$locale}/_authenticated/dashboard/url/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -523,6 +561,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlCreateRouteImport
       parentRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlRouteRoute
     }
+    '/{-$locale}/_authenticated/dashboard/identifier/$id/': {
+      id: '/{-$locale}/_authenticated/dashboard/identifier/$id/'
+      path: '/'
+      fullPath: '/{-$locale}/dashboard/identifier/$id/'
+      preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRouteImport
+      parentRoute: typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRoute
+    }
     '/{-$locale}/_authenticated/dashboard/identifier/$id/edit': {
       id: '/{-$locale}/_authenticated/dashboard/identifier/$id/edit'
       path: '/edit'
@@ -537,6 +582,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRouteImport
       parentRoute: typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRoute
     }
+    '/{-$locale}/_authenticated/dashboard/platform/$id/': {
+      id: '/{-$locale}/_authenticated/dashboard/platform/$id/'
+      path: '/'
+      fullPath: '/{-$locale}/dashboard/platform/$id/'
+      preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRouteImport
+      parentRoute: typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRoute
+    }
     '/{-$locale}/_authenticated/dashboard/platform/$id/edit': {
       id: '/{-$locale}/_authenticated/dashboard/platform/$id/edit'
       path: '/edit'
@@ -550,6 +602,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/{-$locale}/dashboard/platform/$id/view'
       preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRouteImport
       parentRoute: typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRoute
+    }
+    '/{-$locale}/_authenticated/dashboard/url/$id/': {
+      id: '/{-$locale}/_authenticated/dashboard/url/$id/'
+      path: '/'
+      fullPath: '/{-$locale}/dashboard/url/$id/'
+      preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRouteImport
+      parentRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRoute
     }
     '/{-$locale}/_authenticated/dashboard/url/$id/edit': {
       id: '/{-$locale}/_authenticated/dashboard/url/$id/edit'
@@ -571,6 +630,7 @@ declare module '@tanstack/react-router' {
 interface Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRouteChildren {
   Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute: typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute
   Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute: typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute
+  Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRoute: typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRoute
 }
 
 const Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRouteChildren: Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRouteChildren =
@@ -579,6 +639,8 @@ const Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRouteChildren: 
       Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute,
     Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute:
       Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute,
+    Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRoute:
+      Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRoute,
   }
 
 const Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRouteWithChildren =
@@ -610,6 +672,7 @@ const Char123LocaleChar125AuthenticatedDashboardIdentifierRouteRouteWithChildren
 interface Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRouteChildren {
   Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute: typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute
   Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRoute: typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRoute
+  Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRoute: typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRoute
 }
 
 const Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRouteChildren: Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRouteChildren =
@@ -618,6 +681,8 @@ const Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRouteChildren: Ch
       Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute,
     Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRoute:
       Char123LocaleChar125AuthenticatedDashboardPlatformIdViewRoute,
+    Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRoute:
+      Char123LocaleChar125AuthenticatedDashboardPlatformIdIndexRoute,
   }
 
 const Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRouteWithChildren =
@@ -649,6 +714,7 @@ const Char123LocaleChar125AuthenticatedDashboardPlatformRouteRouteWithChildren =
 interface Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRouteChildren {
   Char123LocaleChar125AuthenticatedDashboardUrlIdEditRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlIdEditRoute
   Char123LocaleChar125AuthenticatedDashboardUrlIdViewRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlIdViewRoute
+  Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRoute
 }
 
 const Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRouteChildren: Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRouteChildren =
@@ -657,6 +723,8 @@ const Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRouteChildren: Char123
       Char123LocaleChar125AuthenticatedDashboardUrlIdEditRoute,
     Char123LocaleChar125AuthenticatedDashboardUrlIdViewRoute:
       Char123LocaleChar125AuthenticatedDashboardUrlIdViewRoute,
+    Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRoute:
+      Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRoute,
   }
 
 const Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRouteWithChildren =

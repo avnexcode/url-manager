@@ -10,6 +10,7 @@ import {
   bulkDeleteUrlsRequest,
   createUrlRequest,
   deleteUrlRequest,
+  relationParams,
   updateUrlRequest,
   UrlService,
 } from '@/server/features/url'
@@ -20,12 +21,12 @@ import { createTRPCRouter, protectedProcedure } from '../trpc'
 
 export const urlRouter = createTRPCRouter({
   getAll: protectedProcedure
-    .input(z.object({ params: queryParams }))
+    .input(z.object({ params: queryParams, relation: relationParams }))
     .query(async ({ ctx, input }): Promise<QueryResponse<UrlResponse>> => {
       const { auth, db } = ctx
-      const { params } = input
+      const { params, relation } = input
       try {
-        const urls = await UrlService.getAll(db, auth.id, params)
+        const urls = await UrlService.getAll(db, auth.id, params, relation)
         return urls
       } catch (error) {
         return errorFilter(error)

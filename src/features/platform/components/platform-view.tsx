@@ -4,12 +4,7 @@ import {
   ImagePreviewSkeleton,
   QrImageDialog,
 } from '@/components'
-import {
-  ActionButton,
-  ActionLink,
-  EmptyState,
-  ExternalLink,
-} from '@/components/elements'
+import { ActionButton, ActionLink, ExternalLink } from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
 import { Heading } from '@/components/heading'
 import { Badge } from '@/components/ui/badge'
@@ -22,7 +17,7 @@ import { useTRPC } from '@/lib/trpc/react'
 import { cn } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { useDeletePlatform } from '../hooks/use-delete-platform'
+import { useDeletePlatform } from '../hooks'
 import type { PlatformResponse } from '../types'
 
 type PlatformViewProps = {
@@ -168,25 +163,7 @@ export const PlatformView = ({
           </div>
         </div>
 
-        <div className="px-4 py-5 sm:px-6">
-          <header className="mb-4 flex items-center justify-between">
-            <Heading size="h4" as="h2">
-              {m.component_view_url_list_heading()}
-            </Heading>
-          </header>
-
-          <main className="w-full">
-            <EmptyState
-              title={m.component_url_empty_state()}
-              action={
-                <ActionLink
-                  action="createNew"
-                  to="/{-$locale}/dashboard/url/create"
-                />
-              }
-            />
-          </main>
-        </div>
+        <Separator className="my-5" />
       </div>
 
       <ConfirmDialog

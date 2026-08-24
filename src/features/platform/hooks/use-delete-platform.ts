@@ -19,9 +19,14 @@ export const useDeletePlatform = ({
   const { mutate, isPending } = useMutation(
     trpc.platform.delete.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries({
-          queryKey: trpc.platform.getAll.queryKey(),
-        })
+        await Promise.allSettled([
+          queryClient.invalidateQueries({
+            queryKey: trpc.platform.getAll.queryKey(),
+          }),
+          queryClient.invalidateQueries({
+            queryKey: trpc.url.getAll.queryKey(),
+          }),
+        ])
         if (redirect) {
           void navigate({ to: redirectTo || '/{-$locale}/dashboard/platform' })
         }

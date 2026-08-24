@@ -19,9 +19,14 @@ export const useBulkDeleteIdentifiers = ({
   const { mutate, isPending, variables } = useMutation(
     trpc.identifier.deleteMany.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries({
-          queryKey: trpc.identifier.getAll.queryKey(),
-        })
+        await Promise.allSettled([
+          queryClient.invalidateQueries({
+            queryKey: trpc.identifier.getAll.queryKey(),
+          }),
+          queryClient.invalidateQueries({
+            queryKey: trpc.url.getAll.queryKey(),
+          }),
+        ])
         if (redirect) {
           void navigate({
             to: redirectTo || '/{-$locale}/dashboard/identifier',

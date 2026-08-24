@@ -68,6 +68,19 @@ export const capitalizeWords = (str: string): string => {
 }
 
 /**
+ * Capitalizes only the first letter of a string, leaving the rest of the string untouched
+ * (preserves existing casing, e.g. camelCase)
+ * @param str - The input string to capitalize
+ * @returns String with the first letter capitalized and the remainder unchanged
+ * @example capitalizeFirstLetter("godofWar") // "GodofWar"
+ * @example capitalizeFirstLetter("hello WORLD") // "Hello WORLD"
+ */
+export const capitalizeFirstLetter = (str: string): string => {
+  if (!str) return ''
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+/**
  * Extracts the first N letters from a text string
  * @param text - The input text
  * @param count - Number of letters to extract

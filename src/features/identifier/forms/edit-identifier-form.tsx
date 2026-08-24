@@ -1,8 +1,3 @@
-import { FormSkeleton, InputImageSkeleton } from '@/components/forms'
-import {
-  InputTextAreaSkeleton,
-  InputTextSkeleton,
-} from '@/components/forms/input-skeleton'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import * as m from '@/generated/paraglide/messages'
@@ -68,17 +63,5 @@ export const EditIdentifierForm = ({
         </Button>
       </CardFooter>
     </Card>
-  )
-}
-
-export const EditIdentifierFormSkeleton = () => {
-  return (
-    <FormSkeleton>
-      <InputTextSkeleton />
-      <InputTextAreaSkeleton />
-      <InputTextSkeleton />
-      <InputImageSkeleton />
-      <InputTextSkeleton />
-    </FormSkeleton>
   )
 }

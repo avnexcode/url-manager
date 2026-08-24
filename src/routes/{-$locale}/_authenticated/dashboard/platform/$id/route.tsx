@@ -1,6 +1,7 @@
 import { env } from '@/configs/env'
 import * as m from '@/generated/paraglide/messages'
 import { seo } from '@/routes/__root'
+import { capitalizeFirstLetter } from '@/utils'
 import { createFileRoute, notFound, Outlet } from '@tanstack/react-router'
 import { TRPCClientError } from '@trpc/client'
 
@@ -26,7 +27,9 @@ export const Route = createFileRoute(
   },
   head: ({ loaderData, params }) =>
     seo({
-      title: loaderData ? `${loaderData.title}` : m.page_platform_title(),
+      title: loaderData
+        ? `${capitalizeFirstLetter(loaderData.title)}`
+        : m.page_platform_title(),
       description: loaderData?.description ? undefined : undefined,
       image: loaderData?.thumbnail ?? undefined,
       url: `${env.VITE_BASE_URL}/platform/${loaderData?.slug ?? params.id}`,

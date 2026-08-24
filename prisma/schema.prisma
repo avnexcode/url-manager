@@ -97,7 +97,7 @@ model Identifier {
   qrEncodedValue String     @map("qr_encoded_value_fbc14275_bbf5_4674_867a_40104c553a23") @db.Text
 
   userId String @map("user_id_bfde042a_890e_4e06_b9db_349fa15df6fa") @db.VarChar(36)
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "relation_identifier_user_d77f320819a9")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "relation_identifier_user_d77f320819a9")
   urls   Url[]
 
   createdAt DateTime @default(now()) @map("created_at_01e0998f_9fbb_446d_a400_b531ede82d76") @db.Timestamptz()
@@ -116,8 +116,8 @@ model Platform {
   id             String     @id @default(uuid()) @map("id_1f736195_3a3d_45a0_8337_871426950342") @db.VarChar(36)
   title          String     @map("title_b3257e01_2a8e_4b35_ad7b_732d9cba0793") @db.VarChar(100)
   slug           String     @unique @map("slug_1e1bf633_7296_4262_bdb7_463519949ff1") @db.VarChar(150)
-  description    String?    @map("description_4adb7f0b_8864_4e03_bea4_5083265555a9") @db.VarChar(255)
   url            String     @map("url_d6b433d9_627b_48ee_8886_ed4578e5b24d") @db.Text
+  description    String?    @map("description_4adb7f0b_8864_4e03_bea4_5083265555a9") @db.VarChar(255)
   visibility     Visibility @default(PRIVATE) @map("visibility_95c98420_69f5_408b_ac16_f46c0a8216e2")
   password       String?    @map("password_532aa8c5_e64c_4844_905f_c94618b5da3b") @db.VarChar(255)
   thumbnail      String?    @map("thumbnail_8dca2fdd_163a_4bb7_9dbe_efbf6feee5ba") @db.Text
@@ -125,7 +125,7 @@ model Platform {
   qrEncodedValue String     @map("qr_encoded_value_bfedbf2e_759a_4fbf_8d37_c001b55cf8c6") @db.Text
 
   userId String @map("user_id_d4806f3a_b420_4efd_9bc2_2c1a3953c274") @db.VarChar(36)
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "relation_platform_user_169798816184")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "relation_platform_user_169798816184")
   urls   Url[]
 
   createdAt DateTime @default(now()) @map("created_at_8f7f9790_0d19_4f32_a5fd_9af2c2a2b9f9") @db.Timestamptz()
@@ -144,18 +144,18 @@ model Url {
   id             String  @id @default(uuid()) @map("id_c748cbdb_7c8f_48e1_b756_0fe4cfc605b0") @db.VarChar(36)
   title          String  @map("title_e0a74b3d_b6d9_4092_9d77_7a7cb9ba9b67") @db.VarChar(100)
   slug           String  @unique @map("slug_c0fd9426_32d5_450a_bbba_48fd8ee30b57") @db.VarChar(150)
-  description    String? @map("description_fabd75a3_ad74_4a12_97f0_b6b365a20f13") @db.VarChar(255)
   url            String  @map("url_009003c8_1114_43d1_bdd1_f8abf6473c4a")
+  description    String? @map("description_fabd75a3_ad74_4a12_97f0_b6b365a20f13") @db.VarChar(255)
   thumbnail      String? @map("thumbnail_b01f565a_b46e_4a44_81b3_012600fecc82") @db.Text
   qrCodeUrl      String  @map("qr_code_url_0ddbcd34_b050_47c0_8a52_383076855fd9") @db.Text
   qrEncodedValue String  @map("qr_encoded_value_6b075fe4_6b2d_45ea_a341_4187609353c1") @db.Text
 
   userId       String      @map("user_id_853164f9_8e31_4f75_82a7_4cf66a81b66a") @db.VarChar(36)
-  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "relation_url_user_d413520ae96a")
+  user         User        @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "relation_url_user_d413520ae96a")
   platformId   String?     @map("platform_id_a45c5609_82c8_4bbb_9f6d_f76c4d6dfc3d") @db.VarChar(36)
-  platform     Platform?   @relation(fields: [platformId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "relation_url_platform_c17c6bf5ee3d")
+  platform     Platform?   @relation(fields: [platformId], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "relation_url_platform_c17c6bf5ee3d")
   identifierId String?     @map("identifier_id_d5b1e707_7810_4738_9ebb_6d1b2e33bee9") @db.VarChar(36)
-  identifier   Identifier? @relation(fields: [identifierId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "relation_url_identifier_b8a2d9d8b604")
+  identifier   Identifier? @relation(fields: [identifierId], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "relation_url_identifier_b8a2d9d8b604")
 
   createdAt DateTime @default(now()) @map("created_at_039cf16d_92d5_4fe3_be4f_f0a911e888f7") @db.Timestamptz()
   updatedAt DateTime @updatedAt @map("updated_at_8c497330_4ca1_42c5_b76f_6442cdb063ab") @db.Timestamptz()

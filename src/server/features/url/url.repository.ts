@@ -9,24 +9,86 @@ import type {
   CreateUrlResponse,
   DeleteUrlRequest,
   DeleteUrlResponse,
+  RelationParams,
   UpdateUrlResponse,
   UrlResponse,
 } from './url.model'
 
 export class UrlRepository extends CommonRepository {
-  protected static override orQuery = ['title']
+  protected static override orQuery = ['title', 'slug']
+
+  private static toRelationFilter = (value?: string | string[]) => {
+    if (!value) return undefined
+
+    if (Array.isArray(value)) return value.length ? { in: value } : undefined
+
+    return value
+  }
+
+  private static getRelationWhereClause = (relation?: RelationParams) => {
+    const platformId = this.toRelationFilter(relation?.platformId)
+
+    const identifierId = this.toRelationFilter(relation?.identifierId)
+
+    return {
+      ...(platformId && { platformId }),
+      ...(identifierId && { identifierId }),
+    }
+  }
+
+  private static getWhereClause = (
+    userId: string,
+    search: string | undefined,
+    relation?: RelationParams,
+  ) => {
+    const OR = search ? this.getOrQuery(search) : undefined
+
+    return {
+      userId,
+      ...this.getRelationWhereClause(relation),
+      ...(OR && { OR }),
+    }
+  }
 
   static findMany = async (
     db: DBClient,
     userId: string,
     params: QueryParams,
+    filter?: RelationParams,
   ): Promise<UrlResponse[]> => {
     const { page, limit, search, sort } = params
     const skip = (page - 1) * limit
-    const OR = this.getOrQuery(search)
+    const where = this.getWhereClause(userId, search, filter)
     const orderBy = this.getOrderBy(sort)
+
     const urls = await db.url.findMany({
-      where: { userId, ...(search && { OR }) },
+      where,
+      omit: { userId: true },
+      take: limit,
+      skip,
+      orderBy,
+    })
+
+    return urls
+  }
+
+  static findManyPublic = async (
+    db: DBClient,
+    params: QueryParams,
+    filter?: RelationParams,
+  ): Promise<UrlResponse[]> => {
+    const { page, limit, search, sort } = params
+    const skip = (page - 1) * limit
+    const OR = search ? this.getOrQuery(search) : undefined
+    const orderBy = this.getOrderBy(sort)
+
+    const where = {
+      ...this.getRelationWhereClause(filter),
+      ...(OR && { OR }),
+    }
+
+    const urls = await db.url.findMany({
+      where,
       omit: { userId: true },
       take: limit,
       skip,
@@ -49,22 +111,32 @@ export class UrlRepository extends CommonRepository {
     return url
   }
 
+  static findIdsByRelation = async (
+    db: DBClient,
+    relation?: RelationParams,
+  ): Promise<{ id: string }[]> => {
+    const where = this.getRelationWhereClause(relation)
+
+    const url = await db.url.findMany({ where, select: { id: true } })
+
+    return url
+  }
+
   static countAll = async (
     db: DBClient,
     userId: string,
-    search?: string,
+    search: string | undefined,
+    relation?: RelationParams,
   ): Promise<number> => {
-    const OR = this.getOrQuery(search)
+    const where = this.getWhereClause(userId, search, relation)
 
-    const count = await db.url.count({
-      where: { userId, ...(search && { OR }) },
-    })
+    const count = await db.url.count({ where })
 
     return count
   }
 
   static countByIds = async (db: DBClient, ids: string[]): Promise<number> => {
-    const count = db.url.count({ where: { id: { in: ids } } })
+    const count = await db.url.count({ where: { id: { in: ids } } })
 
     return count
   }

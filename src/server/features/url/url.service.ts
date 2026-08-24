@@ -5,6 +5,7 @@ import type { QueryParams } from '@/server/models'
 import { FileService, QrCodeService } from '@/server/services'
 import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
+import { UserService } from '../user'
 import type {
   BulkDeleteUrlsRequest,
   BulkDeleteUrlsResponse,
@@ -12,12 +13,12 @@ import type {
   CreateUrlResponse,
   DeleteUrlRequest,
   DeleteUrlResponse,
+  RelationParams,
   UpdateUrlRequest,
   UpdateUrlResponse,
   UrlResponse,
 } from './url.model'
 import { UrlRepository as Repository } from './url.repository'
-import { UserService } from '../user'
 
 export class UrlService extends CommonService {
   private static bucket = SUPABASE_BUCKET.Url
@@ -62,12 +63,14 @@ export class UrlService extends CommonService {
     db: DBClient,
     userId: string,
     params: QueryParams,
+    relation?: RelationParams,
   ): Promise<QueryResponse<UrlResponse>> => {
     const { page, limit, search } = params
 
-    const total = await Repository.countAll(db, userId, search)
-
-    const data = await Repository.findMany(db, userId, params)
+    const [total, data] = await Promise.all([
+      Repository.countAll(db, userId, search, relation),
+      Repository.findMany(db, userId, params, relation),
+    ])
 
     const lastPage = Math.ceil(total / limit)
 
@@ -84,12 +87,22 @@ export class UrlService extends CommonService {
     return this.checkNotNull(url)
   }
 
+  static getIdsByRelation = async (
+    db: DBClient,
+    relation?: RelationParams,
+  ): Promise<string[]> => {
+    const url = await Repository.findIdsByRelation(db, relation)
+
+    return url.map((doc) => doc.id)
+  }
+
   static create = async (
     db: DBClient,
     userId: string,
     request: CreateUrlRequest,
   ): Promise<CreateUrlResponse> => {
     const { title, url } = request
+
     this.checkBlockedUrl(url)
 
     await this.checkConflict(db, 'title', userId, title)

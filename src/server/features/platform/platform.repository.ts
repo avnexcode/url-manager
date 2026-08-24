@@ -15,7 +15,7 @@ import type {
 } from './platform.model'
 
 export class PlatformRepository extends CommonRepository {
-  protected static override orQuery = ['title']
+  protected static override orQuery = ['title', 'slug']
 
   static findMany = async (
     db: DBClient,
@@ -24,10 +24,10 @@ export class PlatformRepository extends CommonRepository {
   ): Promise<PlatformResponse[]> => {
     const { page, limit, search, sort } = params
     const skip = (page - 1) * limit
-    const OR = this.getOrQuery(search)
+    const OR = search ? this.getOrQuery(search) : undefined
     const orderBy = this.getOrderBy(sort)
     const platforms = await db.platform.findMany({
-      where: { userId, ...(search && { OR }) },
+      where: { userId, ...(OR && { OR }) },
       omit: { userId: true },
       take: limit,
       skip,

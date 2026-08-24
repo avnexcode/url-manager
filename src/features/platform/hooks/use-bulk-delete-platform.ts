@@ -19,9 +19,14 @@ export const useBulkDeletePlatforms = ({
   const { mutate, isPending, variables } = useMutation(
     trpc.platform.deleteMany.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries({
-          queryKey: trpc.platform.getAll.queryKey(),
-        })
+        await Promise.allSettled([
+          queryClient.invalidateQueries({
+            queryKey: trpc.platform.getAll.queryKey(),
+          }),
+          queryClient.invalidateQueries({
+            queryKey: trpc.url.getAll.queryKey(),
+          }),
+        ])
         if (redirect) {
           void navigate({ to: redirectTo || '/{-$locale}/dashboard/platform' })
         }

@@ -1,5 +1,12 @@
 import z from 'zod'
 
+export const relationParams = z
+  .object({
+    platformId: z.union([z.string(), z.array(z.string())]).optional(),
+    identifierId: z.union([z.string(), z.array(z.string())]).optional(),
+  })
+  .optional()
+
 export const baseCreateUrlRequest = z.object({
   title: z.string().min(1).max(100).trim(),
   slug: z

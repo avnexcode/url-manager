@@ -5,6 +5,7 @@ import type { QueryParams } from '@/server/models'
 import { FileService, QrCodeService } from '@/server/services'
 import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
+import { UrlService } from '../url'
 import { UserService } from '../user'
 import type {
   BaseCreateIdentifierRequest,
@@ -72,9 +73,10 @@ export class IdentifierService extends CommonService {
   ): Promise<QueryResponse<IdentifierResponse>> => {
     const { page, limit, search } = params
 
-    const total = await Repository.countAll(db, userId, search)
-
-    const data = await Repository.findMany(db, userId, params)
+    const [total, data] = await Promise.all([
+      Repository.countAll(db, userId, search),
+      Repository.findMany(db, userId, params),
+    ])
 
     const lastPage = Math.ceil(total / limit)
 
@@ -118,7 +120,9 @@ export class IdentifierService extends CommonService {
 
     const requestData = { userId, slug, qrEncodedValue, qrCodeUrl, ...request }
 
-    return await Repository.insert(db, requestData)
+    const identifier = await Repository.insert(db, requestData)
+
+    return identifier
   }
 
   static createMany = async (
@@ -135,6 +139,7 @@ export class IdentifierService extends CommonService {
     const { username } = await UserService.getById(db, userId)
 
     const usedSlugs = new Set<string>()
+
     const requestData: BaseCreateIdentifierRequest[] = []
 
     for (const item of requests) {
@@ -157,7 +162,9 @@ export class IdentifierService extends CommonService {
       requestData.push({ userId, slug, qrEncodedValue, qrCodeUrl, ...item })
     }
 
-    return await Repository.insertMany(db, requestData)
+    const identifiers = await Repository.insertMany(db, requestData)
+
+    return identifiers
   }
 
   static update = async (
@@ -212,7 +219,9 @@ export class IdentifierService extends CommonService {
 
     const requestData = { slug, qrEncodedValue, qrCodeUrl, ...request }
 
-    return await Repository.update(db, id, userId, requestData)
+    const identifier = await Repository.update(db, id, userId, requestData)
+
+    return identifier
   }
 
   static delete = async (
@@ -223,6 +232,12 @@ export class IdentifierService extends CommonService {
     const { id } = request
 
     await this.checkIdentifierExists(db, id)
+
+    const urlIds = await UrlService.getIdsByRelation(db, { identifierId: id })
+
+    if (urlIds.length) {
+      await UrlService.deleteMany(db, userId, { ids: urlIds })
+    }
 
     const identifier = await Repository.destroy(db, userId, request)
 
@@ -245,6 +260,12 @@ export class IdentifierService extends CommonService {
     const { ids } = request
 
     await this.checkIdentifiersExist(db, ids)
+
+    const urlIds = await UrlService.getIdsByRelation(db, { identifierId: ids })
+
+    if (urlIds.length) {
+      await UrlService.deleteMany(db, userId, { ids: urlIds })
+    }
 
     const identifiers = await Repository.destroyMany(db, userId, request)
 

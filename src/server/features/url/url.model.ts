@@ -6,8 +6,11 @@ import type {
   bulkDeleteUrlsRequest,
   createUrlRequest,
   deleteUrlRequest,
+  relationParams,
   updateUrlRequest,
 } from './url.validation'
+
+export type RelationParams = z.infer<typeof relationParams>
 
 export type BaseCreateUrlRequest = z.infer<typeof baseCreateUrlRequest>
 
