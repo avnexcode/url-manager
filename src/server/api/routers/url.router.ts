@@ -3,6 +3,7 @@ import type {
   BulkDeleteUrlsResponse,
   CreateUrlResponse,
   DeleteUrlResponse,
+  PublicUrlResponse,
   UpdateUrlResponse,
   UrlResponse,
 } from '@/server/features/url'
@@ -10,6 +11,7 @@ import {
   bulkDeleteUrlsRequest,
   createUrlRequest,
   deleteUrlRequest,
+  publicRelationParams,
   relationParams,
   updateUrlRequest,
   UrlService,
@@ -17,16 +19,55 @@ import {
 import { errorFilter } from '@/server/filters'
 import { queryParams } from '@/server/validations'
 import z from 'zod'
-import { createTRPCRouter, protectedProcedure } from '../trpc'
+import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc'
 
 export const urlRouter = createTRPCRouter({
+  getPublicAll: publicProcedure
+    .input(
+      z.object({
+        username: z.string(),
+        relation: publicRelationParams,
+        params: queryParams,
+      }),
+    )
+    .query(
+      async ({ ctx, input }): Promise<QueryResponse<PublicUrlResponse>> => {
+        const { db } = ctx
+        const { username, relation, params } = input
+        try {
+          const urls = await UrlService.getPublicAll(
+            db,
+            username,
+            relation,
+            params,
+          )
+          return urls
+        } catch (error) {
+          return errorFilter(error)
+        }
+      },
+    ),
+
+  getPublicBySlugSuffix: publicProcedure
+    .input(z.object({ suffix: z.string() }))
+    .query(async ({ ctx, input }): Promise<PublicUrlResponse> => {
+      const { db } = ctx
+      const { suffix } = input
+      try {
+        const url = await UrlService.getPublicBySlugSuffix(db, suffix)
+        return url
+      } catch (error) {
+        return errorFilter(error)
+      }
+    }),
+
   getAll: protectedProcedure
-    .input(z.object({ params: queryParams, relation: relationParams }))
+    .input(z.object({ relation: relationParams, params: queryParams }))
     .query(async ({ ctx, input }): Promise<QueryResponse<UrlResponse>> => {
       const { auth, db } = ctx
-      const { params, relation } = input
+      const { relation, params } = input
       try {
-        const urls = await UrlService.getAll(db, auth.id, params, relation)
+        const urls = await UrlService.getAll(db, auth.id, relation, params)
         return urls
       } catch (error) {
         return errorFilter(error)

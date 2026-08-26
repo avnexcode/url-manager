@@ -5,6 +5,7 @@ import type { QueryParams } from '@/server/models'
 import { FileService, QrCodeService } from '@/server/services'
 import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
+import { SettingService } from '../settings'
 import { UrlService } from '../url'
 import { UserService } from '../user'
 import type {
@@ -18,6 +19,7 @@ import type {
   DeleteIdentifierRequest,
   DeleteIdentifierResponse,
   IdentifierResponse,
+  PublicIdentifierResponse,
   UpdateIdentifierRequest,
   UpdateIdentifierResponse,
 } from './identifier.model'
@@ -83,14 +85,74 @@ export class IdentifierService extends CommonService {
     return { data, meta: { total, limit, page, lastPage } }
   }
 
+  static getPublicAll = async (
+    db: DBClient,
+    username: string,
+    params: QueryParams,
+  ): Promise<QueryResponse<PublicIdentifierResponse>> => {
+    const { page, limit, search } = params
+
+    const { publicAccess, publicIdentifierAccess } =
+      await SettingService.getByUsername(db, username)
+
+    if (publicAccess === false || publicIdentifierAccess === false) {
+      this.throwError('BAD_REQUEST')
+    }
+
+    const [total, data] = await Promise.all([
+      Repository.countPublicAll(db, username, search),
+      Repository.findManyPublic(db, username, params),
+    ])
+
+    const lastPage = Math.ceil(total / limit)
+
+    return { data, meta: { total, limit, page, lastPage } }
+  }
+
   static getById = async (
     db: DBClient,
     userId: string,
     id: string,
   ): Promise<IdentifierResponse> => {
-    const identifier = await Repository.findById(db, userId, id)
+    const identifier = await Repository.findUniqueId(db, userId, id)
 
     return this.checkNotNull(identifier)
+  }
+
+  static getPublicBySlugSuffix = async (
+    db: DBClient,
+    suffix: string,
+  ): Promise<PublicIdentifierResponse> => {
+    const identifier = await Repository.findPublicUniqueSlugSuffix(db, suffix)
+
+    return this.checkNotNull(identifier)
+  }
+
+  static getPublicBySlug = async (
+    db: DBClient,
+    username: string,
+    slug: string,
+  ): Promise<PublicIdentifierResponse> => {
+    const identifier = await Repository.findPublicUniqueSlug(db, username, slug)
+
+    return this.checkNotNull(identifier)
+  }
+
+  static getPublicAccessPassword = async (
+    db: DBClient,
+    username: string,
+    slug: string,
+    password: string,
+  ): Promise<{ redirectUrl: string }> => {
+    const identifier = await this.getPublicBySlug(db, username, slug)
+
+    if (password !== identifier.password) {
+      this.throwError('BAD_REQUEST')
+    }
+
+    const redirectUrl = `/${username}/identifier/${slug}?password=${password}`
+
+    return { redirectUrl }
   }
 
   static create = async (

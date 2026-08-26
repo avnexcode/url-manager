@@ -1,452 +1,402 @@
 [
   {
     "title": "Instagram",
-    "slug": "instagram-3f2a9b1c",
+    "description": "Platform berbagi foto dan video untuk media sosial.",
     "url": "https://instagram.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Twitter",
-    "slug": "twitter-7d4e6a2f",
+    "description": "Platform mikroblog untuk berbagi pemikiran dan berita singkat.",
     "url": "https://twitter.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Facebook",
-    "slug": "facebook-1c8b5d3e",
+    "description": "Jejaring sosial untuk terhubung dengan teman dan komunitas.",
     "url": "https://facebook.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "TikTok",
-    "slug": "tiktok-9a4f2e7b",
+    "description": "Platform video pendek yang populer untuk konten kreatif.",
     "url": "https://tiktok.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "YouTube",
-    "slug": "youtube-5e1d8c4a",
+    "description": "Platform berbagi video terbesar untuk konten dan hiburan.",
     "url": "https://youtube.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "LinkedIn",
-    "slug": "linkedin-2b7a9f3d",
+    "description": "Jejaring profesional untuk karier dan koneksi bisnis.",
     "url": "https://linkedin.com/in",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "GitHub",
-    "slug": "github-8f3c1e5a",
+    "description": "Platform hosting kode dan kolaborasi pengembangan perangkat lunak.",
     "url": "https://github.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Pinterest",
-    "slug": "pinterest-4d9b6a2c",
+    "description": "Platform berbagi ide dan inspirasi visual.",
     "url": "https://pinterest.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Snapchat",
-    "slug": "snapchat-6a2f8d1b",
+    "description": "Aplikasi berbagi foto dan video sesaat dengan teman.",
     "url": "https://snapchat.com/add",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Reddit",
-    "slug": "reddit-3c7e9a4f",
+    "description": "Forum diskusi komunitas berdasarkan berbagai topik minat.",
     "url": "https://reddit.com/user",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Discord",
-    "slug": "discord-1a5d8b2e",
+    "description": "Platform obrolan dan komunitas untuk berbagai kelompok minat.",
     "url": "https://discord.gg/invitecode",
-    "visibility": "PRIVATE",
-    "password": "secret123",
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "visibility": "PUBLIC",
+    "password": "discord123",
+    "thumbnail": null
   },
   {
     "title": "Telegram",
-    "slug": "telegram-9f4a2c6d",
+    "description": "Aplikasi pesan instan yang cepat dan aman.",
     "url": "https://t.me",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "WhatsApp",
-    "slug": "whatsapp-7b1e5f3a",
+    "description": "Aplikasi pesan instan populer untuk komunikasi sehari-hari.",
     "url": "https://wa.me/6281234567890",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Threads",
-    "slug": "threads-2e8c4a9b",
+    "description": "Platform mikroblog berbasis teks dari Meta.",
     "url": "https://threads.net",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Twitch",
-    "slug": "twitch-5a3f7d1c",
+    "description": "Platform live streaming untuk gaming dan konten interaktif.",
     "url": "https://twitch.tv",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Spotify",
-    "slug": "spotify-8d2b6e4a",
+    "description": "Platform streaming musik dan podcast.",
     "url": "https://open.spotify.com/user",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Behance",
-    "slug": "behance-4f9a1c7e",
+    "description": "Platform showcase portofolio kreatif dan desain.",
     "url": "https://behance.net",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Dribbble",
-    "slug": "dribbble-6c3e8a2f",
+    "description": "Komunitas dan showcase karya desain digital.",
     "url": "https://dribbble.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Medium",
-    "slug": "medium-1d7b4f9a",
+    "description": "Platform publikasi tulisan dan artikel online.",
     "url": "https://medium.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Notion",
-    "slug": "notion-9a5c2e8b",
+    "description": "Aplikasi produktivitas untuk catatan dan manajemen proyek.",
     "url": "https://notion.so",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "GitLab",
-    "slug": "gitlab-3e8f1a6d",
+    "description": "Platform hosting kode dan DevOps untuk tim pengembang.",
     "url": "https://gitlab.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Bitbucket",
-    "slug": "bitbucket-7a4d9c2f",
+    "description": "Platform hosting repositori kode untuk kolaborasi tim.",
     "url": "https://bitbucket.org",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Vimeo",
-    "slug": "vimeo-2c6a8e4b",
+    "description": "Platform berbagi video berkualitas tinggi untuk kreator.",
     "url": "https://vimeo.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "SoundCloud",
-    "slug": "soundcloud-5f1d9a3e",
+    "description": "Platform streaming dan berbagi musik untuk musisi independen.",
     "url": "https://soundcloud.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Patreon",
-    "slug": "patreon-8b3e6c1a",
+    "description": "Platform dukungan finansial untuk kreator dari penggemar.",
     "url": "https://patreon.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Ko-fi",
-    "slug": "ko-fi-4a9f2d7c",
+    "description": "Platform donasi sederhana untuk mendukung kreator.",
     "url": "https://ko-fi.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Buy Me a Coffee",
-    "slug": "buy-me-a-coffee-6d2a8f4b",
+    "description": "Platform dukungan finansial ringan untuk kreator konten.",
     "url": "https://buymeacoffee.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Substack",
-    "slug": "substack-1e7c4a9d",
+    "description": "Platform penerbitan newsletter dan tulisan berlangganan.",
     "url": "https://.substack.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Mastodon",
-    "slug": "mastodon-9c3f6a2e",
+    "description": "Platform media sosial terdesentralisasi berbasis komunitas.",
     "url": "https://mastodon.social",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Bluesky",
-    "slug": "bluesky-5a8d1e7c",
+    "description": "Platform media sosial mikroblog alternatif berbasis protokol terbuka.",
     "url": "https://bsky.app/profile",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Figma",
-    "slug": "figma-2f9b6c4a",
+    "description": "Alat desain kolaboratif berbasis web untuk tim kreatif.",
     "url": "https://figma.com",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "CodePen",
-    "slug": "codepen-7e4a3d8f",
+    "description": "Editor online untuk menulis dan berbagi kode front-end.",
     "url": "https://codepen.io",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Stack Overflow",
-    "slug": "stack-overflow-3d8a5e2c",
+    "description": "Forum tanya jawab seputar pemrograman dan pengembangan software.",
     "url": "https://stackoverflow.com/users",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Product Hunt",
-    "slug": "product-hunt-9f2c7a4e",
+    "description": "Platform untuk menemukan dan meluncurkan produk baru.",
     "url": "https://producthunt.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Dev.to",
-    "slug": "dev-to-6a1e9c3f",
+    "description": "Komunitas blog untuk berbagi pengetahuan seputar pengembangan software.",
     "url": "https://dev.to",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Hashnode",
-    "slug": "hashnode-4c8f2a6d",
+    "description": "Platform blogging untuk developer dengan domain kustom.",
     "url": "https://.hashnode.dev",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Kaggle",
-    "slug": "kaggle-8a3d6e1f",
+    "description": "Platform kompetisi dan komunitas data science.",
     "url": "https://kaggle.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Goodreads",
-    "slug": "goodreads-1f7a4c9b",
+    "description": "Platform katalog dan rekomendasi buku bagi pecinta literasi.",
     "url": "https://goodreads.com",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Letterboxd",
-    "slug": "letterboxd-5e2b8d4a",
+    "description": "Platform katalog dan ulasan film bagi pecinta sinema.",
     "url": "https://letterboxd.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Steam",
-    "slug": "steam-9d4a1f6c",
+    "description": "Platform distribusi digital dan komunitas game PC.",
     "url": "https://steamcommunity.com/id",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Xbox Live",
-    "slug": "xbox-live-3a6c9e2f",
+    "description": "Layanan gaming online resmi untuk konsol Xbox.",
     "url": "https://xbox.com/en-US/play/user",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "PlayStation Network",
-    "slug": "playstation-network-7c2f4a8d",
+    "description": "Layanan gaming online resmi untuk konsol PlayStation.",
     "url": "https://psnprofiles.com",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Roblox",
-    "slug": "roblox-2a9d6c3e",
+    "description": "Platform game online dan pembuatan game oleh komunitas.",
     "url": "https://roblox.com/users",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Etsy",
-    "slug": "etsy-6f1a8d4c",
+    "description": "Marketplace untuk produk buatan tangan dan barang unik.",
     "url": "https://etsy.com/shop",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Shopee",
-    "slug": "shopee-4d8c2e9a",
+    "description": "Marketplace belanja online populer di Indonesia.",
     "url": "https://shopee.co.id",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Tokopedia",
-    "slug": "tokopedia-1c5a9f3e",
+    "description": "Marketplace belanja online terkemuka di Indonesia.",
     "url": "https://tokopedia.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Gumroad",
-    "slug": "gumroad-8e3d6a1f",
+    "description": "Platform penjualan produk digital secara langsung ke konsumen.",
     "url": "https://.gumroad.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Fiverr",
-    "slug": "fiverr-5a9c4d2b",
+    "description": "Marketplace jasa freelance untuk berbagai kebutuhan.",
     "url": "https://fiverr.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Upwork",
-    "slug": "upwork-2f6a8c9d",
+    "description": "Platform freelance global untuk mencari klien dan proyek.",
     "url": "https://upwork.com/freelancers",
-    "visibility": "PRIVATE",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Calendly",
-    "slug": "calendly-9b4e1f7a",
+    "description": "Alat penjadwalan janji temu dan pertemuan secara online.",
     "url": "https://calendly.com",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   }
 ]

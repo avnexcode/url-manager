@@ -28,7 +28,7 @@ export const createPlatformRequest = baseCreatePlatformRequest.omit({
 export const bulkCreatePlatformsRequest = z
   .array(createPlatformRequest)
   .min(1)
-  .max(50)
+  .max(250)
   .refine((items) => new Set(items.map((i) => i.title)).size === items.length, {
     message: 'Duplicate title found in request',
   })

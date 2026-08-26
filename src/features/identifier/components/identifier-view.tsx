@@ -4,7 +4,11 @@ import {
   ImagePreviewSkeleton,
   QrImageDialog,
 } from '@/components'
-import { ActionButton, ActionLink } from '@/components/elements'
+import {
+  ActionButton,
+  ActionLink,
+  CopyTextWrapper,
+} from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
 import { Heading } from '@/components/heading'
 import { Badge } from '@/components/ui/badge'
@@ -100,10 +104,16 @@ export const IdentifierView = ({
                   {getVisibility({ visibility })}
                 </Badge>
               </div>
+              {password ? (
+                <div className="flex items-center gap-x-1 text-sm py-2">
+                  <h1>{m.model_identifier_field_password()}:</h1>
+                  <CopyTextWrapper>{password}</CopyTextWrapper>
+                </div>
+              ) : null}
               {description && (
                 <>
                   <Separator />
-                  <p className="text-sm text-muted-foreground line-clamp-2">
+                  <p className="text-sm text-muted-foreground line-clamp-2 py-1">
                     {description}
                   </p>
                 </>

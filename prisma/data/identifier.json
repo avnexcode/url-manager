@@ -1,402 +1,352 @@
 [
   {
     "title": "Promo Akhir Tahun",
-    "slug": "promo-akhir-tahun-52a18508",
+    "description": "Kumpulan link promo dan penawaran spesial menyambut akhir tahun.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Undangan Pernikahan",
-    "slug": "undangan-pernikahan-163809fa",
-    "visibility": "PRIVATE",
+    "description": "Halaman undangan digital lengkap dengan detail acara pernikahan.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Katalog Produk",
-    "slug": "katalog-produk-96f0d421",
+    "description": "Daftar lengkap produk yang tersedia beserta detail dan harga.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Lebaran 2026",
-    "slug": "lebaran-2026-8a1931b9",
-    "visibility": "PRIVATE",
-    "password": "pw_a65974",
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "description": "Ucapan dan galeri momen spesial menyambut Hari Raya Lebaran 2026.",
+    "visibility": "PUBLIC",
+    "password": "lebaran2026",
+    "thumbnail": null
   },
   {
     "title": "Campaign Instagram Ads",
-    "slug": "campaign-instagram-ads-cb398eb4",
+    "description": "Landing page pendukung kampanye iklan Instagram.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Portofolio Desain",
-    "slug": "portofolio-desain-16c270ac",
-    "visibility": "PRIVATE",
+    "description": "Kumpulan karya dan portofolio hasil desain terbaik.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "CV Digital",
-    "slug": "cv-digital-d557c114",
-    "visibility": "PRIVATE",
+    "description": "Resume digital berisi riwayat pendidikan, pengalaman, dan keahlian.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Link Bio Utama",
-    "slug": "link-bio-utama-0bafd46a",
+    "description": "Kumpulan tautan penting yang ditampilkan di bio media sosial.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Event Tahunan",
-    "slug": "event-tahunan-f59734b6",
+    "description": "Informasi lengkap seputar rangkaian acara tahunan.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Webinar Marketing",
-    "slug": "webinar-marketing-178edd46",
+    "description": "Halaman pendaftaran dan materi webinar seputar strategi marketing.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Diskon Flash Sale",
-    "slug": "diskon-flash-sale-a6312a0d",
+    "description": "Info penawaran flash sale dengan waktu terbatas.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Peluncuran Produk Baru",
-    "slug": "peluncuran-produk-baru-40659fb8",
-    "visibility": "PRIVATE",
+    "description": "Informasi peluncuran dan detail fitur produk terbaru.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Kampanye Donasi",
-    "slug": "kampanye-donasi-b7dfa866",
+    "description": "Halaman penggalangan dana untuk mendukung kegiatan sosial.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Materi Pelatihan",
-    "slug": "materi-pelatihan-a0132500",
+    "description": "Kumpulan bahan dan modul untuk keperluan pelatihan.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Panduan Onboarding",
-    "slug": "panduan-onboarding-8f9136af",
-    "visibility": "PRIVATE",
+    "description": "Panduan langkah demi langkah untuk proses onboarding pengguna baru.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Reuni Angkatan",
-    "slug": "reuni-angkatan-1df77115",
+    "description": "Informasi acara reuni dan galeri kenangan angkatan.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Undangan Ulang Tahun",
-    "slug": "undangan-ulang-tahun-7b83f5be",
-    "visibility": "PRIVATE",
-    "password": "pw_a1d8e5",
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "description": "Undangan digital perayaan ulang tahun beserta detail acara.",
+    "visibility": "PUBLIC",
+    "password": "ultah123",
+    "thumbnail": null
   },
   {
     "title": "Sertifikat Pelatihan",
-    "slug": "sertifikat-pelatihan-388a9cc3",
+    "description": "Halaman unduh sertifikat bagi peserta yang telah menyelesaikan pelatihan.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Dokumentasi Proyek",
-    "slug": "dokumentasi-proyek-db385004",
+    "description": "Kumpulan dokumen dan catatan progres sebuah proyek.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Formulir Pendaftaran",
-    "slug": "formulir-pendaftaran-395cb5f1",
+    "description": "Formulir online untuk pendaftaran peserta atau anggota baru.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Katalog Jasa",
-    "slug": "katalog-jasa-3339ed7a",
-    "visibility": "PRIVATE",
-    "password": "pw_aecc72",
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "description": "Daftar layanan jasa yang ditawarkan beserta harga dan detailnya.",
+    "visibility": "PUBLIC",
+    "password": "jasa123",
+    "thumbnail": null
   },
   {
     "title": "Company Profile",
-    "slug": "company-profile-c5cf66fb",
+    "description": "Profil perusahaan berisi visi, misi, dan informasi bisnis.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Media Kit",
-    "slug": "media-kit-f097a997",
+    "description": "Kumpulan aset media resmi untuk keperluan publikasi dan kerja sama.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Press Release",
-    "slug": "press-release-280cb1b2",
+    "description": "Siaran pers resmi terkait berita atau pengumuman terbaru.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Rilis Aplikasi Mobile",
-    "slug": "rilis-aplikasi-mobile-d3443946",
+    "description": "Informasi peluncuran dan tautan unduh aplikasi mobile terbaru.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Kampanye Sosial",
-    "slug": "kampanye-sosial-0bead8de",
+    "description": "Halaman kampanye untuk mendukung isu atau gerakan sosial.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Voucher Belanja",
-    "slug": "voucher-belanja-880720c2",
+    "description": "Kode voucher dan promo diskon untuk belanja.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Survey Kepuasan Pelanggan",
-    "slug": "survey-kepuasan-pelanggan-910a87ce",
+    "description": "Formulir survei untuk mengukur tingkat kepuasan pelanggan.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Portal Karir",
-    "slug": "portal-karir-34c88ce7",
-    "visibility": "PRIVATE",
+    "description": "Halaman informasi lowongan kerja dan proses rekrutmen.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Materi Presentasi",
-    "slug": "materi-presentasi-9348c838",
+    "description": "Kumpulan slide dan bahan presentasi untuk keperluan acara.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Booklet Digital",
-    "slug": "booklet-digital-ee37665a",
+    "description": "Buklet digital berisi informasi ringkas dan menarik.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Brosur Kegiatan",
-    "slug": "brosur-kegiatan-1ace2ba2",
+    "description": "Brosur digital berisi rincian jadwal dan informasi kegiatan.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Undangan Seminar",
-    "slug": "undangan-seminar-f3f67fd2",
+    "description": "Undangan digital untuk menghadiri seminar beserta detail acara.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Jadwal Acara",
-    "slug": "jadwal-acara-f6651557",
-    "visibility": "PRIVATE",
-    "password": "pw_5981fc",
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "description": "Rincian jadwal dan susunan acara secara lengkap.",
+    "visibility": "PUBLIC",
+    "password": "jadwal123",
+    "thumbnail": null
   },
   {
     "title": "Katalog Wisata",
-    "slug": "katalog-wisata-f140c426",
-    "visibility": "PRIVATE",
+    "description": "Daftar destinasi wisata beserta informasi dan paket perjalanan.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Panduan Instalasi",
-    "slug": "panduan-instalasi-42e9b10b",
+    "description": "Petunjuk langkah demi langkah untuk instalasi produk atau software.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Dokumen Kerjasama",
-    "slug": "dokumen-kerjasama-e4014934",
+    "description": "Kumpulan dokumen terkait perjanjian dan kerja sama pihak terkait.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Modul Pembelajaran",
-    "slug": "modul-pembelajaran-758e4283",
+    "description": "Kumpulan materi dan modul untuk keperluan belajar.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Roadmap Produk",
-    "slug": "roadmap-produk-f42ea837",
-    "visibility": "PRIVATE",
-    "password": "pw_5040b8",
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "description": "Rencana pengembangan dan arah produk ke depan.",
+    "visibility": "PUBLIC",
+    "password": "roadmap1",
+    "thumbnail": null
   },
   {
     "title": "Rangkuman Rapat",
-    "slug": "rangkuman-rapat-37e1d67d",
+    "description": "Ringkasan hasil dan poin penting dari sebuah rapat.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Kampanye Fundraising",
-    "slug": "kampanye-fundraising-f4333eb2",
+    "description": "Halaman penggalangan dana untuk mendukung sebuah kampanye.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Undangan Pelatihan",
-    "slug": "undangan-pelatihan-fd0ae60a",
+    "description": "Undangan digital untuk mengikuti sesi pelatihan.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Formulir Feedback",
-    "slug": "formulir-feedback-da434727",
+    "description": "Formulir untuk mengumpulkan masukan dan umpan balik pengguna.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Katalog Merchandise",
-    "slug": "katalog-merchandise-55f50e32",
+    "description": "Daftar produk merchandise beserta harga dan detailnya.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Materi Sosialisasi",
-    "slug": "materi-sosialisasi-67838041",
+    "description": "Bahan sosialisasi untuk menyampaikan informasi kepada masyarakat.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Panduan Pengguna",
-    "slug": "panduan-pengguna-964a1fd2",
-    "visibility": "PRIVATE",
+    "description": "Petunjuk penggunaan produk atau layanan secara lengkap.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Rilis Fitur Baru",
-    "slug": "rilis-fitur-baru-9cb7492d",
-    "visibility": "PRIVATE",
+    "description": "Informasi tentang fitur baru yang baru saja diluncurkan.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Undangan Peluncuran",
-    "slug": "undangan-peluncuran-abc288dc",
-    "visibility": "PRIVATE",
+    "description": "Undangan digital untuk menghadiri acara peluncuran.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Dokumen Legal",
-    "slug": "dokumen-legal-eab30251",
+    "description": "Kumpulan dokumen hukum dan legalitas yang relevan.",
     "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   },
   {
     "title": "Arsip Kegiatan",
-    "slug": "arsip-kegiatan-8aaa70cb",
-    "visibility": "PRIVATE",
+    "description": "Kumpulan arsip dokumentasi dari berbagai kegiatan yang telah berlangsung.",
+    "visibility": "PUBLIC",
     "password": null,
-    "thumbnail": null,
-    "userId": "94218e54-d802-4d92-9d09-96d2a6ffa766"
+    "thumbnail": null
   }
 ]

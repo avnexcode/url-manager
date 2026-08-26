@@ -1,5 +1,6 @@
 export * from './use-bulk-delete-platform'
 export * from './use-create-platform'
 export * from './use-delete-platform'
+export * from './use-public-platform-access-password'
 export * from './use-select-platform'
 export * from './use-update-platform'

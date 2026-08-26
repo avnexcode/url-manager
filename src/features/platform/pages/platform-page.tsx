@@ -81,7 +81,7 @@ export const PlatformPage = () => {
                 onSearchChange={(search) =>
                   handleUpdateQuery({ search, page: 1 })
                 }
-                placeholder={m.model_platform_field_title()}
+                placeholder={`${m.model_platform_field_title()}, ${m.model_platform_field_slug()}`}
               />
             </div>
             <div className="flex items-center justify-end gap-2">

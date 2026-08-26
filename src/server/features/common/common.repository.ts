@@ -3,7 +3,7 @@ export class CommonRepository {
 
   protected static buildNestedQuery(
     field: string,
-    search?: string,
+    search: string,
   ): Record<string, unknown> {
     const keys = field.split('.')
     const isRelation = keys.length > 1
@@ -25,7 +25,7 @@ export class CommonRepository {
     return { [keys[0]]: innermost }
   }
 
-  protected static getOrQuery(search?: string): Array<Record<string, unknown>> {
+  protected static getOrQuery(search: string): Array<Record<string, unknown>> {
     return this.orQuery.map((field) => this.buildNestedQuery(field, search))
   }
 

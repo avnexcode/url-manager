@@ -11,12 +11,24 @@ import type {
 } from './setting.model'
 
 export class SettingRepository extends CommonRepository {
-  static findByUser = async (
+  static findUniqueUser = async (
     db: DBClient,
     userId: string,
   ): Promise<SettingResponse | null> => {
     const setting = await db.setting.findUnique({
       where: { userId },
+      omit: { userId: true },
+    })
+
+    return setting
+  }
+
+  static findUniqueUsername = async (
+    db: DBClient,
+    username: string,
+  ): Promise<SettingResponse | null> => {
+    const setting = await db.setting.findFirst({
+      where: { user: { username } },
       omit: { userId: true },
     })
 

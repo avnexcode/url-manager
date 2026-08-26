@@ -30,6 +30,7 @@ export const IdentifierPage = () => {
   const { data: identifiers, isLoading: isIdentifiersLoading } = useQuery(
     trpc.identifier.getAll.queryOptions({ params: { ...queryParams } }),
   )
+
   const allIdentifierIds =
     identifiers?.data.map((identifier) => identifier.id) ?? []
 
@@ -79,7 +80,7 @@ export const IdentifierPage = () => {
                 onSearchChange={(search) =>
                   handleUpdateQuery({ search, page: 1 })
                 }
-                placeholder={m.model_identifier_field_title()}
+                placeholder={`${m.model_identifier_field_title()}, ${m.model_identifier_field_slug()}`}
               />
             </div>
             <div className="flex items-center justify-end gap-2">

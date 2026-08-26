@@ -4,11 +4,14 @@ import { CommonRepository } from '../common'
 import type {
   BaseCreateUrlRequest,
   BaseUpdateUrlRequest,
+  BulkCreateUrlsResponse,
   BulkDeleteUrlsRequest,
   BulkDeleteUrlsResponse,
   CreateUrlResponse,
   DeleteUrlRequest,
   DeleteUrlResponse,
+  PublicRelationParams,
+  PublicUrlResponse,
   RelationParams,
   UpdateUrlResponse,
   UrlResponse,
@@ -25,7 +28,7 @@ export class UrlRepository extends CommonRepository {
     return value
   }
 
-  private static getRelationWhereClause = (relation?: RelationParams) => {
+  private static getRelationWhereClause = (relation: RelationParams) => {
     const platformId = this.toRelationFilter(relation?.platformId)
 
     const identifierId = this.toRelationFilter(relation?.identifierId)
@@ -36,10 +39,21 @@ export class UrlRepository extends CommonRepository {
     }
   }
 
+  private static getPublicRelationWhereClause = (
+    relation: PublicRelationParams,
+  ) => ({
+    ...(relation?.platformSlug && {
+      platform: { slug: relation.platformSlug },
+    }),
+    ...(relation?.identifierSlug && {
+      identifier: { slug: relation.identifierSlug },
+    }),
+  })
+
   private static getWhereClause = (
     userId: string,
-    search: string | undefined,
-    relation?: RelationParams,
+    relation: RelationParams,
+    search: string,
   ) => {
     const OR = search ? this.getOrQuery(search) : undefined
 
@@ -50,15 +64,29 @@ export class UrlRepository extends CommonRepository {
     }
   }
 
+  private static getPublicWhereClause = (
+    username: string,
+    relation: PublicRelationParams,
+    search: string,
+  ) => {
+    const OR = search ? this.getOrQuery(search) : undefined
+
+    return {
+      user: { username },
+      ...this.getPublicRelationWhereClause(relation),
+      ...(OR && { OR }),
+    }
+  }
+
   static findMany = async (
     db: DBClient,
     userId: string,
+    relation: RelationParams,
     params: QueryParams,
-    filter?: RelationParams,
   ): Promise<UrlResponse[]> => {
     const { page, limit, search, sort } = params
     const skip = (page - 1) * limit
-    const where = this.getWhereClause(userId, search, filter)
+    const where = this.getWhereClause(userId, relation, search)
     const orderBy = this.getOrderBy(sort)
 
     const urls = await db.url.findMany({
@@ -74,22 +102,25 @@ export class UrlRepository extends CommonRepository {
 
   static findManyPublic = async (
     db: DBClient,
+    username: string,
+    relation: PublicRelationParams,
     params: QueryParams,
-    filter?: RelationParams,
-  ): Promise<UrlResponse[]> => {
+  ): Promise<PublicUrlResponse[]> => {
     const { page, limit, search, sort } = params
     const skip = (page - 1) * limit
-    const OR = search ? this.getOrQuery(search) : undefined
+    const where = this.getPublicWhereClause(username, relation, search)
     const orderBy = this.getOrderBy(sort)
-
-    const where = {
-      ...this.getRelationWhereClause(filter),
-      ...(OR && { OR }),
-    }
 
     const urls = await db.url.findMany({
       where,
-      omit: { userId: true },
+      select: {
+        title: true,
+        slug: true,
+        url: true,
+        description: true,
+        thumbnail: true,
+        user: { select: { username: true } },
+      },
       take: limit,
       skip,
       orderBy,
@@ -111,9 +142,28 @@ export class UrlRepository extends CommonRepository {
     return url
   }
 
+  static findPublicUniqueSlugSuffix = async (
+    db: DBClient,
+    suffix: string,
+  ): Promise<PublicUrlResponse | null> => {
+    const url = await db.url.findFirst({
+      where: { slug: { endsWith: `-${suffix}` } },
+      select: {
+        title: true,
+        slug: true,
+        url: true,
+        description: true,
+        thumbnail: true,
+        user: { select: { username: true } },
+      },
+    })
+
+    return url
+  }
+
   static findIdsByRelation = async (
     db: DBClient,
-    relation?: RelationParams,
+    relation: RelationParams,
   ): Promise<{ id: string }[]> => {
     const where = this.getRelationWhereClause(relation)
 
@@ -125,10 +175,23 @@ export class UrlRepository extends CommonRepository {
   static countAll = async (
     db: DBClient,
     userId: string,
-    search: string | undefined,
-    relation?: RelationParams,
+    relation: RelationParams,
+    search: string,
   ): Promise<number> => {
-    const where = this.getWhereClause(userId, search, relation)
+    const where = this.getWhereClause(userId, relation, search)
+
+    const count = await db.url.count({ where })
+
+    return count
+  }
+
+  static countPublicAll = async (
+    db: DBClient,
+    username: string,
+    relation: PublicRelationParams,
+    search: string,
+  ): Promise<number> => {
+    const where = this.getPublicWhereClause(username, relation, search)
 
     const count = await db.url.count({ where })
 
@@ -181,6 +244,18 @@ export class UrlRepository extends CommonRepository {
     })
 
     return url
+  }
+
+  static insertMany = async (
+    db: DBClient,
+    requests: BaseCreateUrlRequest[],
+  ): Promise<BulkCreateUrlsResponse> => {
+    const data = await db.url.createManyAndReturn({
+      data: requests,
+      omit: { userId: true, updatedAt: true },
+    })
+
+    return { data, count: data.length }
   }
 
   static update = async (

@@ -168,6 +168,8 @@
   "page_shared_form_footer_create_button_loading": "Creating",
   "page_shared_form_footer_update_button": "Update",
   "page_shared_form_footer_update_button_loading": "Updating",
+  "page_shared_form_footer_submit_button": "Submit",
+  "page_shared_form_footer_submit_button_loading": "Submiting",
 
   "page_auth_register_title": "Register",
   "page_auth_form_register_header_title": "Register",

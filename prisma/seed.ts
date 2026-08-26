@@ -3,11 +3,16 @@ import { PrismaClient } from '../src/generated/prisma/client.js'
 import { getDatabaseUrl } from '../src/server/db/database-url.js'
 
 import { IdentifierService } from '@/server/features/identifier/identifier.service.js'
-import { bulkCreateIdentifiersRequest } from '@/server/features/identifier/identifier.validation.js'
 import { PlatformService } from '@/server/features/platform/platform.service.js'
+import { UrlService } from '@/server/features/url/url.service.js'
+
+import { bulkCreateIdentifiersRequest } from '@/server/features/identifier/identifier.validation.js'
 import { bulkCreatePlatformsRequest } from '@/server/features/platform/platform.validation.js'
+import { bulkCreateUrlsRequest } from '@/server/features/url/url.validation.js'
+
 import identifiersData from './data/identifier.json'
 import platformsData from './data/platform.json'
+import urlsData from './data/url.json'
 
 const adapter = new PrismaPg({
   connectionString: getDatabaseUrl(),
@@ -20,6 +25,7 @@ async function main() {
 
   await prisma.platform.deleteMany()
   await prisma.identifier.deleteMany()
+  await prisma.url.deleteMany()
 
   const parsedPlatforms = bulkCreatePlatformsRequest.parse(platformsData)
 
@@ -37,8 +43,17 @@ async function main() {
     parsedIdentifiers,
   )
 
+  const parsedUrls = bulkCreateUrlsRequest.parse(urlsData)
+
+  const urls = await UrlService.createMany(
+    prisma,
+    '991b0f1e-1a66-4f43-bf54-0e005a2d3ec7',
+    parsedUrls,
+  )
+
   console.log(`✅ Created ${platforms.count} platforms`)
   console.log(`✅ Created ${identifiers.count} identifiers`)
+  console.log(`✅ Created ${urls.count} urls`)
 }
 
 main()

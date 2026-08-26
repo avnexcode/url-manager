@@ -21,7 +21,6 @@ export class QrCodeService {
 
   private static buildQrEncodedValue = (
     type: BuildQrEncodedValueType,
-    username: string,
     slug: string,
   ): string => {
     const prefix = extractSlugId({ slug })
@@ -29,15 +28,15 @@ export class QrCodeService {
     let qrEncodedValue = ''
 
     if (type === 'IDENTIFIER') {
-      qrEncodedValue = `${env.VITE_BASE_URL}/${username}/i/${prefix}`
+      qrEncodedValue = `${env.VITE_BASE_URL}/i/${prefix}`
     }
 
     if (type === 'PLATFORM') {
-      qrEncodedValue = `${env.VITE_BASE_URL}/${username}/p/${prefix}`
+      qrEncodedValue = `${env.VITE_BASE_URL}/p/${prefix}`
     }
 
     if (type === 'URL') {
-      qrEncodedValue = `${env.VITE_BASE_URL}/${prefix}`
+      qrEncodedValue = `${env.VITE_BASE_URL}/s/${prefix}`
     }
 
     return qrEncodedValue
@@ -55,7 +54,7 @@ export class QrCodeService {
     const { username, slug } = params
 
     const fileName = this.buildFileName(username, slug)
-    const qrEncodedValue = this.buildQrEncodedValue(type, username, slug)
+    const qrEncodedValue = this.buildQrEncodedValue(type, slug)
 
     const buffer = await QRCode.toBuffer(qrEncodedValue, this.OPTIONS)
 

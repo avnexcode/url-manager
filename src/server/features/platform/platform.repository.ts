@@ -11,6 +11,7 @@ import type {
   DeletePlatformRequest,
   DeletePlatformResponse,
   PlatformResponse,
+  PublicPlatformResponse,
   UpdatePlatformResponse,
 } from './platform.model'
 
@@ -37,7 +38,35 @@ export class PlatformRepository extends CommonRepository {
     return platforms
   }
 
-  static findById = async (
+  static findManyPublic = async (
+    db: DBClient,
+    username: string,
+    params: QueryParams,
+  ): Promise<PublicPlatformResponse[]> => {
+    const { page, limit, search, sort } = params
+    const skip = (page - 1) * limit
+    const OR = search ? this.getOrQuery(search) : undefined
+    const orderBy = this.getOrderBy(sort)
+    const platforms = await db.platform.findMany({
+      where: { user: { username }, visibility: 'PUBLIC', ...(OR && { OR }) },
+      select: {
+        title: true,
+        slug: true,
+        url: true,
+        description: true,
+        password: true,
+        thumbnail: true,
+        user: { select: { username: true } },
+      },
+      take: limit,
+      skip,
+      orderBy,
+    })
+
+    return platforms
+  }
+
+  static findUniqueId = async (
     db: DBClient,
     userId: string,
     id: string,
@@ -50,15 +79,74 @@ export class PlatformRepository extends CommonRepository {
     return platform
   }
 
+  static findPublicUniqueSlug = async (
+    db: DBClient,
+    username: string,
+    slug: string,
+  ): Promise<PublicPlatformResponse | null> => {
+    const platform = await db.platform.findUnique({
+      where: { user: { username }, slug, visibility: 'PUBLIC' },
+      select: {
+        title: true,
+        slug: true,
+        url: true,
+        description: true,
+        password: true,
+        thumbnail: true,
+        user: { select: { username: true } },
+      },
+    })
+
+    return platform
+  }
+
+  static findPublicUniqueSlugSuffix = async (
+    db: DBClient,
+    suffix: string,
+  ): Promise<PublicPlatformResponse | null> => {
+    const platform = await db.platform.findFirst({
+      where: { slug: { endsWith: `-${suffix}` }, visibility: 'PUBLIC' },
+      select: {
+        title: true,
+        slug: true,
+        url: true,
+        description: true,
+        password: true,
+        thumbnail: true,
+        user: { select: { username: true } },
+      },
+    })
+
+    return platform
+  }
+
   static countAll = async (
     db: DBClient,
     userId: string,
-    search?: string,
+    search: string,
   ): Promise<number> => {
-    const OR = this.getOrQuery(search)
+    const OR = search ? this.getOrQuery(search) : undefined
 
     const count = await db.platform.count({
-      where: { userId, ...(search && { OR }) },
+      where: { userId, ...(OR && { OR }) },
+    })
+
+    return count
+  }
+
+  static countPublicAll = async (
+    db: DBClient,
+    username: string,
+    search: string,
+  ): Promise<number> => {
+    const OR = search ? this.getOrQuery(search) : undefined
+
+    const count = await db.platform.count({
+      where: {
+        user: { username },
+        visibility: 'PUBLIC',
+        ...(OR && { OR }),
+      },
     })
 
     return count

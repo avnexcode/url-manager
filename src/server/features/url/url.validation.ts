@@ -7,6 +7,13 @@ export const relationParams = z
   })
   .optional()
 
+export const publicRelationParams = z
+  .object({
+    platformSlug: z.string().optional(),
+    identifierSlug: z.string().optional(),
+  })
+  .optional()
+
 export const baseCreateUrlRequest = z.object({
   title: z.string().min(1).max(100).trim(),
   slug: z
@@ -30,6 +37,14 @@ export const createUrlRequest = baseCreateUrlRequest.omit({
   qrEncodedValue: true,
   userId: true,
 })
+
+export const bulkCreateUrlsRequest = z
+  .array(createUrlRequest)
+  .min(1)
+  .max(250)
+  .refine((items) => new Set(items.map((i) => i.title)).size === items.length, {
+    message: 'Duplicate title found in request',
+  })
 
 export const baseUpdateUrlRequest = baseCreateUrlRequest.partial()
 

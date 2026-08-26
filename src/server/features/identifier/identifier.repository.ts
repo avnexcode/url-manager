@@ -11,6 +11,7 @@ import type {
   DeleteIdentifierRequest,
   DeleteIdentifierResponse,
   IdentifierResponse,
+  PublicIdentifierResponse,
   UpdateIdentifierResponse,
 } from './identifier.model'
 
@@ -37,7 +38,34 @@ export class IdentifierRepository extends CommonRepository {
     return identifiers
   }
 
-  static findById = async (
+  static findManyPublic = async (
+    db: DBClient,
+    username: string,
+    params: QueryParams,
+  ): Promise<PublicIdentifierResponse[]> => {
+    const { page, limit, search, sort } = params
+    const skip = (page - 1) * limit
+    const OR = search ? this.getOrQuery(search) : undefined
+    const orderBy = this.getOrderBy(sort)
+    const identifiers = await db.identifier.findMany({
+      where: { user: { username }, visibility: 'PUBLIC', ...(OR && { OR }) },
+      select: {
+        title: true,
+        slug: true,
+        description: true,
+        password: true,
+        thumbnail: true,
+        user: { select: { username: true } },
+      },
+      take: limit,
+      skip,
+      orderBy,
+    })
+
+    return identifiers
+  }
+
+  static findUniqueId = async (
     db: DBClient,
     userId: string,
     id: string,
@@ -50,15 +78,72 @@ export class IdentifierRepository extends CommonRepository {
     return identifier
   }
 
+  static findPublicUniqueSlug = async (
+    db: DBClient,
+    username: string,
+    slug: string,
+  ): Promise<PublicIdentifierResponse | null> => {
+    const identifier = await db.identifier.findUnique({
+      where: { user: { username }, slug, visibility: 'PUBLIC' },
+      select: {
+        title: true,
+        slug: true,
+        description: true,
+        password: true,
+        thumbnail: true,
+        user: { select: { username: true } },
+      },
+    })
+
+    return identifier
+  }
+
+  static findPublicUniqueSlugSuffix = async (
+    db: DBClient,
+    suffix: string,
+  ): Promise<PublicIdentifierResponse | null> => {
+    const identifier = await db.identifier.findFirst({
+      where: { slug: { endsWith: `-${suffix}` }, visibility: 'PUBLIC' },
+      select: {
+        title: true,
+        slug: true,
+        description: true,
+        password: true,
+        thumbnail: true,
+        user: { select: { username: true } },
+      },
+    })
+
+    return identifier
+  }
+
   static countAll = async (
     db: DBClient,
     userId: string,
-    search?: string,
+    search: string,
   ): Promise<number> => {
-    const OR = this.getOrQuery(search)
+    const OR = search ? this.getOrQuery(search) : undefined
 
     const count = await db.identifier.count({
-      where: { userId, ...(search && { OR }) },
+      where: { userId, ...(OR && { OR }) },
+    })
+
+    return count
+  }
+
+  static countPublicAll = async (
+    db: DBClient,
+    username: string,
+    search: string,
+  ): Promise<number> => {
+    const OR = search ? this.getOrQuery(search) : undefined
+
+    const count = await db.identifier.count({
+      where: {
+        user: { username },
+        visibility: 'PUBLIC',
+        ...(OR && { OR }),
+      },
     })
 
     return count

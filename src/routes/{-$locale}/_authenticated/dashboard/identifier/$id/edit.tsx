@@ -7,6 +7,4 @@ export const Route = createFileRoute(
 )({
   component: EditIdentifierPage,
   pendingComponent: EditIdentifierPageSkeleton,
-  pendingMs: 300,
-  pendingMinMs: 500,
 })

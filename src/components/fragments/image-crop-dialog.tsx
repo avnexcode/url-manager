@@ -182,7 +182,7 @@ export const ImageCropDialog = ({
         </div>
 
         <div className="flex items-center gap-3 px-1">
-          <span className="text-xs text-muted-foreground">
+          <span className="text-xs text-muted-foreground min-w-fit">
             {m.form_action_zoom()}
           </span>
           <Slider

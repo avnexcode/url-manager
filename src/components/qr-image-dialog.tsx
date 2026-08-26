@@ -41,7 +41,18 @@ export const QrImageDialog = ({
           </div>
 
           {qrEncodedValue && (
-            <CopyTextWrapper>{qrEncodedValue}</CopyTextWrapper>
+            <div className="flex w-full flex-col items-center gap-2">
+              <CopyTextWrapper>{qrEncodedValue}</CopyTextWrapper>
+              <a
+                href={qrEncodedValue}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline"
+              >
+                <Icon name="ExternalLink" className="size-3.5" />
+                {m.action_visit()}
+              </a>
+            </div>
           )}
 
           <a href={qrCodeUrl} download className="w-full">

@@ -7,6 +7,4 @@ export const Route = createFileRoute(
 )({
   component: EditPlatformPage,
   pendingComponent: EditPlatformPageSkeleton,
-  pendingMs: 300,
-  pendingMinMs: 500,
 })

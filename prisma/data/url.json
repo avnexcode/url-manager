@@ -1,0 +1,802 @@
+[
+  {
+    "title": "Profil Instagram Saya",
+    "description": "Tautan menuju akun Instagram pribadi.",
+    "url": "https://instagram.com/username1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Akun Twitter Utama",
+    "description": "Tautan menuju akun Twitter untuk update terbaru.",
+    "url": "https://twitter.com/username2",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Halaman Facebook Bisnis",
+    "description": "Tautan menuju halaman Facebook bisnis.",
+    "url": "https://facebook.com/pagebisnis",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil TikTok Kreator",
+    "description": "Tautan menuju akun TikTok berisi konten kreatif.",
+    "url": "https://tiktok.com/@kreator1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Channel YouTube Utama",
+    "description": "Tautan menuju channel YouTube berisi video tutorial.",
+    "url": "https://youtube.com/@channelutama",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil LinkedIn Profesional",
+    "description": "Tautan menuju profil LinkedIn untuk jejaring karier.",
+    "url": "https://linkedin.com/in/profesional1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Repositori GitHub Utama",
+    "description": "Tautan menuju repositori proyek open source.",
+    "url": "https://github.com/user/repo1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Papan Pinterest Inspirasi",
+    "description": "Tautan menuju papan Pinterest berisi ide desain.",
+    "url": "https://pinterest.com/user/papan1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Snapchat Pribadi",
+    "description": "Tautan menuju akun Snapchat untuk momen sehari-hari.",
+    "url": "https://snapchat.com/add/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Reddit Komunitas",
+    "description": "Tautan menuju profil Reddit aktif di berbagai subreddit.",
+    "url": "https://reddit.com/user/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Server Discord Komunitas",
+    "description": "Tautan undangan menuju server Discord komunitas.",
+    "url": "https://discord.gg/komunitas1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Channel Telegram Info",
+    "description": "Tautan menuju channel Telegram berisi informasi terkini.",
+    "url": "https://t.me/channelinfo1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Kontak WhatsApp Bisnis",
+    "description": "Tautan langsung untuk menghubungi via WhatsApp.",
+    "url": "https://wa.me/6281234500001",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Threads",
+    "description": "Tautan menuju akun Threads untuk diskusi ringan.",
+    "url": "https://threads.net/@user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Channel Twitch Streaming",
+    "description": "Tautan menuju channel Twitch untuk siaran langsung game.",
+    "url": "https://twitch.tv/streamer1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Spotify Musisi",
+    "description": "Tautan menuju profil Spotify berisi playlist musik.",
+    "url": "https://open.spotify.com/user/musisi1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Portofolio Behance",
+    "description": "Tautan menuju portofolio desain di Behance.",
+    "url": "https://behance.net/desainer1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Showcase Dribbble",
+    "description": "Tautan menuju showcase karya desain di Dribbble.",
+    "url": "https://dribbble.com/desainer1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Blog Medium Pribadi",
+    "description": "Tautan menuju kumpulan artikel di Medium.",
+    "url": "https://medium.com/@penulis1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Halaman Notion Publik",
+    "description": "Tautan menuju halaman Notion berisi catatan publik.",
+    "url": "https://notion.so/halaman-publik-1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Repositori GitLab",
+    "description": "Tautan menuju repositori proyek di GitLab.",
+    "url": "https://gitlab.com/user/proyek1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Repositori Bitbucket",
+    "description": "Tautan menuju repositori kode di Bitbucket.",
+    "url": "https://bitbucket.org/user/proyek1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Channel Vimeo",
+    "description": "Tautan menuju channel Vimeo berisi video berkualitas tinggi.",
+    "url": "https://vimeo.com/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil SoundCloud",
+    "description": "Tautan menuju profil SoundCloud berisi karya musik.",
+    "url": "https://soundcloud.com/musisi1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Halaman Patreon",
+    "description": "Tautan menuju halaman Patreon untuk dukungan penggemar.",
+    "url": "https://patreon.com/kreator1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Halaman Ko-fi",
+    "description": "Tautan menuju halaman Ko-fi untuk donasi ringan.",
+    "url": "https://ko-fi.com/kreator1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Halaman Buy Me a Coffee",
+    "description": "Tautan menuju halaman dukungan finansial kreator.",
+    "url": "https://buymeacoffee.com/kreator1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Newsletter Substack",
+    "description": "Tautan menuju newsletter berlangganan di Substack.",
+    "url": "https://penulis1.substack.com",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Mastodon",
+    "description": "Tautan menuju akun Mastodon di jejaring terdesentralisasi.",
+    "url": "https://mastodon.social/@user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Bluesky",
+    "description": "Tautan menuju akun Bluesky untuk update singkat.",
+    "url": "https://bsky.app/profile/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Proyek Figma",
+    "description": "Tautan menuju file desain kolaboratif di Figma.",
+    "url": "https://figma.com/file/proyek1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Pena CodePen",
+    "description": "Tautan menuju kumpulan eksperimen kode di CodePen.",
+    "url": "https://codepen.io/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Stack Overflow",
+    "description": "Tautan menuju profil Stack Overflow dengan riwayat kontribusi.",
+    "url": "https://stackoverflow.com/users/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Produk di Product Hunt",
+    "description": "Tautan menuju halaman peluncuran produk di Product Hunt.",
+    "url": "https://producthunt.com/posts/produk1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Artikel Dev.to",
+    "description": "Tautan menuju kumpulan artikel teknis di Dev.to.",
+    "url": "https://dev.to/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Blog Hashnode",
+    "description": "Tautan menuju blog developer di Hashnode.",
+    "url": "https://user1.hashnode.dev",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Kaggle",
+    "description": "Tautan menuju profil Kaggle dengan proyek data science.",
+    "url": "https://kaggle.com/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Rak Buku Goodreads",
+    "description": "Tautan menuju rak buku dan ulasan di Goodreads.",
+    "url": "https://goodreads.com/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Letterboxd",
+    "description": "Tautan menuju daftar ulasan film di Letterboxd.",
+    "url": "https://letterboxd.com/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Steam",
+    "description": "Tautan menuju profil komunitas game di Steam.",
+    "url": "https://steamcommunity.com/id/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Xbox Live",
+    "description": "Tautan menuju profil gaming di Xbox Live.",
+    "url": "https://xbox.com/en-US/play/user/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil PlayStation Network",
+    "description": "Tautan menuju profil gaming di PlayStation Network.",
+    "url": "https://psnprofiles.com/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Roblox",
+    "description": "Tautan menuju profil pengguna di Roblox.",
+    "url": "https://roblox.com/users/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Toko Etsy",
+    "description": "Tautan menuju toko produk buatan tangan di Etsy.",
+    "url": "https://etsy.com/shop/toko1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Toko Shopee",
+    "description": "Tautan menuju toko online di Shopee.",
+    "url": "https://shopee.co.id/toko1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Toko Tokopedia",
+    "description": "Tautan menuju toko online di Tokopedia.",
+    "url": "https://tokopedia.com/toko1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Produk Gumroad",
+    "description": "Tautan menuju halaman penjualan produk digital di Gumroad.",
+    "url": "https://kreator1.gumroad.com",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Fiverr",
+    "description": "Tautan menuju profil jasa freelance di Fiverr.",
+    "url": "https://fiverr.com/freelancer1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Profil Upwork",
+    "description": "Tautan menuju profil freelancer di Upwork.",
+    "url": "https://upwork.com/freelancers/~user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Jadwal Calendly",
+    "description": "Tautan menuju halaman penjadwalan janji temu di Calendly.",
+    "url": "https://calendly.com/user1",
+    "thumbnail": null,
+    "platformId": "f5f21e99-2d1d-4ce3-be82-9ecd1c9cf05c",
+    "identifierId": null
+  },
+  {
+    "title": "Banner Promo Akhir Tahun",
+    "description": "Tautan menuju halaman promo akhir tahun.",
+    "url": "https://contoh.com/promo-akhir-tahun",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Undangan Pernikahan Digital",
+    "description": "Tautan menuju halaman undangan pernikahan.",
+    "url": "https://contoh.com/undangan-nikah-1",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Katalog Produk Lengkap",
+    "description": "Tautan menuju katalog produk terbaru.",
+    "url": "https://contoh.com/katalog-produk",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Ucapan Lebaran 2026",
+    "description": "Tautan menuju halaman ucapan Lebaran 2026.",
+    "url": "https://contoh.com/lebaran-2026",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Landing Page Iklan Instagram",
+    "description": "Tautan menuju landing page kampanye iklan.",
+    "url": "https://contoh.com/ads-instagram",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Portofolio Desain Grafis",
+    "description": "Tautan menuju galeri portofolio desain.",
+    "url": "https://contoh.com/portofolio-desain",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "CV Digital Interaktif",
+    "description": "Tautan menuju halaman CV digital.",
+    "url": "https://contoh.com/cv-digital",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Halaman Link Bio Utama",
+    "description": "Tautan menuju halaman kumpulan tautan bio.",
+    "url": "https://contoh.com/link-bio",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Informasi Event Tahunan",
+    "description": "Tautan menuju halaman detail event tahunan.",
+    "url": "https://contoh.com/event-tahunan",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Pendaftaran Webinar Marketing",
+    "description": "Tautan menuju halaman pendaftaran webinar.",
+    "url": "https://contoh.com/webinar-marketing",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Halaman Flash Sale",
+    "description": "Tautan menuju halaman diskon flash sale.",
+    "url": "https://contoh.com/flash-sale",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Peluncuran Produk Baru",
+    "description": "Tautan menuju halaman peluncuran produk.",
+    "url": "https://contoh.com/produk-baru",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Halaman Kampanye Donasi",
+    "description": "Tautan menuju halaman penggalangan dana.",
+    "url": "https://contoh.com/donasi",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Materi Pelatihan Online",
+    "description": "Tautan menuju halaman unduh materi pelatihan.",
+    "url": "https://contoh.com/materi-pelatihan",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Panduan Onboarding Pengguna",
+    "description": "Tautan menuju halaman panduan onboarding.",
+    "url": "https://contoh.com/onboarding",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Halaman Reuni Angkatan",
+    "description": "Tautan menuju halaman informasi reuni.",
+    "url": "https://contoh.com/reuni-angkatan",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Undangan Ulang Tahun Digital",
+    "description": "Tautan menuju halaman undangan ulang tahun.",
+    "url": "https://contoh.com/undangan-ultah",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Sertifikat Pelatihan Online",
+    "description": "Tautan menuju halaman unduh sertifikat.",
+    "url": "https://contoh.com/sertifikat",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Dokumentasi Proyek Tim",
+    "description": "Tautan menuju halaman dokumentasi proyek.",
+    "url": "https://contoh.com/dokumentasi-proyek",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Formulir Pendaftaran Peserta",
+    "description": "Tautan menuju formulir pendaftaran online.",
+    "url": "https://contoh.com/formulir-daftar",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Katalog Jasa Layanan",
+    "description": "Tautan menuju halaman katalog jasa.",
+    "url": "https://contoh.com/katalog-jasa",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Profil Perusahaan",
+    "description": "Tautan menuju halaman company profile.",
+    "url": "https://contoh.com/company-profile",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Media Kit Resmi",
+    "description": "Tautan menuju halaman unduh media kit.",
+    "url": "https://contoh.com/media-kit",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Siaran Pers Terbaru",
+    "description": "Tautan menuju halaman press release.",
+    "url": "https://contoh.com/press-release",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Rilis Aplikasi Mobile",
+    "description": "Tautan menuju halaman unduh aplikasi mobile.",
+    "url": "https://contoh.com/rilis-app",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Halaman Kampanye Sosial",
+    "description": "Tautan menuju halaman kampanye isu sosial.",
+    "url": "https://contoh.com/kampanye-sosial",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Voucher Belanja Spesial",
+    "description": "Tautan menuju halaman kode voucher belanja.",
+    "url": "https://contoh.com/voucher-belanja",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Survei Kepuasan Pelanggan",
+    "description": "Tautan menuju formulir survei kepuasan.",
+    "url": "https://contoh.com/survei-kepuasan",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Portal Lowongan Karir",
+    "description": "Tautan menuju halaman portal karir.",
+    "url": "https://contoh.com/portal-karir",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Materi Presentasi Acara",
+    "description": "Tautan menuju halaman unduh slide presentasi.",
+    "url": "https://contoh.com/materi-presentasi",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Booklet Digital Interaktif",
+    "description": "Tautan menuju halaman buklet digital.",
+    "url": "https://contoh.com/booklet-digital",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Brosur Kegiatan Komunitas",
+    "description": "Tautan menuju halaman brosur kegiatan.",
+    "url": "https://contoh.com/brosur-kegiatan",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Undangan Seminar Nasional",
+    "description": "Tautan menuju halaman undangan seminar.",
+    "url": "https://contoh.com/undangan-seminar",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Jadwal Lengkap Acara",
+    "description": "Tautan menuju halaman jadwal acara.",
+    "url": "https://contoh.com/jadwal-acara",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Katalog Paket Wisata",
+    "description": "Tautan menuju halaman katalog wisata.",
+    "url": "https://contoh.com/katalog-wisata",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Panduan Instalasi Software",
+    "description": "Tautan menuju halaman panduan instalasi.",
+    "url": "https://contoh.com/panduan-instalasi",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Dokumen Kerjasama Mitra",
+    "description": "Tautan menuju halaman dokumen kerja sama.",
+    "url": "https://contoh.com/dokumen-kerjasama",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Modul Pembelajaran Online",
+    "description": "Tautan menuju halaman modul pembelajaran.",
+    "url": "https://contoh.com/modul-belajar",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Roadmap Pengembangan Produk",
+    "description": "Tautan menuju halaman roadmap produk.",
+    "url": "https://contoh.com/roadmap-produk",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Rangkuman Hasil Rapat",
+    "description": "Tautan menuju halaman rangkuman rapat.",
+    "url": "https://contoh.com/rangkuman-rapat",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Kampanye Fundraising Sosial",
+    "description": "Tautan menuju halaman penggalangan dana sosial.",
+    "url": "https://contoh.com/fundraising",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Undangan Sesi Pelatihan",
+    "description": "Tautan menuju halaman undangan pelatihan.",
+    "url": "https://contoh.com/undangan-pelatihan",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Formulir Masukan Pengguna",
+    "description": "Tautan menuju formulir umpan balik.",
+    "url": "https://contoh.com/formulir-feedback",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Katalog Merchandise Resmi",
+    "description": "Tautan menuju halaman katalog merchandise.",
+    "url": "https://contoh.com/katalog-merch",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Materi Sosialisasi Program",
+    "description": "Tautan menuju halaman materi sosialisasi.",
+    "url": "https://contoh.com/materi-sosialisasi",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Panduan Penggunaan Layanan",
+    "description": "Tautan menuju halaman panduan pengguna.",
+    "url": "https://contoh.com/panduan-pengguna",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Rilis Fitur Terbaru",
+    "description": "Tautan menuju halaman informasi fitur baru.",
+    "url": "https://contoh.com/fitur-baru",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Undangan Peluncuran Produk",
+    "description": "Tautan menuju halaman undangan peluncuran.",
+    "url": "https://contoh.com/undangan-peluncuran",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Dokumen Legal Perusahaan",
+    "description": "Tautan menuju halaman dokumen legal.",
+    "url": "https://contoh.com/dokumen-legal",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  },
+  {
+    "title": "Arsip Dokumentasi Kegiatan",
+    "description": "Tautan menuju halaman arsip kegiatan.",
+    "url": "https://contoh.com/arsip-kegiatan",
+    "thumbnail": null,
+    "platformId": null,
+    "identifierId": "d622153a-6c60-4051-8057-3b5a9995cd78"
+  }
+]

@@ -5,6 +5,8 @@ import type { QueryParams } from '@/server/models'
 import { FileService, QrCodeService } from '@/server/services'
 import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
+import { SettingService } from '../settings'
+import { UrlService } from '../url'
 import { UserService } from '../user'
 import type {
   BaseCreatePlatformRequest,
@@ -17,11 +19,11 @@ import type {
   DeletePlatformRequest,
   DeletePlatformResponse,
   PlatformResponse,
+  PublicPlatformResponse,
   UpdatePlatformRequest,
   UpdatePlatformResponse,
 } from './platform.model'
 import { PlatformRepository as Repository } from './platform.repository'
-import { UrlService } from '../url'
 
 export class PlatformService extends CommonService {
   private static bucket = SUPABASE_BUCKET.Platform
@@ -83,14 +85,74 @@ export class PlatformService extends CommonService {
     return { data, meta: { total, limit, page, lastPage } }
   }
 
+  static getPublicAll = async (
+    db: DBClient,
+    username: string,
+    params: QueryParams,
+  ): Promise<QueryResponse<PublicPlatformResponse>> => {
+    const { page, limit, search } = params
+
+    const { publicAccess, publicPlatformAccess } =
+      await SettingService.getByUsername(db, username)
+
+    if (publicAccess === false || publicPlatformAccess === false) {
+      this.throwError('BAD_REQUEST')
+    }
+
+    const [total, data] = await Promise.all([
+      Repository.countPublicAll(db, username, search),
+      Repository.findManyPublic(db, username, params),
+    ])
+
+    const lastPage = Math.ceil(total / limit)
+
+    return { data, meta: { total, limit, page, lastPage } }
+  }
+
   static getById = async (
     db: DBClient,
     userId: string,
     id: string,
   ): Promise<PlatformResponse> => {
-    const platform = await Repository.findById(db, userId, id)
+    const platform = await Repository.findUniqueId(db, userId, id)
 
     return this.checkNotNull(platform)
+  }
+
+  static getPublicBySlugSuffix = async (
+    db: DBClient,
+    suffix: string,
+  ): Promise<PublicPlatformResponse> => {
+    const platform = await Repository.findPublicUniqueSlugSuffix(db, suffix)
+
+    return this.checkNotNull(platform)
+  }
+
+  static getPublicBySlug = async (
+    db: DBClient,
+    username: string,
+    slug: string,
+  ): Promise<PublicPlatformResponse> => {
+    const platform = await Repository.findPublicUniqueSlug(db, username, slug)
+
+    return this.checkNotNull(platform)
+  }
+
+  static getPublicAccessPassword = async (
+    db: DBClient,
+    username: string,
+    slug: string,
+    password: string,
+  ): Promise<{ redirectUrl: string }> => {
+    const platform = await this.getPublicBySlug(db, username, slug)
+
+    if (password !== platform.password) {
+      this.throwError('BAD_REQUEST')
+    }
+
+    const redirectUrl = `/${username}/platform/${slug}?password=${password}`
+
+    return { redirectUrl }
   }
 
   static create = async (

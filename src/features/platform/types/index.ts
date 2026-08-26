@@ -11,3 +11,15 @@ export type UpdatePlatformFormSchema = z.infer<typeof updatePlatformFormSchema>
 export type PlatformResponse = Prisma.PlatformGetPayload<{
   omit: { userId: true }
 }>
+
+export type PublicPlatformResponse = Prisma.PlatformGetPayload<{
+  select: {
+    title: true
+    slug: true
+    url: true
+    description: true
+    password: true
+    thumbnail: true
+    user: { select: { username: true } }
+  }
+}>

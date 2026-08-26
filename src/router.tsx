@@ -2,6 +2,7 @@ import { TanstackQueryProvider, getContext } from '@/providers/query-provider'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
 import type { ReactNode } from 'react'
+import { Loader } from './components'
 import { deLocalizeUrl, localizeUrl } from './generated/paraglide/runtime'
 import { routeTree } from './routeTree.gen'
 
@@ -20,6 +21,9 @@ export const getRouter = () => {
     scrollRestoration: true,
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
+    defaultPendingComponent: Loader,
+    defaultPendingMs: 300,
+    defaultPendingMinMs: 500,
 
     Wrap: ({ children }: { children: ReactNode }) => {
       return (

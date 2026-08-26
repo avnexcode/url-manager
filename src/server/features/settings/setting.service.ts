@@ -32,7 +32,16 @@ export class SettingService extends CommonService {
     db: DBClient,
     userId: string,
   ): Promise<SettingResponse> => {
-    const setting = await Repository.findByUser(db, userId)
+    const setting = await Repository.findUniqueUser(db, userId)
+
+    return this.checkNotNull(setting)
+  }
+
+  static getByUsername = async (
+    db: DBClient,
+    username: string,
+  ): Promise<SettingResponse> => {
+    const setting = await Repository.findUniqueUsername(db, username)
 
     return this.checkNotNull(setting)
   }

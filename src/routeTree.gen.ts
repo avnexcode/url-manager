@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
 import { Route as Char123LocaleChar125AuthenticatedRouteRouteImport } from './routes/{-$locale}/_authenticated/route'
+import { Route as Char123LocaleChar125PublicRouteRouteImport } from './routes/{-$locale}/_public/route'
 import { Route as Char123LocaleChar125LoginRouteImport } from './routes/{-$locale}/login'
 import { Route as Char123LocaleChar125RegisterRouteImport } from './routes/{-$locale}/register'
 import { Route as ApiTrpcSplatRouteImport } from './routes/api.trpc.$'
@@ -20,6 +21,9 @@ import { Route as Char123LocaleChar125AuthenticatedDashboardIndexRouteImport } f
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierRouteRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/route'
 import { Route as Char123LocaleChar125AuthenticatedDashboardPlatformRouteRouteImport } from './routes/{-$locale}/_authenticated/dashboard/platform/route'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlRouteRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/route'
+import { Route as Char123LocaleChar125PublicISuffixRouteImport } from './routes/{-$locale}/_public/i/$suffix'
+import { Route as Char123LocaleChar125PublicPSuffixRouteImport } from './routes/{-$locale}/_public/p/$suffix'
+import { Route as Char123LocaleChar125PublicSSuffixRouteImport } from './routes/{-$locale}/_public/s/$suffix'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/index'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/$id/route'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierCreateRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/create'
@@ -29,6 +33,10 @@ import { Route as Char123LocaleChar125AuthenticatedDashboardPlatformCreateRouteI
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/index'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIdRouteRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/$id/route'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlCreateRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/create'
+import { Route as Char123LocaleChar125PublicUsernameIdentifierIndexRouteImport } from './routes/{-$locale}/_public/$username/identifier/index'
+import { Route as Char123LocaleChar125PublicUsernameIdentifierSlugRouteImport } from './routes/{-$locale}/_public/$username/identifier/$slug'
+import { Route as Char123LocaleChar125PublicUsernamePlatformIndexRouteImport } from './routes/{-$locale}/_public/$username/platform/index'
+import { Route as Char123LocaleChar125PublicUsernamePlatformSlugRouteImport } from './routes/{-$locale}/_public/$username/platform/$slug'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/$id/index'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/$id/edit'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/$id/view'
@@ -48,6 +56,12 @@ const Char123LocaleChar125IndexRoute =
 const Char123LocaleChar125AuthenticatedRouteRoute =
   Char123LocaleChar125AuthenticatedRouteRouteImport.update({
     id: '/{-$locale}/_authenticated',
+    path: '/{-$locale}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char123LocaleChar125PublicRouteRoute =
+  Char123LocaleChar125PublicRouteRouteImport.update({
+    id: '/{-$locale}/_public',
     path: '/{-$locale}',
     getParentRoute: () => rootRouteImport,
   } as any)
@@ -103,6 +117,24 @@ const Char123LocaleChar125AuthenticatedDashboardUrlRouteRoute =
     id: '/dashboard/url',
     path: '/dashboard/url',
     getParentRoute: () => Char123LocaleChar125AuthenticatedRouteRoute,
+  } as any)
+const Char123LocaleChar125PublicISuffixRoute =
+  Char123LocaleChar125PublicISuffixRouteImport.update({
+    id: '/i/$suffix',
+    path: '/i/$suffix',
+    getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
+  } as any)
+const Char123LocaleChar125PublicPSuffixRoute =
+  Char123LocaleChar125PublicPSuffixRouteImport.update({
+    id: '/p/$suffix',
+    path: '/p/$suffix',
+    getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
+  } as any)
+const Char123LocaleChar125PublicSSuffixRoute =
+  Char123LocaleChar125PublicSSuffixRouteImport.update({
+    id: '/s/$suffix',
+    path: '/s/$suffix',
+    getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
   } as any)
 const Char123LocaleChar125AuthenticatedDashboardIdentifierIndexRoute =
   Char123LocaleChar125AuthenticatedDashboardIdentifierIndexRouteImport.update({
@@ -168,6 +200,30 @@ const Char123LocaleChar125AuthenticatedDashboardUrlCreateRoute =
     path: '/create',
     getParentRoute: () =>
       Char123LocaleChar125AuthenticatedDashboardUrlRouteRoute,
+  } as any)
+const Char123LocaleChar125PublicUsernameIdentifierIndexRoute =
+  Char123LocaleChar125PublicUsernameIdentifierIndexRouteImport.update({
+    id: '/$username/identifier/',
+    path: '/$username/identifier/',
+    getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
+  } as any)
+const Char123LocaleChar125PublicUsernameIdentifierSlugRoute =
+  Char123LocaleChar125PublicUsernameIdentifierSlugRouteImport.update({
+    id: '/$username/identifier/$slug',
+    path: '/$username/identifier/$slug',
+    getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
+  } as any)
+const Char123LocaleChar125PublicUsernamePlatformIndexRoute =
+  Char123LocaleChar125PublicUsernamePlatformIndexRouteImport.update({
+    id: '/$username/platform/',
+    path: '/$username/platform/',
+    getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
+  } as any)
+const Char123LocaleChar125PublicUsernamePlatformSlugRoute =
+  Char123LocaleChar125PublicUsernamePlatformSlugRouteImport.update({
+    id: '/$username/platform/$slug',
+    path: '/$username/platform/$slug',
+    getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
   } as any)
 const Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRoute =
   Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRouteImport.update(
@@ -236,7 +292,7 @@ const Char123LocaleChar125AuthenticatedDashboardUrlIdViewRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/{-$locale}': typeof Char123LocaleChar125AuthenticatedRouteRouteWithChildren
+  '/{-$locale}': typeof Char123LocaleChar125PublicRouteRouteWithChildren
   '/{-$locale}/login': typeof Char123LocaleChar125LoginRoute
   '/{-$locale}/register': typeof Char123LocaleChar125RegisterRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
@@ -246,6 +302,9 @@ export interface FileRoutesByFullPath {
   '/{-$locale}/dashboard/identifier': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierRouteRouteWithChildren
   '/{-$locale}/dashboard/platform': typeof Char123LocaleChar125AuthenticatedDashboardPlatformRouteRouteWithChildren
   '/{-$locale}/dashboard/url': typeof Char123LocaleChar125AuthenticatedDashboardUrlRouteRouteWithChildren
+  '/{-$locale}/i/$suffix': typeof Char123LocaleChar125PublicISuffixRoute
+  '/{-$locale}/p/$suffix': typeof Char123LocaleChar125PublicPSuffixRoute
+  '/{-$locale}/s/$suffix': typeof Char123LocaleChar125PublicSSuffixRoute
   '/{-$locale}/dashboard/': typeof Char123LocaleChar125AuthenticatedDashboardIndexRoute
   '/{-$locale}/dashboard/identifier/$id': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRouteWithChildren
   '/{-$locale}/dashboard/platform/$id': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRouteWithChildren
@@ -253,9 +312,13 @@ export interface FileRoutesByFullPath {
   '/{-$locale}/dashboard/identifier/create': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierCreateRoute
   '/{-$locale}/dashboard/platform/create': typeof Char123LocaleChar125AuthenticatedDashboardPlatformCreateRoute
   '/{-$locale}/dashboard/url/create': typeof Char123LocaleChar125AuthenticatedDashboardUrlCreateRoute
+  '/{-$locale}/$username/identifier/$slug': typeof Char123LocaleChar125PublicUsernameIdentifierSlugRoute
+  '/{-$locale}/$username/platform/$slug': typeof Char123LocaleChar125PublicUsernamePlatformSlugRoute
   '/{-$locale}/dashboard/identifier/': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIndexRoute
   '/{-$locale}/dashboard/platform/': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIndexRoute
   '/{-$locale}/dashboard/url/': typeof Char123LocaleChar125AuthenticatedDashboardUrlIndexRoute
+  '/{-$locale}/$username/identifier/': typeof Char123LocaleChar125PublicUsernameIdentifierIndexRoute
+  '/{-$locale}/$username/platform/': typeof Char123LocaleChar125PublicUsernamePlatformIndexRoute
   '/{-$locale}/dashboard/identifier/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute
   '/{-$locale}/dashboard/identifier/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute
   '/{-$locale}/dashboard/platform/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute
@@ -273,13 +336,20 @@ export interface FileRoutesByTo {
   '/api/trpc/$': typeof ApiTrpcSplatRoute
   '/{-$locale}/account': typeof Char123LocaleChar125AuthenticatedAccountRoute
   '/{-$locale}/setting': typeof Char123LocaleChar125AuthenticatedSettingRoute
+  '/{-$locale}/i/$suffix': typeof Char123LocaleChar125PublicISuffixRoute
+  '/{-$locale}/p/$suffix': typeof Char123LocaleChar125PublicPSuffixRoute
+  '/{-$locale}/s/$suffix': typeof Char123LocaleChar125PublicSSuffixRoute
   '/{-$locale}/dashboard': typeof Char123LocaleChar125AuthenticatedDashboardIndexRoute
   '/{-$locale}/dashboard/identifier/create': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierCreateRoute
   '/{-$locale}/dashboard/platform/create': typeof Char123LocaleChar125AuthenticatedDashboardPlatformCreateRoute
   '/{-$locale}/dashboard/url/create': typeof Char123LocaleChar125AuthenticatedDashboardUrlCreateRoute
+  '/{-$locale}/$username/identifier/$slug': typeof Char123LocaleChar125PublicUsernameIdentifierSlugRoute
+  '/{-$locale}/$username/platform/$slug': typeof Char123LocaleChar125PublicUsernamePlatformSlugRoute
   '/{-$locale}/dashboard/identifier': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIndexRoute
   '/{-$locale}/dashboard/platform': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIndexRoute
   '/{-$locale}/dashboard/url': typeof Char123LocaleChar125AuthenticatedDashboardUrlIndexRoute
+  '/{-$locale}/$username/identifier': typeof Char123LocaleChar125PublicUsernameIdentifierIndexRoute
+  '/{-$locale}/$username/platform': typeof Char123LocaleChar125PublicUsernamePlatformIndexRoute
   '/{-$locale}/dashboard/identifier/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute
   '/{-$locale}/dashboard/identifier/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute
   '/{-$locale}/dashboard/platform/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute
@@ -293,6 +363,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/{-$locale}/_authenticated': typeof Char123LocaleChar125AuthenticatedRouteRouteWithChildren
+  '/{-$locale}/_public': typeof Char123LocaleChar125PublicRouteRouteWithChildren
   '/{-$locale}/login': typeof Char123LocaleChar125LoginRoute
   '/{-$locale}/register': typeof Char123LocaleChar125RegisterRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
@@ -302,6 +373,9 @@ export interface FileRoutesById {
   '/{-$locale}/_authenticated/dashboard/identifier': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierRouteRouteWithChildren
   '/{-$locale}/_authenticated/dashboard/platform': typeof Char123LocaleChar125AuthenticatedDashboardPlatformRouteRouteWithChildren
   '/{-$locale}/_authenticated/dashboard/url': typeof Char123LocaleChar125AuthenticatedDashboardUrlRouteRouteWithChildren
+  '/{-$locale}/_public/i/$suffix': typeof Char123LocaleChar125PublicISuffixRoute
+  '/{-$locale}/_public/p/$suffix': typeof Char123LocaleChar125PublicPSuffixRoute
+  '/{-$locale}/_public/s/$suffix': typeof Char123LocaleChar125PublicSSuffixRoute
   '/{-$locale}/_authenticated/dashboard/': typeof Char123LocaleChar125AuthenticatedDashboardIndexRoute
   '/{-$locale}/_authenticated/dashboard/identifier/$id': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdRouteRouteWithChildren
   '/{-$locale}/_authenticated/dashboard/platform/$id': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdRouteRouteWithChildren
@@ -309,9 +383,13 @@ export interface FileRoutesById {
   '/{-$locale}/_authenticated/dashboard/identifier/create': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierCreateRoute
   '/{-$locale}/_authenticated/dashboard/platform/create': typeof Char123LocaleChar125AuthenticatedDashboardPlatformCreateRoute
   '/{-$locale}/_authenticated/dashboard/url/create': typeof Char123LocaleChar125AuthenticatedDashboardUrlCreateRoute
+  '/{-$locale}/_public/$username/identifier/$slug': typeof Char123LocaleChar125PublicUsernameIdentifierSlugRoute
+  '/{-$locale}/_public/$username/platform/$slug': typeof Char123LocaleChar125PublicUsernamePlatformSlugRoute
   '/{-$locale}/_authenticated/dashboard/identifier/': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIndexRoute
   '/{-$locale}/_authenticated/dashboard/platform/': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIndexRoute
   '/{-$locale}/_authenticated/dashboard/url/': typeof Char123LocaleChar125AuthenticatedDashboardUrlIndexRoute
+  '/{-$locale}/_public/$username/identifier/': typeof Char123LocaleChar125PublicUsernameIdentifierIndexRoute
+  '/{-$locale}/_public/$username/platform/': typeof Char123LocaleChar125PublicUsernamePlatformIndexRoute
   '/{-$locale}/_authenticated/dashboard/identifier/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute
   '/{-$locale}/_authenticated/dashboard/identifier/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute
   '/{-$locale}/_authenticated/dashboard/platform/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute
@@ -335,6 +413,9 @@ export interface FileRouteTypes {
     | '/{-$locale}/dashboard/identifier'
     | '/{-$locale}/dashboard/platform'
     | '/{-$locale}/dashboard/url'
+    | '/{-$locale}/i/$suffix'
+    | '/{-$locale}/p/$suffix'
+    | '/{-$locale}/s/$suffix'
     | '/{-$locale}/dashboard/'
     | '/{-$locale}/dashboard/identifier/$id'
     | '/{-$locale}/dashboard/platform/$id'
@@ -342,9 +423,13 @@ export interface FileRouteTypes {
     | '/{-$locale}/dashboard/identifier/create'
     | '/{-$locale}/dashboard/platform/create'
     | '/{-$locale}/dashboard/url/create'
+    | '/{-$locale}/$username/identifier/$slug'
+    | '/{-$locale}/$username/platform/$slug'
     | '/{-$locale}/dashboard/identifier/'
     | '/{-$locale}/dashboard/platform/'
     | '/{-$locale}/dashboard/url/'
+    | '/{-$locale}/$username/identifier/'
+    | '/{-$locale}/$username/platform/'
     | '/{-$locale}/dashboard/identifier/$id/edit'
     | '/{-$locale}/dashboard/identifier/$id/view'
     | '/{-$locale}/dashboard/platform/$id/edit'
@@ -362,13 +447,20 @@ export interface FileRouteTypes {
     | '/api/trpc/$'
     | '/{-$locale}/account'
     | '/{-$locale}/setting'
+    | '/{-$locale}/i/$suffix'
+    | '/{-$locale}/p/$suffix'
+    | '/{-$locale}/s/$suffix'
     | '/{-$locale}/dashboard'
     | '/{-$locale}/dashboard/identifier/create'
     | '/{-$locale}/dashboard/platform/create'
     | '/{-$locale}/dashboard/url/create'
+    | '/{-$locale}/$username/identifier/$slug'
+    | '/{-$locale}/$username/platform/$slug'
     | '/{-$locale}/dashboard/identifier'
     | '/{-$locale}/dashboard/platform'
     | '/{-$locale}/dashboard/url'
+    | '/{-$locale}/$username/identifier'
+    | '/{-$locale}/$username/platform'
     | '/{-$locale}/dashboard/identifier/$id/edit'
     | '/{-$locale}/dashboard/identifier/$id/view'
     | '/{-$locale}/dashboard/platform/$id/edit'
@@ -381,6 +473,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/{-$locale}/_authenticated'
+    | '/{-$locale}/_public'
     | '/{-$locale}/login'
     | '/{-$locale}/register'
     | '/{-$locale}/'
@@ -390,6 +483,9 @@ export interface FileRouteTypes {
     | '/{-$locale}/_authenticated/dashboard/identifier'
     | '/{-$locale}/_authenticated/dashboard/platform'
     | '/{-$locale}/_authenticated/dashboard/url'
+    | '/{-$locale}/_public/i/$suffix'
+    | '/{-$locale}/_public/p/$suffix'
+    | '/{-$locale}/_public/s/$suffix'
     | '/{-$locale}/_authenticated/dashboard/'
     | '/{-$locale}/_authenticated/dashboard/identifier/$id'
     | '/{-$locale}/_authenticated/dashboard/platform/$id'
@@ -397,9 +493,13 @@ export interface FileRouteTypes {
     | '/{-$locale}/_authenticated/dashboard/identifier/create'
     | '/{-$locale}/_authenticated/dashboard/platform/create'
     | '/{-$locale}/_authenticated/dashboard/url/create'
+    | '/{-$locale}/_public/$username/identifier/$slug'
+    | '/{-$locale}/_public/$username/platform/$slug'
     | '/{-$locale}/_authenticated/dashboard/identifier/'
     | '/{-$locale}/_authenticated/dashboard/platform/'
     | '/{-$locale}/_authenticated/dashboard/url/'
+    | '/{-$locale}/_public/$username/identifier/'
+    | '/{-$locale}/_public/$username/platform/'
     | '/{-$locale}/_authenticated/dashboard/identifier/$id/edit'
     | '/{-$locale}/_authenticated/dashboard/identifier/$id/view'
     | '/{-$locale}/_authenticated/dashboard/platform/$id/edit'
@@ -413,6 +513,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   Char123LocaleChar125AuthenticatedRouteRoute: typeof Char123LocaleChar125AuthenticatedRouteRouteWithChildren
+  Char123LocaleChar125PublicRouteRoute: typeof Char123LocaleChar125PublicRouteRouteWithChildren
   Char123LocaleChar125LoginRoute: typeof Char123LocaleChar125LoginRoute
   Char123LocaleChar125RegisterRoute: typeof Char123LocaleChar125RegisterRoute
   Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
@@ -433,6 +534,13 @@ declare module '@tanstack/react-router' {
       path: '/{-$locale}'
       fullPath: '/{-$locale}'
       preLoaderRoute: typeof Char123LocaleChar125AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/{-$locale}/_public': {
+      id: '/{-$locale}/_public'
+      path: '/{-$locale}'
+      fullPath: '/{-$locale}'
+      preLoaderRoute: typeof Char123LocaleChar125PublicRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/{-$locale}/login': {
@@ -498,6 +606,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlRouteRouteImport
       parentRoute: typeof Char123LocaleChar125AuthenticatedRouteRoute
     }
+    '/{-$locale}/_public/i/$suffix': {
+      id: '/{-$locale}/_public/i/$suffix'
+      path: '/i/$suffix'
+      fullPath: '/{-$locale}/i/$suffix'
+      preLoaderRoute: typeof Char123LocaleChar125PublicISuffixRouteImport
+      parentRoute: typeof Char123LocaleChar125PublicRouteRoute
+    }
+    '/{-$locale}/_public/p/$suffix': {
+      id: '/{-$locale}/_public/p/$suffix'
+      path: '/p/$suffix'
+      fullPath: '/{-$locale}/p/$suffix'
+      preLoaderRoute: typeof Char123LocaleChar125PublicPSuffixRouteImport
+      parentRoute: typeof Char123LocaleChar125PublicRouteRoute
+    }
+    '/{-$locale}/_public/s/$suffix': {
+      id: '/{-$locale}/_public/s/$suffix'
+      path: '/s/$suffix'
+      fullPath: '/{-$locale}/s/$suffix'
+      preLoaderRoute: typeof Char123LocaleChar125PublicSSuffixRouteImport
+      parentRoute: typeof Char123LocaleChar125PublicRouteRoute
+    }
     '/{-$locale}/_authenticated/dashboard/identifier/': {
       id: '/{-$locale}/_authenticated/dashboard/identifier/'
       path: '/'
@@ -560,6 +689,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/{-$locale}/dashboard/url/create'
       preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlCreateRouteImport
       parentRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlRouteRoute
+    }
+    '/{-$locale}/_public/$username/identifier/': {
+      id: '/{-$locale}/_public/$username/identifier/'
+      path: '/$username/identifier'
+      fullPath: '/{-$locale}/$username/identifier/'
+      preLoaderRoute: typeof Char123LocaleChar125PublicUsernameIdentifierIndexRouteImport
+      parentRoute: typeof Char123LocaleChar125PublicRouteRoute
+    }
+    '/{-$locale}/_public/$username/identifier/$slug': {
+      id: '/{-$locale}/_public/$username/identifier/$slug'
+      path: '/$username/identifier/$slug'
+      fullPath: '/{-$locale}/$username/identifier/$slug'
+      preLoaderRoute: typeof Char123LocaleChar125PublicUsernameIdentifierSlugRouteImport
+      parentRoute: typeof Char123LocaleChar125PublicRouteRoute
+    }
+    '/{-$locale}/_public/$username/platform/': {
+      id: '/{-$locale}/_public/$username/platform/'
+      path: '/$username/platform'
+      fullPath: '/{-$locale}/$username/platform/'
+      preLoaderRoute: typeof Char123LocaleChar125PublicUsernamePlatformIndexRouteImport
+      parentRoute: typeof Char123LocaleChar125PublicRouteRoute
+    }
+    '/{-$locale}/_public/$username/platform/$slug': {
+      id: '/{-$locale}/_public/$username/platform/$slug'
+      path: '/$username/platform/$slug'
+      fullPath: '/{-$locale}/$username/platform/$slug'
+      preLoaderRoute: typeof Char123LocaleChar125PublicUsernamePlatformSlugRouteImport
+      parentRoute: typeof Char123LocaleChar125PublicRouteRoute
     }
     '/{-$locale}/_authenticated/dashboard/identifier/$id/': {
       id: '/{-$locale}/_authenticated/dashboard/identifier/$id/'
@@ -783,9 +940,44 @@ const Char123LocaleChar125AuthenticatedRouteRouteWithChildren =
     Char123LocaleChar125AuthenticatedRouteRouteChildren,
   )
 
+interface Char123LocaleChar125PublicRouteRouteChildren {
+  Char123LocaleChar125PublicISuffixRoute: typeof Char123LocaleChar125PublicISuffixRoute
+  Char123LocaleChar125PublicPSuffixRoute: typeof Char123LocaleChar125PublicPSuffixRoute
+  Char123LocaleChar125PublicSSuffixRoute: typeof Char123LocaleChar125PublicSSuffixRoute
+  Char123LocaleChar125PublicUsernameIdentifierSlugRoute: typeof Char123LocaleChar125PublicUsernameIdentifierSlugRoute
+  Char123LocaleChar125PublicUsernamePlatformSlugRoute: typeof Char123LocaleChar125PublicUsernamePlatformSlugRoute
+  Char123LocaleChar125PublicUsernameIdentifierIndexRoute: typeof Char123LocaleChar125PublicUsernameIdentifierIndexRoute
+  Char123LocaleChar125PublicUsernamePlatformIndexRoute: typeof Char123LocaleChar125PublicUsernamePlatformIndexRoute
+}
+
+const Char123LocaleChar125PublicRouteRouteChildren: Char123LocaleChar125PublicRouteRouteChildren =
+  {
+    Char123LocaleChar125PublicISuffixRoute:
+      Char123LocaleChar125PublicISuffixRoute,
+    Char123LocaleChar125PublicPSuffixRoute:
+      Char123LocaleChar125PublicPSuffixRoute,
+    Char123LocaleChar125PublicSSuffixRoute:
+      Char123LocaleChar125PublicSSuffixRoute,
+    Char123LocaleChar125PublicUsernameIdentifierSlugRoute:
+      Char123LocaleChar125PublicUsernameIdentifierSlugRoute,
+    Char123LocaleChar125PublicUsernamePlatformSlugRoute:
+      Char123LocaleChar125PublicUsernamePlatformSlugRoute,
+    Char123LocaleChar125PublicUsernameIdentifierIndexRoute:
+      Char123LocaleChar125PublicUsernameIdentifierIndexRoute,
+    Char123LocaleChar125PublicUsernamePlatformIndexRoute:
+      Char123LocaleChar125PublicUsernamePlatformIndexRoute,
+  }
+
+const Char123LocaleChar125PublicRouteRouteWithChildren =
+  Char123LocaleChar125PublicRouteRoute._addFileChildren(
+    Char123LocaleChar125PublicRouteRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   Char123LocaleChar125AuthenticatedRouteRoute:
     Char123LocaleChar125AuthenticatedRouteRouteWithChildren,
+  Char123LocaleChar125PublicRouteRoute:
+    Char123LocaleChar125PublicRouteRouteWithChildren,
   Char123LocaleChar125LoginRoute: Char123LocaleChar125LoginRoute,
   Char123LocaleChar125RegisterRoute: Char123LocaleChar125RegisterRoute,
   Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,

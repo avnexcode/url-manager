@@ -36,6 +36,17 @@ export type IdentifierResponse = Prisma.IdentifierGetPayload<{
   omit: { userId: true }
 }>
 
+export type PublicIdentifierResponse = Prisma.IdentifierGetPayload<{
+  select: {
+    title: true
+    slug: true
+    description: true
+    password: true
+    thumbnail: true
+    user: { select: { username: true } }
+  }
+}>
+
 export type CreateIdentifierResponse = Omit<Identifier, 'userId' | 'updatedAt'>
 
 export type BulkCreateIdentifiersResponse = {

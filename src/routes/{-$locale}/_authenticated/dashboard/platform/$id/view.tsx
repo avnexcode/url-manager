@@ -9,6 +9,4 @@ export const Route = createFileRoute(
   validateSearch: searchSchema,
   component: DetailPlatformPage,
   pendingComponent: DetailPlatformPageSkeleton,
-  pendingMs: 300,
-  pendingMinMs: 500,
 })

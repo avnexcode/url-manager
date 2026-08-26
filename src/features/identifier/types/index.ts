@@ -15,3 +15,14 @@ export type UpdateIdentifierFormSchema = z.infer<
 export type IdentifierResponse = Prisma.IdentifierGetPayload<{
   omit: { userId: true }
 }>
+
+export type PublicIdentifierResponse = Prisma.IdentifierGetPayload<{
+  select: {
+    title: true
+    slug: true
+    description: true
+    password: true
+    thumbnail: true
+    user: { select: { username: true } }
+  }
+}>

@@ -168,6 +168,8 @@
   "page_shared_form_footer_create_button_loading": "Menambahkan",
   "page_shared_form_footer_update_button": "Perbarui",
   "page_shared_form_footer_update_button_loading": "Memperbarui",
+  "page_shared_form_footer_submit_button": "Kirim",
+  "page_shared_form_footer_submit_button_loading": "Mengirim...",
 
   "page_auth_register_title": "Daftar",
   "page_auth_form_register_header_title": "Daftar",

@@ -7,12 +7,17 @@ import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
 import { UserService } from '../user'
 import type {
+  BaseCreateUrlRequest,
+  BulkCreateUrlsRequest,
+  BulkCreateUrlsResponse,
   BulkDeleteUrlsRequest,
   BulkDeleteUrlsResponse,
   CreateUrlRequest,
   CreateUrlResponse,
   DeleteUrlRequest,
   DeleteUrlResponse,
+  PublicRelationParams,
+  PublicUrlResponse,
   RelationParams,
   UpdateUrlRequest,
   UpdateUrlResponse,
@@ -62,16 +67,33 @@ export class UrlService extends CommonService {
   static getAll = async (
     db: DBClient,
     userId: string,
+    relation: RelationParams,
     params: QueryParams,
-    relation?: RelationParams,
   ): Promise<QueryResponse<UrlResponse>> => {
     const { page, limit, search } = params
 
     const [total, data] = await Promise.all([
-      Repository.countAll(db, userId, search, relation),
-      Repository.findMany(db, userId, params, relation),
+      Repository.countAll(db, userId, relation, search),
+      Repository.findMany(db, userId, relation, params),
     ])
 
+    const lastPage = Math.ceil(total / limit)
+
+    return { data, meta: { total, limit, page, lastPage } }
+  }
+
+  static getPublicAll = async (
+    db: DBClient,
+    username: string,
+    relation: PublicRelationParams,
+    params: QueryParams,
+  ): Promise<QueryResponse<PublicUrlResponse>> => {
+    const { page, limit, search } = params
+
+    const [total, data] = await Promise.all([
+      Repository.countPublicAll(db, username, relation, search),
+      Repository.findManyPublic(db, username, relation, params),
+    ])
     const lastPage = Math.ceil(total / limit)
 
     return { data, meta: { total, limit, page, lastPage } }
@@ -83,6 +105,15 @@ export class UrlService extends CommonService {
     id: string,
   ): Promise<UrlResponse> => {
     const url = await Repository.findById(db, userId, id)
+
+    return this.checkNotNull(url)
+  }
+
+  static getPublicBySlugSuffix = async (
+    db: DBClient,
+    suffix: string,
+  ): Promise<PublicUrlResponse> => {
+    const url = await Repository.findPublicUniqueSlugSuffix(db, suffix)
 
     return this.checkNotNull(url)
   }
@@ -126,6 +157,48 @@ export class UrlService extends CommonService {
     const requestData = { userId, slug, qrEncodedValue, qrCodeUrl, ...request }
 
     return await Repository.insert(db, requestData)
+  }
+
+  static createMany = async (
+    db: DBClient,
+    userId: string,
+    requests: BulkCreateUrlsRequest,
+  ): Promise<BulkCreateUrlsResponse> => {
+    await Promise.all(
+      requests.map(async ({ title, url }) => {
+        this.checkBlockedUrl(url)
+        await this.checkConflict(db, 'title', userId, title)
+      }),
+    )
+
+    const { username } = await UserService.getById(db, userId)
+
+    const usedSlugs = new Set<string>()
+    const requestData: BaseCreateUrlRequest[] = []
+
+    for (const item of requests) {
+      let slug = generateSlug({ text: item.title })
+      let existsSlugCount = await Repository.countBySlug(db, slug)
+
+      while (existsSlugCount > 0 || usedSlugs.has(slug)) {
+        slug = generateSlug({ text: item.title })
+        existsSlugCount = await Repository.countBySlug(db, slug)
+      }
+
+      usedSlugs.add(slug)
+
+      const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
+        this.bucket,
+        'URL',
+        { username, slug },
+      )
+
+      requestData.push({ userId, slug, qrEncodedValue, qrCodeUrl, ...item })
+    }
+
+    const urls = await Repository.insertMany(db, requestData)
+
+    return urls
   }
 
   static update = async (

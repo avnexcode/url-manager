@@ -21,10 +21,13 @@ export const useQueryParams = () => {
   const navigate = useNavigate()
 
   const handleUpdateQuery = (newParams: Partial<SearchParams>) => {
+    const shouldResetPage = 'limit' in newParams && !('page' in newParams)
+
     void navigate({
       search: ((prev: SearchParams) => ({
         ...prev,
         ...newParams,
+        ...(shouldResetPage && { page: 1 }),
       })) as unknown as true,
       replace: true,
     })
