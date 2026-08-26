@@ -26,7 +26,7 @@ export const QrImageDialog = ({
 }: QrImageDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl">
+      <DialogContent className="sm:max-w-xl" variant={'default'}>
         <DialogHeader>
           <DialogTitle className="capitalize">{title ?? 'QR Code'}</DialogTitle>
         </DialogHeader>

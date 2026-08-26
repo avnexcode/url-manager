@@ -5,6 +5,7 @@
 
   "common_hello": "Halo Dunia",
   "common_language": "Bahasa",
+  "common_loading": "Memuat",
 
   "language_en": "inggris",
   "language_id": "indonesia",
@@ -63,6 +64,8 @@
   "action_redirect": "Alihkan",
   "action_complete_assessment": "Selesaikan Penilaian",
   "action_logout": "Keluar",
+  "action_previous": "Sebelumnya",
+  "action_next": "Berikutnya",
 
   "form_placeholder_input": "Masukkan {field} di sini",
   "form_placeholder_select": "Pilih {field}",
@@ -182,6 +185,9 @@
   "page_auth_login_title": "Masuk",
   "page_auth_form_login_header_title": "Masuk",
   "page_auth_form_login_header_description": "Selamat datang kembali! Silakan masuk untuk melanjutkan.",
+  "page_auth_form_login_content_optional_account": "ATAU LOGIN DENGAN",
+  "page_auth_form_login_content_forgot_password": "Lupa kata sandi?",
+  "page_auth_form_login_content_click_here": "klik di sini!",
   "page_auth_form_login_footer_submit_button": "Masuk",
   "page_auth_form_login_footer_submit_button_loading": "Memproses",
   "page_auth_form_login_footer_caption": "Belum punya akun?",
@@ -219,6 +225,17 @@
   "component_view_public_url_label": "URL Publik",
   "component_view_url_list_heading": "Daftar URL",
   "component_view_show_qr": "Tampilkan QR",
+  "component_view_password_restricted_description": "Akses ke halaman ini dibatasi oleh kata sandi yang dikonfigurasi oleh pemilik {model}.",
+
+  "component_button_go_back": "Kembali ke Halaman Sebelumnya",
+  "component_button_go_home": "Kembali ke Beranda",
+
+  "component_page_limit_placeholder": "Batas per halaman",
+  "component_page_limit_item": "Batas {limit}",
+  "component_page_limit_skeleton": "Batas 15",
+
+  "component_select_pagination_page": "Halaman",
+  "component_select_pagination_of": "dari",
 
   "component_platform_empty_state": "Tidak ada platform ditemukan",
   "component_identifier_empty_state": "Tidak ada identifier ditemukan",

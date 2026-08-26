@@ -3,6 +3,7 @@ import { useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
 import { signIn } from '@/lib/supabase/auth'
 import { SupabaseAuthErrorCode } from '@/lib/supabase/auth-error-code'
+import { capitalizeSentence } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { AuthError } from '@supabase/supabase-js'
 import { useNavigate, useRouter } from '@tanstack/react-router'
@@ -48,7 +49,9 @@ export const useLogin = (
           })
           toast(m.error_message_supabase_auth_email_not_confirmed(), {
             action: {
-              label: 'Verify Email',
+              label: capitalizeSentence(
+                `${m.action_verify()} ${m.model_auth_field_email()}`,
+              ),
               onClick: () =>
                 navigate({
                   to: `/verify-email?email=${encodeURIComponent(form.getValues().email)}`,

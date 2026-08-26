@@ -55,8 +55,9 @@ export const DetailIdentifierPage = () => {
                 <div className="max-w-xl space-y-2 p-8">
                   <Heading size={'h3'}>{identifier.title}</Heading>
                   <p className="text-foreground/70 text-sm">
-                    Access to this page is restricted by a password configured
-                    by the identifier owner.
+                    {m.component_view_password_restricted_description({
+                      model: m.model_identifier_title(),
+                    })}
                   </p>
                 </div>
                 <div className="p-3 w-full sm:p-0">

@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import * as m from '@/generated/paraglide/messages'
 import { useRouter } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
 
@@ -16,7 +17,7 @@ export const GoBackButton = () => {
       className="flex cursor-pointer items-center gap-2"
     >
       <ArrowLeft size={16} />
-      Back to Previous Page
+      {m.component_button_go_back()}
     </Button>
   )
 }

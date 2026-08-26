@@ -8,10 +8,20 @@
 
 :root {
   --background: oklch(95.08% 0.0481 184.07);
-  --secondary-background: oklch(100% 0 0);
   --foreground: oklch(0% 0 0);
-  --main-foreground: oklch(0% 0 0);
+
+  /* Card: sama dengan background */
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+
+  /* Popover: sama dengan background */
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+
+  /* Design token utama */
   --main: oklch(78.57% 0.1422 180.36);
+  --main-foreground: oklch(0% 0 0);
+
   --border: oklch(0% 0 0);
   --ring: oklch(0% 0 0);
   --overlay: oklch(0% 0 0 / 0.8);
@@ -20,14 +30,14 @@
   /* Semantic color tokens (shadcn-compatible) */
   --primary: var(--main);
   --primary-foreground: var(--main-foreground);
-  --secondary: var(--secondary-background);
+  --secondary: oklch(100% 0 0);
   --secondary-foreground: var(--foreground);
-  --destructive: oklch(62.8% 0.2577 27.33);
-  --destructive-foreground: oklch(100% 0 0);
   --muted: oklch(90% 0.02 184);
   --muted-foreground: oklch(45% 0.02 184);
   --accent: oklch(88% 0.08 184);
   --accent-foreground: oklch(0% 0 0);
+  --destructive: oklch(62.8% 0.2577 27.33);
+  --destructive-foreground: oklch(100% 0 0);
   --warning: oklch(85% 0.16 85);
   --warning-foreground: oklch(20% 0.05 85);
   --success: oklch(75% 0.18 145);
@@ -43,10 +53,20 @@
 
 .dark {
   --background: oklch(22.65% 0.0236 198.49);
-  --secondary-background: oklch(29% 0.015 198);
   --foreground: oklch(92.49% 0 0);
-  --main-foreground: oklch(0% 0 0);
+
+  /* Card: sama dengan background */
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+
+  /* Popover: sama dengan background */
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+
+  /* Design token utama */
   --main: oklch(71.47% 0.129261 180.4742);
+  --main-foreground: oklch(0% 0 0);
+
   --border: oklch(90% 0.01 198);
   --ring: oklch(90% 0.01 198);
   --overlay: oklch(0% 0 0 / 0.8);
@@ -55,14 +75,14 @@
   /* Semantic color tokens (shadcn-compatible) */
   --primary: var(--main);
   --primary-foreground: var(--main-foreground);
-  --secondary: var(--secondary-background);
+  --secondary: oklch(29% 0.015 198);
   --secondary-foreground: var(--foreground);
-  --destructive: oklch(55% 0.22 27.33);
-  --destructive-foreground: oklch(100% 0 0);
   --muted: oklch(30% 0.02 198);
   --muted-foreground: oklch(70% 0.02 198);
   --accent: oklch(32% 0.05 180);
   --accent-foreground: oklch(92% 0 0);
+  --destructive: oklch(55% 0.22 27.33);
+  --destructive-foreground: oklch(100% 0 0);
   --warning: oklch(75% 0.16 85);
   --warning-foreground: oklch(15% 0.05 85);
   --success: oklch(65% 0.18 145);
@@ -81,10 +101,11 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   --color-main: var(--main);
-  --color-background: var(--background);
-  --color-secondary-background: var(--secondary-background);
-  --color-foreground: var(--foreground);
   --color-main-foreground: var(--main-foreground);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* Alias backward-compatible: secondary-background → secondary */
+  --color-secondary-background: var(--secondary);
   --color-border: var(--border);
   --color-overlay: var(--overlay);
   --color-ring: var(--ring);
@@ -94,17 +115,21 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  /* Semantic Tailwind color tokens */
+  /* Semantic Tailwind color tokens (shadcn-compatible) */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
   --color-success: var(--success);

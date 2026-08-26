@@ -6,6 +6,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { renderElements } from '@/utils'
+import * as m from '@/generated/paraglide/messages'
 
 type PageLimitProps = {
   totalData: number
@@ -27,18 +28,10 @@ export const PageLimit = ({
       value={currentLimit.toString()}
       onValueChange={(value) => onLimitChange(Number(value))}
     >
-      <SelectTrigger
-        className="w-32.5 bg-secondary-background"
-        disabled={totalData <= smallestLimit}
-      >
-        <SelectValue placeholder="Limit per page" />
+      <SelectTrigger className="w-32.5" disabled={totalData <= smallestLimit}>
+        <SelectValue placeholder={m.component_page_limit_placeholder()} />
       </SelectTrigger>
-      <SelectContent
-        position="popper"
-        sideOffset={2}
-        align="end"
-        className="bg-secondary-background *:cursor-pointer"
-      >
+      <SelectContent position="popper" sideOffset={2} align="end">
         {renderElements({
           of: LIMIT_OPTIONS,
           keyExtractor: (limit) => limit,
@@ -47,8 +40,12 @@ export const PageLimit = ({
             const isDisabled = index === 0 ? false : totalData <= previousLimit
 
             return (
-              <SelectItem value={limit.toString()} disabled={isDisabled}>
-                Limit {limit}
+              <SelectItem
+                value={limit.toString()}
+                disabled={isDisabled}
+                className="cursor-pointer"
+              >
+                {m.component_page_limit_item({ limit })}
               </SelectItem>
             )
           },
@@ -61,7 +58,9 @@ export const PageLimit = ({
 export const PageLimitSkeleton = () => {
   return (
     <Select disabled>
-      <SelectTrigger className="w-32.5">Limit 15</SelectTrigger>
+      <SelectTrigger className="w-32.5">
+        {m.component_page_limit_skeleton()}
+      </SelectTrigger>
     </Select>
   )
 }

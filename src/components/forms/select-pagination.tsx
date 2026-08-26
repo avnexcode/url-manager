@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '../ui/button'
+import * as m from '@/generated/paraglide/messages'
 
 type SelectPaginationProps = {
   currentPage: number
@@ -33,7 +34,8 @@ export const SelectPagination = ({
         <ChevronLeft className="h-4 w-4" />
       </Button>
       <span className="text-xs text-muted-foreground">
-        Page {currentPage} of {totalPages}
+        {m.component_select_pagination_page()} {currentPage}{' '}
+        {m.component_select_pagination_of()} {totalPages}
       </span>
       <Button
         variant="ghost"

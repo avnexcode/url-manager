@@ -1,8 +1,9 @@
 import * as React from 'react'
 
-import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
-import { Check, ChevronRight, Circle } from 'lucide-react'
+import type { VariantProps } from 'class-variance-authority'
 import { cva } from 'class-variance-authority'
+import { Check, ChevronRight, Circle } from 'lucide-react'
+import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
 
 import { cn } from '#/lib/utils.ts'
 
@@ -71,16 +72,33 @@ export const DropdownMenuSubTrigger = ({
   )
 }
 
+export const dropdownMenuContentVariants = cva(
+  'z-50 min-w-32 overflow-hidden rounded-base border-2 border-border p-1 font-base data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--radix-dropdown-menu-content-transform-origin)',
+  {
+    variants: {
+      variant: {
+        default: 'bg-main text-main-foreground',
+        neutral: 'bg-secondary text-secondary-foreground',
+        destructive: 'bg-destructive text-destructive-foreground',
+        outline: 'bg-transparent text-foreground',
+        ghost: 'bg-transparent text-foreground',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+)
+
 export const DropdownMenuSubContent = ({
   className,
+  variant = 'default',
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>) => {
+}: React.ComponentProps<typeof DropdownMenuPrimitive.SubContent> &
+  VariantProps<typeof dropdownMenuContentVariants>) => {
   return (
     <DropdownMenuPrimitive.SubContent
-      className={cn(
-        'z-50 min-w-32 overflow-hidden rounded-base border-2 border-border bg-main p-1 font-base text-main-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--radix-dropdown-menu-content-transform-origin)',
-        className,
-      )}
+      className={cn(dropdownMenuContentVariants({ variant }), className)}
       {...props}
     />
   )
@@ -88,18 +106,17 @@ export const DropdownMenuSubContent = ({
 
 export const DropdownMenuContent = ({
   className,
+  variant = 'default',
   sideOffset = 4,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Content>) => {
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Content> &
+  VariantProps<typeof dropdownMenuContentVariants>) => {
   return (
     <DropdownMenuPrimitive.Portal>
       <DropdownMenuPrimitive.Content
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
-        className={cn(
-          'z-50 min-w-32 overflow-hidden rounded-base border-2 border-border bg-main p-1 font-base text-main-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--radix-dropdown-menu-content-transform-origin)',
-          className,
-        )}
+        className={cn(dropdownMenuContentVariants({ variant }), className)}
         {...props}
       />
     </DropdownMenuPrimitive.Portal>
@@ -113,9 +130,11 @@ export const dropdownMenuItemVariants = cva(
       variant: {
         default: 'bg-main text-main-foreground',
         neutral:
-          'bg-secondary-background text-foreground focus:bg-accent focus:text-accent-foreground',
+          'bg-secondary text-secondary-foreground focus:bg-main focus:text-main-foreground',
         destructive:
           'bg-main text-destructive focus:bg-destructive focus:text-destructive-foreground',
+        outline: 'bg-transparent text-foreground',
+        link: 'bg-transparent text-foreground underline-offset-4 hover:underline',
       },
     },
     defaultVariants: {
@@ -129,10 +148,10 @@ export const DropdownMenuItem = ({
   inset,
   variant = 'default',
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
-  inset?: boolean
-  variant?: 'default' | 'neutral' | 'destructive'
-}) => {
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Item> &
+  VariantProps<typeof dropdownMenuItemVariants> & {
+    inset?: boolean
+  }) => {
   return (
     <DropdownMenuPrimitive.Item
       data-slot="dropdown-menu-item"

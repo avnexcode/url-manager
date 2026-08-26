@@ -67,7 +67,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'URL Manager' },
+      { title: `Your URL's Manager` },
     ],
     links: [
       { rel: 'icon', href: '/favicon.ico' },

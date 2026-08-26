@@ -53,10 +53,11 @@ export const DetailPlatformPage = () => {
             <div className="w-full pt-12">
               <div className="border-border bg-main flex w-full flex-col gap-6 border-2 sm:p-8 shadow-shadow xl:flex-row xl:items-center xl:justify-between">
                 <div className="max-w-xl space-y-2 p-8">
-                  <Heading size={'h3'}>{platform.title} is locked</Heading>
+                  <Heading size={'h3'}>{platform.title}</Heading>
                   <p className="text-foreground/70 text-sm">
-                    Access to this page is restricted by a password configured
-                    by the platform owner.
+                    {m.component_view_password_restricted_description({
+                      model: m.model_platform_title(),
+                    })}
                   </p>
                 </div>
                 <div className="p-3 w-full sm:p-0">

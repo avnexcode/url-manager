@@ -3,6 +3,7 @@ import * as React from 'react'
 import { buttonVariants } from '#/components/ui/button.tsx'
 import { AlertDialog as AlertDialogPrimitive } from 'radix-ui'
 import type { VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 
 import { cn } from '#/lib/utils.ts'
 
@@ -44,19 +45,36 @@ export const AlertDialogOverlay = ({
   )
 }
 
+export const alertDialogContentVariants = cva(
+  'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-base border-2 border-border p-6 shadow-shadow duration-200 sm:max-w-lg',
+  {
+    variants: {
+      variant: {
+        default: 'bg-background text-foreground',
+        neutral: 'bg-secondary text-secondary-foreground',
+        destructive: 'bg-destructive text-destructive-foreground',
+        outline: 'bg-transparent text-foreground',
+        ghost: 'bg-transparent text-foreground',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+)
+
 export const AlertDialogContent = ({
   className,
+  variant = 'default',
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Content>) => {
+}: React.ComponentProps<typeof AlertDialogPrimitive.Content> &
+  VariantProps<typeof alertDialogContentVariants>) => {
   return (
     <AlertDialogPortal>
       <AlertDialogOverlay />
       <AlertDialogPrimitive.Content
         data-slot="alert-dialog-content"
-        className={cn(
-          'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-base border-2 border-border p-6 shadow-shadow duration-200 sm:max-w-lg',
-          className,
-        )}
+        className={cn(alertDialogContentVariants({ variant }), className)}
         {...props}
       />
     </AlertDialogPortal>

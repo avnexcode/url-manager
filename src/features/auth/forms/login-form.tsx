@@ -39,19 +39,19 @@ export const LoginForm = ({ form, onSubmit, isPending }: LoginFormProps) => {
         <OAuthSignIn />
         <div className="flex w-full items-center gap-2 pt-8 pb-5 text-xs text-nowrap">
           <div className="bg-foreground h-0.5 w-full" />
-          OR LOGIN WITH
+          {m.page_auth_form_login_content_optional_account()}
           <div className="bg-foreground h-0.5 w-full" />
         </div>
         <FormProvider {...form}>
           <LoginFormInner formId="login-form" onSubmit={onSubmit} />
         </FormProvider>
         <div className="text-muted-foreground w-full space-y-1 space-x-0_5 py-2 text-sm">
-          <span>Forgot your password?</span>
+          <span>{m.page_auth_form_login_content_forgot_password()}</span>
           <Link
             to={'/{-$locale}'}
             className="font-medium text-blue-600/80 transition-colors hover:text-blue-600 hover:underline"
           >
-            click here!
+            {m.page_auth_form_login_content_click_here()}
           </Link>
         </div>
       </CardContent>

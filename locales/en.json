@@ -5,6 +5,7 @@
 
   "common_hello": "Hello World",
   "common_language": "Language",
+  "common_loading": "Loading",
 
   "language_en": "english",
   "language_id": "indonesian",
@@ -63,6 +64,8 @@
   "action_redirect": "Redirect",
   "action_complete_assessment": "Complete Assessment",
   "action_logout": "Logout",
+  "action_previous": "Previous",
+  "action_next": "Next",
 
   "form_placeholder_input": "Input {field} here",
   "form_placeholder_select": "Select {field}",
@@ -182,6 +185,9 @@
   "page_auth_login_title": "Login",
   "page_auth_form_login_header_title": "Login",
   "page_auth_form_login_header_description": "Welcome back! Please sign in to continue.",
+  "page_auth_form_login_content_optional_account": "OR LOGIN WITH",
+  "page_auth_form_login_content_forgot_password": "Forgot your password?",
+  "page_auth_form_login_content_click_here": "click here!",
   "page_auth_form_login_footer_submit_button": "Login",
   "page_auth_form_login_footer_submit_button_loading": "Loging in",
   "page_auth_form_login_footer_caption": "Don't have an account?",
@@ -219,6 +225,17 @@
   "component_view_public_url_label": "Public URL",
   "component_view_url_list_heading": "URL's List",
   "component_view_show_qr": "Show QR",
+  "component_view_password_restricted_description": "Access to this page is restricted by a password configured by the {model} owner.",
+
+  "component_button_go_back": "Back to Previous Page",
+  "component_button_go_home": "Back to Home",
+
+  "component_page_limit_placeholder": "Limit per page",
+  "component_page_limit_item": "Limit {limit}",
+  "component_page_limit_skeleton": "Limit 15",
+
+  "component_select_pagination_page": "Page",
+  "component_select_pagination_of": "of",
 
   "component_platform_empty_state": "No platforms found",
   "component_identifier_empty_state": "No identifiers found",

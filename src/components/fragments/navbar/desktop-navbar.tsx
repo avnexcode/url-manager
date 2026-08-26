@@ -10,11 +10,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useLogout } from '@/features/auth/hooks'
+import * as m from '@/generated//paraglide/messages'
 import { useAuth } from '@/hooks'
 import { renderElements } from '@/utils'
 import { Link } from '@tanstack/react-router'
 import { routeList } from './menu'
-import * as m from '@/generated//paraglide/messages'
 
 export const DesktopNavbar = () => {
   const { user, isAuthenticated } = useAuth()
@@ -59,7 +59,8 @@ export const DesktopNavbar = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="mt-1 w-56 rounded-none border-2 border-border shadow-shadow bg-secondary-background"
+        className="mt-1 w-56"
+        variant={'neutral'}
         align="end"
       >
         <DropdownMenuLabel className="border-b-2 border-border pb-2">
@@ -75,8 +76,9 @@ export const DesktopNavbar = () => {
             render: (route) => (
               <DropdownMenuItem
                 key={route.label}
+                variant={'neutral'}
+                className="cursor-pointer"
                 asChild
-                className="rounded-none cursor-pointer bg-secondary-background text-secondary-foreground"
               >
                 <Link
                   preload={false}
@@ -99,7 +101,7 @@ export const DesktopNavbar = () => {
           className="rounded-none cursor-pointer bg-secondary-background"
         >
           <Icon name="LogOut" />
-          Logout
+          {m.action_logout()}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

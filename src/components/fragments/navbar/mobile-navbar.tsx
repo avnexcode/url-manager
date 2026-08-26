@@ -65,7 +65,7 @@ export const MobileNavbar = () => {
                   <Button
                     asChild
                     key={route.href}
-                    variant={'secondary'}
+                    variant={'neutral'}
                     onClick={() => setIsOpen(false)}
                     className="h-11 justify-start gap-3 rounded-none border-2 border-transparent px-3 text-base hover:border-border"
                   >
@@ -107,7 +107,9 @@ export const MobileNavbar = () => {
                   className="w-full"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link to="/{-$locale}/login">Login</Link>
+                  <Link to="/{-$locale}/login">
+                    {m.page_auth_login_title()}
+                  </Link>
                 </Button>
                 <Button
                   asChild
@@ -115,7 +117,9 @@ export const MobileNavbar = () => {
                   className="w-full"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link to="/{-$locale}/register">Register</Link>
+                  <Link to="/{-$locale}/register">
+                    {m.page_auth_register_title()}
+                  </Link>
                 </Button>
               </div>
             ) : (

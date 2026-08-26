@@ -1,15 +1,49 @@
 import * as React from 'react'
 
+import type { VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
+
 import { cn } from '@/lib/utils'
 
-export const Card = ({ className, ...props }: React.ComponentProps<'div'>) => {
+export const cardVariants = cva(
+  'rounded-base flex flex-col border-2 gap-6 py-6 border-border font-base',
+  {
+    variants: {
+      variant: {
+        default: 'bg-card text-card-foreground shadow-shadow',
+        noShadow: 'bg-card text-card-foreground',
+        reverse:
+          'bg-card text-card-foreground hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',
+        neutral: 'bg-secondary text-secondary-foreground shadow-shadow',
+        neutralNoShadow: 'bg-secondary text-secondary-foreground',
+        neutralReverse:
+          'bg-secondary text-secondary-foreground hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',
+        destructive:
+          'bg-destructive text-destructive-foreground shadow-shadow',
+        destructiveNoShadow: 'bg-destructive text-destructive-foreground',
+        destructiveReverse:
+          'bg-destructive text-destructive-foreground hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',
+        outline: 'bg-transparent text-foreground shadow-shadow',
+        outlineNoShadow: 'bg-transparent text-foreground',
+        outlineReverse:
+          'bg-transparent text-foreground hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+)
+
+export const Card = ({
+  className,
+  variant,
+  ...props
+}: React.ComponentProps<'div'> & VariantProps<typeof cardVariants>) => {
   return (
     <div
       data-slot="card"
-      className={cn(
-        'rounded-base flex flex-col shadow-shadow border-2 gap-6 py-6 border-border bg-background text-foreground font-base',
-        className,
-      )}
+      className={cn(cardVariants({ variant }), className)}
       {...props}
     />
   )

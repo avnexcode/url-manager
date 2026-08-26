@@ -78,7 +78,11 @@ export const SelectIdentifierForm = <T extends FieldValues>({
             value={field.value ?? ''}
             defaultValue={field.value}
           >
-            <SelectTrigger id={field.name} aria-invalid={fieldState.invalid}>
+            <SelectTrigger
+              variant={'neutral'}
+              id={field.name}
+              aria-invalid={fieldState.invalid}
+            >
               <SelectValue
                 placeholder={m.form_placeholder_select({ field: label })}
               >
@@ -87,6 +91,7 @@ export const SelectIdentifierForm = <T extends FieldValues>({
               </SelectValue>
             </SelectTrigger>
             <SelectContent
+              variant={'neutral'}
               position="popper"
               className="w-(--radix-select-trigger-width)"
             >
@@ -106,12 +111,16 @@ export const SelectIdentifierForm = <T extends FieldValues>({
                     of: combinedItems,
                     keyExtractor: (item) => item.id,
                     render: (item) => (
-                      <SelectItem value={item.id} className="capitalize">
+                      <SelectItem
+                        variant={'neutral'}
+                        value={item.id}
+                        className="capitalize cursor-pointer"
+                      >
                         {item.title}
                       </SelectItem>
                     ),
                     fallback: (
-                      <SelectItem value="none" disabled>
+                      <SelectItem variant={'neutral'} value="none" disabled>
                         {m.form_validation_empty_state()}
                       </SelectItem>
                     ),
