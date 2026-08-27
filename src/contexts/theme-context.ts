@@ -6,6 +6,9 @@ export type ResolvedTheme = 'light' | 'dark'
 export type ThemeContextProps = {
   theme: Theme
   resolvedTheme: ResolvedTheme
+  /** Update lokal (DOM + state + localStorage) tanpa memanggil DB */
+  setThemeLocal: (theme: Theme) => void
+  /** Update lokal + DB jika tidak authenticated; gunakan ini untuk user yang belum login */
   setTheme: (theme: Theme) => void
 }
 

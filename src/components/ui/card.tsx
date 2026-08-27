@@ -18,8 +18,7 @@ export const cardVariants = cva(
         neutralNoShadow: 'bg-secondary text-secondary-foreground',
         neutralReverse:
           'bg-secondary text-secondary-foreground hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',
-        destructive:
-          'bg-destructive text-destructive-foreground shadow-shadow',
+        destructive: 'bg-destructive text-destructive-foreground shadow-shadow',
         destructiveNoShadow: 'bg-destructive text-destructive-foreground',
         destructiveReverse:
           'bg-destructive text-destructive-foreground hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',

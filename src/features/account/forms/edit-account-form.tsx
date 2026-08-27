@@ -25,7 +25,7 @@ export const EditAccountForm = ({
   image,
 }: EditAccountFormProps) => {
   return (
-    <Card className="w-full">
+    <Card className="w-full border-0 shadow-0 md:border-2 md:shadow-shadow">
       <CardContent>
         <FormProvider {...form}>
           <EditAccountFormInner

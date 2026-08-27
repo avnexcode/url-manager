@@ -26,7 +26,7 @@ type LoginFormProps = {
 
 export const LoginForm = ({ form, onSubmit, isPending }: LoginFormProps) => {
   return (
-    <Card className="w-full max-w-2xl">
+    <Card className="w-full max-w-2xl border-0 shadow-0 md:border-2 md:shadow-shadow">
       <CardHeader>
         <CardTitle>
           <Heading size={'h3'}>{m.page_auth_form_login_header_title()}</Heading>

@@ -57,16 +57,10 @@ export const UrlView = ({
 
               <div className="flex flex-wrap items-center gap-2"></div>
 
-              <p
-                className="truncate font-mono text-xs text-muted-foreground"
-                title={url}
-              >
-                {url}
-              </p>
               {description && (
                 <>
                   <Separator />
-                  <p className="text-sm text-muted-foreground line-clamp-2">
+                  <p className="text-sm text-muted-foreground line-clamp-2 py-1">
                     {description}
                   </p>
                 </>

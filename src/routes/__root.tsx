@@ -1,7 +1,8 @@
 import { AppProvider } from '@/components/layouts'
-import { Error404Page } from '@/features/error/pages'
-import { getLocale } from '@/generated/paraglide/runtime'
+import { Error404Page, Error500Page } from '@/features/error/pages'
+import { getLocale, isLocale, localizeUrl } from '@/generated/paraglide/runtime'
 import { getUser } from '@/lib/supabase/auth'
+import { getStoredLocale } from '@/providers/locale-sync'
 import type { AppRouter } from '@/server/api/root'
 import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, redirect } from '@tanstack/react-router'
@@ -21,6 +22,7 @@ export const PATHS = {
   DEFAULT_REDIRECT: '/dashboard',
   AUTH_REDIRECT: '/login',
   PUBLIC_ROUTES: [
+    '/',
     '/login',
     '/register',
     '/forgot-password',
@@ -44,11 +46,28 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     }
 
     const user = await getUser()
-
     const pathname = location.pathname
 
     if (user && PATHS.PUBLIC_ROUTES.includes(pathname)) {
       throw redirect({ to: PATHS.DEFAULT_REDIRECT })
+    }
+
+    if (!user && typeof window !== 'undefined') {
+      const storedLocale = getStoredLocale()
+      const currentLocale = getLocale()
+
+      if (
+        storedLocale &&
+        isLocale(storedLocale) &&
+        storedLocale !== currentLocale
+      ) {
+        const localized = localizeUrl(window.location.href, {
+          locale: storedLocale,
+        })
+        if (localized.href !== window.location.href) {
+          throw redirect({ href: localized.href })
+        }
+      }
     }
 
     return { user: user ?? undefined }
@@ -67,7 +86,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: `Your URL's Manager` },
+      { title: `URL's Manager` },
     ],
     links: [
       { rel: 'icon', href: '/favicon.ico' },
@@ -76,4 +95,5 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   }),
   shellComponent: AppProvider,
   notFoundComponent: Error404Page,
+  errorComponent: Error500Page,
 })

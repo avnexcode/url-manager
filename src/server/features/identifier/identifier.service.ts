@@ -68,6 +68,15 @@ export class IdentifierService extends CommonService {
     }
   }
 
+  private static checkPublicAccess = async (db: DBClient, username: string) => {
+    const { publicAccess, publicIdentifierAccess } =
+      await SettingService.getByUsername(db, username)
+
+    if (publicAccess === false || publicIdentifierAccess === false) {
+      this.throwError('FORBIDDEN')
+    }
+  }
+
   static getAll = async (
     db: DBClient,
     userId: string,
@@ -92,12 +101,7 @@ export class IdentifierService extends CommonService {
   ): Promise<QueryResponse<PublicIdentifierResponse>> => {
     const { page, limit, search } = params
 
-    const { publicAccess, publicIdentifierAccess } =
-      await SettingService.getByUsername(db, username)
-
-    if (publicAccess === false || publicIdentifierAccess === false) {
-      this.throwError('BAD_REQUEST')
-    }
+    await this.checkPublicAccess(db, username)
 
     const [total, data] = await Promise.all([
       Repository.countPublicAll(db, username, search),
@@ -133,6 +137,8 @@ export class IdentifierService extends CommonService {
     username: string,
     slug: string,
   ): Promise<PublicIdentifierResponse> => {
+    await this.checkPublicAccess(db, username)
+
     const identifier = await Repository.findPublicUniqueSlug(db, username, slug)
 
     return this.checkNotNull(identifier)
@@ -144,6 +150,8 @@ export class IdentifierService extends CommonService {
     slug: string,
     password: string,
   ): Promise<{ redirectUrl: string }> => {
+    await this.checkPublicAccess(db, username)
+
     const identifier = await this.getPublicBySlug(db, username, slug)
 
     if (password !== identifier.password) {

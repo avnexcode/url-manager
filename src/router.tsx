@@ -22,8 +22,8 @@ export const getRouter = () => {
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
     defaultPendingComponent: Loader,
-    defaultPendingMs: 300,
-    defaultPendingMinMs: 500,
+    // defaultPendingMs: 500,
+    // defaultPendingMinMs: 300,
 
     Wrap: ({ children }: { children: ReactNode }) => {
       return (

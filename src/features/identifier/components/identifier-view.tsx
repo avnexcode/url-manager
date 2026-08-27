@@ -106,7 +106,9 @@ export const IdentifierView = ({
               </div>
               {password ? (
                 <div className="flex items-center gap-x-1 text-sm py-2">
-                  <h1>{m.model_identifier_field_password()}:</h1>
+                  <h1 className="capitalize">
+                    {m.model_identifier_field_password()}:
+                  </h1>
                   <CopyTextWrapper>{password}</CopyTextWrapper>
                 </div>
               ) : null}

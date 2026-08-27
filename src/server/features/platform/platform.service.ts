@@ -68,6 +68,15 @@ export class PlatformService extends CommonService {
     }
   }
 
+  private static checkPublicAccess = async (db: DBClient, username: string) => {
+    const { publicAccess, publicPlatformAccess } =
+      await SettingService.getByUsername(db, username)
+
+    if (publicAccess === false || publicPlatformAccess === false) {
+      this.throwError('FORBIDDEN')
+    }
+  }
+
   static getAll = async (
     db: DBClient,
     userId: string,
@@ -92,12 +101,7 @@ export class PlatformService extends CommonService {
   ): Promise<QueryResponse<PublicPlatformResponse>> => {
     const { page, limit, search } = params
 
-    const { publicAccess, publicPlatformAccess } =
-      await SettingService.getByUsername(db, username)
-
-    if (publicAccess === false || publicPlatformAccess === false) {
-      this.throwError('BAD_REQUEST')
-    }
+    await this.checkPublicAccess(db, username)
 
     const [total, data] = await Promise.all([
       Repository.countPublicAll(db, username, search),
@@ -133,6 +137,8 @@ export class PlatformService extends CommonService {
     username: string,
     slug: string,
   ): Promise<PublicPlatformResponse> => {
+    await this.checkPublicAccess(db, username)
+
     const platform = await Repository.findPublicUniqueSlug(db, username, slug)
 
     return this.checkNotNull(platform)
@@ -144,6 +150,8 @@ export class PlatformService extends CommonService {
     slug: string,
     password: string,
   ): Promise<{ redirectUrl: string }> => {
+    await this.checkPublicAccess(db, username)
+
     const platform = await this.getPublicBySlug(db, username, slug)
 
     if (password !== platform.password) {

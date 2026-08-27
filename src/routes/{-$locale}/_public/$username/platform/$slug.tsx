@@ -32,6 +32,12 @@ export const Route = createFileRoute(
       ) {
         throw notFound()
       }
+      if (
+        error instanceof TRPCClientError &&
+        error.data?.code === 'FORBIDDEN'
+      ) {
+        throw notFound()
+      }
       throw error
     }
   },

@@ -20,7 +20,7 @@ export const CreatePlatformForm = ({
   isPending,
 }: CreatePlatformFormProps) => {
   return (
-    <Card className="w-full">
+    <Card className="w-full border-0 shadow-0 md:border-2 md:shadow-shadow">
       <CardContent>
         <FormProvider {...form}>
           <CreatePlatformFormInner

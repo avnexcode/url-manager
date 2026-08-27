@@ -1,4 +1,5 @@
 export * from './auth-provider'
+export * from './locale-sync'
 export * from './providers'
 export * from './query-provider'
 export * from './theme-provider'

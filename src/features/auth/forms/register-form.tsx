@@ -29,7 +29,7 @@ export const RegisterForm = ({
   isPending,
 }: RegisterFormProps) => {
   return (
-    <Card className="w-full max-w-2xl">
+    <Card className="w-full max-w-2xl border-0 shadow-0 md:border-2 md:shadow-shadow">
       <CardHeader>
         <CardTitle>
           <Heading size={'h3'}>

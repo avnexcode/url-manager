@@ -70,7 +70,7 @@ export class AuthService extends CommonService {
     }
   }
 
-  static registerOAuthCustomer = async (
+  static registerOAuth = async (
     db: DBClient,
     userId: string,
     email: string,

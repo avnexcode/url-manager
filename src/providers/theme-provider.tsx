@@ -113,11 +113,17 @@ export const ThemeProvider: React.FC<React.PropsWithChildren> = ({
     return () => media.removeEventListener('change', onChange)
   }, [theme])
 
+  /** Update DOM + state + localStorage saja — tanpa memanggil DB */
+  const setThemeLocal = useCallback((newTheme: Theme) => {
+    setThemeState(newTheme)
+    applyTheme(newTheme)
+    window.localStorage.setItem(STORAGE_KEY, newTheme)
+  }, [])
+
+  /** Update lokal + DB (hanya ketika tidak authenticated, untuk guest) */
   const setTheme = useCallback(
     (newTheme: Theme) => {
-      setThemeState(newTheme)
-      applyTheme(newTheme)
-      window.localStorage.setItem(STORAGE_KEY, newTheme)
+      setThemeLocal(newTheme)
 
       if (isAuthenticated && setting.id) {
         updateSetting({
@@ -125,11 +131,13 @@ export const ThemeProvider: React.FC<React.PropsWithChildren> = ({
         })
       }
     },
-    [isAuthenticated, setting.id, updateSetting],
+    [isAuthenticated, setting.id, updateSetting, setThemeLocal],
   )
 
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+    <ThemeContext.Provider
+      value={{ theme, resolvedTheme, setTheme, setThemeLocal }}
+    >
       {children}
     </ThemeContext.Provider>
   )

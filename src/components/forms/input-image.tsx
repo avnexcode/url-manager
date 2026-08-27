@@ -58,7 +58,6 @@ export const InputImage = <T extends FieldValues>({
 
   const previewSrc = selectedImagePreview ?? image ?? defaultImage ?? null
 
-  // state khusus untuk alur crop (gambar mentah sebelum dipotong)
   const [pendingRawSrc, setPendingRawSrc] = useState<string | null>(null)
   const [pendingFileName, setPendingFileName] = useState('')
   const [cropDialogOpen, setCropDialogOpen] = useState(false)
@@ -144,7 +143,6 @@ export const InputImage = <T extends FieldValues>({
               setPendingFileName(file.name)
               setCropDialogOpen(true)
 
-              // reset value agar file yang sama bisa dipilih ulang setelah cancel
               e.target.value = ''
             }}
           />

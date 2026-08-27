@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import * as m from '@/generated/paraglide/messages'
 import { cn } from '@/lib/utils'
-import { ImageOff } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import type { FieldValues, Path } from 'react-hook-form'
 import { Controller, useFormContext } from 'react-hook-form'
+import { Icon } from '../icon'
 import { Skeleton } from '../ui/skeleton'
 
 type InputAvatarprops<T extends FieldValues> = {
@@ -56,7 +56,6 @@ export const InputAvatar = <T extends FieldValues>({
 
   const previewSrc = selectedImagePreview ?? image ?? defaultImage ?? null
 
-  // state khusus untuk alur crop (gambar mentah sebelum dipotong)
   const [pendingRawSrc, setPendingRawSrc] = useState<string | null>(null)
   const [pendingFileName, setPendingFileName] = useState('')
   const [cropDialogOpen, setCropDialogOpen] = useState(false)
@@ -77,7 +76,6 @@ export const InputAvatar = <T extends FieldValues>({
             {required && <span className="text-destructive">*</span>}
           </FieldLabel>
 
-          {/* Preview Gambar */}
           <div className="aspect-square w-full overflow-hidden bg-muted">
             {previewSrc ? (
               <img
@@ -91,12 +89,11 @@ export const InputAvatar = <T extends FieldValues>({
                 onClick={handleOpenFileExplorer}
                 className="flex h-full w-full flex-col items-center justify-center gap-1 text-muted-foreground transition-colors hover:bg-muted/70"
               >
-                <ImageOff size={28} />
+                <Icon name="ImageOff" className="h-20 w-20" />
               </button>
             )}
           </div>
 
-          {/* Tombol Pilih/Ganti File */}
           <div className="flex flex-col items-center justify-center gap-2">
             <Button
               type="button"
@@ -123,7 +120,6 @@ export const InputAvatar = <T extends FieldValues>({
             )}
           </div>
 
-          {/* Input File Tersembunyi */}
           <input
             id={field.name}
             type="file"
@@ -144,7 +140,6 @@ export const InputAvatar = <T extends FieldValues>({
               setPendingFileName(file.name)
               setCropDialogOpen(true)
 
-              // reset value agar file yang sama bisa dipilih ulang setelah cancel
               e.target.value = ''
             }}
           />
