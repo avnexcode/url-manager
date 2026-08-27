@@ -14,6 +14,7 @@ type EditAccountFormProps = {
   isPending: boolean
   email: string
   image?: string | null
+  avatar?: string | null
 }
 
 export const EditAccountForm = ({
@@ -23,6 +24,7 @@ export const EditAccountForm = ({
   isPending,
   email,
   image,
+  avatar,
 }: EditAccountFormProps) => {
   return (
     <Card className="w-full border-0 shadow-0 md:border-2 md:shadow-shadow">
@@ -33,6 +35,7 @@ export const EditAccountForm = ({
             onSubmit={onSubmit}
             email={email}
             image={image}
+            avatar={avatar}
           />
         </FormProvider>
       </CardContent>

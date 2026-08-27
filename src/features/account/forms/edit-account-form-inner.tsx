@@ -10,6 +10,7 @@ type EditAccountFormInnerProps = {
   onSubmit: (values: UpdateAccountFormSchema) => void
   email: string
   image?: string | null
+  avatar?: string | null
 }
 
 export const EditAccountFormInner = ({
@@ -17,6 +18,7 @@ export const EditAccountFormInner = ({
   onSubmit,
   email,
   image,
+  avatar,
 }: EditAccountFormInnerProps) => {
   const form = useFormContext<UpdateAccountFormSchema>()
   const { InputText, InputAvatar } = useFormInput<UpdateAccountFormSchema>()
@@ -33,7 +35,7 @@ export const EditAccountFormInner = ({
             name="image"
             label={m.model_user_field_image()}
             className="w-full"
-            image={image}
+            image={image ?? avatar}
           />
         </div>
         <div className="w-full flex-1 space-y-5">

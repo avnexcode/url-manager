@@ -31,6 +31,7 @@ export const AccountPage = () => {
             isPending={isPending}
             email={user.email}
             image={user.image}
+            avatar={user.avatar}
           />
         </MainLayout>
       </SectionContainer>
