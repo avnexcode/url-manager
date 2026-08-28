@@ -199,9 +199,9 @@
   "page_auth_form_update_password_header_title": "Update Password",
   "page_auth_form_update_password_header_description": "Make sure your new password is strong and secure.",
 
-  "page_setting_title": "Settings",
+  "page_setting_title": "Setting",
   "page_setting_section_general_title": "General",
-  "page_setting_section_general_caption": "Basic settings for your account",
+  "page_setting_section_general_caption": "Basic setting for your account",
   "page_setting_section_appearance_title": "Appearance",
   "page_setting_section_appearance_caption": "Customize how the app looks",
   "page_setting_section_public_access_title": "Public Access",

@@ -6,7 +6,9 @@ import {
 } from '@/components'
 import {
   ActionButton,
+  ActionButtonSkeleton,
   ActionLink,
+  ActionLinkSkeleton,
   CopyTextWrapper,
 } from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
@@ -204,8 +206,8 @@ export const IdentifierViewSkeleton = () => {
 
           {/* Edit + Delete action buttons */}
           <div className="flex shrink-0 items-center gap-2 self-end">
-            <Skeleton className="size-9 shrink-0" />
-            <Skeleton className="size-9 shrink-0" />
+            <ActionLinkSkeleton size="sm" hideLabel />
+            <ActionButtonSkeleton size="sm" hideLabel />
           </div>
         </div>
       </div>
@@ -217,19 +219,7 @@ export const IdentifierViewSkeleton = () => {
         </div>
       </div>
 
-      {/* URL list section */}
-      <div className="px-4 py-5 sm:px-6">
-        <header className="mb-4 flex items-center justify-between">
-          <Skeleton className="h-6 w-32" />
-        </header>
-
-        <main className="w-full">
-          <div className="flex min-h-32 w-full flex-col items-center justify-center gap-3 rounded-none border-2 border-dashed border-border py-10">
-            <Skeleton className="h-4 w-40" />
-            <Skeleton className="h-9 w-32" />
-          </div>
-        </main>
-      </div>
+      <Separator className="my-5" />
     </div>
   )
 }

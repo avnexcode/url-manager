@@ -29,7 +29,7 @@ export const SettingsSection = ({
         </CardTitle>
         <CardDescription>{caption}</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-5 pb-10">{children}</CardContent>
+      <CardContent className="space-y-10 pb-10">{children}</CardContent>
       <Separator />
     </Card>
   )

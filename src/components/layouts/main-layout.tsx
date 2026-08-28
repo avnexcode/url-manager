@@ -12,7 +12,7 @@ export const MainLayout: React.FC<
   React.PropsWithChildren & MainLayoutProps
 > = ({ children, className, headerContent, headerClassName }) => {
   return (
-    <div className="space-y-5 pb-5">
+    <div className="space-y-5 pb-15">
       <header
         className={cn(
           'flex w-full items-center justify-between h-15',

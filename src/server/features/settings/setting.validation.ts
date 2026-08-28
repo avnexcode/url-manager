@@ -2,20 +2,14 @@ import { language, theme } from '@/server/validations'
 import z from 'zod'
 
 export const createSettingRequest = z.object({
-  theme: z.enum(theme).default('SYSTEM').optional(),
-  language: z.enum(language).default('ID').optional(),
-  publicAccess: z.boolean().default(false).optional(),
-  publicPlatformAccess: z.boolean().default(false).optional(),
-  publicIdentifierAccess: z.boolean().default(false).optional(),
+  theme: z.enum(theme).optional(),
+  language: z.enum(language).optional(),
+  publicAccess: z.boolean().optional(),
+  publicPlatformAccess: z.boolean().optional(),
+  publicIdentifierAccess: z.boolean().optional(),
 })
 
-export const updateSettingRequest = createSettingRequest
-  .partial()
-  .omit({ theme: true, language: true })
-  .extend({
-    theme: z.enum(theme).optional(),
-    language: z.enum(language).optional(),
-  })
+export const updateSettingRequest = createSettingRequest.partial()
 
 export const deleteSettingRequest = z.object({
   userId: z.uuid().min(1),

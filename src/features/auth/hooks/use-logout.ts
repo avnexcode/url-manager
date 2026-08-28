@@ -5,6 +5,21 @@ import { signOut } from '@/lib/supabase/auth'
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
 
+export const clearClientStorage = () => {
+  if (typeof window === 'undefined') return
+
+  window.localStorage.clear()
+  window.sessionStorage.clear()
+
+  document.cookie.split(';').forEach((cookie) => {
+    const name = cookie.split('=')[0]?.trim()
+    if (!name) return
+
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`
+  })
+}
+
 export const useLogout = ({
   redirect = true,
   redirectTo,
@@ -21,6 +36,7 @@ export const useLogout = ({
       setIsPending(true)
 
       await signOut()
+      clearClientStorage()
 
       await router.invalidate()
 

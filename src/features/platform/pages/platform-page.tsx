@@ -161,7 +161,7 @@ export const PlatformPage = () => {
                   />
                 ),
               })}
-          <footer>
+          <footer className="pt-5">
             <PagePagination
               total={platforms?.meta.total ?? 0}
               currentPage={queryParams.page}

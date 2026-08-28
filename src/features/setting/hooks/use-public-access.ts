@@ -1,17 +1,15 @@
 import * as m from '@/generated/paraglide/messages'
-import { useAuth, useToastMessages } from '@/hooks'
+import { useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
 import { useTRPC } from '@/lib/trpc/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-type PublicAccessField =
-  'publicAccess' | 'publicPlatformAccess' | 'publicIdentifierAccess'
+type Access = 'publicAccess' | 'publicPlatformAccess' | 'publicIdentifierAccess'
 
 export const usePublicAccess = ({
   onSuccess,
   onError,
 }: UseMutationOptions = {}) => {
-  const { setting } = useAuth()
   const toastMessages = useToastMessages(m.model_setting_title())
   const trpc = useTRPC()
   const queryClient = useQueryClient()
@@ -32,18 +30,8 @@ export const usePublicAccess = ({
     }),
   )
 
-  const handlePublicAccessChange = (
-    field: PublicAccessField,
-    checked: boolean,
-  ) => {
-    mutate({
-      request: {
-        publicAccess: setting.publicAccess,
-        publicPlatformAccess: setting.publicPlatformAccess,
-        publicIdentifierAccess: setting.publicIdentifierAccess,
-        [field]: checked,
-      },
-    })
+  const handlePublicAccessChange = (field: Access, checked: boolean) => {
+    mutate({ request: { [field]: checked } })
   }
 
   return { handlePublicAccessChange, isPending }

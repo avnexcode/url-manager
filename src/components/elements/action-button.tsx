@@ -62,12 +62,6 @@ type ActionVariantConfig = {
   label: () => string
 }
 
-/**
- * Icon size per button size. Values follow common shadcn/neobrutalism
- * button proportions (h-9/h-8/h-10). If `buttonVariants` in
- * `@/components/ui/button` defines different heights, adjust this map only —
- * every icon and skeleton consuming it stays in sync.
- */
 export const ICON_SIZE_CLASS: Record<ButtonSize, string> = {
   default: 'h-4 w-4',
   sm: 'h-3.5 w-3.5',
@@ -284,7 +278,6 @@ type ActionButtonProps = Omit<React.ComponentProps<'button'>, 'children'> & {
   isPending?: boolean
   size?: ButtonSize
   hideLabel?: boolean
-  /** Override the icon's default size (auto-derived from `size` otherwise). */
   iconClassName?: string
   children?: React.ReactNode
 }
@@ -353,14 +346,6 @@ export const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
 
 ActionButton.displayName = 'ActionButton'
 
-/**
- * Skeleton counterpart of ActionButton.
- *
- * NOTE: height/size values below (h-9/h-8/h-10, size-9/size-8/size-10)
- * mirror common shadcn/neobrutalism button proportions. If your
- * `buttonVariants` sizes differ, adjust HEIGHT_CLASS / ICON_ONLY_SIZE_CLASS
- * here (and the matching map in action-link.tsx) to match.
- */
 const HEIGHT_CLASS: Record<ButtonSize, string> = {
   default: 'h-9',
   sm: 'h-8',
@@ -376,16 +361,8 @@ const ICON_ONLY_SIZE_CLASS: Record<ButtonSize, string> = {
 }
 
 type ActionButtonSkeletonProps = {
-  /** Mirrors the `size` prop of ActionButton. */
   size?: ButtonSize
-  /** Mirrors `hideLabel`. When true, renders a square icon-only skeleton. */
   hideLabel?: boolean
-  /**
-   * Tailwind width class for the label portion (ignored when hideLabel).
-   * Label length varies a lot by action (e.g. "delete" vs "unpublish"), so
-   * this isn't inferred automatically — pass one close to the real action's
-   * label width, or leave the default for a generic estimate.
-   */
   labelWidth?: string
   className?: string
 }

@@ -1,7 +1,8 @@
-import { ImagePreview } from '@/components'
-import { ExternalLink } from '@/components/elements'
+import { ImagePreview, ImagePreviewSkeleton } from '@/components'
+import { ExternalLink, ExternalLinkSkeleton } from '@/components/elements'
 import { Heading } from '@/components/heading'
 import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
 import type { PublicPlatformResponse } from '../types'
 
 type PublicPlatformViewProps = {
@@ -46,6 +47,42 @@ export const PublicPlatformView = ({
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto"
+          />
+        </div>
+      </div>
+
+      <Separator className="my-5" />
+    </div>
+  )
+}
+
+export const PublicPlatformViewSkeleton = () => {
+  return (
+    <div className="flex w-full flex-col gap-0">
+      <div className="from-primary/10 via-primary/5 bg-linear-to-br to-transparent">
+        <div className="flex flex-col gap-4 px-4 py-5 sm:flex-row sm:items-start sm:gap-6 sm:px-6 sm:py-7">
+          <ImagePreviewSkeleton />
+
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
+            {/* Heading */}
+            <Skeleton className="h-7 w-48 max-w-full" />
+
+            {/* Description (separator + 2 lines) */}
+            <Skeleton className="h-px w-full mt-1" />
+            <Skeleton className="h-4 w-full max-w-md" />
+            <Skeleton className="h-4 w-3/4 max-w-sm" />
+          </div>
+        </div>
+      </div>
+
+      {/* Visit button */}
+      <div className="px-4 py-4 sm:px-6">
+        <div className="flex justify-end">
+          <ExternalLinkSkeleton
+            action="visit"
+            size="sm"
+            className="w-full sm:w-auto"
+            labelWidth="w-16"
           />
         </div>
       </div>

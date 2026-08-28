@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { ParaglideLocaleSelect, ThemeToggle } from '../actions'
 import { Separator } from '../ui/separator'
 
 type PublicLayoutProps = {
@@ -19,6 +20,10 @@ export const PublicLayout: React.FC<
         )}
       >
         {headerContent}
+        <div className="flex items-center gap-x-5">
+          <ParaglideLocaleSelect />
+          <ThemeToggle />
+        </div>
       </header>
 
       <div className="space-y-2">

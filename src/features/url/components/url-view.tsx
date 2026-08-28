@@ -4,7 +4,14 @@ import {
   ImagePreviewSkeleton,
   QrImageDialog,
 } from '@/components'
-import { ActionButton, ActionLink, ExternalLink } from '@/components/elements'
+import {
+  ActionButton,
+  ActionButtonSkeleton,
+  ActionLink,
+  ActionLinkSkeleton,
+  ExternalLink,
+  ExternalLinkSkeleton,
+} from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
 import { Heading } from '@/components/heading'
 import { Button } from '@/components/ui/button'
@@ -12,6 +19,7 @@ import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import * as m from '@/generated/paraglide/messages'
 import { useTRPC } from '@/lib/trpc/react'
+import { cn } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useDeleteUrl } from '../hooks'
@@ -22,7 +30,17 @@ type UrlViewProps = {
 }
 
 export const UrlView = ({
-  url: { id, title, description, url, thumbnail, qrEncodedValue, qrCodeUrl },
+  url: {
+    id,
+    title,
+    description,
+    url,
+    thumbnail,
+    qrEncodedValue,
+    qrCodeUrl,
+    platform,
+    identifier,
+  },
 }: UrlViewProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isQrOpen, setIsQrOpen] = useState<boolean>(false)
@@ -85,7 +103,6 @@ export const UrlView = ({
           </div>
         </div>
 
-        {/* Secondary action */}
         <div className="px-4 py-4 sm:px-6">
           <div className="flex flex-col gap-2 sm:flex-row justify-end">
             {qrCodeUrl && (
@@ -108,6 +125,40 @@ export const UrlView = ({
               rel="noopener noreferrer"
               className="w-full sm:w-auto"
             />
+          </div>
+        </div>
+        <Separator className="my-5" />
+        <div className="grid grid-cols-1 gap-3 px-4 py-4 sm:grid-cols-2 sm:px-6">
+          <div className="flex items-center gap-x-2.5 rounded-lg px-3 py-2.5">
+            <div className="flex min-w-0 flex-col">
+              <span className="text-xs text-muted-foreground capitalize">
+                {m.model_platform_title()}
+              </span>
+              <span
+                className={cn(
+                  'truncate text-sm font-medium text-foreground',
+                  !platform && 'font-normal italic text-muted-foreground',
+                )}
+              >
+                {platform ? platform.title : '-'}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-x-2.5 rounded-lg px-3 py-2.5">
+            <div className="flex min-w-0 flex-col">
+              <span className="text-xs text-muted-foreground capitalize">
+                {m.model_identifier_title()}
+              </span>
+              <span
+                className={cn(
+                  'truncate text-sm font-medium text-foreground',
+                  !identifier && 'font-normal italic text-muted-foreground',
+                )}
+              >
+                {identifier ? identifier.title : '-'}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -145,19 +196,16 @@ export const UrlViewSkeleton = () => {
             {/* Empty badge row — UrlView renders no badges, kept as spacer to match layout */}
             <div className="flex flex-wrap items-center gap-2" />
 
-            {/* Destination URL text */}
-            <Skeleton className="h-4 w-56 max-w-full" />
-
             {/* Description (separator + 2 lines) */}
-            <Skeleton className="h-px w-full" />
+            <Skeleton className="h-px w-full mt-1" />
             <Skeleton className="h-4 w-full max-w-md" />
             <Skeleton className="h-4 w-3/4 max-w-sm" />
           </div>
 
           {/* Edit + Delete action buttons */}
           <div className="flex shrink-0 items-center gap-2 self-end">
-            <Skeleton className="size-9 shrink-0" />
-            <Skeleton className="size-9 shrink-0" />
+            <ActionLinkSkeleton size="sm" hideLabel />
+            <ActionButtonSkeleton size="sm" hideLabel />
           </div>
         </div>
       </div>
@@ -166,7 +214,31 @@ export const UrlViewSkeleton = () => {
       <div className="px-4 py-4 sm:px-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
           <Skeleton className="h-9 w-full sm:w-28" />
-          <Skeleton className="h-9 w-full sm:w-24" />
+          <ExternalLinkSkeleton
+            action="visit"
+            size="sm"
+            className="w-full sm:w-auto"
+            labelWidth="w-16"
+          />
+        </div>
+      </div>
+
+      <Separator className="my-5" />
+
+      {/* Platform / Identifier info grid */}
+      <div className="grid grid-cols-1 gap-3 px-4 py-4 sm:grid-cols-2 sm:px-6">
+        <div className="flex items-center gap-x-2.5 rounded-lg px-3 py-2.5">
+          <div className="flex min-w-0 flex-col gap-1">
+            <Skeleton className="h-3 w-14" />
+            <Skeleton className="h-4 w-24" />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-x-2.5 rounded-lg px-3 py-2.5">
+          <div className="flex min-w-0 flex-col gap-1">
+            <Skeleton className="h-3 w-16" />
+            <Skeleton className="h-4 w-24" />
+          </div>
         </div>
       </div>
     </div>

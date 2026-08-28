@@ -7,6 +7,10 @@ export type UpdateUrlFormSchema = z.infer<typeof updateUrlFormSchema>
 
 export type UrlResponse = Prisma.UrlGetPayload<{
   omit: { userId: true }
+  include: {
+    platform: { select: { title: true } }
+    identifier: { select: { title: true } }
+  }
 }>
 
 export type PublicUrlResponse = Prisma.UrlGetPayload<{

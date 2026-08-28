@@ -92,6 +92,10 @@ export class UrlRepository extends CommonRepository {
     const urls = await db.url.findMany({
       where,
       omit: { userId: true },
+      include: {
+        platform: { select: { title: true } },
+        identifier: { select: { title: true } },
+      },
       take: limit,
       skip,
       orderBy,
@@ -137,6 +141,10 @@ export class UrlRepository extends CommonRepository {
     const url = await db.url.findUnique({
       where: { userId, id },
       omit: { userId: true },
+      include: {
+        platform: { select: { title: true } },
+        identifier: { select: { title: true } },
+      },
     })
 
     return url

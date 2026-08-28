@@ -10,11 +10,7 @@ export const PublicAccessSwitcher = () => {
 
   return (
     <>
-      <SettingsCard
-        label={m.page_setting_card_public_access_label()}
-        caption={m.page_setting_card_public_access_caption()}
-        icon="Globe"
-      >
+      <SettingsCard label={m.page_setting_card_public_access_label()}>
         <Switch
           checked={setting.publicAccess}
           onCheckedChange={(checked) =>
@@ -23,11 +19,7 @@ export const PublicAccessSwitcher = () => {
           disabled={isPending}
         />
       </SettingsCard>
-      <SettingsCard
-        label={m.page_setting_card_public_platform_access_label()}
-        caption={m.page_setting_card_public_platform_access_caption()}
-        icon="Layers"
-      >
+      <SettingsCard label={m.page_setting_card_public_platform_access_label()}>
         <Switch
           checked={setting.publicPlatformAccess}
           onCheckedChange={(checked) =>
@@ -38,8 +30,6 @@ export const PublicAccessSwitcher = () => {
       </SettingsCard>
       <SettingsCard
         label={m.page_setting_card_public_identifier_access_label()}
-        caption={m.page_setting_card_public_identifier_access_caption()}
-        icon="Tag"
       >
         <Switch
           checked={setting.publicIdentifierAccess}

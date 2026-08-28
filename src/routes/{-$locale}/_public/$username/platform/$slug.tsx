@@ -1,5 +1,6 @@
 import { env } from '@/configs/env'
 import { DetailPlatformPage } from '@/features/platform/pages/public'
+import { PublicDetailPlatformPageSkeleton } from '@/features/platform/skeletons'
 import * as m from '@/generated/paraglide/messages'
 import { seo } from '@/routes/__root'
 import { capitalizeFirstLetter } from '@/utils'
@@ -51,4 +52,5 @@ export const Route = createFileRoute(
       url: `${env.VITE_BASE_URL}/${params.username}/i/${loaderData?.platform.slug}`,
     }),
   component: DetailPlatformPage,
+  pendingComponent: PublicDetailPlatformPageSkeleton,
 })

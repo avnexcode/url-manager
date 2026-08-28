@@ -28,11 +28,7 @@ export const SettingPage = () => {
               title={m.page_setting_section_general_title()}
               caption={m.page_setting_section_general_caption()}
             >
-              <SettingsCard
-                label={m.page_setting_card_language_label()}
-                caption={m.page_setting_card_language_caption()}
-                icon="Globe"
-              >
+              <SettingsCard label={m.page_setting_card_language_label()}>
                 <ParaglideLocaleSelect />
               </SettingsCard>
             </SettingsSection>
@@ -46,11 +42,7 @@ export const SettingPage = () => {
               title={m.page_setting_section_appearance_title()}
               caption={m.page_setting_section_appearance_caption()}
             >
-              <SettingsCard
-                label={m.page_setting_card_theme_label()}
-                caption={m.page_setting_card_theme_caption()}
-                icon="Palette"
-              >
+              <SettingsCard label={m.page_setting_card_theme_label()}>
                 <ThemeSelect />
               </SettingsCard>
             </SettingsSection>

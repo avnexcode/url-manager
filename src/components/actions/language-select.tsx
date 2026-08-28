@@ -34,19 +34,24 @@ export const ParaglideLocaleSelect = () => {
     <Select value={currentLocale} onValueChange={handleSelectChange}>
       <SelectTrigger
         aria-label={m.action_select({ model: m.common_language() })}
+        className="h-10 w-auto gap-2 rounded-none border-2 border-border bg-secondary-background px-3 shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-secondary-foreground"
       >
-        <span className="flex items-center gap-2 capitalize">
-          {flags[currentLocale] ?? <Globe className="size-5" />}
-          <span className="uppercase">{currentLocale}</span>
-        </span>
+        {flags[currentLocale]}
+        <span className="uppercase">{currentLocale}</span>
       </SelectTrigger>
-      <SelectContent position="popper" sideOffset={2} align="end">
+      <SelectContent
+        variant={'neutral'}
+        position="popper"
+        sideOffset={2}
+        align="end"
+      >
         {renderElements({
           of: Array.from(locales),
           keyExtractor: (locale) => locale,
           render: (locale) => {
             return (
               <SelectItem
+                variant={'neutral'}
                 value={locale}
                 className="cursor-pointer py-2 capitalize"
               >

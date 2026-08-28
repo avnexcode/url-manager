@@ -62,7 +62,7 @@ export const PlatformPage = () => {
             },
             fallback: <EmptyState title={m.component_platform_empty_state()} />,
           })}
-          <footer>
+          <footer className="pt-5">
             <PagePagination
               total={platforms.meta.total}
               currentPage={queryParams.page}

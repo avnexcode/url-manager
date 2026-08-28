@@ -1,5 +1,6 @@
 import { env } from '@/configs/env'
 import { DetailIdentifierPage } from '@/features/identifier/pages/public'
+import { PublicDetailIdentifierPageSkeleton } from '@/features/identifier/skeletons'
 import * as m from '@/generated/paraglide/messages'
 import { seo } from '@/routes/__root'
 import { capitalizeFirstLetter } from '@/utils'
@@ -48,4 +49,5 @@ export const Route = createFileRoute(
       robots: false,
     }),
   component: DetailIdentifierPage,
+  pendingComponent: PublicDetailIdentifierPageSkeleton,
 })

@@ -5,6 +5,7 @@ import { icons } from 'lucide-react'
 import { forwardRef } from 'react'
 import type { ActionVariant } from './action-button'
 import { ACTION_VARIANT_CONFIG } from './action-button'
+import { Skeleton } from '../ui/skeleton'
 
 type ButtonSize = NonNullable<VariantProps<typeof buttonVariants>['size']>
 
@@ -86,3 +87,64 @@ export const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
 )
 
 ExternalLink.displayName = 'ExternalLink'
+
+const HEIGHT_CLASS: Record<ButtonSize, string> = {
+  default: 'h-9',
+  sm: 'h-8',
+  lg: 'h-10',
+  icon: 'size-9',
+}
+
+const ICON_ONLY_SIZE_CLASS: Record<ButtonSize, string> = {
+  default: 'size-9',
+  sm: 'size-8',
+  lg: 'size-10',
+  icon: 'size-9',
+}
+
+type ExternalLinkSkeletonProps = {
+  action?: ActionVariant
+  size?: ButtonSize
+  hideLabel?: boolean
+  labelWidth?: string
+  className?: string
+}
+
+export const ExternalLinkSkeleton = ({
+  action,
+  size = 'default',
+  hideLabel = false,
+  labelWidth = 'w-20',
+  className,
+}: ExternalLinkSkeletonProps) => {
+  if (hideLabel || size === 'icon') {
+    return (
+      <Skeleton
+        className={cn(ICON_ONLY_SIZE_CLASS[size], 'shrink-0', className)}
+      />
+    )
+  }
+
+  const smHideLabel = action === 'download'
+
+  if (smHideLabel) {
+    return (
+      <Skeleton
+        className={cn(
+          HEIGHT_CLASS[size],
+          'flex items-center gap-1.5 px-3 shrink-0',
+          className,
+        )}
+      >
+        <Skeleton className="h-3.5 w-3.5 shrink-0" />
+        <Skeleton className={cn('h-3.5 sm:hidden', labelWidth)} />
+      </Skeleton>
+    )
+  }
+
+  return (
+    <Skeleton
+      className={cn(HEIGHT_CLASS[size], labelWidth, 'shrink-0', className)}
+    />
+  )
+}

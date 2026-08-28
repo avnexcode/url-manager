@@ -42,8 +42,8 @@ export const DesktopNavbar = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="group relative flex cursor-pointer items-center gap-2 border-2 border-border bg-secondary-background p-1 pr-1 shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2">
-          <Avatar className="size-8 rounded-none">
+        <button className="group relative flex w-40 cursor-pointer items-center gap-2 border-2 border-border bg-secondary-background p-1 pr-1 shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2">
+          <Avatar className="size-8 shrink-0 rounded-none">
             <AvatarImage
               src={user.image ?? user.avatar ?? ''}
               crossOrigin="anonymous"
@@ -54,7 +54,14 @@ export const DesktopNavbar = () => {
             </AvatarFallback>
           </Avatar>
 
-          <Icon name="ChevronDown" className="size-3 opacity-60" />
+          <p className="min-w-0 flex-1 truncate font-heading text-secondary-foreground text-left">
+            {user.username}
+          </p>
+
+          <Icon
+            name="ChevronDown"
+            className="size-3 shrink-0 opacity-60 mr-2"
+          />
         </button>
       </DropdownMenuTrigger>
 

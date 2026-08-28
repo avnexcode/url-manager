@@ -64,14 +64,16 @@ export const IdentifierPage = () => {
               <EmptyState title={m.component_identifier_empty_state()} />
             ),
           })}
-          <PagePagination
-            total={identifiers.meta.total}
-            currentPage={queryParams.page}
-            limit={queryParams.limit}
-            onPageChange={(page) => handleUpdateQuery({ page })}
-            className="flex justify-end xl:max-w-fit"
-            showPageList
-          />
+          <footer className="pt-5">
+            <PagePagination
+              total={identifiers.meta.total}
+              currentPage={queryParams.page}
+              limit={queryParams.limit}
+              onPageChange={(page) => handleUpdateQuery({ page })}
+              className="flex justify-end xl:max-w-fit"
+              showPageList
+            />
+          </footer>
         </PublicLayout>
       </SectionContainer>
     </PageContainer>

@@ -56,7 +56,7 @@ export const MobileNavbar = () => {
           </SheetHeader>
 
           {/* Nav links */}
-          <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-3">
+          <div className="flex flex-1 flex-col gap-5 overflow-y-auto p-3">
             {isAuthenticated &&
               renderElements({
                 of: routeList,

@@ -133,7 +133,7 @@ export const UrlListSection = ({
             ),
           })}
 
-      <footer>
+      <footer className="pt-5">
         <PagePagination
           total={urls?.meta.total ?? 0}
           currentPage={queryParams.page}

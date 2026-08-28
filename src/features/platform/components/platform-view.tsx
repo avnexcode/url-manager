@@ -6,9 +6,12 @@ import {
 } from '@/components'
 import {
   ActionButton,
+  ActionButtonSkeleton,
   ActionLink,
+  ActionLinkSkeleton,
   CopyTextWrapper,
   ExternalLink,
+  ExternalLinkSkeleton,
 } from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
 import { Heading } from '@/components/heading'
@@ -200,28 +203,22 @@ export const PlatformViewSkeleton = () => {
           <ImagePreviewSkeleton />
 
           <div className="flex min-w-0 flex-1 flex-col gap-2">
-            {/* Heading */}
             <Skeleton className="h-7 w-48 max-w-full" />
 
-            {/* Lock status + visibility badges */}
             <div className="flex flex-wrap items-center gap-2">
               <Skeleton className="h-5.5 w-20 rounded-none" />
               <Skeleton className="h-5.5 w-16 rounded-none" />
             </div>
 
-            {/* URL text */}
-            <Skeleton className="h-4 w-56 max-w-full" />
-
-            {/* Description (separator + 2 lines) */}
-            <Skeleton className="h-px w-full" />
+            <Skeleton className="h-px w-full mt-1" />
             <Skeleton className="h-4 w-full max-w-md" />
             <Skeleton className="h-4 w-3/4 max-w-sm" />
           </div>
 
           {/* Edit + Delete action buttons */}
           <div className="flex shrink-0 items-center gap-2 self-end">
-            <Skeleton className="size-9 shrink-0" />
-            <Skeleton className="size-9 shrink-0" />
+            <ActionLinkSkeleton size="sm" hideLabel />
+            <ActionButtonSkeleton size="sm" hideLabel />
           </div>
         </div>
       </div>
@@ -230,23 +227,16 @@ export const PlatformViewSkeleton = () => {
       <div className="px-4 py-4 sm:px-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
           <Skeleton className="h-9 w-full sm:w-28" />
-          <Skeleton className="h-9 w-full sm:w-24" />
+          <ExternalLinkSkeleton
+            action="visit"
+            size="sm"
+            className="w-full sm:w-auto"
+            labelWidth="w-16"
+          />
         </div>
       </div>
 
-      {/* URL list section */}
-      <div className="px-4 py-5 sm:px-6">
-        <header className="mb-4 flex items-center justify-between">
-          <Skeleton className="h-6 w-32" />
-        </header>
-
-        <main className="w-full">
-          <div className="flex min-h-32 w-full flex-col items-center justify-center gap-3 rounded-none border-2 border-dashed border-border py-10">
-            <Skeleton className="h-4 w-40" />
-            <Skeleton className="h-9 w-32" />
-          </div>
-        </main>
-      </div>
+      <Separator className="my-5" />
     </div>
   )
 }

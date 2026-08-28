@@ -7,9 +7,13 @@ import {
 import {
   MainLayout,
   PageContainer,
+  PublicLayout,
   SectionContainer,
 } from '@/components/layouts'
-import { IdentifierViewSkeleton } from '@/features/identifier/components'
+import {
+  IdentifierViewSkeleton,
+  PublicIdentifierViewSkeleton,
+} from '@/features/identifier/components'
 import * as m from '@/generated/paraglide/messages'
 
 export const EditIdentifierFormSkeleton = () => {
@@ -35,6 +39,22 @@ export const DetailIdentifierPageSkeleton = () => {
         >
           <IdentifierViewSkeleton />
         </MainLayout>
+      </SectionContainer>
+    </PageContainer>
+  )
+}
+
+export const PublicDetailIdentifierPageSkeleton = () => {
+  return (
+    <PageContainer withFooter>
+      <SectionContainer container padded className="min-h-screen">
+        <PublicLayout
+          headerContent={
+            <Heading size={'h2'}>{m.page_identifier_title()}</Heading>
+          }
+        >
+          <PublicIdentifierViewSkeleton />
+        </PublicLayout>
       </SectionContainer>
     </PageContainer>
   )

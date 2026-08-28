@@ -7,9 +7,13 @@ import {
 import {
   MainLayout,
   PageContainer,
+  PublicLayout,
   SectionContainer,
 } from '@/components/layouts'
-import { PlatformViewSkeleton } from '@/features/platform/components'
+import {
+  PlatformViewSkeleton,
+  PublicPlatformViewSkeleton,
+} from '@/features/platform/components'
 import * as m from '@/generated/paraglide/messages'
 
 export const EditPlatformFormSkeleton = () => {
@@ -36,6 +40,22 @@ export const DetailPlatformPageSkeleton = () => {
         >
           <PlatformViewSkeleton />
         </MainLayout>
+      </SectionContainer>
+    </PageContainer>
+  )
+}
+
+export const PublicDetailPlatformPageSkeleton = () => {
+  return (
+    <PageContainer withFooter>
+      <SectionContainer container padded className="min-h-screen">
+        <PublicLayout
+          headerContent={
+            <Heading size={'h2'}>{m.page_platform_title()}</Heading>
+          }
+        >
+          <PublicPlatformViewSkeleton />
+        </PublicLayout>
       </SectionContainer>
     </PageContainer>
   )

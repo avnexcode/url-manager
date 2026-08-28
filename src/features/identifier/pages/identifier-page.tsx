@@ -152,7 +152,7 @@ export const IdentifierPage = () => {
                   <EmptyState title={m.component_identifier_empty_state()} />
                 ),
               })}
-          <footer>
+          <footer className="pt-5">
             <PagePagination
               total={identifiers?.meta.total ?? 0}
               currentPage={queryParams.page}
