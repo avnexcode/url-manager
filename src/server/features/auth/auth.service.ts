@@ -2,6 +2,7 @@ import type { DBClient } from '@/server/db'
 import { SupabaseService } from '@/server/services'
 import { capitalizeSentence } from '@/utils'
 import { CommonService } from '../common'
+import { DummyService } from '../dummy'
 import { SettingService } from '../settings'
 import type { CreateUserResponse, UpdateUserResponse } from '../user'
 import { UserRepository, UserService } from '../user'
@@ -59,6 +60,7 @@ export class AuthService extends CommonService {
       })
 
       await SettingService.create(db, { userId })
+      await DummyService.init(db, userId)
 
       await this.auth.emailVerification(email)
 
@@ -82,6 +84,7 @@ export class AuthService extends CommonService {
       })
 
       await SettingService.create(db, { userId })
+      await DummyService.init(db, userId)
 
       await this.auth.updateUsername(userId, user.username)
       await this.auth.updateLanguage(userId, 'ID')
