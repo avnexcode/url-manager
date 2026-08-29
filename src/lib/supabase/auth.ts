@@ -19,12 +19,7 @@ export const getUser = createServerFn({ method: 'GET' }).handler(async () => {
 })
 
 export const signIn = createServerFn({ method: 'POST' })
-  .validator(
-    z.object({
-      email: z.email(),
-      password: z.string().min(8),
-    }),
-  )
+  .validator(z.object({ email: z.email(), password: z.string().min(1) }))
   .handler(async ({ data: { email, password } }) => {
     const supabase = createSSRClient()
 
@@ -33,7 +28,11 @@ export const signIn = createServerFn({ method: 'POST' })
       password,
     })
 
-    if (error) throw error
+    if (error) {
+      const { code, status, message } = error
+
+      throw new Error(JSON.stringify({ code, status, message }))
+    }
 
     return { success: true }
   })
@@ -43,7 +42,11 @@ export const signOut = createServerFn({ method: 'POST' }).handler(async () => {
 
   const { error } = await supabase.auth.signOut()
 
-  if (error) throw error
+  if (error) {
+    const { code, status, message } = error
+
+    throw new Error(JSON.stringify({ code, status, message }))
+  }
 
   return { success: true }
 })

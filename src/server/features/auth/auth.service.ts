@@ -1,12 +1,19 @@
+import { createSSRClient } from '@/lib/supabase/server'
 import type { DBClient } from '@/server/db'
 import { SupabaseService } from '@/server/services'
 import { capitalizeSentence } from '@/utils'
 import { CommonService } from '../common'
-import { DummyService } from '../dummy'
-import { SettingService } from '../settings'
-import type { CreateUserResponse, UpdateUserResponse } from '../user'
+import type {
+  CreateUserResponse,
+  DeleteUserResponse,
+  UpdateUserResponse,
+} from '../user'
 import { UserRepository, UserService } from '../user'
-import type { RegisterRequest, UpdatePasswordRequest } from './auth.model'
+import type {
+  DeleteAccountRequest,
+  RegisterRequest,
+  UpdatePasswordRequest,
+} from './auth.model'
 
 export class AuthService extends CommonService {
   private static auth = SupabaseService.auth
@@ -21,6 +28,25 @@ export class AuthService extends CommonService {
         message: capitalizeSentence(
           this.m.schema_validation_password_confirm_password_do_not_match(),
         ),
+      })
+    }
+  }
+
+  private static checkIsValidCredentials = async (
+    email: string,
+    password: string,
+  ) => {
+    const supabase = createSSRClient()
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) {
+      this.newError({
+        code: 'BAD_REQUEST',
+        message: this.m.error_message_supabase_auth_invalid_credentials(),
       })
     }
   }
@@ -59,9 +85,6 @@ export class AuthService extends CommonService {
         provider: 'CREDENTIALS',
       })
 
-      await SettingService.create(db, { userId })
-      await DummyService.init(db, userId)
-
       await this.auth.emailVerification(email)
 
       return user
@@ -76,15 +99,14 @@ export class AuthService extends CommonService {
     db: DBClient,
     userId: string,
     email: string,
+    avatar: string,
   ): Promise<CreateUserResponse> => {
     try {
       const user = await UserService.create(db, userId, {
         email,
         provider: 'GOOGLE',
+        avatar,
       })
-
-      await SettingService.create(db, { userId })
-      await DummyService.init(db, userId)
 
       await this.auth.updateUsername(userId, user.username)
       await this.auth.updateLanguage(userId, 'ID')
@@ -102,9 +124,15 @@ export class AuthService extends CommonService {
     userId: string,
     request: UpdatePasswordRequest,
   ): Promise<UpdateUserResponse> => {
-    const { password, confirmPassword } = request
+    const { currentPassword, password, confirmPassword } = request
 
     const { createdAt, ...user } = await UserService.getById(db, userId)
+
+    if (user.providers.includes('CREDENTIALS')) {
+      await this.checkIsValidCredentials(user.email, currentPassword)
+    } else {
+      await UserService.update(db, userId, { provider: 'CREDENTIALS' })
+    }
 
     this.checkIsPasswordMatch(password, confirmPassword)
 
@@ -113,8 +141,28 @@ export class AuthService extends CommonService {
     return user
   }
 
-  static deleteUser = async (db: DBClient, id: string) => {
-    await UserService.delete(db, { id })
+  static deleteUser = async (
+    db: DBClient,
+    id: string,
+  ): Promise<DeleteUserResponse> => {
+    const user = await UserService.delete(db, { id })
+
     await this.auth.deleteUser(id)
+
+    return user
+  }
+
+  static deleteAccount = async (
+    db: DBClient,
+    userId: string,
+    request: DeleteAccountRequest,
+  ): Promise<DeleteUserResponse> => {
+    const { password } = request
+
+    const user = await UserService.getById(db, userId)
+
+    await this.checkIsValidCredentials(user.email, password)
+
+    return await this.deleteUser(db, userId)
   }
 }

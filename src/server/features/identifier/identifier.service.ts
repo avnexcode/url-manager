@@ -37,7 +37,7 @@ export class IdentifierService extends CommonService {
     db: DBClient,
     id: string,
   ): Promise<void> => {
-    const count = await Repository.countById(db, id)
+    const count = await Repository.countUniqueId(db, id)
 
     this.checkExists(count === 0)
   }
@@ -46,7 +46,7 @@ export class IdentifierService extends CommonService {
     db: DBClient,
     ids: string[],
   ): Promise<void> => {
-    const count = await Repository.countByIds(db, ids)
+    const count = await Repository.countUniqueIds(db, ids)
 
     this.checkExists(count !== ids.length)
   }
@@ -58,7 +58,7 @@ export class IdentifierService extends CommonService {
     value: string,
   ): Promise<void> => {
     if (key === 'title') {
-      const count = await Repository.countByUserAndTitle(db, userId, value)
+      const count = await Repository.countUniqueUserAndTitle(db, userId, value)
 
       this.checkExists(
         count !== 0,
@@ -163,6 +163,15 @@ export class IdentifierService extends CommonService {
     return { redirectUrl }
   }
 
+  static getIdsByUser = async (
+    db: DBClient,
+    userId: string,
+  ): Promise<string[]> => {
+    const identifiers = await Repository.findIdsUniqueUser(db, userId)
+
+    return identifiers.map((identifier) => identifier.id)
+  }
+
   static create = async (
     db: DBClient,
     userId: string,
@@ -174,7 +183,7 @@ export class IdentifierService extends CommonService {
 
     let slug = generateSlug({ text: title })
 
-    const existsSLugCount = await Repository.countBySlug(db, slug)
+    const existsSLugCount = await Repository.countUniqueSlug(db, slug)
 
     if (existsSLugCount > 0) {
       slug = generateSlug({ text: title })
@@ -214,11 +223,11 @@ export class IdentifierService extends CommonService {
 
     for (const item of requests) {
       let slug = generateSlug({ text: item.title })
-      let existsSlugCount = await Repository.countBySlug(db, slug)
+      let existsSlugCount = await Repository.countUniqueSlug(db, slug)
 
       while (existsSlugCount > 0 || usedSlugs.has(slug)) {
         slug = generateSlug({ text: item.title })
-        existsSlugCount = await Repository.countBySlug(db, slug)
+        existsSlugCount = await Repository.countUniqueSlug(db, slug)
       }
 
       usedSlugs.add(slug)
@@ -252,7 +261,11 @@ export class IdentifierService extends CommonService {
     let slug = existingIdentifier.slug
 
     if (title) {
-      const countTitle = await Repository.countByUserAndTitle(db, userId, title)
+      const countTitle = await Repository.countUniqueUserAndTitle(
+        db,
+        userId,
+        title,
+      )
 
       const isSimilarTitle =
         title.toLowerCase() === existingIdentifier.title.toLowerCase()

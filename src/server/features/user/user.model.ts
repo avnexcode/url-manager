@@ -1,3 +1,4 @@
+import type { Prisma, User } from '@/generated/prisma/client'
 import type z from 'zod'
 import type {
   baseUserRequest,
@@ -5,7 +6,6 @@ import type {
   deleteUserRequest,
   updateUserRequest,
 } from './user.validation'
-import type { Prisma, User } from '@/generated/prisma/client'
 
 export type BaseUserRequest = z.infer<typeof baseUserRequest>
 
@@ -21,4 +21,4 @@ export type UpdateUserResponse = Omit<User, 'createdAt'>
 
 export type CreateUserResponse = Omit<User, 'updatedAt'>
 
-export type DeleteUserResponse = Pick<User, 'id' | 'image'>
+export type DeleteUserResponse = Pick<User, 'id' | 'image' | 'avatar'>

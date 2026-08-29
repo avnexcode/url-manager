@@ -16,7 +16,12 @@ export const createUserRequest = baseUserRequest.pick({
   provider: true,
 })
 
-export const updateUserRequest = baseUserRequest.partial().omit({ email: true })
+export const updateUserRequest = baseUserRequest
+  .partial()
+  .omit({ email: true, provider: true })
+  .extend({
+    provider: z.enum(loginProvider).optional(),
+  })
 
 export const deleteUserRequest = z.object({
   id: z.uuid(),

@@ -21,17 +21,18 @@ const adapter = new PrismaPg({
 const prisma = new PrismaClient({ adapter })
 
 async function main() {
+  const userId = '92512802-f85a-491c-a2c8-c000e837cc8f'
   console.log('🌱 Seeding database...')
 
-  await prisma.platform.deleteMany()
-  await prisma.identifier.deleteMany()
-  await prisma.url.deleteMany()
+  await prisma.url.deleteMany({ where: { userId } })
+  await prisma.platform.deleteMany({ where: { userId } })
+  await prisma.identifier.deleteMany({ where: { userId } })
 
   const parsedPlatforms = bulkCreatePlatformsRequest.parse(platformsData)
 
   const platforms = await PlatformService.createMany(
     prisma,
-    '991b0f1e-1a66-4f43-bf54-0e005a2d3ec7',
+    userId,
     parsedPlatforms,
   )
 
@@ -39,21 +40,21 @@ async function main() {
 
   const identifiers = await IdentifierService.createMany(
     prisma,
-    '991b0f1e-1a66-4f43-bf54-0e005a2d3ec7',
+    userId,
     parsedIdentifiers,
   )
 
-  const parsedUrls = bulkCreateUrlsRequest.parse(urlsData)
+  // const parsedUrls = bulkCreateUrlsRequest.parse(urlsData)
 
-  const urls = await UrlService.createMany(
-    prisma,
-    '991b0f1e-1a66-4f43-bf54-0e005a2d3ec7',
-    parsedUrls,
-  )
+  // const urls = await UrlService.createMany(
+  //   prisma,
+  //   userId,
+  //   parsedUrls,
+  // )
 
   console.log(`✅ Created ${platforms.count} platforms`)
   console.log(`✅ Created ${identifiers.count} identifiers`)
-  console.log(`✅ Created ${urls.count} urls`)
+  // console.log(`✅ Created ${urls.count} urls`)
 }
 
 main()

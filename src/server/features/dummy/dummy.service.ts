@@ -8,7 +8,7 @@ export class DummyService extends CommonService {
     return [
       {
         title: 'Instagram',
-        description: 'Tautan menuju akun Instagram pribadi.',
+        description: 'Tautan menuju akun Instagram Programmer Ganteng.',
         url: 'https://www.instagram.com/fauzi.n4_',
         thumbnail: null,
         platformId: null,
@@ -16,7 +16,7 @@ export class DummyService extends CommonService {
       },
       {
         title: 'Facebook',
-        description: 'Tautan menuju akun Facebook pribadi.',
+        description: 'Tautan menuju akun Facebook Programmer Ganteng.',
         url: 'https://www.facebook.com/muhammad.fauzi.nur.aziz',
         thumbnail: null,
         platformId: null,
@@ -32,7 +32,7 @@ export class DummyService extends CommonService {
       },
       {
         title: 'GitHub',
-        description: 'Tautan menuju akun GitHub pribadi.',
+        description: 'Tautan menuju akun GitHub Programmer Ganteng.',
         url: 'https://github.com/avnexcode',
         thumbnail: null,
         platformId: null,
@@ -40,7 +40,7 @@ export class DummyService extends CommonService {
       },
       {
         title: 'X (Twitter)',
-        description: 'Tautan menuju akun X (Twitter) pribadi.',
+        description: 'Tautan menuju akun X (Twitter) Programmer Ganteng.',
         url: 'https://x.com/Avnexeed2',
         thumbnail: null,
         platformId: null,

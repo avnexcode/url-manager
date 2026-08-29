@@ -102,7 +102,7 @@ export const AlertDialogFooter = ({
     <div
       data-slot="alert-dialog-footer"
       className={cn(
-        'flex flex-col-reverse gap-3 sm:flex-row sm:justify-end',
+        'flex flex-col gap-3 sm:flex-row sm:justify-end',
         className,
       )}
       {...props}

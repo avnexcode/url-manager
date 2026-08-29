@@ -1,9 +1,14 @@
 import {
   AuthService,
+  deleteAccountRequest,
   registerRequest,
   updatePasswordRequest,
 } from '@/server/features/auth'
-import type { UpdateUserResponse, UserResponse } from '@/server/features/user'
+import type {
+  DeleteUserResponse,
+  UpdateUserResponse,
+  UserResponse,
+} from '@/server/features/user'
 import { updateUserRequest, UserService } from '@/server/features/user'
 import { errorFilter } from '@/server/filters'
 import z from 'zod'
@@ -56,6 +61,19 @@ export const authRouter = createTRPCRouter({
       const { request } = input
       try {
         const user = await AuthService.updatePassword(db, auth.id, request)
+        return user
+      } catch (error) {
+        return errorFilter(error)
+      }
+    }),
+
+  deleteAccount: protectedProcedure
+    .input(z.object({ request: deleteAccountRequest }))
+    .mutation(async ({ ctx, input }): Promise<DeleteUserResponse> => {
+      const { auth, db } = ctx
+      const { request } = input
+      try {
+        const user = await AuthService.deleteAccount(db, auth.id, request)
         return user
       } catch (error) {
         return errorFilter(error)

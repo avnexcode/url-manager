@@ -1,4 +1,6 @@
+import { passwordValidation } from '@/features/auth/schemas/password-schema'
 import * as m from '@/generated/paraglide/messages'
+import { passwordField } from '@/schemas'
 import { capitalizeSentence } from '@/utils'
 import z from 'zod'
 
@@ -37,7 +39,7 @@ export const updateAccountFormSchema = z.object({
       ),
     })
     .refine(
-      (file) => file.size <= 10 * 1024 * 1024, // max 10 MB
+      (file) => file.size <= 2 * 1024 * 1024, // max 2 MB
       {
         message: capitalizeSentence(
           m.schema_validation_file_max_size({
@@ -60,4 +62,42 @@ export const updateAccountFormSchema = z.object({
     )
     .optional()
     .nullable(),
+})
+
+export const updatePasswordFormSchema = z
+  .object({
+    currentPassword: z.string().min(
+      1,
+      capitalizeSentence(
+        m.schema_validation_common_required({
+          field: passwordField,
+        }),
+      ),
+    ),
+    password: passwordValidation,
+    confirmPassword: z
+      .string()
+      .min(
+        1,
+        capitalizeSentence(
+          m.schema_validation_password_confirm_password_required(),
+        ),
+      ),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: capitalizeSentence(
+      m.schema_validation_password_confirm_password_do_not_match(),
+    ),
+    path: ['confirmPassword'],
+  })
+
+export const deleteAccountFormSchema = z.object({
+  password: z.string().min(
+    1,
+    capitalizeSentence(
+      m.schema_validation_common_required({
+        field: passwordField,
+      }),
+    ),
+  ),
 })

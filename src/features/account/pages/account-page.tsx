@@ -4,16 +4,29 @@ import {
   PageContainer,
   SectionContainer,
 } from '@/components/layouts'
-import { useAuth } from '@/hooks'
 import * as m from '@/generated/paraglide/messages'
-
+import { useAuth } from '@/hooks'
 import { useUpdateAccount } from '../../auth/hooks'
-import { EditAccountForm } from '../forms'
+import { DeleteAccountForm, EditAccountForm, EditPasswordForm } from '../forms'
+import { useDeleteAccount } from '../hooks/use-delete-account'
+import { useUpdatePassword } from '../hooks/use-update-password'
 
 export const AccountPage = () => {
   const { user } = useAuth()
 
   const { form, onSubmit, hasChanges, isPending } = useUpdateAccount(user)
+
+  const {
+    form: updatePasswordForm,
+    onSubmit: onUpdatePasswordSubmit,
+    isPending: isUpdatePasswordPending,
+  } = useUpdatePassword()
+
+  const {
+    form: deleteAccountForm,
+    onSubmit: onDeleteAccountSubmit,
+    isPending: isDeleteAccountPending,
+  } = useDeleteAccount()
 
   return (
     <PageContainer withHeader withFooter>
@@ -22,7 +35,7 @@ export const AccountPage = () => {
           headerContent={
             <Heading size={'h2'}>{m.page_auth_account_title()}</Heading>
           }
-          className="space-y-5"
+          className="space-y-25"
         >
           <EditAccountForm
             form={form}
@@ -32,6 +45,16 @@ export const AccountPage = () => {
             email={user.email}
             image={user.image}
             avatar={user.avatar}
+          />
+          <EditPasswordForm
+            form={updatePasswordForm}
+            onSubmit={onUpdatePasswordSubmit}
+            isPending={isUpdatePasswordPending}
+          />
+          <DeleteAccountForm
+            form={deleteAccountForm}
+            onSubmit={onDeleteAccountSubmit}
+            isPending={isDeleteAccountPending}
           />
         </MainLayout>
       </SectionContainer>

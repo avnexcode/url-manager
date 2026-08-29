@@ -56,6 +56,7 @@ export class UserRepository extends CommonRepository {
         username,
         email: request.email,
         providers: [request.provider],
+        avatar: request.avatar,
       },
       omit: { updatedAt: true },
     })
@@ -90,7 +91,7 @@ export class UserRepository extends CommonRepository {
 
     const user = await db.user.delete({
       where: { id },
-      select: { id: true, image: true },
+      select: { id: true, image: true, avatar: true },
     })
 
     return user

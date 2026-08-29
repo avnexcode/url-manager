@@ -172,7 +172,7 @@ export const ConfirmDialog = ({
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent className="rounded-none">
+      <AlertDialogContent className="rounded-none sm:max-w-2xl">
         <AlertDialogHeader>
           <AlertDialogTitle>{messages.title({ model })}</AlertDialogTitle>
           <AlertDialogDescription>

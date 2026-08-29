@@ -5,7 +5,6 @@ import { signIn } from '@/lib/supabase/auth'
 import { SupabaseAuthErrorCode } from '@/lib/supabase/auth-error-code'
 import { capitalizeSentence } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { AuthError } from '@supabase/supabase-js'
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -37,7 +36,9 @@ export const useLogin = (
       if (redirect) void navigate({ to: redirectTo || '/{-$locale}/dashboard' })
     } catch (error) {
       onError?.()
-      const code = (error as AuthError).code
+
+      const code = JSON.parse((error as Error).message)?.code
+
       form.setValue('password', '')
       switch (code) {
         case SupabaseAuthErrorCode.invalid_credentials:

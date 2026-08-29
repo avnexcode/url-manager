@@ -173,6 +173,8 @@
   "page_shared_form_footer_update_button_loading": "Updating",
   "page_shared_form_footer_submit_button": "Submit",
   "page_shared_form_footer_submit_button_loading": "Submiting",
+  "page_shared_form_footer_delete_button": "Delete",
+  "page_shared_form_footer_delete_button_loading": "Deleting",
 
   "page_auth_register_title": "Register",
   "page_auth_form_register_header_title": "Register",
@@ -196,6 +198,8 @@
   "page_auth_account_title": "Account",
   "page_auth_form_account_header_title": "Account",
   "page_auth_form_account_header_description": "Modify the account details as needed.",
+  "page_auth_form_delete_account_header_title": "Delete Account",
+  "page_auth_form_delete_account_header_description": "Permanently delete your account and all associated data. This action cannot be undone.",
   "page_auth_form_update_password_header_title": "Update Password",
   "page_auth_form_update_password_header_description": "Make sure your new password is strong and secure.",
 

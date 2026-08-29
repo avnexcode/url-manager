@@ -44,7 +44,10 @@ class SupabaseAuthService {
     return { userId }
   }
 
-  static updateLanguage = async (id: string, language: Language) => {
+  static updateLanguage = async (
+    id: string,
+    language: Language,
+  ): Promise<void> => {
     const { error } = await supabase.auth.admin.updateUserById(id, {
       app_metadata: { language: language.toLocaleLowerCase() },
     })
@@ -52,7 +55,10 @@ class SupabaseAuthService {
     if (error) throw error
   }
 
-  static updateFullName = async (id: string, fullName: string) => {
+  static updateFullName = async (
+    id: string,
+    fullName: string,
+  ): Promise<void> => {
     const name = capitalizeWords(fullName)
     const { error } = await supabase.auth.admin.updateUserById(id, {
       user_metadata: { name, full_name: name, display_name: name },
@@ -61,7 +67,10 @@ class SupabaseAuthService {
     if (error) throw error
   }
 
-  static updateUsername = async (id: string, username: string) => {
+  static updateUsername = async (
+    id: string,
+    username: string,
+  ): Promise<void> => {
     const { error } = await supabase.auth.admin.updateUserById(id, {
       user_metadata: { username },
     })
@@ -69,7 +78,10 @@ class SupabaseAuthService {
     if (error) throw error
   }
 
-  static updatePassword = async (id: string, password: string) => {
+  static updatePassword = async (
+    id: string,
+    password: string,
+  ): Promise<void> => {
     const { error } = await supabase.auth.admin.updateUserById(id, {
       password,
     })
@@ -78,7 +90,9 @@ class SupabaseAuthService {
   }
 
   static deleteUser = async (userId: string): Promise<void> => {
-    await supabase.auth.admin.deleteUser(userId)
+    const { error } = await supabase.auth.admin.deleteUser(userId)
+
+    if (error) throw error
   }
 
   static deleteManyUsers = async (userIds: string[]): Promise<void> => {

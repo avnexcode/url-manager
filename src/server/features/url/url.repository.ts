@@ -133,7 +133,7 @@ export class UrlRepository extends CommonRepository {
     return urls
   }
 
-  static findById = async (
+  static findUniqueId = async (
     db: DBClient,
     userId: string,
     id: string,
@@ -169,7 +169,7 @@ export class UrlRepository extends CommonRepository {
     return url
   }
 
-  static findIdsByRelation = async (
+  static findIdsUniqueRelation = async (
     db: DBClient,
     relation: RelationParams,
   ): Promise<{ id: string }[]> => {
@@ -206,19 +206,22 @@ export class UrlRepository extends CommonRepository {
     return count
   }
 
-  static countByIds = async (db: DBClient, ids: string[]): Promise<number> => {
+  static countUniqueIds = async (
+    db: DBClient,
+    ids: string[],
+  ): Promise<number> => {
     const count = await db.url.count({ where: { id: { in: ids } } })
 
     return count
   }
 
-  static countById = async (db: DBClient, id: string): Promise<number> => {
+  static countUniqueId = async (db: DBClient, id: string): Promise<number> => {
     const count = await db.url.count({ where: { id } })
 
     return count
   }
 
-  static countByUserAndTitle = async (
+  static countUniqueUserAndTitle = async (
     db: DBClient,
     userId: string,
     title: string,

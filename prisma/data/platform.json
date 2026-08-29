@@ -398,5 +398,1605 @@
     "visibility": "PUBLIC",
     "password": null,
     "thumbnail": null
+  },
+  {
+    "title": "Slack",
+    "description": "Aplikasi komunikasi tim untuk kolaborasi dan pesan kerja.",
+    "url": "https://slack.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Zoom",
+    "description": "Aplikasi video konferensi untuk rapat dan webinar online.",
+    "url": "https://zoom.us",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Google Meet",
+    "description": "Layanan video call dari Google untuk pertemuan virtual.",
+    "url": "https://meet.google.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Microsoft Teams",
+    "description": "Platform kolaborasi tim dengan chat, rapat, dan file bersama.",
+    "url": "https://teams.microsoft.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Skype",
+    "description": "Aplikasi panggilan video dan pesan instan lintas perangkat.",
+    "url": "https://skype.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Signal",
+    "description": "Aplikasi pesan terenkripsi yang mengutamakan privasi pengguna.",
+    "url": "https://signal.org",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Viber",
+    "description": "Aplikasi pesan dan panggilan gratis melalui internet.",
+    "url": "https://viber.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Line",
+    "description": "Aplikasi pesan populer dengan stiker dan fitur sosial.",
+    "url": "https://line.me",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "WeChat",
+    "description": "Aplikasi serba guna untuk pesan, pembayaran, dan media sosial.",
+    "url": "https://wechat.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "KakaoTalk",
+    "description": "Aplikasi pesan instan populer asal Korea Selatan.",
+    "url": "https://kakaocorp.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Trello",
+    "description": "Alat manajemen tugas berbasis papan Kanban untuk tim.",
+    "url": "https://trello.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Asana",
+    "description": "Platform manajemen proyek untuk melacak pekerjaan tim.",
+    "url": "https://asana.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Monday.com",
+    "description": "Alat manajemen kerja untuk mengatur alur proyek tim.",
+    "url": "https://monday.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "ClickUp",
+    "description": "Platform produktivitas all-in-one untuk manajemen proyek.",
+    "url": "https://clickup.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Airtable",
+    "description": "Alat basis data fleksibel berbentuk spreadsheet untuk tim.",
+    "url": "https://airtable.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Dropbox",
+    "description": "Layanan penyimpanan file dan berbagi dokumen berbasis cloud.",
+    "url": "https://dropbox.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Google Drive",
+    "description": "Layanan penyimpanan cloud untuk dokumen dan file pribadi.",
+    "url": "https://drive.google.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "OneDrive",
+    "description": "Layanan penyimpanan cloud dari Microsoft untuk file pengguna.",
+    "url": "https://onedrive.live.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "iCloud",
+    "description": "Layanan penyimpanan dan sinkronisasi data untuk perangkat Apple.",
+    "url": "https://icloud.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Box",
+    "description": "Platform penyimpanan dan berbagi file untuk kebutuhan bisnis.",
+    "url": "https://box.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Evernote",
+    "description": "Aplikasi pencatatan untuk menyimpan ide dan informasi penting.",
+    "url": "https://evernote.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Todoist",
+    "description": "Aplikasi daftar tugas untuk mengelola pekerjaan harian.",
+    "url": "https://todoist.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Google Calendar",
+    "description": "Aplikasi kalender untuk menjadwalkan acara dan pengingat.",
+    "url": "https://calendar.google.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Confluence",
+    "description": "Alat dokumentasi dan berbagi pengetahuan untuk tim kerja.",
+    "url": "https://atlassian.com/software/confluence",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Jira",
+    "description": "Alat pelacakan proyek dan bug untuk tim pengembang.",
+    "url": "https://atlassian.com/software/jira",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Basecamp",
+    "description": "Platform manajemen proyek sederhana untuk kolaborasi tim.",
+    "url": "https://basecamp.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Wrike",
+    "description": "Alat manajemen proyek untuk perencanaan dan pelaporan kerja.",
+    "url": "https://wrike.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Smartsheet",
+    "description": "Platform manajemen kerja berbasis spreadsheet dinamis.",
+    "url": "https://smartsheet.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Miro",
+    "description": "Papan kolaborasi visual untuk brainstorming dan perencanaan tim.",
+    "url": "https://miro.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Lucidchart",
+    "description": "Alat pembuatan diagram dan flowchart secara online.",
+    "url": "https://lucidchart.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Gmail",
+    "description": "Layanan email gratis dari Google untuk komunikasi pribadi.",
+    "url": "https://mail.google.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Outlook",
+    "description": "Layanan email dan kalender dari Microsoft.",
+    "url": "https://outlook.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Yahoo Mail",
+    "description": "Layanan email populer dengan fitur berita dan kalender.",
+    "url": "https://mail.yahoo.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Zoho Mail",
+    "description": "Layanan email profesional untuk kebutuhan bisnis kecil.",
+    "url": "https://zoho.com/mail",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "ProtonMail",
+    "description": "Layanan email terenkripsi yang mengutamakan privasi pengguna.",
+    "url": "https://proton.me/mail",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "AOL Mail",
+    "description": "Layanan email lama yang masih digunakan banyak orang.",
+    "url": "https://mail.aol.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "GMX",
+    "description": "Layanan email gratis dengan kapasitas penyimpanan besar.",
+    "url": "https://gmx.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Fastmail",
+    "description": "Layanan email berbayar dengan fokus pada kecepatan dan privasi.",
+    "url": "https://fastmail.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Canva",
+    "description": "Alat desain grafis online untuk membuat konten visual.",
+    "url": "https://canva.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Adobe Portfolio",
+    "description": "Situs portofolio kreatif terintegrasi dengan produk Adobe.",
+    "url": "https://myportfolio.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Unsplash",
+    "description": "Sumber foto gratis berkualitas tinggi untuk berbagai kebutuhan.",
+    "url": "https://unsplash.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Pexels",
+    "description": "Platform foto dan video gratis untuk kreator konten.",
+    "url": "https://pexels.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "500px",
+    "description": "Komunitas fotografi untuk berbagi dan menjual karya foto.",
+    "url": "https://500px.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Flickr",
+    "description": "Platform berbagi dan penyimpanan foto online.",
+    "url": "https://flickr.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "DeviantArt",
+    "description": "Komunitas seniman untuk berbagi karya seni digital.",
+    "url": "https://deviantart.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "ArtStation",
+    "description": "Platform portofolio untuk seniman digital dan ilustrator.",
+    "url": "https://artstation.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Piktochart",
+    "description": "Alat pembuatan infografis dan presentasi visual.",
+    "url": "https://piktochart.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Venngage",
+    "description": "Alat desain infografis untuk kebutuhan bisnis dan edukasi.",
+    "url": "https://venngage.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "VSCO",
+    "description": "Aplikasi edit foto dengan filter estetik untuk kreator.",
+    "url": "https://vsco.co",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Adobe Lightroom",
+    "description": "Aplikasi pengeditan dan pengelolaan foto profesional.",
+    "url": "https://lightroom.adobe.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Photobucket",
+    "description": "Layanan penyimpanan dan berbagi foto secara online.",
+    "url": "https://photobucket.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Imgur",
+    "description": "Platform berbagi gambar dan meme populer.",
+    "url": "https://imgur.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Giphy",
+    "description": "Mesin pencari dan platform berbagi GIF animasi.",
+    "url": "https://giphy.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Tenor",
+    "description": "Platform pencarian GIF untuk digunakan di berbagai aplikasi.",
+    "url": "https://tenor.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Freepik",
+    "description": "Sumber daya grafis vektor dan gambar gratis untuk desain.",
+    "url": "https://freepik.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Envato Elements",
+    "description": "Layanan langganan aset kreatif untuk desain dan video.",
+    "url": "https://elements.envato.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Creative Market",
+    "description": "Marketplace aset desain seperti font dan template.",
+    "url": "https://creativemarket.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Draw.io",
+    "description": "Alat pembuatan diagram gratis berbasis web.",
+    "url": "https://draw.io",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Tumblr",
+    "description": "Platform microblog untuk berbagi teks, foto, dan video.",
+    "url": "https://tumblr.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "LiveJournal",
+    "description": "Platform blog lama untuk menulis jurnal pribadi online.",
+    "url": "https://livejournal.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "VK",
+    "description": "Jejaring sosial populer di Rusia dan negara sekitarnya.",
+    "url": "https://vk.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Weibo",
+    "description": "Platform microblog populer di Tiongkok.",
+    "url": "https://weibo.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Douyin",
+    "description": "Versi Tiongkok dari platform video pendek populer.",
+    "url": "https://douyin.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Kuaishou",
+    "description": "Platform video pendek populer asal Tiongkok.",
+    "url": "https://kuaishou.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Bilibili",
+    "description": "Platform video dan komunitas hiburan asal Tiongkok.",
+    "url": "https://bilibili.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Niconico",
+    "description": "Platform berbagi video populer di Jepang.",
+    "url": "https://nicovideo.jp",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Clubhouse",
+    "description": "Aplikasi obrolan audio langsung berbasis ruang diskusi.",
+    "url": "https://clubhouse.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Quora",
+    "description": "Platform tanya jawab untuk berbagi pengetahuan.",
+    "url": "https://quora.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Blogger",
+    "description": "Platform blog gratis dari Google untuk menulis online.",
+    "url": "https://blogger.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "WordPress",
+    "description": "Platform pembuatan situs web dan blog paling populer.",
+    "url": "https://wordpress.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Wix",
+    "description": "Platform pembuatan situs web dengan editor drag-and-drop.",
+    "url": "https://wix.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Squarespace",
+    "description": "Platform pembuatan situs web dengan desain modern.",
+    "url": "https://squarespace.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Webflow",
+    "description": "Platform desain situs web visual untuk profesional.",
+    "url": "https://webflow.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Shopify",
+    "description": "Platform pembuatan toko online untuk bisnis e-commerce.",
+    "url": "https://shopify.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "BigCommerce",
+    "description": "Platform e-commerce untuk membangun toko online skala besar.",
+    "url": "https://bigcommerce.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Amazon",
+    "description": "Marketplace belanja online terbesar di dunia.",
+    "url": "https://amazon.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "eBay",
+    "description": "Marketplace lelang dan jual beli barang online.",
+    "url": "https://ebay.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "AliExpress",
+    "description": "Marketplace belanja online internasional asal Tiongkok.",
+    "url": "https://aliexpress.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Bukalapak",
+    "description": "Marketplace belanja online lokal Indonesia.",
+    "url": "https://bukalapak.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Lazada",
+    "description": "Marketplace belanja online populer di Asia Tenggara.",
+    "url": "https://lazada.co.id",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Blibli",
+    "description": "Marketplace belanja online terpercaya di Indonesia.",
+    "url": "https://blibli.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "OLX",
+    "description": "Platform jual beli barang bekas dan baru secara online.",
+    "url": "https://olx.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Carousell",
+    "description": "Aplikasi jual beli barang bekas antar pengguna.",
+    "url": "https://carousell.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Mercari",
+    "description": "Aplikasi jual beli barang bekas populer di Jepang dan AS.",
+    "url": "https://mercari.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Depop",
+    "description": "Marketplace fashion bekas dan vintage untuk anak muda.",
+    "url": "https://depop.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Poshmark",
+    "description": "Marketplace jual beli fashion bekas dan baru.",
+    "url": "https://poshmark.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Craigslist",
+    "description": "Situs iklan baris klasik untuk jual beli lokal.",
+    "url": "https://craigslist.org",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Facebook Marketplace",
+    "description": "Fitur jual beli barang di dalam platform Facebook.",
+    "url": "https://facebook.com/marketplace",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Vinted",
+    "description": "Marketplace pakaian bekas untuk jual beli antar pengguna.",
+    "url": "https://vinted.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Sellfy",
+    "description": "Platform penjualan produk digital dan merchandise online.",
+    "url": "https://sellfy.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Payhip",
+    "description": "Platform penjualan produk digital dengan proses sederhana.",
+    "url": "https://payhip.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Gumtree",
+    "description": "Situs iklan baris untuk jual beli barang secara lokal.",
+    "url": "https://gumtree.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "BigCartel",
+    "description": "Platform toko online sederhana untuk seniman dan kreator kecil.",
+    "url": "https://bigcartel.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Airbnb",
+    "description": "Platform pemesanan akomodasi dan penginapan unik.",
+    "url": "https://airbnb.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Booking.com",
+    "description": "Platform pemesanan hotel dan akomodasi secara global.",
+    "url": "https://booking.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Traveloka",
+    "description": "Platform pemesanan tiket dan hotel populer di Asia Tenggara.",
+    "url": "https://traveloka.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Tiket.com",
+    "description": "Platform pemesanan tiket perjalanan dan akomodasi Indonesia.",
+    "url": "https://tiket.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Agoda",
+    "description": "Platform pemesanan hotel dengan fokus pasar Asia.",
+    "url": "https://agoda.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Skyscanner",
+    "description": "Mesin pencari tiket pesawat dan perjalanan termurah.",
+    "url": "https://skyscanner.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Uber",
+    "description": "Aplikasi transportasi online untuk perjalanan sehari-hari.",
+    "url": "https://uber.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Lyft",
+    "description": "Aplikasi transportasi online populer di Amerika Serikat.",
+    "url": "https://lyft.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Grab",
+    "description": "Aplikasi transportasi dan layanan sehari-hari di Asia Tenggara.",
+    "url": "https://grab.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Gojek",
+    "description": "Aplikasi layanan transportasi dan on-demand asal Indonesia.",
+    "url": "https://gojek.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "DoorDash",
+    "description": "Aplikasi pengantaran makanan populer di Amerika Serikat.",
+    "url": "https://doordash.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Uber Eats",
+    "description": "Layanan pengantaran makanan dari aplikasi Uber.",
+    "url": "https://ubereats.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "GrabFood",
+    "description": "Layanan pengantaran makanan dari aplikasi Grab.",
+    "url": "https://food.grab.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Deliveroo",
+    "description": "Layanan pengantaran makanan populer di Eropa.",
+    "url": "https://deliveroo.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Postmates",
+    "description": "Layanan pengantaran makanan dan barang di Amerika Serikat.",
+    "url": "https://postmates.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "TripAdvisor",
+    "description": "Platform ulasan tempat wisata, hotel, dan restoran.",
+    "url": "https://tripadvisor.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Expedia",
+    "description": "Platform pemesanan perjalanan lengkap seperti tiket dan hotel.",
+    "url": "https://expedia.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Vrbo",
+    "description": "Platform sewa properti liburan dari pemilik langsung.",
+    "url": "https://vrbo.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Couchsurfing",
+    "description": "Komunitas untuk menginap gratis di rumah warga lokal.",
+    "url": "https://couchsurfing.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Yelp",
+    "description": "Platform ulasan bisnis lokal seperti restoran dan layanan.",
+    "url": "https://yelp.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "PayPal",
+    "description": "Layanan pembayaran online untuk transaksi internasional.",
+    "url": "https://paypal.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Venmo",
+    "description": "Aplikasi pembayaran dan transfer uang antar teman.",
+    "url": "https://venmo.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Cash App",
+    "description": "Aplikasi transfer dan pengelolaan uang digital.",
+    "url": "https://cash.app",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Stripe",
+    "description": "Platform pemrosesan pembayaran online untuk bisnis.",
+    "url": "https://stripe.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Wise",
+    "description": "Layanan transfer uang internasional dengan biaya rendah.",
+    "url": "https://wise.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Payoneer",
+    "description": "Layanan pembayaran global untuk freelancer dan bisnis.",
+    "url": "https://payoneer.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Coinbase",
+    "description": "Platform jual beli dan penyimpanan mata uang kripto.",
+    "url": "https://coinbase.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Binance",
+    "description": "Platform perdagangan mata uang kripto terbesar di dunia.",
+    "url": "https://binance.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "OpenSea",
+    "description": "Marketplace jual beli aset digital NFT.",
+    "url": "https://opensea.io",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "MetaMask",
+    "description": "Dompet digital untuk menyimpan aset kripto dan NFT.",
+    "url": "https://metamask.io",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Robinhood",
+    "description": "Aplikasi investasi saham dan kripto tanpa komisi.",
+    "url": "https://robinhood.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "eToro",
+    "description": "Platform investasi dan perdagangan sosial online.",
+    "url": "https://etoro.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "TradingView",
+    "description": "Platform analisis grafik dan data pasar keuangan.",
+    "url": "https://tradingview.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Mint",
+    "description": "Aplikasi pengelolaan keuangan dan anggaran pribadi.",
+    "url": "https://mint.intuit.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Trust Wallet",
+    "description": "Dompet kripto multi-koin untuk penyimpanan aset digital.",
+    "url": "https://trustwallet.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Duolingo",
+    "description": "Aplikasi belajar bahasa asing secara interaktif dan gratis.",
+    "url": "https://duolingo.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Coursera",
+    "description": "Platform kursus online dari universitas dan institusi ternama.",
+    "url": "https://coursera.org",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Udemy",
+    "description": "Platform kursus online dengan berbagai topik keterampilan.",
+    "url": "https://udemy.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "edX",
+    "description": "Platform kursus online dari universitas terkemuka dunia.",
+    "url": "https://edx.org",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Khan Academy",
+    "description": "Platform belajar gratis untuk berbagai jenjang pendidikan.",
+    "url": "https://khanacademy.org",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Skillshare",
+    "description": "Platform kursus kreatif untuk belajar keterampilan baru.",
+    "url": "https://skillshare.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Codecademy",
+    "description": "Platform belajar coding secara interaktif untuk pemula.",
+    "url": "https://codecademy.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "LeetCode",
+    "description": "Platform latihan soal pemrograman untuk persiapan interview.",
+    "url": "https://leetcode.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "HackerRank",
+    "description": "Platform latihan coding dan kompetisi pemrograman.",
+    "url": "https://hackerrank.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "freeCodeCamp",
+    "description": "Platform belajar coding gratis dengan sertifikasi.",
+    "url": "https://freecodecamp.org",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Replit",
+    "description": "Editor kode online untuk menulis dan menjalankan program.",
+    "url": "https://replit.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "CodeSandbox",
+    "description": "Lingkungan pengembangan online untuk proyek web front-end.",
+    "url": "https://codesandbox.io",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Glitch",
+    "description": "Platform pengembangan dan hosting aplikasi web sederhana.",
+    "url": "https://glitch.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Vercel",
+    "description": "Platform hosting dan deployment aplikasi web modern.",
+    "url": "https://vercel.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Netlify",
+    "description": "Platform hosting untuk situs web statis dan aplikasi.",
+    "url": "https://netlify.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Heroku",
+    "description": "Platform cloud untuk deployment aplikasi secara mudah.",
+    "url": "https://heroku.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "DigitalOcean",
+    "description": "Layanan cloud computing untuk developer dan startup.",
+    "url": "https://digitalocean.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "AWS",
+    "description": "Layanan cloud computing terbesar milik Amazon.",
+    "url": "https://aws.amazon.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Google Cloud",
+    "description": "Layanan cloud computing dari Google untuk berbagai kebutuhan.",
+    "url": "https://cloud.google.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Microsoft Azure",
+    "description": "Layanan cloud computing dari Microsoft untuk bisnis.",
+    "url": "https://azure.microsoft.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Cloudflare",
+    "description": "Layanan keamanan dan performa jaringan untuk situs web.",
+    "url": "https://cloudflare.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "npm",
+    "description": "Registri paket JavaScript untuk pengembangan perangkat lunak.",
+    "url": "https://npmjs.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Docker Hub",
+    "description": "Registri untuk menyimpan dan berbagi image container.",
+    "url": "https://hub.docker.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Postman",
+    "description": "Alat pengujian dan dokumentasi API untuk developer.",
+    "url": "https://postman.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Brilliant",
+    "description": "Platform belajar matematika, sains, dan logika interaktif.",
+    "url": "https://brilliant.org",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Netflix",
+    "description": "Layanan streaming film dan serial terbesar di dunia.",
+    "url": "https://netflix.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Disney+",
+    "description": "Layanan streaming konten Disney, Marvel, dan Pixar.",
+    "url": "https://disneyplus.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "HBO Max",
+    "description": "Layanan streaming film dan serial premium.",
+    "url": "https://max.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Hulu",
+    "description": "Layanan streaming acara TV dan film populer di AS.",
+    "url": "https://hulu.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Amazon Prime Video",
+    "description": "Layanan streaming film dan serial dari Amazon.",
+    "url": "https://primevideo.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Apple TV+",
+    "description": "Layanan streaming original dari Apple.",
+    "url": "https://tv.apple.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Peacock",
+    "description": "Layanan streaming dari NBCUniversal dengan berbagai konten.",
+    "url": "https://peacocktv.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Paramount+",
+    "description": "Layanan streaming film dan serial dari Paramount.",
+    "url": "https://paramountplus.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Deezer",
+    "description": "Layanan streaming musik dengan jutaan lagu.",
+    "url": "https://deezer.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Tidal",
+    "description": "Layanan streaming musik dengan kualitas audio tinggi.",
+    "url": "https://tidal.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Apple Music",
+    "description": "Layanan streaming musik resmi dari Apple.",
+    "url": "https://music.apple.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Amazon Music",
+    "description": "Layanan streaming musik dari Amazon.",
+    "url": "https://music.amazon.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Pandora",
+    "description": "Layanan radio musik personal berbasis internet.",
+    "url": "https://pandora.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Bandcamp",
+    "description": "Platform musik untuk musisi independen menjual karya.",
+    "url": "https://bandcamp.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Mixcloud",
+    "description": "Platform streaming untuk DJ mix dan podcast musik.",
+    "url": "https://mixcloud.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Audiomack",
+    "description": "Platform streaming musik untuk artis dan pendengar.",
+    "url": "https://audiomack.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Anchor",
+    "description": "Platform pembuatan dan distribusi podcast gratis.",
+    "url": "https://anchor.fm",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Podbean",
+    "description": "Platform hosting dan distribusi podcast.",
+    "url": "https://podbean.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "iHeartRadio",
+    "description": "Layanan streaming radio dan podcast di Amerika Serikat.",
+    "url": "https://iheart.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "TuneIn",
+    "description": "Layanan streaming radio dari seluruh dunia.",
+    "url": "https://tunein.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Last.fm",
+    "description": "Platform pelacakan riwayat mendengarkan musik pengguna.",
+    "url": "https://last.fm",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "IMDb",
+    "description": "Basis data informasi film, serial, dan aktor terlengkap.",
+    "url": "https://imdb.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Rotten Tomatoes",
+    "description": "Platform ulasan dan skor kritik film serta serial.",
+    "url": "https://rottentomatoes.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Metacritic",
+    "description": "Platform agregasi ulasan film, game, dan musik.",
+    "url": "https://metacritic.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Trakt",
+    "description": "Aplikasi pelacak tontonan film dan serial TV.",
+    "url": "https://trakt.tv",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "MyAnimeList",
+    "description": "Komunitas dan basis data untuk pecinta anime dan manga.",
+    "url": "https://myanimelist.net",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "AniList",
+    "description": "Platform pelacak dan komunitas anime serta manga.",
+    "url": "https://anilist.co",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Webtoon",
+    "description": "Platform membaca komik digital dari berbagai genre.",
+    "url": "https://webtoons.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Tapas",
+    "description": "Platform komik dan novel digital untuk pembaca.",
+    "url": "https://tapas.io",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Archive of Our Own",
+    "description": "Platform komunitas untuk berbagi karya tulis penggemar.",
+    "url": "https://archiveofourown.org",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Newgrounds",
+    "description": "Komunitas seni, animasi, dan game daring lama.",
+    "url": "https://newgrounds.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "itch.io",
+    "description": "Platform distribusi game indie untuk kreator dan pemain.",
+    "url": "https://itch.io",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Game Jolt",
+    "description": "Komunitas dan platform berbagi game indie.",
+    "url": "https://gamejolt.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Epic Games Store",
+    "description": "Toko digital untuk membeli dan mengunduh game PC.",
+    "url": "https://store.epicgames.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "GOG.com",
+    "description": "Toko digital game PC tanpa DRM.",
+    "url": "https://gog.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Battle.net",
+    "description": "Platform game dan komunitas resmi dari Blizzard.",
+    "url": "https://battle.net",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Nintendo eShop",
+    "description": "Toko digital resmi untuk game konsol Nintendo.",
+    "url": "https://nintendo.com/store",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Humble Bundle",
+    "description": "Toko game digital dengan paket bundel amal.",
+    "url": "https://humblebundle.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "VRChat",
+    "description": "Platform sosial realitas virtual untuk berinteraksi dengan avatar.",
+    "url": "https://vrchat.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Bitwarden",
+    "description": "Aplikasi pengelola kata sandi yang aman dan open source.",
+    "url": "https://bitwarden.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "LastPass",
+    "description": "Aplikasi pengelola kata sandi untuk keamanan akun online.",
+    "url": "https://lastpass.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "NordVPN",
+    "description": "Layanan VPN untuk menjaga privasi dan keamanan internet.",
+    "url": "https://nordvpn.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "ExpressVPN",
+    "description": "Layanan VPN populer untuk akses internet yang aman.",
+    "url": "https://expressvpn.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Meetup",
+    "description": "Platform untuk menemukan dan membuat acara komunitas.",
+    "url": "https://meetup.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Eventbrite",
+    "description": "Platform pembuatan dan penjualan tiket acara online.",
+    "url": "https://eventbrite.com",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Carrd",
+    "description": "Alat pembuatan halaman satu situs sederhana dan cepat.",
+    "url": "https://carrd.co",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
+  },
+  {
+    "title": "Bio.link",
+    "description": "Alat pembuatan halaman tautan tunggal untuk bio media sosial.",
+    "url": "https://bio.link",
+    "visibility": "PUBLIC",
+    "password": null,
+    "thumbnail": null
   }
 ]

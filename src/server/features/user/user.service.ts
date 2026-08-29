@@ -5,6 +5,9 @@ import { FileService } from '@/server/services'
 import { SupabaseService } from '@/server/services/supabase.service'
 import { generateUsernameFromEmail } from '@/utils'
 import { CommonService } from '../common'
+import { DummyService } from '../dummy'
+import { IdentifierService } from '../identifier'
+import { PlatformService } from '../platform'
 import { SettingService } from '../settings'
 import type {
   CreateUserRequest,
@@ -51,6 +54,10 @@ export class UserService extends CommonService {
     const username = generateUsernameFromEmail({ email })
 
     const user = await Repository.insert(db, id, username, request)
+
+    await SettingService.create(db, { userId: id })
+
+    await DummyService.init(db, id)
 
     await this.auth.updateUsername(id, username)
 
@@ -101,10 +108,20 @@ export class UserService extends CommonService {
 
     await SettingService.delete(db, { userId: id })
 
+    const platformIds = await PlatformService.getIdsByUser(db, id)
+
+    await PlatformService.deleteMany(db, id, { ids: platformIds })
+
+    const identifierIds = await IdentifierService.getIdsByUser(db, id)
+
+    await IdentifierService.deleteMany(db, id, { ids: identifierIds })
+
     const user = await Repository.destroy(db, request)
 
-    if (user.image) {
-      await this.file.deleteFileByUrls(this.bucket, [user.image])
+    const imageUrls = [user.image, user.avatar].filter(Boolean) as string[]
+
+    if (imageUrls.length) {
+      await this.file.deleteFileByUrls(this.bucket, imageUrls)
     }
 
     return user

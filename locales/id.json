@@ -172,7 +172,9 @@
   "page_shared_form_footer_update_button": "Perbarui",
   "page_shared_form_footer_update_button_loading": "Memperbarui",
   "page_shared_form_footer_submit_button": "Kirim",
-  "page_shared_form_footer_submit_button_loading": "Mengirim...",
+  "page_shared_form_footer_submit_button_loading": "Mengirim",
+  "page_shared_form_footer_delete_button": "Hapus",
+  "page_shared_form_footer_delete_button_loading": "Menghapus",
 
   "page_auth_register_title": "Daftar",
   "page_auth_form_register_header_title": "Daftar",
@@ -196,6 +198,8 @@
   "page_auth_account_title": "Akun",
   "page_auth_form_account_header_title": "Akun",
   "page_auth_form_account_header_description": "Ubah detail akun sesuai kebutuhan.",
+  "page_auth_form_delete_account_header_title": "Hapus Akun",
+  "page_auth_form_delete_account_header_description": "Hapus akun Anda beserta seluruh data terkait secara permanen. Tindakan ini tidak dapat dibatalkan.",
   "page_auth_form_update_password_header_title": "Perbarui Kata Sandi",
   "page_auth_form_update_password_header_description": "Pastikan kata sandi baru kamu kuat dan aman.",
 

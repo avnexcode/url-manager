@@ -57,15 +57,18 @@ export const Route = createFileRoute('/oauth/callback')({
                 tx,
                 data.user.id,
                 data.user.email!,
+                avatar,
               )
               return
             }
 
             const { username, providers } = currentUser
 
-            const isProviderExists = appMetadata.providers.every((p) =>
-              providers.includes(p.toLocaleUpperCase() as LoginProvider),
-            )
+            const isProviderExists = appMetadata.providers.every((provider) => {
+              return providers.includes(
+                provider.toLocaleUpperCase() as LoginProvider,
+              )
+            })
 
             const { error: updateAuthError } = await supabase.auth.updateUser({
               data: { username },

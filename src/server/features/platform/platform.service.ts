@@ -37,7 +37,7 @@ export class PlatformService extends CommonService {
     db: DBClient,
     id: string,
   ): Promise<void> => {
-    const count = await Repository.countById(db, id)
+    const count = await Repository.countUniqueId(db, id)
 
     this.checkExists(count === 0)
   }
@@ -46,7 +46,7 @@ export class PlatformService extends CommonService {
     db: DBClient,
     ids: string[],
   ): Promise<void> => {
-    const count = await Repository.countByIds(db, ids)
+    const count = await Repository.countUniqueIds(db, ids)
 
     this.checkExists(count !== ids.length)
   }
@@ -58,7 +58,7 @@ export class PlatformService extends CommonService {
     value: string,
   ): Promise<void> => {
     if (key === 'title') {
-      const count = await Repository.countByUserAndTitle(db, userId, value)
+      const count = await Repository.countUniqueUserAndTitle(db, userId, value)
 
       this.checkExists(
         count !== 0,
@@ -163,6 +163,15 @@ export class PlatformService extends CommonService {
     return { redirectUrl }
   }
 
+  static getIdsByUser = async (
+    db: DBClient,
+    userId: string,
+  ): Promise<string[]> => {
+    const platforms = await Repository.findIdsUniqueUser(db, userId)
+
+    return platforms.map((platform) => platform.id)
+  }
+
   static create = async (
     db: DBClient,
     userId: string,
@@ -170,13 +179,13 @@ export class PlatformService extends CommonService {
   ): Promise<CreatePlatformResponse> => {
     const { title, url } = request
 
-    this.checkBlockedUrl(url)
+    this.checkBlockedUrl(url, 'BAD_REQUEST', this.m.model_platform_field_url())
 
     await this.checkConflict(db, 'title', userId, title)
 
     let slug = generateSlug({ text: title })
 
-    const existsSLugCount = await Repository.countBySlug(db, slug)
+    const existsSLugCount = await Repository.countUniqueSlug(db, slug)
 
     if (existsSLugCount > 0) {
       slug = generateSlug({ text: title })
@@ -204,7 +213,11 @@ export class PlatformService extends CommonService {
   ): Promise<BulkCreatePlatformsResponse> => {
     await Promise.all(
       requests.map(async ({ title, url }) => {
-        this.checkBlockedUrl(url)
+        this.checkBlockedUrl(
+          url,
+          'BAD_REQUEST',
+          this.m.model_platform_field_url(),
+        )
         await this.checkConflict(db, 'title', userId, title)
       }),
     )
@@ -216,11 +229,11 @@ export class PlatformService extends CommonService {
 
     for (const item of requests) {
       let slug = generateSlug({ text: item.title })
-      let existsSlugCount = await Repository.countBySlug(db, slug)
+      let existsSlugCount = await Repository.countUniqueSlug(db, slug)
 
       while (existsSlugCount > 0 || usedSlugs.has(slug)) {
         slug = generateSlug({ text: item.title })
-        existsSlugCount = await Repository.countBySlug(db, slug)
+        existsSlugCount = await Repository.countUniqueSlug(db, slug)
       }
 
       usedSlugs.add(slug)
@@ -250,7 +263,11 @@ export class PlatformService extends CommonService {
     await this.checkPlatformExists(db, id)
 
     if (url) {
-      this.checkBlockedUrl(url)
+      this.checkBlockedUrl(
+        url,
+        'BAD_REQUEST',
+        this.m.model_platform_field_url(),
+      )
     }
 
     const existingPlatform = await this.getById(db, userId, id)
@@ -258,7 +275,11 @@ export class PlatformService extends CommonService {
     let slug = existingPlatform.slug
 
     if (title) {
-      const countTitle = await Repository.countByUserAndTitle(db, userId, title)
+      const countTitle = await Repository.countUniqueUserAndTitle(
+        db,
+        userId,
+        title,
+      )
 
       const isSimilarTitle =
         title.toLowerCase() === existingPlatform.title.toLowerCase()

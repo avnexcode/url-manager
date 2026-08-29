@@ -37,7 +37,7 @@ export class UrlService extends CommonService {
     db: DBClient,
     id: string,
   ): Promise<void> => {
-    const count = await Repository.countById(db, id)
+    const count = await Repository.countUniqueId(db, id)
 
     this.checkExists(count === 0)
   }
@@ -46,7 +46,7 @@ export class UrlService extends CommonService {
     db: DBClient,
     ids: string[],
   ): Promise<void> => {
-    const count = await Repository.countByIds(db, ids)
+    const count = await Repository.countUniqueIds(db, ids)
 
     this.checkExists(count !== ids.length)
   }
@@ -58,7 +58,7 @@ export class UrlService extends CommonService {
     value: string,
   ): Promise<void> => {
     if (key === 'title') {
-      const count = await Repository.countByUserAndTitle(db, userId, value)
+      const count = await Repository.countUniqueUserAndTitle(db, userId, value)
 
       this.checkExists(count !== 0, 'CONFLICT', this.m.model_url_field_title())
     }
@@ -104,7 +104,7 @@ export class UrlService extends CommonService {
     userId: string,
     id: string,
   ): Promise<UrlResponse> => {
-    const url = await Repository.findById(db, userId, id)
+    const url = await Repository.findUniqueId(db, userId, id)
 
     return this.checkNotNull(url)
   }
@@ -122,7 +122,7 @@ export class UrlService extends CommonService {
     db: DBClient,
     relation?: RelationParams,
   ): Promise<string[]> => {
-    const url = await Repository.findIdsByRelation(db, relation)
+    const url = await Repository.findIdsUniqueRelation(db, relation)
 
     return url.map((doc) => doc.id)
   }
@@ -134,7 +134,7 @@ export class UrlService extends CommonService {
   ): Promise<CreateUrlResponse> => {
     const { title, url } = request
 
-    this.checkBlockedUrl(url)
+    this.checkBlockedUrl(url, 'BAD_REQUEST', this.m.model_url_field_url())
 
     await this.checkConflict(db, 'title', userId, title)
 
@@ -166,7 +166,7 @@ export class UrlService extends CommonService {
   ): Promise<BulkCreateUrlsResponse> => {
     await Promise.all(
       requests.map(async ({ title, url }) => {
-        this.checkBlockedUrl(url)
+        this.checkBlockedUrl(url, 'BAD_REQUEST', this.m.model_url_field_url())
         await this.checkConflict(db, 'title', userId, title)
       }),
     )
@@ -210,7 +210,7 @@ export class UrlService extends CommonService {
     const { title, url } = request
 
     if (url) {
-      this.checkBlockedUrl(url)
+      this.checkBlockedUrl(url, 'BAD_REQUEST', this.m.model_url_field_url())
     }
 
     await this.checkUrlExists(db, id)
@@ -220,7 +220,11 @@ export class UrlService extends CommonService {
     let slug = existingUrl.slug
 
     if (title) {
-      const countTitle = await Repository.countByUserAndTitle(db, userId, title)
+      const countTitle = await Repository.countUniqueUserAndTitle(
+        db,
+        userId,
+        title,
+      )
 
       const isSimilarTitle =
         title.toLowerCase() === existingUrl.title.toLowerCase()

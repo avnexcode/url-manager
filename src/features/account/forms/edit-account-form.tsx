@@ -1,5 +1,13 @@
+import { Heading } from '@/components'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import * as m from '@/generated/paraglide/messages'
 import { Loader2 } from 'lucide-react'
 import type { UseFormReturn } from 'react-hook-form'
@@ -28,6 +36,16 @@ export const EditAccountForm = ({
 }: EditAccountFormProps) => {
   return (
     <Card className="w-full border-0 shadow-0 md:border-2 md:shadow-shadow">
+      <CardHeader>
+        <CardTitle>
+          <Heading size={'h3'}>
+            {m.page_auth_form_account_header_title()}
+          </Heading>
+        </CardTitle>
+        <CardDescription>
+          {m.page_auth_form_account_header_description()}
+        </CardDescription>
+      </CardHeader>
       <CardContent>
         <FormProvider {...form}>
           <EditAccountFormInner

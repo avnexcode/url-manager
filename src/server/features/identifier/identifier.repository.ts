@@ -117,6 +117,18 @@ export class IdentifierRepository extends CommonRepository {
     return identifier
   }
 
+  static findIdsUniqueUser = async (
+    db: DBClient,
+    userId: string,
+  ): Promise<{ id: string }[]> => {
+    const identifiers = await db.identifier.findMany({
+      where: { userId },
+      select: { id: true },
+    })
+
+    return identifiers
+  }
+
   static countAll = async (
     db: DBClient,
     userId: string,
@@ -149,19 +161,22 @@ export class IdentifierRepository extends CommonRepository {
     return count
   }
 
-  static countByIds = async (db: DBClient, ids: string[]): Promise<number> => {
+  static countUniqueIds = async (
+    db: DBClient,
+    ids: string[],
+  ): Promise<number> => {
     const count = db.identifier.count({ where: { id: { in: ids } } })
 
     return count
   }
 
-  static countById = async (db: DBClient, id: string): Promise<number> => {
+  static countUniqueId = async (db: DBClient, id: string): Promise<number> => {
     const count = await db.identifier.count({ where: { id } })
 
     return count
   }
 
-  static countByUserAndTitle = async (
+  static countUniqueUserAndTitle = async (
     db: DBClient,
     userId: string,
     title: string,
@@ -173,7 +188,10 @@ export class IdentifierRepository extends CommonRepository {
     return count
   }
 
-  static countBySlug = async (db: DBClient, slug: string): Promise<number> => {
+  static countUniqueSlug = async (
+    db: DBClient,
+    slug: string,
+  ): Promise<number> => {
     const hashSegment = slug.split('-').pop()
 
     const count = await db.identifier.count({

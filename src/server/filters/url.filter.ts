@@ -10,6 +10,9 @@ export class UrlFilter {
   private static blockedUrls: string[] = [
     env.VITE_BASE_URL,
     env.SERVER_URL,
+    'https://jav.guru/',
+    'https://ukdevilz.com/home',
+    'http://pornhub.com/',
   ].filter(Boolean)
 
   private static normalizeHostname(rawValue: string): NormalizedHost | null {
@@ -18,6 +21,7 @@ export class UrlFilter {
     const tryParse = (input: string): NormalizedHost | null => {
       try {
         const url = new URL(input)
+
         const port =
           url.port ||
           (url.protocol === 'https:'
@@ -26,11 +30,11 @@ export class UrlFilter {
               ? '80'
               : '')
 
-        return {
-          hostname: url.hostname.toLowerCase().replace(/\.+$/, ''),
-          port,
-          isDefaultPort: port === '80' || port === '443' || port === '',
-        }
+        const hostname = url.hostname.toLowerCase().replace(/\.+$/, '')
+
+        const isDefaultPort = port === '80' || port === '443' || port === ''
+
+        return { hostname, port, isDefaultPort }
       } catch {
         return null
       }
