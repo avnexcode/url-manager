@@ -6,15 +6,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
-import { updatePasswordFormSchema } from '../schemas'
+import { createUpdatePasswordFormSchema } from '../schemas'
 import type { UpdatePasswordFormSchema } from '../types'
+import type { LoginProvider } from '@/generated/prisma/enums'
 
-export const useUpdatePassword = ({
-  redirect = true,
-  redirectTo,
-  onSuccess,
-  onError,
-}: UseMutationOptions = {}) => {
+export const useUpdatePassword = (
+  providers: LoginProvider[],
+  { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
+) => {
   const toastMessages = useToastMessages(m.model_auth_field_password())
   const trpc = useTRPC()
   const navigate = useNavigate()
@@ -25,7 +24,7 @@ export const useUpdatePassword = ({
       password: '',
       confirmPassword: '',
     },
-    resolver: zodResolver(updatePasswordFormSchema),
+    resolver: zodResolver(createUpdatePasswordFormSchema(providers)),
   })
 
   const { mutate, isPending } = useMutation(

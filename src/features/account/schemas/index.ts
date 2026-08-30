@@ -1,5 +1,6 @@
 import { passwordValidation } from '@/features/auth/schemas/password-schema'
 import * as m from '@/generated/paraglide/messages'
+import type { LoginProvider } from '@/generated/prisma/enums'
 import { passwordField } from '@/schemas'
 import { capitalizeSentence } from '@/utils'
 import z from 'zod'
@@ -64,32 +65,38 @@ export const updateAccountFormSchema = z.object({
     .nullable(),
 })
 
-export const updatePasswordFormSchema = z
-  .object({
-    currentPassword: z.string().min(
-      1,
-      capitalizeSentence(
-        m.schema_validation_common_required({
-          field: passwordField,
-        }),
-      ),
-    ),
-    password: passwordValidation,
-    confirmPassword: z
-      .string()
-      .min(
-        1,
-        capitalizeSentence(
-          m.schema_validation_password_confirm_password_required(),
+export const createUpdatePasswordFormSchema = (providers: LoginProvider[]) => {
+  const hasCredentials = providers.includes('CREDENTIALS')
+
+  return z
+    .object({
+      currentPassword: hasCredentials
+        ? z.string().min(
+            1,
+            capitalizeSentence(
+              m.schema_validation_common_required({
+                field: passwordField,
+              }),
+            ),
+          )
+        : z.string().optional(),
+      password: passwordValidation,
+      confirmPassword: z
+        .string()
+        .min(
+          1,
+          capitalizeSentence(
+            m.schema_validation_password_confirm_password_required(),
+          ),
         ),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: capitalizeSentence(
+        m.schema_validation_password_confirm_password_do_not_match(),
       ),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: capitalizeSentence(
-      m.schema_validation_password_confirm_password_do_not_match(),
-    ),
-    path: ['confirmPassword'],
-  })
+      path: ['confirmPassword'],
+    })
+}
 
 export const deleteAccountFormSchema = z.object({
   password: z.string().min(

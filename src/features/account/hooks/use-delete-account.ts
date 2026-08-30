@@ -37,6 +37,7 @@ export const useDeleteAccount = ({
         onSuccess?.()
       },
       onError: (error) => {
+        form.reset()
         toastMessages.onDelete.onError(error)
         onError?.()
       },

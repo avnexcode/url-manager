@@ -20,7 +20,7 @@ export const AccountPage = () => {
     form: updatePasswordForm,
     onSubmit: onUpdatePasswordSubmit,
     isPending: isUpdatePasswordPending,
-  } = useUpdatePassword()
+  } = useUpdatePassword(user.providers)
 
   const {
     form: deleteAccountForm,
@@ -50,6 +50,7 @@ export const AccountPage = () => {
             form={updatePasswordForm}
             onSubmit={onUpdatePasswordSubmit}
             isPending={isUpdatePasswordPending}
+            providers={user.providers}
           />
           <DeleteAccountForm
             form={deleteAccountForm}

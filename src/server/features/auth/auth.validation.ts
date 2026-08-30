@@ -42,7 +42,7 @@ export const updateEmailRequest = z.object({
 
 export const updatePasswordRequest = z
   .object({
-    currentPassword: z.string().min(1),
+    currentPassword: z.string().optional(),
     password: passwordValidation,
     confirmPassword: z.string().min(1),
   })

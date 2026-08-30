@@ -129,7 +129,7 @@ export class AuthService extends CommonService {
     const { createdAt, ...user } = await UserService.getById(db, userId)
 
     if (user.providers.includes('CREDENTIALS')) {
-      await this.checkIsValidCredentials(user.email, currentPassword)
+      await this.checkIsValidCredentials(user.email, currentPassword!)
     } else {
       await UserService.update(db, userId, { provider: 'CREDENTIALS' })
     }

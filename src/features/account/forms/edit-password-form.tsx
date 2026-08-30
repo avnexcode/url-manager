@@ -14,17 +14,20 @@ import type { UseFormReturn } from 'react-hook-form'
 import { FormProvider } from 'react-hook-form'
 import type { UpdatePasswordFormSchema } from '../types'
 import { EditPasswordFormInner } from './edit-password-form-inner'
+import type { LoginProvider } from '@/generated/prisma/enums'
 
 type EditPasswordFormProps = {
   form: UseFormReturn<UpdatePasswordFormSchema>
   onSubmit: (values: UpdatePasswordFormSchema) => void
   isPending: boolean
+  providers: LoginProvider[]
 }
 
 export const EditPasswordForm = ({
   form,
   onSubmit,
   isPending,
+  providers,
 }: EditPasswordFormProps) => {
   return (
     <Card className="w-full border-0 shadow-0 md:border-2 md:shadow-shadow">
@@ -43,6 +46,7 @@ export const EditPasswordForm = ({
           <EditPasswordFormInner
             formId="update-password-form"
             onSubmit={onSubmit}
+            providers={providers}
           />
         </FormProvider>
       </CardContent>
