@@ -140,14 +140,8 @@ export const identifierRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        return db.$transaction(async (tx) => {
-          const identifier = await IdentifierService.create(
-            tx,
-            auth.id,
-            request,
-          )
-          return identifier
-        })
+        const identifier = await IdentifierService.create(db, auth.id, request)
+        return identifier
       } catch (error) {
         return errorFilter(error)
       }
@@ -177,14 +171,8 @@ export const identifierRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        return await db.$transaction(async (tx) => {
-          const identifier = await IdentifierService.delete(
-            tx,
-            auth.id,
-            request,
-          )
-          return identifier
-        })
+        const identifier = await IdentifierService.delete(db, auth.id, request)
+        return identifier
       } catch (error) {
         return errorFilter(error)
       }
@@ -197,14 +185,12 @@ export const identifierRouter = createTRPCRouter({
         const { auth, db } = ctx
         const { request } = input
         try {
-          return await db.$transaction(async (tx) => {
-            const identifier = await IdentifierService.deleteMany(
-              tx,
-              auth.id,
-              request,
-            )
-            return identifier
-          })
+          const identifier = await IdentifierService.deleteMany(
+            db,
+            auth.id,
+            request,
+          )
+          return identifier
         } catch (error) {
           return errorFilter(error)
         }

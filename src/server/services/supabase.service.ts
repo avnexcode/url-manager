@@ -1,8 +1,6 @@
 import { env } from '@/configs/env'
-import type { Language } from '@/generated/prisma/enums'
 import type { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import { supabaseAdminClient as supabase } from '@/lib/supabase/server'
-import { capitalizeWords } from '@/utils'
 
 type CreateUserRequest = {
   email: string
@@ -25,7 +23,7 @@ class SupabaseAuthService {
 
   static createUser = async (
     request: CreateUserRequest,
-  ): Promise<{ userId?: string | null }> => {
+  ): Promise<{ userId: string }> => {
     const { email, password, email_confirm = false } = request
 
     let userId = ''
@@ -42,29 +40,6 @@ class SupabaseAuthService {
     if (error) throw error
 
     return { userId }
-  }
-
-  static updateLanguage = async (
-    id: string,
-    language: Language,
-  ): Promise<void> => {
-    const { error } = await supabase.auth.admin.updateUserById(id, {
-      app_metadata: { language: language.toLocaleLowerCase() },
-    })
-
-    if (error) throw error
-  }
-
-  static updateFullName = async (
-    id: string,
-    fullName: string,
-  ): Promise<void> => {
-    const name = capitalizeWords(fullName)
-    const { error } = await supabase.auth.admin.updateUserById(id, {
-      user_metadata: { name, full_name: name, display_name: name },
-    })
-
-    if (error) throw error
   }
 
   static updateUsername = async (
@@ -93,10 +68,6 @@ class SupabaseAuthService {
     const { error } = await supabase.auth.admin.deleteUser(userId)
 
     if (error) throw error
-  }
-
-  static deleteManyUsers = async (userIds: string[]): Promise<void> => {
-    await Promise.all(userIds.map((id) => supabase.auth.admin.deleteUser(id)))
   }
 }
 
@@ -131,7 +102,7 @@ class SupabaseStorageService {
   ): Promise<void> => {
     const { error } = await supabase.storage.from(bucket).remove(fileNames)
 
-    if (error) throw new Error(`Failed to delete image: ${error.message}`)
+    if (error) throw error
   }
 }
 

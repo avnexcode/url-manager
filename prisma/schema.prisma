@@ -56,8 +56,8 @@ enum Language {
 
 model Setting {
   id                     String   @id @default(uuid()) @map("id_10b3d8f5_5ca4_4002_ae45_bee50b748967") @db.VarChar(36)
-  theme                  Theme    @default(SYSTEM) @map("theme_c0375458_6dd2_400a_9994_3f95f92f5072")
-  language               Language @default(ID) @map("language_b3823990_c237_4d17_b900_7dcaf2009242")
+  theme                  Theme    @default(LIGHT) @map("theme_c0375458_6dd2_400a_9994_3f95f92f5072")
+  language               Language @default(EN) @map("language_b3823990_c237_4d17_b900_7dcaf2009242")
   publicAccess           Boolean  @default(false) @map("public_access_45498a99_a23f_4745_b049_47e0c45e4be4")
   publicIdentifierAccess Boolean  @default(false) @map("public_identifier_access_ce553a1c_6777_49da_93d7_e0ab897f4d4e")
   publicPlatformAccess   Boolean  @default(false) @map("public_platform_access_736d8e9e_4e9a_4a71_8e2d_33b297a69cb2")

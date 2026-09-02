@@ -131,10 +131,8 @@ export const platformRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        return db.$transaction(async (tx) => {
-          const platform = await PlatformService.create(tx, auth.id, request)
-          return platform
-        })
+        const platform = await PlatformService.create(db, auth.id, request)
+        return platform
       } catch (error) {
         return errorFilter(error)
       }
@@ -159,10 +157,8 @@ export const platformRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        return await db.$transaction(async (tx) => {
-          const platform = await PlatformService.delete(tx, auth.id, request)
-          return platform
-        })
+        const platform = await PlatformService.delete(db, auth.id, request)
+        return platform
       } catch (error) {
         return errorFilter(error)
       }
@@ -174,14 +170,8 @@ export const platformRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        return await db.$transaction(async (tx) => {
-          const platform = await PlatformService.deleteMany(
-            tx,
-            auth.id,
-            request,
-          )
-          return platform
-        })
+        const platform = await PlatformService.deleteMany(db, auth.id, request)
+        return platform
       } catch (error) {
         return errorFilter(error)
       }

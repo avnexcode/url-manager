@@ -151,11 +151,7 @@ export class IdentifierRepository extends CommonRepository {
     const OR = search ? this.getOrQuery(search) : undefined
 
     const count = await db.identifier.count({
-      where: {
-        user: { username },
-        visibility: 'PUBLIC',
-        ...(OR && { OR }),
-      },
+      where: { user: { username }, visibility: 'PUBLIC', ...(OR && { OR }) },
     })
 
     return count

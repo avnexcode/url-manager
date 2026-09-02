@@ -6,9 +6,7 @@ import type {
   updateSettingRequest,
 } from './setting.validation'
 
-export type CreateSettingRequest = z.infer<typeof createSettingRequest> & {
-  userId: string
-}
+export type CreateSettingRequest = z.infer<typeof createSettingRequest>
 
 export type UpdateSettingRequest = z.infer<typeof updateSettingRequest>
 

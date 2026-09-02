@@ -18,7 +18,7 @@ export const useUrlListActions = (allUrlIds: string[]) => {
     clearSelection,
   } = useSelectionSet(allUrlIds)
 
-  const { onBulkDelete, isPending, variables } = useBulkDeleteUrls({
+  const { onDelete, isPending, variables } = useBulkDeleteUrls({
     onSuccess: () => clearSelection(),
     onError: () => clearSelection(),
     redirect: false,
@@ -36,7 +36,7 @@ export const useUrlListActions = (allUrlIds: string[]) => {
     selectedCount,
     isDeleteDialogOpen,
     setIsDeleteDialogOpen,
-    onDelete: () => onBulkDelete({ ids: urlIds }),
+    handleDelete: () => onDelete({ ids: urlIds }),
     isPending,
     isUrlPending,
   }

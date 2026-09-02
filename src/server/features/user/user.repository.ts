@@ -46,18 +46,13 @@ export class UserRepository extends CommonRepository {
 
   static insert = async (
     db: DBClient,
-    id: string,
     username: string,
     request: CreateUserRequest,
   ): Promise<CreateUserResponse> => {
+    const { id, email, provider, avatar } = request
+
     const user = await db.user.create({
-      data: {
-        id,
-        username,
-        email: request.email,
-        providers: [request.provider],
-        avatar: request.avatar,
-      },
+      data: { id, username, email, providers: [provider], avatar },
       omit: { updatedAt: true },
     })
 

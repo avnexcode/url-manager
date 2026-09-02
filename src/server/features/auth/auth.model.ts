@@ -1,3 +1,4 @@
+import type { LoginProvider } from '@/generated/prisma/enums'
 import type z from 'zod'
 import type {
   deleteAccountRequest,
@@ -7,6 +8,17 @@ import type {
   updateEmailRequest,
   updatePasswordRequest,
 } from './auth.validation'
+
+export type UserMetadata = {
+  full_name: string
+  name?: string
+  avatar_url?: string
+  picture?: string
+}
+
+export type AppMetadata = {
+  providers: LoginProvider[]
+}
 
 export type RegisterRequest = z.infer<typeof registerRequest>
 

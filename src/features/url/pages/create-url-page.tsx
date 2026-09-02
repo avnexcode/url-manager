@@ -1,9 +1,5 @@
 import { Heading } from '@/components'
-import {
-  MainLayout,
-  PageContainer,
-  SectionContainer,
-} from '@/components/layouts'
+import { MainLayout } from '@/components/layouts'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import * as m from '@/generated/paraglide/messages'
@@ -34,31 +30,27 @@ export const CreateUrlPage = () => {
   )
 
   return (
-    <PageContainer withHeader withFooter>
-      <SectionContainer container padded className="min-h-screen">
-        <MainLayout
-          headerContent={
-            <>
-              <Heading size={'h2'}>{m.page_url_title()}</Heading>
-              <div className="flex items-center gap-2">
-                <Switch
-                  id="redirect-toggle"
-                  checked={redirect}
-                  onCheckedChange={setRedirect}
-                />
-                <Label htmlFor="redirect-toggle">{m.action_redirect()}</Label>
-              </div>
-            </>
-          }
-        >
-          <CreateUrlForm
-            form={form}
-            onSubmit={onSubmit}
-            isPending={isPending}
-            cancelTo={redirectTo}
-          />
-        </MainLayout>
-      </SectionContainer>
-    </PageContainer>
+    <MainLayout
+      headerContent={
+        <>
+          <Heading size={'h2'}>{m.page_url_title()}</Heading>
+          <div className="flex items-center gap-2">
+            <Switch
+              id="redirect-toggle"
+              checked={redirect}
+              onCheckedChange={setRedirect}
+            />
+            <Label htmlFor="redirect-toggle">{m.action_redirect()}</Label>
+          </div>
+        </>
+      }
+    >
+      <CreateUrlForm
+        form={form}
+        onSubmit={onSubmit}
+        isPending={isPending}
+        cancelTo={redirectTo}
+      />
+    </MainLayout>
   )
 }

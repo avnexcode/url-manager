@@ -154,11 +154,7 @@ export class PlatformRepository extends CommonRepository {
     const OR = search ? this.getOrQuery(search) : undefined
 
     const count = await db.platform.count({
-      where: {
-        user: { username },
-        visibility: 'PUBLIC',
-        ...(OR && { OR }),
-      },
+      where: { user: { username }, visibility: 'PUBLIC', ...(OR && { OR }) },
     })
 
     return count

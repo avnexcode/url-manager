@@ -1,9 +1,5 @@
 import { Heading } from '@/components'
-import {
-  MainLayout,
-  PageContainer,
-  SectionContainer,
-} from '@/components/layouts'
+import { MainLayout } from '@/components/layouts'
 import * as m from '@/generated/paraglide/messages'
 import { useTRPC } from '@/lib/trpc/react'
 import { Route } from '@/routes/{-$locale}/_authenticated/dashboard/identifier/$id/edit'
@@ -23,23 +19,17 @@ export const EditIdentifierPage = () => {
     useUpdateIdentifier(identifier)
 
   return (
-    <PageContainer withHeader withFooter>
-      <SectionContainer container padded className="min-h-screen">
-        <MainLayout
-          headerContent={
-            <Heading size={'h2'}>{m.page_identifier_title()}</Heading>
-          }
-        >
-          <EditIdentifierForm
-            form={form}
-            onSubmit={onSubmit}
-            hasChanges={hasChanges}
-            isPending={isPending}
-            thumbnail={identifier.thumbnail}
-            identifierId={identifier.id}
-          />
-        </MainLayout>
-      </SectionContainer>
-    </PageContainer>
+    <MainLayout
+      headerContent={<Heading size={'h2'}>{m.page_identifier_title()}</Heading>}
+    >
+      <EditIdentifierForm
+        form={form}
+        onSubmit={onSubmit}
+        hasChanges={hasChanges}
+        isPending={isPending}
+        thumbnail={identifier.thumbnail}
+        identifierId={identifier.id}
+      />
+    </MainLayout>
   )
 }

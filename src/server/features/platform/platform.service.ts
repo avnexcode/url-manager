@@ -8,6 +8,7 @@ import { CommonService } from '../common'
 import { SettingService } from '../settings'
 import { UrlService } from '../url'
 import { UserService } from '../user'
+import type { ImageUrlsByBucket } from '@/server/services'
 import type {
   BaseCreatePlatformRequest,
   BulkCreatePlatformsRequest,
@@ -172,6 +173,24 @@ export class PlatformService extends CommonService {
     return platforms.map((platform) => platform.id)
   }
 
+  private static getSlug = async (
+    db: DBClient,
+    title: string,
+    usedSlugs?: Set<string>,
+  ): Promise<string> => {
+    let slug = generateSlug({ text: title })
+
+    let existsSlugCount = await Repository.countUniqueSlug(db, slug)
+
+    while (existsSlugCount > 0 || usedSlugs?.has(slug)) {
+      slug = generateSlug({ text: title })
+
+      existsSlugCount = await Repository.countUniqueSlug(db, slug)
+    }
+
+    return slug
+  }
+
   static create = async (
     db: DBClient,
     userId: string,
@@ -183,16 +202,12 @@ export class PlatformService extends CommonService {
 
     await this.checkConflict(db, 'title', userId, title)
 
-    let slug = generateSlug({ text: title })
-
-    const existsSLugCount = await Repository.countUniqueSlug(db, slug)
-
-    if (existsSLugCount > 0) {
-      slug = generateSlug({ text: title })
-    }
+    const slug = await this.getSlug(db, title)
 
     const { username } = await UserService.getById(db, userId)
 
+    // Anchor step — WAJIB sukses, TIDAK di-try/catch.
+    // Belum ada apa pun yang perlu di-compensate kalau ini gagal.
     const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
       this.bucket,
       'PLATFORM',
@@ -201,9 +216,20 @@ export class PlatformService extends CommonService {
 
     const requestData = { userId, slug, qrEncodedValue, qrCodeUrl, ...request }
 
-    const platform = await Repository.insert(db, requestData)
-
-    return platform
+    try {
+      return await Repository.insert(db, requestData)
+    } catch (error) {
+      // Repository.insert gagal SETELAH file QR sudah ke-upload → orphan, compensate
+      try {
+        await this.file.deleteFileByUrls(this.bucket, [qrCodeUrl])
+      } catch (cleanupError) {
+        console.error(
+          'failed to cleanup orphan qr code after create failure',
+          cleanupError,
+        )
+      }
+      throw error // tetap throw error ASLI dari Repository.insert
+    }
   }
 
   static createMany = async (
@@ -222,34 +248,52 @@ export class PlatformService extends CommonService {
       }),
     )
 
+    // Cek duplikat title DI DALAM batch itu sendiri — checkConflict di atas
+    // cuma cek ke DB, tidak mendeteksi dua item dalam satu request yang title-nya sama
+    const titles = requests.map((r) => r.title.toLowerCase())
+    const hasDuplicateInBatch = new Set(titles).size !== titles.length
+    this.checkExists(
+      hasDuplicateInBatch,
+      'CONFLICT',
+      this.m.model_platform_field_title(),
+    )
+
     const { username } = await UserService.getById(db, userId)
 
     const usedSlugs = new Set<string>()
     const requestData: BaseCreatePlatformRequest[] = []
+    const generatedQrUrls: string[] = []
 
-    for (const item of requests) {
-      let slug = generateSlug({ text: item.title })
-      let existsSlugCount = await Repository.countUniqueSlug(db, slug)
+    try {
+      for (const item of requests) {
+        const slug = await this.getSlug(db, item.title, usedSlugs)
+        usedSlugs.add(slug)
 
-      while (existsSlugCount > 0 || usedSlugs.has(slug)) {
-        slug = generateSlug({ text: item.title })
-        existsSlugCount = await Repository.countUniqueSlug(db, slug)
+        const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
+          this.bucket,
+          'PLATFORM',
+          { username, slug },
+        )
+        generatedQrUrls.push(qrCodeUrl)
+
+        requestData.push({ userId, slug, qrEncodedValue, qrCodeUrl, ...item })
       }
 
-      usedSlugs.add(slug)
-
-      const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
-        this.bucket,
-        'PLATFORM',
-        { username, slug },
-      )
-
-      requestData.push({ userId, slug, qrEncodedValue, qrCodeUrl, ...item })
+      return await Repository.insertMany(db, requestData)
+    } catch (error) {
+      // insertMany gagal SETELAH sebagian/semua QR sudah ke-upload → semuanya orphan, compensate
+      if (generatedQrUrls.length) {
+        try {
+          await this.file.deleteFileByUrls(this.bucket, generatedQrUrls)
+        } catch (cleanupError) {
+          console.error(
+            'failed to cleanup orphan qr codes after createMany failure',
+            cleanupError,
+          )
+        }
+      }
+      throw error // tetap throw error ASLI dari Repository.insertMany
     }
-
-    const platforms = await Repository.insertMany(db, requestData)
-
-    return platforms
   }
 
   static update = async (
@@ -293,7 +337,7 @@ export class PlatformService extends CommonService {
       )
 
       if (!isSimilarTitle) {
-        slug = generateSlug({ text: title })
+        slug = await this.getSlug(db, title)
       }
     }
 
@@ -301,10 +345,11 @@ export class PlatformService extends CommonService {
 
     let qrEncodedValue = existingPlatform.qrEncodedValue
     let qrCodeUrl = existingPlatform.qrCodeUrl
+    let newQrCodeUrl: string | null = null
 
     if (slug !== existingPlatform.slug) {
-      await FileService.deleteFileByUrls(this.bucket, [qrCodeUrl])
-
+      // Generate BARU dulu — anchor step, fatal, TIDAK di-try/catch.
+      // Belum ada apa pun yang perlu di-compensate kalau ini gagal.
       const qrCode = await QrCodeService.generate(this.bucket, 'PLATFORM', {
         username,
         slug,
@@ -312,13 +357,43 @@ export class PlatformService extends CommonService {
 
       qrEncodedValue = qrCode.qrEncodedValue
       qrCodeUrl = qrCode.qrCodeUrl
+      newQrCodeUrl = qrCode.qrCodeUrl
     }
 
     const requestData = { slug, qrEncodedValue, qrCodeUrl, ...request }
 
-    const platform = await Repository.update(db, id, userId, requestData)
+    try {
+      const platform = await Repository.update(db, id, userId, requestData)
 
-    return platform
+      // DB sudah commit sukses — baru hapus file LAMA, non-fatal
+      if (newQrCodeUrl) {
+        try {
+          await this.file.deleteFileByUrls(this.bucket, [
+            existingPlatform.qrCodeUrl,
+          ])
+        } catch (cleanupError) {
+          console.error(
+            'failed to cleanup old qr code after update',
+            cleanupError,
+          )
+        }
+      }
+
+      return platform
+    } catch (error) {
+      // Repository.update gagal → QR baru yang sudah ke-generate jadi orphan, compensate
+      if (newQrCodeUrl) {
+        try {
+          await this.file.deleteFileByUrls(this.bucket, [newQrCodeUrl])
+        } catch (cleanupError) {
+          console.error(
+            'failed to cleanup new qr code after update failure',
+            cleanupError,
+          )
+        }
+      }
+      throw error // tetap throw error ASLI dari Repository.update
+    }
   }
 
   static delete = async (
@@ -332,21 +407,63 @@ export class PlatformService extends CommonService {
 
     const urlIds = await UrlService.getIdsByRelation(db, { platformId: id })
 
-    if (urlIds.length) {
-      await UrlService.deleteMany(db, userId, { ids: urlIds })
-    }
+    const platform = await db.$transaction(async (tx) => {
+      if (urlIds.length) {
+        await UrlService.deleteMany(tx, userId, { ids: urlIds })
+      }
 
-    const platform = await Repository.destroy(db, userId, request)
+      return await Repository.destroy(tx, userId, request)
+    })
 
     const imageUrls = [platform.thumbnail, platform.qrCodeUrl].filter(
       Boolean,
     ) as string[]
 
     if (imageUrls.length) {
-      await this.file.deleteFileByUrls(this.bucket, imageUrls)
+      try {
+        await this.file.deleteFileByUrls(this.bucket, imageUrls)
+      } catch (error) {
+        console.error('failed to cleanup platform images', error)
+      }
     }
 
     return platform
+  }
+
+  static deleteManyCore = async (
+    db: DBClient,
+    userId: string,
+    ids: string[],
+  ): Promise<{
+    platforms: BulkDeletePlatformsResponse
+    imageUrls: ImageUrlsByBucket
+  }> => {
+    await this.checkPlatformsExist(db, ids)
+
+    const urlIds = await UrlService.getIdsByRelation(db, { platformId: ids })
+
+    let urlImages: ImageUrlsByBucket = {}
+
+    if (urlIds.length) {
+      const result = await UrlService.deleteManyCore(db, userId, urlIds)
+
+      urlImages = result.imageUrls
+    }
+
+    const platforms = await Repository.destroyMany(db, userId, { ids })
+
+    const imageUrls = platforms
+      .flatMap((platform) => [platform.thumbnail, platform.qrCodeUrl])
+      .filter(Boolean) as string[]
+
+    const platformImages: ImageUrlsByBucket = imageUrls.length
+      ? { [this.bucket]: imageUrls }
+      : {}
+
+    return {
+      platforms,
+      imageUrls: this.file.mergeImageUrlsByBucket(urlImages, platformImages),
+    }
   }
 
   static deleteMany = async (
@@ -356,23 +473,11 @@ export class PlatformService extends CommonService {
   ): Promise<BulkDeletePlatformsResponse> => {
     const { ids } = request
 
-    await this.checkPlatformsExist(db, ids)
+    const { platforms, imageUrls } = await db.$transaction(async (tx) => {
+      return await this.deleteManyCore(tx, userId, ids)
+    })
 
-    const urlIds = await UrlService.getIdsByRelation(db, { platformId: ids })
-
-    if (urlIds.length) {
-      await UrlService.deleteMany(db, userId, { ids: urlIds })
-    }
-
-    const platforms = await Repository.destroyMany(db, userId, request)
-
-    const imageUrls = platforms
-      .flatMap((platform) => [platform.thumbnail, platform.qrCodeUrl])
-      .filter(Boolean) as string[]
-
-    if (imageUrls.length) {
-      await this.file.deleteFileByUrls(this.bucket, imageUrls)
-    }
+    await this.file.deleteImagesByBucket(imageUrls)
 
     return platforms
   }

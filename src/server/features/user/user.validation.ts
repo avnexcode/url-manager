@@ -3,6 +3,7 @@ import z from 'zod'
 import { emailValidation } from '../auth/auth.validation'
 
 export const baseUserRequest = z.object({
+  id: z.uuid(),
   username: z.string().min(6).max(50),
   email: emailValidation,
   avatar: z.url().optional().nullable(),
@@ -11,6 +12,7 @@ export const baseUserRequest = z.object({
 })
 
 export const createUserRequest = baseUserRequest.pick({
+  id: true,
   email: true,
   avatar: true,
   provider: true,
@@ -18,7 +20,7 @@ export const createUserRequest = baseUserRequest.pick({
 
 export const updateUserRequest = baseUserRequest
   .partial()
-  .omit({ email: true, provider: true })
+  .omit({ id: true, email: true, provider: true })
   .extend({
     provider: z.enum(loginProvider).optional(),
   })

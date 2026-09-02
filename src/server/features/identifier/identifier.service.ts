@@ -2,6 +2,7 @@ import type { QueryResponse } from '@/interfaces'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import type { DBClient } from '@/server/db'
 import type { QueryParams } from '@/server/models'
+import type { ImageUrlsByBucket } from '@/server/services'
 import { FileService, QrCodeService } from '@/server/services'
 import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
@@ -172,6 +173,24 @@ export class IdentifierService extends CommonService {
     return identifiers.map((identifier) => identifier.id)
   }
 
+  private static getSlug = async (
+    db: DBClient,
+    title: string,
+    usedSlugs?: Set<string>,
+  ): Promise<string> => {
+    let slug = generateSlug({ text: title })
+
+    let existsSlugCount = await Repository.countUniqueSlug(db, slug)
+
+    while (existsSlugCount > 0 || usedSlugs?.has(slug)) {
+      slug = generateSlug({ text: title })
+
+      existsSlugCount = await Repository.countUniqueSlug(db, slug)
+    }
+
+    return slug
+  }
+
   static create = async (
     db: DBClient,
     userId: string,
@@ -181,13 +200,7 @@ export class IdentifierService extends CommonService {
 
     await this.checkConflict(db, 'title', userId, title)
 
-    let slug = generateSlug({ text: title })
-
-    const existsSLugCount = await Repository.countUniqueSlug(db, slug)
-
-    if (existsSLugCount > 0) {
-      slug = generateSlug({ text: title })
-    }
+    const slug = await this.getSlug(db, title)
 
     const { username } = await UserService.getById(db, userId)
 
@@ -199,9 +212,19 @@ export class IdentifierService extends CommonService {
 
     const requestData = { userId, slug, qrEncodedValue, qrCodeUrl, ...request }
 
-    const identifier = await Repository.insert(db, requestData)
-
-    return identifier
+    try {
+      return await Repository.insert(db, requestData)
+    } catch (error) {
+      try {
+        await this.file.deleteFileByUrls(this.bucket, [qrCodeUrl])
+      } catch (cleanupError) {
+        console.error(
+          'failed to cleanup orphan qr code after create failure',
+          cleanupError,
+        )
+      }
+      throw error
+    }
   }
 
   static createMany = async (
@@ -215,35 +238,49 @@ export class IdentifierService extends CommonService {
       }),
     )
 
+    const titles = requests.map((r) => r.title.toLowerCase())
+    const hasDuplicateInBatch = new Set(titles).size !== titles.length
+    this.checkExists(
+      hasDuplicateInBatch,
+      'CONFLICT',
+      this.m.model_identifier_field_title(),
+    )
+
     const { username } = await UserService.getById(db, userId)
 
     const usedSlugs = new Set<string>()
-
     const requestData: BaseCreateIdentifierRequest[] = []
+    const generatedQrUrls: string[] = []
 
-    for (const item of requests) {
-      let slug = generateSlug({ text: item.title })
-      let existsSlugCount = await Repository.countUniqueSlug(db, slug)
+    try {
+      for (const item of requests) {
+        const slug = await this.getSlug(db, item.title, usedSlugs)
+        usedSlugs.add(slug)
 
-      while (existsSlugCount > 0 || usedSlugs.has(slug)) {
-        slug = generateSlug({ text: item.title })
-        existsSlugCount = await Repository.countUniqueSlug(db, slug)
+        const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
+          this.bucket,
+          'IDENTIFIER',
+          { username, slug },
+        )
+        generatedQrUrls.push(qrCodeUrl)
+
+        requestData.push({ userId, slug, qrEncodedValue, qrCodeUrl, ...item })
       }
 
-      usedSlugs.add(slug)
-
-      const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
-        this.bucket,
-        'IDENTIFIER',
-        { username, slug },
-      )
-
-      requestData.push({ userId, slug, qrEncodedValue, qrCodeUrl, ...item })
+      return await Repository.insertMany(db, requestData)
+    } catch (error) {
+      if (generatedQrUrls.length) {
+        try {
+          await this.file.deleteFileByUrls(this.bucket, generatedQrUrls)
+        } catch (cleanupError) {
+          console.error(
+            'failed to cleanup orphan qr codes after createMany failure',
+            cleanupError,
+          )
+        }
+      }
+      throw error
     }
-
-    const identifiers = await Repository.insertMany(db, requestData)
-
-    return identifiers
   }
 
   static update = async (
@@ -279,7 +316,7 @@ export class IdentifierService extends CommonService {
       )
 
       if (!isSimilarTitle) {
-        slug = generateSlug({ text: title })
+        slug = await this.getSlug(db, title)
       }
     }
 
@@ -287,10 +324,9 @@ export class IdentifierService extends CommonService {
 
     let qrEncodedValue = existingIdentifier.qrEncodedValue
     let qrCodeUrl = existingIdentifier.qrCodeUrl
+    let newQrCodeUrl: string | null = null
 
     if (slug !== existingIdentifier.slug) {
-      await FileService.deleteFileByUrls(this.bucket, [qrCodeUrl])
-
       const qrCode = await QrCodeService.generate(this.bucket, 'IDENTIFIER', {
         username,
         slug,
@@ -298,13 +334,41 @@ export class IdentifierService extends CommonService {
 
       qrEncodedValue = qrCode.qrEncodedValue
       qrCodeUrl = qrCode.qrCodeUrl
+      newQrCodeUrl = qrCode.qrCodeUrl
     }
 
     const requestData = { slug, qrEncodedValue, qrCodeUrl, ...request }
 
-    const identifier = await Repository.update(db, id, userId, requestData)
+    try {
+      const identifier = await Repository.update(db, id, userId, requestData)
 
-    return identifier
+      if (newQrCodeUrl) {
+        try {
+          await this.file.deleteFileByUrls(this.bucket, [
+            existingIdentifier.qrCodeUrl,
+          ])
+        } catch (cleanupError) {
+          console.error(
+            'failed to cleanup old qr code after update',
+            cleanupError,
+          )
+        }
+      }
+
+      return identifier
+    } catch (error) {
+      if (newQrCodeUrl) {
+        try {
+          await this.file.deleteFileByUrls(this.bucket, [newQrCodeUrl])
+        } catch (cleanupError) {
+          console.error(
+            'failed to cleanup new qr code after update failure',
+            cleanupError,
+          )
+        }
+      }
+      throw error
+    }
   }
 
   static delete = async (
@@ -318,21 +382,63 @@ export class IdentifierService extends CommonService {
 
     const urlIds = await UrlService.getIdsByRelation(db, { identifierId: id })
 
-    if (urlIds.length) {
-      await UrlService.deleteMany(db, userId, { ids: urlIds })
-    }
+    const identifier = await db.$transaction(async (tx) => {
+      if (urlIds.length) {
+        await UrlService.deleteMany(tx, userId, { ids: urlIds })
+      }
 
-    const identifier = await Repository.destroy(db, userId, request)
+      return await Repository.destroy(tx, userId, request)
+    })
 
     const imageUrls = [identifier.thumbnail, identifier.qrCodeUrl].filter(
       Boolean,
     ) as string[]
 
     if (imageUrls.length) {
-      await this.file.deleteFileByUrls(this.bucket, imageUrls)
+      try {
+        await this.file.deleteFileByUrls(this.bucket, imageUrls)
+      } catch (error) {
+        console.error('failed to cleanup identifier images', error)
+      }
     }
 
     return identifier
+  }
+
+  static deleteManyCore = async (
+    db: DBClient,
+    userId: string,
+    ids: string[],
+  ): Promise<{
+    identifiers: BulkDeleteIdentifiersResponse
+    imageUrls: ImageUrlsByBucket
+  }> => {
+    await this.checkIdentifiersExist(db, ids)
+
+    const urlIds = await UrlService.getIdsByRelation(db, { identifierId: ids })
+
+    let urlImages: ImageUrlsByBucket = {}
+
+    if (urlIds.length) {
+      const result = await UrlService.deleteManyCore(db, userId, urlIds)
+
+      urlImages = result.imageUrls
+    }
+
+    const identifiers = await Repository.destroyMany(db, userId, { ids })
+
+    const imageUrls = identifiers
+      .flatMap((identifier) => [identifier.thumbnail, identifier.qrCodeUrl])
+      .filter(Boolean) as string[]
+
+    const identifierImages: ImageUrlsByBucket = imageUrls.length
+      ? { [this.bucket]: imageUrls }
+      : {}
+
+    return {
+      identifiers,
+      imageUrls: this.file.mergeImageUrlsByBucket(urlImages, identifierImages),
+    }
   }
 
   static deleteMany = async (
@@ -342,23 +448,11 @@ export class IdentifierService extends CommonService {
   ): Promise<BulkDeleteIdentifiersResponse> => {
     const { ids } = request
 
-    await this.checkIdentifiersExist(db, ids)
+    const { identifiers, imageUrls } = await db.$transaction(async (tx) => {
+      return await this.deleteManyCore(tx, userId, ids)
+    })
 
-    const urlIds = await UrlService.getIdsByRelation(db, { identifierId: ids })
-
-    if (urlIds.length) {
-      await UrlService.deleteMany(db, userId, { ids: urlIds })
-    }
-
-    const identifiers = await Repository.destroyMany(db, userId, request)
-
-    const imageUrls = identifiers
-      .flatMap((identifier) => [identifier.thumbnail, identifier.qrCodeUrl])
-      .filter(Boolean) as string[]
-
-    if (imageUrls.length) {
-      await this.file.deleteFileByUrls(this.bucket, imageUrls)
-    }
+    await this.file.deleteImagesByBucket(imageUrls)
 
     return identifiers
   }

@@ -1,20 +1,7 @@
-import type { LoginProvider } from '@/generated/prisma/enums'
 import { createSSRClientFromRequest } from '@/lib/supabase/server'
 import { prisma as db } from '@/server/db'
 import { AuthService } from '@/server/features/auth'
-import { UserRepository, UserService } from '@/server/features/user'
 import { createFileRoute } from '@tanstack/react-router'
-
-type UserMetadata = {
-  full_name: string
-  name?: string
-  avatar_url?: string
-  picture?: string
-}
-
-type AppMetadata = {
-  providers: LoginProvider[]
-}
 
 export const Route = createFileRoute('/oauth/callback')({
   server: {
@@ -25,7 +12,6 @@ export const Route = createFileRoute('/oauth/callback')({
         const next = url.searchParams.get('next') ?? undefined
 
         const responseHeaders = new Headers()
-
         const errorLoginRedirect = '/login?error=auth_failed'
 
         if (!code) {
@@ -44,45 +30,8 @@ export const Route = createFileRoute('/oauth/callback')({
           return new Response(null, { status: 302, headers: responseHeaders })
         }
 
-        const userMetadata = data.user.user_metadata as UserMetadata
-        const appMetadata = data.user.app_metadata as AppMetadata
-        const avatar = userMetadata.avatar_url ?? userMetadata.picture ?? ''
-
         try {
-          await db.$transaction(async (tx) => {
-            const currentUser = await UserRepository.findById(tx, data.user.id)
-
-            if (!currentUser) {
-              await AuthService.registerOAuth(
-                tx,
-                data.user.id,
-                data.user.email!,
-                avatar,
-              )
-              return
-            }
-
-            const { username, providers } = currentUser
-
-            const isProviderExists = appMetadata.providers.every((provider) => {
-              return providers.includes(
-                provider.toLocaleUpperCase() as LoginProvider,
-              )
-            })
-
-            const { error: updateAuthError } = await supabase.auth.updateUser({
-              data: { username },
-            })
-
-            if (updateAuthError) throw updateAuthError
-
-            if (!isProviderExists) {
-              await UserService.update(tx, data.user.id, {
-                avatar,
-                provider: 'GOOGLE',
-              })
-            }
-          })
+          await AuthService.registerOAuth(db, data.user)
         } catch {
           responseHeaders.set(
             'Location',

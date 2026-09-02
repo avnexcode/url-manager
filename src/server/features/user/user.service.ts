@@ -2,7 +2,6 @@ import type { LoginProvider } from '@/generated/prisma/enums'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import type { DBClient } from '@/server/db'
 import { FileService } from '@/server/services'
-import { SupabaseService } from '@/server/services/supabase.service'
 import { generateUsernameFromEmail } from '@/utils'
 import { CommonService } from '../common'
 import { DummyService } from '../dummy'
@@ -19,9 +18,9 @@ import type {
   UserResponse,
 } from './user.model'
 import { UserRepository as Repository } from './user.repository'
+import { createUserRequest } from './user.validation'
 
 export class UserService extends CommonService {
-  private static auth = SupabaseService.auth
   private static bucket = SUPABASE_BUCKET.Profile
   private static file = FileService
 
@@ -46,22 +45,23 @@ export class UserService extends CommonService {
 
   static create = async (
     db: DBClient,
-    id: string,
     request: CreateUserRequest,
   ): Promise<CreateUserResponse> => {
-    const { email } = request
+    const { id, email } = request
+
+    const validatedRequest = createUserRequest.parse(request)
 
     const username = generateUsernameFromEmail({ email })
 
-    const user = await Repository.insert(db, id, username, request)
+    return await db.$transaction(async (tx) => {
+      const user = await Repository.insert(tx, username, validatedRequest)
 
-    await SettingService.create(db, { userId: id })
+      await SettingService.create(tx, { userId: id })
 
-    await DummyService.init(db, id)
+      await DummyService.init(tx, id)
 
-    await this.auth.updateUsername(id, username)
-
-    return user
+      return user
+    })
   }
 
   static update = async (
@@ -91,10 +91,6 @@ export class UserService extends CommonService {
 
     const user = await Repository.update(db, id, data)
 
-    if (username) {
-      await this.auth.updateUsername(id, username)
-    }
-
     return user
   }
 
@@ -106,23 +102,40 @@ export class UserService extends CommonService {
 
     await this.checkUserExists(db, id)
 
-    await SettingService.delete(db, { userId: id })
-
     const platformIds = await PlatformService.getIdsByUser(db, id)
-
-    await PlatformService.deleteMany(db, id, { ids: platformIds })
 
     const identifierIds = await IdentifierService.getIdsByUser(db, id)
 
-    await IdentifierService.deleteMany(db, id, { ids: identifierIds })
+    const { user, imageUrls } = await db.$transaction(async (tx) => {
+      await SettingService.delete(tx, { userId: id })
 
-    const user = await Repository.destroy(db, request)
+      const { imageUrls: platformImageUrls } =
+        await PlatformService.deleteManyCore(tx, id, platformIds)
 
-    const imageUrls = [user.image, user.avatar].filter(Boolean) as string[]
+      const { imageUrls: identifierImageUrls } =
+        await IdentifierService.deleteManyCore(tx, id, identifierIds)
 
-    if (imageUrls.length) {
-      await this.file.deleteFileByUrls(this.bucket, imageUrls)
-    }
+      const userData = await Repository.destroy(tx, request)
+
+      return {
+        user: userData,
+        imageUrls: this.file.mergeImageUrlsByBucket(
+          platformImageUrls,
+          identifierImageUrls,
+        ),
+      }
+    })
+
+    const userImages = [user.image, user.avatar].filter(Boolean) as string[]
+
+    const allImageUrls = this.file.mergeImageUrlsByBucket(
+      imageUrls,
+      userImages.length ? { [this.bucket]: userImages } : {},
+    )
+
+    console.log({ allImageUrls })
+
+    await this.file.deleteImagesByBucket(allImageUrls)
 
     return user
   }

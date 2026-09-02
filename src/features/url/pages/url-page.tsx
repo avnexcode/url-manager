@@ -1,10 +1,6 @@
 import { Heading } from '@/components'
 import { ActionLink } from '@/components/elements'
-import {
-  MainLayout,
-  PageContainer,
-  SectionContainer,
-} from '@/components/layouts'
+import { MainLayout } from '@/components/layouts'
 import * as m from '@/generated/paraglide/messages'
 import { useQueryParams } from '@/hooks'
 import { useTRPC } from '@/lib/trpc/react'
@@ -24,30 +20,26 @@ export const UrlPage = () => {
   const urlListActions = useUrlListActions(urls?.data.map((u) => u.id) ?? [])
 
   return (
-    <PageContainer withHeader withFooter>
-      <SectionContainer container padded className="min-h-screen">
-        <MainLayout
-          headerContent={
-            <>
-              <Heading size={'h2'}>{m.page_url_title()}</Heading>
-              {urls?.meta && urls.meta.total > 0 && (
-                <ActionLink
-                  action="createNew"
-                  to="/{-$locale}/dashboard/url/create"
-                />
-              )}
-            </>
-          }
-        >
-          <UrlListSection
-            urls={urls}
-            isUrlsLoading={isUrlsLoading}
-            queryParams={queryParams}
-            handleUpdateQuery={handleUpdateQuery}
-            actions={urlListActions}
-          />
-        </MainLayout>
-      </SectionContainer>
-    </PageContainer>
+    <MainLayout
+      headerContent={
+        <>
+          <Heading size={'h2'}>{m.page_url_title()}</Heading>
+          {urls?.meta && urls.meta.total > 0 && (
+            <ActionLink
+              action="createNew"
+              to="/{-$locale}/dashboard/url/create"
+            />
+          )}
+        </>
+      }
+    >
+      <UrlListSection
+        urls={urls}
+        isUrlsLoading={isUrlsLoading}
+        queryParams={queryParams}
+        handleUpdateQuery={handleUpdateQuery}
+        actions={urlListActions}
+      />
+    </MainLayout>
   )
 }

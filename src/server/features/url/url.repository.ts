@@ -233,7 +233,10 @@ export class UrlRepository extends CommonRepository {
     return count
   }
 
-  static countBySlug = async (db: DBClient, slug: string): Promise<number> => {
+  static countUniqueSlug = async (
+    db: DBClient,
+    slug: string,
+  ): Promise<number> => {
     const hashSegment = slug.split('-').pop()
 
     const count = await db.url.count({

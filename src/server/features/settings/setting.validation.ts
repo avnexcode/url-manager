@@ -7,6 +7,7 @@ export const createSettingRequest = z.object({
   publicAccess: z.boolean().default(true).optional(),
   publicPlatformAccess: z.boolean().default(true).optional(),
   publicIdentifierAccess: z.boolean().default(true).optional(),
+  userId: z.uuid(),
 })
 
 export const updateSettingRequest = z.object({

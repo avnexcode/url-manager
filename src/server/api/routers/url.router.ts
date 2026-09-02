@@ -93,10 +93,8 @@ export const urlRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        return db.$transaction(async (tx) => {
-          const url = await UrlService.create(tx, auth.id, request)
-          return url
-        })
+        const url = await UrlService.create(db, auth.id, request)
+        return url
       } catch (error) {
         return errorFilter(error)
       }
@@ -121,10 +119,8 @@ export const urlRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        return await db.$transaction(async (tx) => {
-          const url = await UrlService.delete(tx, auth.id, request)
-          return url
-        })
+        const url = await UrlService.delete(db, auth.id, request)
+        return url
       } catch (error) {
         return errorFilter(error)
       }
@@ -136,10 +132,8 @@ export const urlRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        return await db.$transaction(async (tx) => {
-          const url = await UrlService.deleteMany(tx, auth.id, request)
-          return url
-        })
+        const url = await UrlService.deleteMany(db, auth.id, request)
+        return url
       } catch (error) {
         return errorFilter(error)
       }

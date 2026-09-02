@@ -14,7 +14,7 @@ type PageLimitProps = {
   onLimitChange: (limit: number) => void
 }
 
-const LIMIT_OPTIONS = [15, 30, 50, 100, 150, 250, 500, 1000]
+const LIMIT_OPTIONS = [15, 30, 50, 100, 150, 250, 500]
 
 export const PageLimit = ({
   totalData,

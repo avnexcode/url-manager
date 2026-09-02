@@ -5,6 +5,7 @@ import {
   updatePasswordRequest,
 } from '@/server/features/auth'
 import type {
+  CreateUserResponse,
   DeleteUserResponse,
   UpdateUserResponse,
   UserResponse,
@@ -17,13 +18,12 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc'
 export const authRouter = createTRPCRouter({
   register: publicProcedure
     .input(z.object({ request: registerRequest }))
-    .mutation(async ({ ctx, input }): Promise<void> => {
+    .mutation(async ({ ctx, input }): Promise<CreateUserResponse> => {
       const { db } = ctx
       const { request } = input
       try {
-        await db.$transaction(async (tx) => {
-          await AuthService.register(tx, request)
-        })
+        const account = await AuthService.register(db, request)
+        return account
       } catch (error) {
         return errorFilter(error)
       }
@@ -47,7 +47,7 @@ export const authRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        const account = await UserService.update(db, auth.id, request)
+        const account = await AuthService.updateAccount(db, auth.id, request)
         return account
       } catch (error) {
         return errorFilter(error)
@@ -60,8 +60,8 @@ export const authRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        const user = await AuthService.updatePassword(db, auth.id, request)
-        return user
+        const account = await AuthService.updatePassword(db, auth.id, request)
+        return account
       } catch (error) {
         return errorFilter(error)
       }
@@ -73,8 +73,8 @@ export const authRouter = createTRPCRouter({
       const { auth, db } = ctx
       const { request } = input
       try {
-        const user = await AuthService.deleteAccount(db, auth.id, request)
-        return user
+        const account = await AuthService.deleteAccount(db, auth.id, request)
+        return account
       } catch (error) {
         return errorFilter(error)
       }

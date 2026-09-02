@@ -1,18 +1,23 @@
+import type { LoginProvider } from '@/generated/prisma/enums'
 import { createSSRClient } from '@/lib/supabase/server'
 import type { DBClient } from '@/server/db'
 import { SupabaseService } from '@/server/services'
 import { capitalizeSentence } from '@/utils'
+import type { User } from '@supabase/supabase-js'
 import { CommonService } from '../common'
 import type {
   CreateUserResponse,
   DeleteUserResponse,
+  UpdateUserRequest,
   UpdateUserResponse,
 } from '../user'
 import { UserRepository, UserService } from '../user'
 import type {
+  AppMetadata,
   DeleteAccountRequest,
   RegisterRequest,
   UpdatePasswordRequest,
+  UserMetadata,
 } from './auth.model'
 
 export class AuthService extends CommonService {
@@ -53,7 +58,7 @@ export class AuthService extends CommonService {
 
   private static checkUserExists = async (
     db: DBClient,
-    key: 'EMAIL' | '',
+    key: 'EMAIL' | 'SOME',
     value: string,
   ) => {
     if (key === 'EMAIL') {
@@ -73,50 +78,113 @@ export class AuthService extends CommonService {
 
     await this.checkUserExists(db, 'EMAIL', email)
 
-    let userId = ''
+    const res = await this.auth.createUser({ email, password })
+
+    const userId = res.userId
 
     try {
-      const res = await this.auth.createUser({ email, password })
-
-      if (res.userId) userId = res.userId
-
-      const user = await UserService.create(db, userId, {
+      const user = await UserService.create(db, {
+        id: userId,
         email,
         provider: 'CREDENTIALS',
       })
 
-      await this.auth.emailVerification(email)
+      try {
+        await this.auth.updateUsername(userId, user.username)
+
+        await this.auth.emailVerification(email)
+      } catch (postCommitError) {
+        console.error('post-register side effect failed', postCommitError)
+      }
 
       return user
     } catch (error) {
-      if (userId) await this.auth.deleteUser(userId)
-
+      try {
+        await this.auth.deleteUser(userId)
+      } catch (cleanupError) {
+        console.error(
+          'failed to cleanup auth user after failed registration',
+          cleanupError,
+        )
+      }
       throw error
     }
   }
 
   static registerOAuth = async (
     db: DBClient,
-    userId: string,
-    email: string,
-    avatar: string,
-  ): Promise<CreateUserResponse> => {
-    try {
-      const user = await UserService.create(db, userId, {
-        email,
-        provider: 'GOOGLE',
-        avatar,
-      })
+    user: User,
+  ): Promise<CreateUserResponse | UpdateUserResponse> => {
+    const userMetadata = user.user_metadata as UserMetadata
+    const appMetadata = user.app_metadata as AppMetadata
+    const avatar = userMetadata.avatar_url ?? userMetadata.picture ?? ''
 
-      await this.auth.updateUsername(userId, user.username)
-      await this.auth.updateLanguage(userId, 'ID')
+    const currentUser = await UserRepository.findById(db, user.id)
 
-      return user
-    } catch (error) {
-      if (userId) await this.deleteUser(db, userId)
+    if (!currentUser) {
+      try {
+        const newUser = await UserService.create(db, {
+          id: user.id,
+          email: user.email!,
+          provider: 'GOOGLE',
+          avatar,
+        })
 
-      throw error
+        try {
+          await this.auth.updateUsername(user.id, newUser.username)
+        } catch (error) {
+          console.error('failed to sync username after oauth register', error)
+        }
+
+        return newUser
+      } catch (error) {
+        try {
+          await this.auth.deleteUser(user.id)
+        } catch (cleanupError) {
+          console.error(
+            'failed to cleanup auth user after failed oauth registration',
+            cleanupError,
+          )
+        }
+        throw error
+      }
     }
+
+    const { username, providers } = currentUser
+
+    await this.auth.updateUsername(user.id, username)
+
+    const isProviderExists = appMetadata.providers.every((provider) =>
+      providers.includes(provider.toLocaleUpperCase() as LoginProvider),
+    )
+
+    if (!isProviderExists) {
+      return await UserService.update(db, user.id, {
+        avatar,
+        provider: 'GOOGLE',
+      })
+    }
+
+    return { ...currentUser, avatar }
+  }
+
+  static updateAccount = async (
+    db: DBClient,
+    userId: string,
+    request: UpdateUserRequest,
+  ): Promise<UpdateUserResponse> => {
+    const user = await UserService.update(db, userId, request)
+
+    try {
+      await this.auth.updateUsername(userId, user.username)
+    } catch (error) {
+      console.error(
+        'failed to sync username to supabase auth after account update',
+        error,
+      )
+    }
+
+    return user
   }
 
   static updatePassword = async (
@@ -126,28 +194,28 @@ export class AuthService extends CommonService {
   ): Promise<UpdateUserResponse> => {
     const { currentPassword, password, confirmPassword } = request
 
+    this.checkIsPasswordMatch(password, confirmPassword)
+
     const { createdAt, ...user } = await UserService.getById(db, userId)
 
-    if (user.providers.includes('CREDENTIALS')) {
-      await this.checkIsValidCredentials(user.email, currentPassword!)
-    } else {
-      await UserService.update(db, userId, { provider: 'CREDENTIALS' })
-    }
+    const hasCredentials = user.providers.includes('CREDENTIALS')
 
-    this.checkIsPasswordMatch(password, confirmPassword)
+    if (hasCredentials) {
+      await this.checkIsValidCredentials(user.email, currentPassword!)
+    }
 
     await this.auth.updatePassword(userId, password)
 
-    return user
-  }
-
-  static deleteUser = async (
-    db: DBClient,
-    id: string,
-  ): Promise<DeleteUserResponse> => {
-    const user = await UserService.delete(db, { id })
-
-    await this.auth.deleteUser(id)
+    if (!hasCredentials) {
+      try {
+        await UserService.update(db, userId, { provider: 'CREDENTIALS' })
+      } catch (error) {
+        console.error(
+          'failed to sync CREDENTIALS provider after password set',
+          error,
+        )
+      }
+    }
 
     return user
   }
@@ -159,10 +227,18 @@ export class AuthService extends CommonService {
   ): Promise<DeleteUserResponse> => {
     const { password } = request
 
-    const user = await UserService.getById(db, userId)
+    const { email } = await UserService.getById(db, userId)
 
-    await this.checkIsValidCredentials(user.email, password)
+    await this.checkIsValidCredentials(email, password)
 
-    return await this.deleteUser(db, userId)
+    const user = await UserService.delete(db, { id: userId })
+
+    try {
+      await this.auth.deleteUser(userId)
+    } catch (error) {
+      console.error('failed to delete supabase auth user', error)
+    }
+
+    return user
   }
 }

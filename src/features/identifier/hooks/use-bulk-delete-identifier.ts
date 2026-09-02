@@ -42,9 +42,9 @@ export const useBulkDeleteIdentifiers = ({
     }),
   )
 
-  const onBulkDelete = (values: { ids: string[] }) => {
+  const onDelete = (values: { ids: string[] }) => {
     mutate({ request: { ids: values.ids } })
   }
 
-  return { onBulkDelete, isPending, variables }
+  return { onDelete, isPending, variables }
 }

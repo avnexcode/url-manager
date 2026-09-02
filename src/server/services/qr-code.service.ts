@@ -25,21 +25,17 @@ export class QrCodeService {
   ): string => {
     const prefix = extractSlugId({ slug })
 
-    let qrEncodedValue = ''
+    const baseUrl = env.VITE_BASE_URL
 
-    if (type === 'IDENTIFIER') {
-      qrEncodedValue = `${env.VITE_BASE_URL}/i/${prefix}`
-    }
+    let value = ''
 
-    if (type === 'PLATFORM') {
-      qrEncodedValue = `${env.VITE_BASE_URL}/p/${prefix}`
-    }
+    if (type === 'IDENTIFIER') value = `${baseUrl}/i/${prefix}`
 
-    if (type === 'URL') {
-      qrEncodedValue = `${env.VITE_BASE_URL}/s/${prefix}`
-    }
+    if (type === 'PLATFORM') value = `${baseUrl}/p/${prefix}`
 
-    return qrEncodedValue
+    if (type === 'URL') value = `${baseUrl}/s/${prefix}`
+
+    return value
   }
 
   private static buildFileName = (username: string, slug: string): string => {
@@ -54,15 +50,12 @@ export class QrCodeService {
     const { username, slug } = params
 
     const fileName = this.buildFileName(username, slug)
+
     const qrEncodedValue = this.buildQrEncodedValue(type, slug)
 
     const buffer = await QRCode.toBuffer(qrEncodedValue, this.OPTIONS)
 
-    const qrCodeUrl = await FileService.uploadImageBuffer(
-      bucket,
-      fileName,
-      buffer,
-    )
+    const qrCodeUrl = await FileService.uploadFile(bucket, fileName, buffer)
 
     return { qrEncodedValue, qrCodeUrl }
   }

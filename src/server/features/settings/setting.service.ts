@@ -1,5 +1,4 @@
 import type { DBClient } from '@/server/db'
-import { SupabaseService } from '@/server/services'
 import { CommonService } from '../common'
 import type {
   CreateSettingRequest,
@@ -11,10 +10,9 @@ import type {
   UpdateSettingResponse,
 } from './setting.model'
 import { SettingRepository as Repository } from './setting.repository'
+import { createSettingRequest } from './setting.validation'
 
 export class SettingService extends CommonService {
-  private static auth = SupabaseService.auth
-
   protected static override get baseModel() {
     return this.m.model_setting_title()
   }
@@ -50,7 +48,9 @@ export class SettingService extends CommonService {
     db: DBClient,
     request: CreateSettingRequest,
   ): Promise<CreateSettingResponse> => {
-    const setting = await Repository.insert(db, request)
+    const validatedRequest = createSettingRequest.parse(request)
+
+    const setting = await Repository.insert(db, validatedRequest)
 
     return setting
   }
@@ -60,15 +60,9 @@ export class SettingService extends CommonService {
     userId: string,
     request: UpdateSettingRequest,
   ): Promise<UpdateSettingResponse> => {
-    const { language } = request
-
     await this.checkSettingByUserExists(db, userId)
 
     const setting = await Repository.update(db, userId, request)
-
-    if (language) {
-      await this.auth.updateLanguage(userId, language)
-    }
 
     return setting
   }

@@ -12,6 +12,7 @@ import * as m from '@/generated/paraglide/messages'
 import type { SearchParams } from '@/hooks'
 import type { QueryResponse } from '@/interfaces'
 import { renderElements } from '@/utils'
+import { Loader2 } from 'lucide-react'
 import type { useUrlListActions } from '../hooks'
 import type { UrlResponse } from '../types'
 import { UrlCard, UrlCardSkeleton } from './url-card'
@@ -42,7 +43,7 @@ export const UrlListSection = ({
     selectedCount,
     isDeleteDialogOpen,
     setIsDeleteDialogOpen,
-    onDelete,
+    handleDelete,
     isPending,
     isUrlPending,
   } = actions
@@ -86,7 +87,16 @@ export const UrlListSection = ({
               className="h-7 max-w-fit rounded-sm text-xs"
               onClick={() => setIsDeleteDialogOpen(true)}
             >
-              <Icon name="Trash2" />({selectedCount}) {m.action_delete()}
+              {!isPending ? (
+                <>
+                  <Icon name="Trash2" />({selectedCount}) {m.action_delete()}
+                </>
+              ) : (
+                <>
+                  <Loader2 className="animate-spin" />
+                  {m.action_delete_loading()}...
+                </>
+              )}
             </Button>
           ) : urls?.data.length !== 0 ? (
             <Button
@@ -149,7 +159,7 @@ export const UrlListSection = ({
         model={m.model_url_title()}
         open={isDeleteDialogOpen}
         onOpenChange={setIsDeleteDialogOpen}
-        onConfirm={onDelete}
+        onConfirm={handleDelete}
         isPending={isPending}
       />
     </>

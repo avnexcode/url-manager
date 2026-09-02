@@ -1,11 +1,6 @@
 import { Heading } from '@/components'
 import { ActionLink } from '@/components/elements'
-import {
-  MainLayout,
-  PageContainer,
-  SectionContainer,
-  SectionLayout,
-} from '@/components/layouts'
+import { MainLayout, SectionLayout } from '@/components/layouts'
 import { UrlListSection } from '@/features/url/components'
 import { useUrlListActions } from '@/features/url/hooks'
 import * as m from '@/generated/paraglide/messages'
@@ -36,43 +31,35 @@ export const DetailPlatformPage = () => {
   const urlListActions = useUrlListActions(urls?.data.map((u) => u.id) ?? [])
 
   return (
-    <PageContainer withHeader withFooter>
-      <SectionContainer container padded className="min-h-screen">
-        <MainLayout
-          headerContent={
-            <Heading size={'h2'}>{m.page_platform_title()}</Heading>
-          }
-        >
-          <PlatformView platform={platform} />
+    <MainLayout
+      headerContent={<Heading size={'h2'}>{m.page_platform_title()}</Heading>}
+    >
+      <PlatformView platform={platform} />
 
-          <SectionLayout
-            headerContent={
-              <>
-                <Heading size="h3">
-                  {m.component_view_url_list_heading()}
-                </Heading>
-                {urls?.meta && urls.meta.total > 0 && (
-                  <ActionLink
-                    size="sm"
-                    action="createNew"
-                    to="/{-$locale}/dashboard/url/create"
-                    search={{ from: 'platform', id }}
-                  />
-                )}
-              </>
-            }
-          >
-            <UrlListSection
-              urls={urls}
-              isUrlsLoading={isUrlsLoading}
-              queryParams={queryParams}
-              handleUpdateQuery={handleUpdateQuery}
-              actions={urlListActions}
-              createLinkSearch={{ from: 'platform', id }}
-            />
-          </SectionLayout>
-        </MainLayout>
-      </SectionContainer>
-    </PageContainer>
+      <SectionLayout
+        headerContent={
+          <>
+            <Heading size="h3">{m.component_view_url_list_heading()}</Heading>
+            {urls?.meta && urls.meta.total > 0 && (
+              <ActionLink
+                size="sm"
+                action="createNew"
+                to="/{-$locale}/dashboard/url/create"
+                search={{ from: 'platform', id }}
+              />
+            )}
+          </>
+        }
+      >
+        <UrlListSection
+          urls={urls}
+          isUrlsLoading={isUrlsLoading}
+          queryParams={queryParams}
+          handleUpdateQuery={handleUpdateQuery}
+          actions={urlListActions}
+          createLinkSearch={{ from: 'platform', id }}
+        />
+      </SectionLayout>
+    </MainLayout>
   )
 }
