@@ -11,31 +11,27 @@ type OAuthSignInProps = {
 
 export const OAuthSignIn = ({ className }: OAuthSignInProps) => {
   const handleGoogleLogin = async () => {
-    try {
-      const redirectUrl = `${window.location.origin}/oauth/callback`
+    const redirectTo = `${window.location.origin}/oauth/callback`
 
+    try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: {
-          redirectTo: redirectUrl,
-        },
+        options: { redirectTo },
       })
 
-      if (error) throw error
-    } catch (error) {
       if (error) {
-        toast.error(m.error_message_supabase_auth_default())
+        const { code, status, message } = error
+
+        throw new Error(JSON.stringify({ code, status, message }))
       }
+    } catch (error) {
+      toast.error(m.error_message_supabase_auth_default())
     }
   }
 
   return (
     <div className={cn('flex w-full items-center justify-center', className)}>
-      <Button
-        variant={'default'}
-        className="w-full"
-        onClick={handleGoogleLogin}
-      >
+      <Button variant="default" className="w-full" onClick={handleGoogleLogin}>
         <GoogleIcon width={25} height={25} />
         Google
       </Button>
