@@ -1,4 +1,4 @@
-import { createSSRClientFromRequest } from '@/lib/supabase/server'
+import { createSSRClient } from '@/lib/supabase/server'
 import { prisma as db } from '@/server/db'
 import { AuthService } from '@/server/features/auth'
 import { createFileRoute } from '@tanstack/react-router'
@@ -18,7 +18,7 @@ export const Route = createFileRoute('/oauth/callback')({
           return Response.redirect(new URL('/login', url.origin))
         }
 
-        const supabase = createSSRClientFromRequest(request, responseHeaders)
+        const supabase = createSSRClient({ request, responseHeaders })
 
         const { data, error } = await supabase.auth.exchangeCodeForSession(code)
 

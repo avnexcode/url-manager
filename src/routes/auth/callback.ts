@@ -1,4 +1,4 @@
-import { createSSRClientFromRequest } from '@/lib/supabase/server'
+import { createSSRClient } from '@/lib/supabase/server'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/auth/callback')({
@@ -15,7 +15,7 @@ export const Route = createFileRoute('/auth/callback')({
           return Response.redirect(new URL('/login', url.origin))
         }
 
-        const supabase = createSSRClientFromRequest(request, responseHeaders)
+        const supabase = createSSRClient({ request, responseHeaders })
 
         const { data, error } = await supabase.auth.exchangeCodeForSession(code)
 
