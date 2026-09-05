@@ -1,6 +1,8 @@
 import { Heading } from '@/components/heading'
 import { PageContainer, SectionContainer } from '@/components/layouts'
+import { buttonVariants } from '@/components/ui/button'
 import * as m from '@/generated/paraglide/messages'
+import { cn } from '@/lib/utils'
 import { GoBackButton } from '../components'
 
 export const Error404Page = () => {
@@ -11,7 +13,12 @@ export const Error404Page = () => {
         className="flex min-h-screen items-center justify-center"
       >
         <div className="flex h-full w-full flex-col items-center justify-center text-center">
-          <div className="mb-6 bg-zinc-100 p-6 dark:bg-zinc-800">
+          <div
+            className={cn(
+              buttonVariants({ variant: 'neutral' }),
+              'mb-10 py-10 px-20',
+            )}
+          >
             <span className="text-5xl">404</span>
           </div>
 

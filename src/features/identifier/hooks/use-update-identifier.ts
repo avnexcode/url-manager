@@ -92,7 +92,7 @@ export const useUpdateIdentifier = (
       if (values.thumbnail) {
         setIsUploading(true)
 
-        const fileName = `${user.username}-th-${generateSlug({ text: values.title })}.png`
+        const fileName = `${user?.username ?? 'user'}-th-${generateSlug({ text: values.title })}.png`
 
         thumbnailUrl = await uploadImage(
           SUPABASE_BUCKET.Identifier,

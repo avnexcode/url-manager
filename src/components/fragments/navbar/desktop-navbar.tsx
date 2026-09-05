@@ -39,6 +39,8 @@ export const DesktopNavbar = () => {
     )
   }
 
+  if (!user) return null
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

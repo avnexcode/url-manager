@@ -8,6 +8,8 @@ export const PublicAccessSwitcher = () => {
   const { setting } = useAuth()
   const { handlePublicAccessChange, isPending } = usePublicAccess()
 
+  if (!setting) return null
+
   return (
     <>
       <SettingsCard label={m.page_setting_card_public_access_label()}>

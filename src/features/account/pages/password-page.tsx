@@ -5,11 +5,13 @@ import {
   SectionContainer,
 } from '@/components/layouts'
 import * as m from '@/generated/paraglide/messages'
+import { useAuth } from '@/hooks'
 import { EditPasswordForm } from '../forms'
 import { useUpdatePassword } from '../hooks/use-update-password'
 
 export const AccountPage = () => {
-  const { form, onSubmit, isPending } = useUpdatePassword()
+  const { user } = useAuth()
+  const { form, onSubmit, isPending } = useUpdatePassword(user?.providers)
 
   return (
     <PageContainer withHeader withFooter>
@@ -24,6 +26,7 @@ export const AccountPage = () => {
             form={form}
             onSubmit={onSubmit}
             isPending={isPending}
+            providers={user?.providers ?? []}
           />
         </MainLayout>
       </SectionContainer>

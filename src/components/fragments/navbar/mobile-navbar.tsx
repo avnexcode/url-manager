@@ -85,13 +85,13 @@ export const MobileNavbar = () => {
                 <div className="flex flex-col gap-1 border-2 border-border bg-secondary-background p-1">
                   <div className="flex items-center gap-2 text-sm font-base">
                     <User className="size-4" />
-                    <span className="truncate">{user.username}</span>
+                    <span className="truncate">{user?.username}</span>
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 border-2 border-border bg-secondary-background p-1">
                   <div className="flex items-center gap-2 text-sm font-base">
                     <Mail className="size-4" />
-                    <span className="truncate">{user.email}</span>
+                    <span className="truncate">{user?.email}</span>
                   </div>
                 </div>
               </>

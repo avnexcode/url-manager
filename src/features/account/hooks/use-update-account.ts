@@ -15,14 +15,14 @@ import { toast } from 'sonner'
 import { updateAccountFormSchema } from '../schemas'
 import type { UpdateAccountFormSchema } from '../types'
 
-const toFormValues = (account: UserResponse): UpdateAccountFormSchema => {
+const toFormValues = (account?: UserResponse): UpdateAccountFormSchema => {
   return {
-    username: account.username,
+    username: account?.username ?? '',
   }
 }
 
 export const useUpdateAccount = (
-  account: UserResponse,
+  account?: UserResponse,
   { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
 ) => {
   const toastMessages = useToastMessages(m.model_user_title())
@@ -72,7 +72,7 @@ export const useUpdateAccount = (
   )
 
   const onSubmit = async (values: UpdateAccountFormSchema) => {
-    let imageUrl = account.image
+    let imageUrl = account?.image ?? null
     let image = false
 
     try {

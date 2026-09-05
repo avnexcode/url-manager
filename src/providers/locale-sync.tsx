@@ -35,7 +35,7 @@ export const LocaleSync = () => {
   const { isAuthenticated, setting } = useAuth()
 
   useEffect(() => {
-    if (!isAuthenticated) return
+    if (!isAuthenticated || !setting) return
 
     const preferredLocale = setting.language.toLowerCase() as Locale
     if (!isLocale(preferredLocale)) return
@@ -53,7 +53,7 @@ export const LocaleSync = () => {
     if (localized.href !== window.location.href) {
       window.location.href = localized.href
     }
-  }, [isAuthenticated, setting.language])
+  }, [isAuthenticated, setting])
 
   return null
 }

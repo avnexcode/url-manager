@@ -91,12 +91,12 @@ export const ThemeProvider: React.FC<React.PropsWithChildren> = ({
   }, [])
 
   useEffect(() => {
-    if (!isAuthenticated) return
+    if (!isAuthenticated || !setting) return
     const dbTheme = dbThemeToTheme(setting.theme)
     setThemeState(dbTheme)
     applyTheme(dbTheme)
     window.localStorage.setItem(STORAGE_KEY, dbTheme)
-  }, [isAuthenticated, setting.theme])
+  }, [isAuthenticated, setting])
 
   useEffect(() => {
     setResolvedTheme(resolveTheme(theme))
@@ -125,13 +125,13 @@ export const ThemeProvider: React.FC<React.PropsWithChildren> = ({
     (newTheme: Theme) => {
       setThemeLocal(newTheme)
 
-      if (isAuthenticated && setting.id) {
+      if (isAuthenticated && setting?.id) {
         updateSetting({
           request: { theme: themeToDbTheme(newTheme) },
         })
       }
     },
-    [isAuthenticated, setting.id, updateSetting, setThemeLocal],
+    [isAuthenticated, setting?.id, updateSetting, setThemeLocal],
   )
 
   return (

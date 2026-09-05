@@ -12,7 +12,7 @@ import { updatePasswordFormSchema } from '../schemas'
 import type { UpdatePasswordFormSchema } from '../types'
 
 export const useUpdatePassword = (
-  providers: LoginProvider[],
+  providers: LoginProvider[] = [],
   { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
 ) => {
   const toastMessages = useToastMessages(m.model_auth_field_password())
@@ -26,7 +26,7 @@ export const useUpdatePassword = (
       password: '',
       confirmPassword: '',
     },
-    resolver: zodResolver(updatePasswordFormSchema(providers)),
+    resolver: zodResolver(updatePasswordFormSchema(providers ?? [])),
   })
 
   const { mutate, isPending } = useMutation(

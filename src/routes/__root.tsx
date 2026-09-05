@@ -1,7 +1,8 @@
 import { AppProvider } from '@/components/layouts'
 import { Error404Page, Error500Page } from '@/features/error/pages'
-import { getLocale } from '@/generated/paraglide/runtime'
+import { getLocale, isLocale, localizeUrl } from '@/generated/paraglide/runtime'
 import { getUser } from '@/lib/supabase/auth'
+import { getStoredLocale } from '@/providers'
 import type { AppRouter } from '@/server/api/root'
 import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, redirect } from '@tanstack/react-router'
@@ -51,35 +52,31 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       throw redirect({ to: PATHS.DEFAULT_REDIRECT })
     }
 
-    // if (!user && typeof window !== 'undefined') {
-    //   const storedLocale = getStoredLocale()
-    //   const currentLocale = getLocale()
+    if (!user && typeof window !== 'undefined') {
+      const storedLocale = getStoredLocale()
+      const currentLocale = getLocale()
 
-    //   if (
-    //     storedLocale &&
-    //     isLocale(storedLocale) &&
-    //     storedLocale !== currentLocale
-    //   ) {
-    //     const localized = localizeUrl(window.location.href, {
-    //       locale: storedLocale,
-    //     })
-    //     if (localized.href !== window.location.href) {
-    //       throw redirect({ href: localized.href })
-    //     }
-    //   }
-    // }
+      if (
+        storedLocale &&
+        isLocale(storedLocale) &&
+        storedLocale !== currentLocale
+      ) {
+        const localized = localizeUrl(window.location.href, {
+          locale: storedLocale,
+        })
+        if (localized.href !== window.location.href) {
+          throw redirect({ href: localized.href })
+        }
+      }
+    }
 
     return { user: user ?? undefined }
   },
-  loader: async ({ context }) => {
-    const { trpc, queryClient, user } = context
-
-    if (!user) return {}
-
-    await Promise.allSettled([
-      queryClient.ensureQueryData(trpc.auth.getAccount.queryOptions()),
-      queryClient.ensureQueryData(trpc.setting.getByUser.queryOptions()),
-    ])
+  loader: async () => {
+    // Auth queries (getAccount, setting.getByUser) are intentionally
+    // fetched client-side in AuthProvider to avoid SSR loopback HTTP
+    // requests on Vercel that lose session cookies and cause UNAUTHORIZED.
+    return {}
   },
   head: () => ({
     meta: [

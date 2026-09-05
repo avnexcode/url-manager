@@ -9,10 +9,11 @@ export const Route = createFileRoute(
   '/{-$locale}/_authenticated/dashboard/platform/$id',
 )({
   loader: async ({ context, params }) => {
+    const { queryClient, trpc } = context
     const { id } = params
     try {
-      const platform = await context.queryClient.ensureQueryData(
-        context.trpc.platform.getById.queryOptions({ id }),
+      const platform = await queryClient.ensureQueryData(
+        trpc.platform.getById.queryOptions({ id }),
       )
       return platform
     } catch (error) {

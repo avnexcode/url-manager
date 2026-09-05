@@ -16,13 +16,15 @@ export const AccountPage = () => {
     form: updatePasswordForm,
     onSubmit: onUpdatePasswordSubmit,
     isPending: isUpdatePasswordPending,
-  } = useUpdatePassword(user.providers)
+  } = useUpdatePassword(user?.providers)
 
   const {
     form: deleteAccountForm,
     onSubmit: onDeleteAccountSubmit,
     isPending: isDeleteAccountPending,
   } = useDeleteAccount()
+
+  if (!user) return null
 
   return (
     <MainLayout
