@@ -36,7 +36,7 @@ export const seo = createSeo({
   titleTemplate: (title) => `${title} · ${env.VITE_APP_TITLE}`,
   twitterHandle: '@avnexeed',
   defaultImage: env.VITE_OG_IMAGE_URL,
-  baseKeywords: [],
+  baseKeywords: ['url manager', 'url shortener', 'link management', 'qr code'],
 })
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
@@ -86,7 +86,12 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: `URL's Manager` },
+      { title: env.VITE_APP_TITLE },
+      {
+        name: 'description',
+        content:
+          'URL Manager — shorten links, manage platforms, group identifiers, and generate QR codes all in one place.',
+      },
     ],
     links: [
       { rel: 'icon', href: '/favicon.ico' },

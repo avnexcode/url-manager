@@ -5,8 +5,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import * as m from '@/generated/paraglide/messages'
+import { Download, ExternalLink } from 'lucide-react'
 import { CopyTextWrapper } from './elements'
-import { Icon } from './icon'
 import { Button } from './ui/button'
 
 type QrImageDialogProps = {
@@ -49,7 +49,7 @@ export const QrImageDialog = ({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline"
               >
-                <Icon name="ExternalLink" className="size-3.5" />
+                <ExternalLink className="size-3.5" />
                 {m.action_visit()}
               </a>
             </div>
@@ -62,7 +62,7 @@ export const QrImageDialog = ({
               size="sm"
               className="w-full gap-2"
             >
-              <Icon name="Download" className="size-4" />
+              <Download className="size-4" />
               {m.action_download()}
             </Button>
           </a>

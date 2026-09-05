@@ -4,8 +4,13 @@ import { getDatabaseUrl } from '../src/server/db/database-url.js'
 
 import { IdentifierService } from '@/server/features/identifier/identifier.service.js'
 import { PlatformService } from '@/server/features/platform/platform.service.js'
+import { UrlService } from '@/server/features/url/url.service.js'
 
-import { generateIdentifiers, generatePlatforms } from './faker/index.js'
+import {
+  generateIdentifiers,
+  generatePlatforms,
+  generateUrls,
+} from './faker/index.js'
 
 const adapter = new PrismaPg({
   connectionString: getDatabaseUrl(),
@@ -14,7 +19,7 @@ const adapter = new PrismaPg({
 const prisma = new PrismaClient({ adapter })
 
 async function main() {
-  const userId = '2ca04dcb-95b3-43d1-aa8a-51b6bfefed63'
+  const userId = '64bf6ae9-1651-41f9-9986-4c70e04f92f5'
   console.log('🌱 Seeding database...')
 
   // await prisma.url.deleteMany({ where: { userId } })
@@ -24,17 +29,28 @@ async function main() {
   const platforms = await PlatformService.createMany(
     prisma,
     userId,
-    generatePlatforms(100),
+    generatePlatforms(150),
   )
 
   const identifiers = await IdentifierService.createMany(
     prisma,
     userId,
-    generateIdentifiers(100),
+    generateIdentifiers(150),
   )
 
   console.log(`✅ Created ${platforms.count} platforms`)
   console.log(`✅ Created ${identifiers.count} identifiers`)
+
+  const platformIds = platforms.data.map((p) => p.id)
+  const identifierIds = identifiers.data.map((i) => i.id)
+
+  const urls = await UrlService.createMany(
+    prisma,
+    userId,
+    generateUrls(1500, platformIds, identifierIds),
+  )
+
+  console.log(`✅ Created ${urls.count} urls`)
 }
 
 main()

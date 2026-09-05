@@ -4,6 +4,13 @@ import { createFileRoute } from '@tanstack/react-router'
 import { seo } from '../../__root'
 
 export const Route = createFileRoute('/{-$locale}/_auth/login')({
-  head: () => seo({ title: m.page_auth_login_title() }),
+  head: () =>
+    seo({
+      title: m.page_auth_login_title(),
+      description:
+        'Sign in to your URL Manager account to manage your links, platforms, and identifiers.',
+      robots: false,
+    }),
   component: LoginPage,
 })
+

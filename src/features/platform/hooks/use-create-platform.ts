@@ -36,7 +36,7 @@ export const useCreatePlatform = ({
       thumbnail: null,
       visibility: 'PRIVATE',
     },
-    resolver: zodResolver(createPlatformFormSchema),
+    resolver: zodResolver(createPlatformFormSchema()),
   })
 
   const { mutateAsync, isPending } = useMutation(

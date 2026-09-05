@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import type { LinkProps } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
-import { icons } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { forwardRef } from 'react'
 import type { ActionVariant, ButtonSize } from './action-button'
 import { ACTION_VARIANT_CONFIG, ICON_SIZE_CLASS } from './action-button'
@@ -11,6 +11,7 @@ import { ACTION_VARIANT_CONFIG, ICON_SIZE_CLASS } from './action-button'
 type ActionLinkProps = Omit<React.ComponentProps<'a'>, 'href' | 'children'> &
   Pick<LinkProps, 'to' | 'replace' | 'preload' | 'search'> & {
     action: ActionVariant
+    icon?: LucideIcon
     disabled?: boolean
     size?: ButtonSize
     hideLabel?: boolean
@@ -22,6 +23,7 @@ export const ActionLink = forwardRef<HTMLAnchorElement, ActionLinkProps>(
   (
     {
       action,
+      icon,
       disabled = false,
       to,
       replace,
@@ -37,7 +39,7 @@ export const ActionLink = forwardRef<HTMLAnchorElement, ActionLinkProps>(
   ) => {
     const { buttonVariant, defaultIcon, label } = ACTION_VARIANT_CONFIG[action]
 
-    const IconComp = defaultIcon ? icons[defaultIcon] : null
+    const IconComp = icon ?? defaultIcon
     const labelText = label()
 
     const smHideLabel = action === 'download'

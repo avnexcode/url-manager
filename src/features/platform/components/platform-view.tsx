@@ -1,9 +1,4 @@
-import {
-  Icon,
-  ImagePreview,
-  ImagePreviewSkeleton,
-  QrImageDialog,
-} from '@/components'
+import { ImagePreview, ImagePreviewSkeleton, QrImageDialog } from '@/components'
 import {
   ActionButton,
   ActionButtonSkeleton,
@@ -24,6 +19,7 @@ import { getVisibility } from '@/lib/get-enum-label'
 import { useTRPC } from '@/lib/trpc/react'
 import { cn } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
+import { LockKeyhole, LockOpen, QrCode } from 'lucide-react'
 import { useState } from 'react'
 import { useDeletePlatform } from '../hooks'
 import type { PlatformResponse } from '../types'
@@ -89,9 +85,9 @@ export const PlatformView = ({
                   )}
                 >
                   {isLocked ? (
-                    <Icon name="LockKeyhole" size={11} className="shrink-0" />
+                    <LockKeyhole size={11} className="shrink-0" />
                   ) : (
-                    <Icon name="LockOpen" size={11} className="shrink-0" />
+                    <LockOpen size={11} className="shrink-0" />
                   )}
                   {isLocked
                     ? m.component_view_lock_status_locked()
@@ -157,7 +153,7 @@ export const PlatformView = ({
                 onClick={() => setIsQrOpen(true)}
                 className="w-full gap-2 sm:w-auto"
               >
-                <Icon name="QrCode" className="size-4 capitalize" />
+                <QrCode className="size-4 capitalize" />
                 {m.component_view_show_qr()}
               </Button>
             )}

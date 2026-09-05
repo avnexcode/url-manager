@@ -39,7 +39,7 @@ export const useUpdateUrl = (
 
   const form = useForm<UpdateUrlFormSchema>({
     defaultValues: initialValues,
-    resolver: zodResolver(updateUrlFormSchema),
+    resolver: zodResolver(updateUrlFormSchema()),
   })
 
   useEffect(() => {

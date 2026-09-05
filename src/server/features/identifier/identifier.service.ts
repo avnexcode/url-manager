@@ -27,9 +27,6 @@ import type {
 import { IdentifierRepository as Repository } from './identifier.repository'
 
 export class IdentifierService extends CommonService {
-  private static bucket = SUPABASE_BUCKET.Identifier
-  private static file = FileService
-
   protected static override get baseModel() {
     return this.m.model_identifier_title()
   }
@@ -205,7 +202,7 @@ export class IdentifierService extends CommonService {
     const { username } = await UserService.getById(db, userId)
 
     const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
-      this.bucket,
+      SUPABASE_BUCKET.Identifier,
       'IDENTIFIER',
       { username, slug },
     )
@@ -216,7 +213,9 @@ export class IdentifierService extends CommonService {
       return await Repository.insert(db, requestData)
     } catch (error) {
       try {
-        await this.file.deleteFileByUrls(this.bucket, [qrCodeUrl])
+        await FileService.deleteFileByUrls(SUPABASE_BUCKET.Identifier, [
+          qrCodeUrl,
+        ])
       } catch (cleanupError) {
         console.error(
           'failed to cleanup orphan qr code after create failure',
@@ -258,7 +257,7 @@ export class IdentifierService extends CommonService {
         usedSlugs.add(slug)
 
         const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
-          this.bucket,
+          SUPABASE_BUCKET.Identifier,
           'IDENTIFIER',
           { username, slug },
         )
@@ -271,7 +270,10 @@ export class IdentifierService extends CommonService {
     } catch (error) {
       if (generatedQrUrls.length) {
         try {
-          await this.file.deleteFileByUrls(this.bucket, generatedQrUrls)
+          await FileService.deleteFileByUrls(
+            SUPABASE_BUCKET.Identifier,
+            generatedQrUrls,
+          )
         } catch (cleanupError) {
           console.error(
             'failed to cleanup orphan qr codes after createMany failure',
@@ -327,10 +329,14 @@ export class IdentifierService extends CommonService {
     let newQrCodeUrl: string | null = null
 
     if (slug !== existingIdentifier.slug) {
-      const qrCode = await QrCodeService.generate(this.bucket, 'IDENTIFIER', {
-        username,
-        slug,
-      })
+      const qrCode = await QrCodeService.generate(
+        SUPABASE_BUCKET.Identifier,
+        'IDENTIFIER',
+        {
+          username,
+          slug,
+        },
+      )
 
       qrEncodedValue = qrCode.qrEncodedValue
       qrCodeUrl = qrCode.qrCodeUrl
@@ -344,7 +350,7 @@ export class IdentifierService extends CommonService {
 
       if (newQrCodeUrl) {
         try {
-          await this.file.deleteFileByUrls(this.bucket, [
+          await FileService.deleteFileByUrls(SUPABASE_BUCKET.Identifier, [
             existingIdentifier.qrCodeUrl,
           ])
         } catch (cleanupError) {
@@ -359,7 +365,9 @@ export class IdentifierService extends CommonService {
     } catch (error) {
       if (newQrCodeUrl) {
         try {
-          await this.file.deleteFileByUrls(this.bucket, [newQrCodeUrl])
+          await FileService.deleteFileByUrls(SUPABASE_BUCKET.Identifier, [
+            newQrCodeUrl,
+          ])
         } catch (cleanupError) {
           console.error(
             'failed to cleanup new qr code after update failure',
@@ -396,7 +404,10 @@ export class IdentifierService extends CommonService {
 
     if (imageUrls.length) {
       try {
-        await this.file.deleteFileByUrls(this.bucket, imageUrls)
+        await FileService.deleteFileByUrls(
+          SUPABASE_BUCKET.Identifier,
+          imageUrls,
+        )
       } catch (error) {
         console.error('failed to cleanup identifier images', error)
       }
@@ -432,12 +443,15 @@ export class IdentifierService extends CommonService {
       .filter(Boolean) as string[]
 
     const identifierImages: ImageUrlsByBucket = imageUrls.length
-      ? { [this.bucket]: imageUrls }
+      ? { [SUPABASE_BUCKET.Identifier]: imageUrls }
       : {}
 
     return {
       identifiers,
-      imageUrls: this.file.mergeImageUrlsByBucket(urlImages, identifierImages),
+      imageUrls: FileService.mergeImageUrlsByBucket(
+        urlImages,
+        identifierImages,
+      ),
     }
   }
 
@@ -452,7 +466,7 @@ export class IdentifierService extends CommonService {
       return await this.deleteManyCore(tx, userId, ids)
     })
 
-    await this.file.deleteImagesByBucket(imageUrls)
+    await FileService.deleteImagesByBucket(imageUrls)
 
     return identifiers
   }

@@ -2,13 +2,13 @@ import type { QueryResponse } from '@/interfaces'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import type { DBClient } from '@/server/db'
 import type { QueryParams } from '@/server/models'
+import type { ImageUrlsByBucket } from '@/server/services'
 import { FileService, QrCodeService } from '@/server/services'
 import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
 import { SettingService } from '../settings'
 import { UrlService } from '../url'
 import { UserService } from '../user'
-import type { ImageUrlsByBucket } from '@/server/services'
 import type {
   BaseCreatePlatformRequest,
   BulkCreatePlatformsRequest,
@@ -27,9 +27,6 @@ import type {
 import { PlatformRepository as Repository } from './platform.repository'
 
 export class PlatformService extends CommonService {
-  private static bucket = SUPABASE_BUCKET.Platform
-  private static file = FileService
-
   protected static override get baseModel() {
     return this.m.model_platform_title()
   }
@@ -209,7 +206,7 @@ export class PlatformService extends CommonService {
     // Anchor step — WAJIB sukses, TIDAK di-try/catch.
     // Belum ada apa pun yang perlu di-compensate kalau ini gagal.
     const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
-      this.bucket,
+      SUPABASE_BUCKET.Platform,
       'PLATFORM',
       { username, slug },
     )
@@ -221,7 +218,9 @@ export class PlatformService extends CommonService {
     } catch (error) {
       // Repository.insert gagal SETELAH file QR sudah ke-upload → orphan, compensate
       try {
-        await this.file.deleteFileByUrls(this.bucket, [qrCodeUrl])
+        await FileService.deleteFileByUrls(SUPABASE_BUCKET.Platform, [
+          qrCodeUrl,
+        ])
       } catch (cleanupError) {
         console.error(
           'failed to cleanup orphan qr code after create failure',
@@ -270,7 +269,7 @@ export class PlatformService extends CommonService {
         usedSlugs.add(slug)
 
         const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
-          this.bucket,
+          SUPABASE_BUCKET.Platform,
           'PLATFORM',
           { username, slug },
         )
@@ -284,7 +283,10 @@ export class PlatformService extends CommonService {
       // insertMany gagal SETELAH sebagian/semua QR sudah ke-upload → semuanya orphan, compensate
       if (generatedQrUrls.length) {
         try {
-          await this.file.deleteFileByUrls(this.bucket, generatedQrUrls)
+          await FileService.deleteFileByUrls(
+            SUPABASE_BUCKET.Platform,
+            generatedQrUrls,
+          )
         } catch (cleanupError) {
           console.error(
             'failed to cleanup orphan qr codes after createMany failure',
@@ -350,10 +352,14 @@ export class PlatformService extends CommonService {
     if (slug !== existingPlatform.slug) {
       // Generate BARU dulu — anchor step, fatal, TIDAK di-try/catch.
       // Belum ada apa pun yang perlu di-compensate kalau ini gagal.
-      const qrCode = await QrCodeService.generate(this.bucket, 'PLATFORM', {
-        username,
-        slug,
-      })
+      const qrCode = await QrCodeService.generate(
+        SUPABASE_BUCKET.Platform,
+        'PLATFORM',
+        {
+          username,
+          slug,
+        },
+      )
 
       qrEncodedValue = qrCode.qrEncodedValue
       qrCodeUrl = qrCode.qrCodeUrl
@@ -368,7 +374,7 @@ export class PlatformService extends CommonService {
       // DB sudah commit sukses — baru hapus file LAMA, non-fatal
       if (newQrCodeUrl) {
         try {
-          await this.file.deleteFileByUrls(this.bucket, [
+          await FileService.deleteFileByUrls(SUPABASE_BUCKET.Platform, [
             existingPlatform.qrCodeUrl,
           ])
         } catch (cleanupError) {
@@ -384,7 +390,9 @@ export class PlatformService extends CommonService {
       // Repository.update gagal → QR baru yang sudah ke-generate jadi orphan, compensate
       if (newQrCodeUrl) {
         try {
-          await this.file.deleteFileByUrls(this.bucket, [newQrCodeUrl])
+          await FileService.deleteFileByUrls(SUPABASE_BUCKET.Platform, [
+            newQrCodeUrl,
+          ])
         } catch (cleanupError) {
           console.error(
             'failed to cleanup new qr code after update failure',
@@ -421,7 +429,7 @@ export class PlatformService extends CommonService {
 
     if (imageUrls.length) {
       try {
-        await this.file.deleteFileByUrls(this.bucket, imageUrls)
+        await FileService.deleteFileByUrls(SUPABASE_BUCKET.Platform, imageUrls)
       } catch (error) {
         console.error('failed to cleanup platform images', error)
       }
@@ -457,12 +465,12 @@ export class PlatformService extends CommonService {
       .filter(Boolean) as string[]
 
     const platformImages: ImageUrlsByBucket = imageUrls.length
-      ? { [this.bucket]: imageUrls }
+      ? { [SUPABASE_BUCKET.Platform]: imageUrls }
       : {}
 
     return {
       platforms,
-      imageUrls: this.file.mergeImageUrlsByBucket(urlImages, platformImages),
+      imageUrls: FileService.mergeImageUrlsByBucket(urlImages, platformImages),
     }
   }
 
@@ -477,7 +485,7 @@ export class PlatformService extends CommonService {
       return await this.deleteManyCore(tx, userId, ids)
     })
 
-    await this.file.deleteImagesByBucket(imageUrls)
+    await FileService.deleteImagesByBucket(imageUrls)
 
     return platforms
   }

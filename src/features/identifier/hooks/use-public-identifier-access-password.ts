@@ -22,7 +22,7 @@ export const usePublicIdentifierAccessPassword = (
     defaultValues: {
       password: '',
     },
-    resolver: zodResolver(publicAccessPasswordFormSchema),
+    resolver: zodResolver(publicAccessPasswordFormSchema()),
   })
 
   const { mutate, isPending } = useMutation(

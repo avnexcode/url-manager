@@ -1,17 +1,21 @@
-import type { Prisma } from '@/generated/prisma/client'
+import type { Prisma } from '@/generated/prisma/browser'
 import type z from 'zod'
 import type {
-  createUpdatePasswordFormSchema,
+  updatePasswordFormSchema,
   deleteAccountFormSchema,
   updateAccountFormSchema,
 } from '../schemas'
 
-export type UpdateAccountFormSchema = z.infer<typeof updateAccountFormSchema>
-
-export type UpdatePasswordFormSchema = z.infer<
-  ReturnType<typeof createUpdatePasswordFormSchema>
+export type UpdateAccountFormSchema = z.infer<
+  ReturnType<typeof updateAccountFormSchema>
 >
 
-export type DeleteAccountFormSchema = z.infer<typeof deleteAccountFormSchema>
+export type UpdatePasswordFormSchema = z.infer<
+  ReturnType<typeof updatePasswordFormSchema>
+>
+
+export type DeleteAccountFormSchema = z.infer<
+  ReturnType<typeof deleteAccountFormSchema>
+>
 
 export type UserResponse = Prisma.UserGetPayload<{}>

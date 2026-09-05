@@ -8,7 +8,9 @@ import { nitro } from 'nitro/vite'
 import { defineConfig } from 'vite'
 
 const config = defineConfig({
-  resolve: { tsconfigPaths: true },
+  resolve: {
+    tsconfigPaths: true,
+  },
   plugins: [
     devtools(),
     paraglideVitePlugin({
@@ -16,11 +18,20 @@ const config = defineConfig({
       outdir: './src/generated/paraglide',
       strategy: ['url', 'baseLocale'],
     }),
-    nitro({ rollupConfig: { external: [/^@sentry\//] } }),
     tailwindcss(),
     tanstackStart(),
+    nitro({
+      rollupConfig: {
+        external: [/^@sentry\//],
+        output: {
+          inlineDynamicImports: true,
+        },
+      },
+    }),
     viteReact(),
-    babel({ presets: [reactCompilerPreset()] }),
+    babel({
+      presets: [reactCompilerPreset()],
+    }),
   ],
   build: {
     chunkSizeWarningLimit: 900,

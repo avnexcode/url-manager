@@ -4,10 +4,10 @@ import type { DBClient } from '@/server/db'
 import { FileService } from '@/server/services'
 import { generateUsernameFromEmail } from '@/utils'
 import { CommonService } from '../common'
-import { DummyService } from '../dummy'
 import { IdentifierService } from '../identifier'
 import { PlatformService } from '../platform'
 import { SettingService } from '../settings'
+import { UrlService } from '../url'
 import type {
   CreateUserRequest,
   CreateUserResponse,
@@ -18,12 +18,9 @@ import type {
   UserResponse,
 } from './user.model'
 import { UserRepository as Repository } from './user.repository'
-import { createUserRequest } from './user.validation'
+import { createUserRequest, updateUserRequest } from './user.validation'
 
 export class UserService extends CommonService {
-  private static bucket = SUPABASE_BUCKET.Profile
-  private static file = FileService
-
   protected static override get baseModel() {
     return this.m.model_user_title()
   }
@@ -58,8 +55,6 @@ export class UserService extends CommonService {
 
       await SettingService.create(tx, { userId: id })
 
-      await DummyService.init(tx, id)
-
       return user
     })
   }
@@ -69,7 +64,9 @@ export class UserService extends CommonService {
     id: string,
     request: UpdateUserRequest,
   ): Promise<UpdateUserResponse> => {
-    const { username, provider } = request
+    const validatedRequest = updateUserRequest.parse(request)
+
+    const { username, provider } = validatedRequest
 
     const { username: oldUsername, providers } = await this.getById(db, id)
 
@@ -94,6 +91,36 @@ export class UserService extends CommonService {
     return user
   }
 
+  static deleteRelationUser = async (db: DBClient, userId: string) => {
+    await SettingService.delete(db, { userId })
+
+    const platformIds = await PlatformService.getIdsByUser(db, userId)
+
+    const { imageUrls: platformImageUrls } =
+      await PlatformService.deleteManyCore(db, userId, platformIds)
+
+    const identifierIds = await IdentifierService.getIdsByUser(db, userId)
+
+    const { imageUrls: identifierImageUrls } =
+      await IdentifierService.deleteManyCore(db, userId, identifierIds)
+
+    const urlIds = await UrlService.getIdsByUser(db, userId)
+
+    const { imageUrls: urlImageUrls } = await UrlService.deleteManyCore(
+      db,
+      userId,
+      urlIds,
+    )
+
+    return {
+      imageUrls: FileService.mergeImageUrlsByBucket(
+        platformImageUrls,
+        identifierImageUrls,
+        urlImageUrls,
+      ),
+    }
+  }
+
   static delete = async (
     db: DBClient,
     request: DeleteUserRequest,
@@ -102,40 +129,25 @@ export class UserService extends CommonService {
 
     await this.checkUserExists(db, id)
 
-    const platformIds = await PlatformService.getIdsByUser(db, id)
-
-    const identifierIds = await IdentifierService.getIdsByUser(db, id)
-
     const { user, imageUrls } = await db.$transaction(async (tx) => {
-      await SettingService.delete(tx, { userId: id })
-
-      const { imageUrls: platformImageUrls } =
-        await PlatformService.deleteManyCore(tx, id, platformIds)
-
-      const { imageUrls: identifierImageUrls } =
-        await IdentifierService.deleteManyCore(tx, id, identifierIds)
+      const { imageUrls: relationImageUrls } = await this.deleteRelationUser(
+        tx,
+        id,
+      )
 
       const userData = await Repository.destroy(tx, request)
 
-      return {
-        user: userData,
-        imageUrls: this.file.mergeImageUrlsByBucket(
-          platformImageUrls,
-          identifierImageUrls,
-        ),
-      }
+      return { user: userData, imageUrls: relationImageUrls }
     })
 
     const userImages = [user.image, user.avatar].filter(Boolean) as string[]
 
-    const allImageUrls = this.file.mergeImageUrlsByBucket(
+    const allImageUrls = FileService.mergeImageUrlsByBucket(
       imageUrls,
-      userImages.length ? { [this.bucket]: userImages } : {},
+      userImages.length ? { [SUPABASE_BUCKET.Profile]: userImages } : {},
     )
 
-    console.log({ allImageUrls })
-
-    await this.file.deleteImagesByBucket(allImageUrls)
+    await FileService.deleteImagesByBucket(allImageUrls)
 
     return user
   }

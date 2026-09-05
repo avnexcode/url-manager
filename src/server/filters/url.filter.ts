@@ -10,9 +10,6 @@ export class UrlFilter {
   private static blockedUrls: string[] = [
     env.VITE_BASE_URL,
     env.SERVER_URL,
-    'https://jav.guru/',
-    'https://ukdevilz.com/home',
-    'http://pornhub.com/',
   ].filter(Boolean)
 
   private static normalizeHostname(rawValue: string): NormalizedHost | null {

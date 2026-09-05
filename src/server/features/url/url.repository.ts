@@ -169,6 +169,18 @@ export class UrlRepository extends CommonRepository {
     return url
   }
 
+  static findIdsUniqueUser = async (
+    db: DBClient,
+    userId: string,
+  ): Promise<{ id: string }[]> => {
+    const identifiers = await db.url.findMany({
+      where: { userId },
+      select: { id: true },
+    })
+
+    return identifiers
+  }
+
   static findIdsUniqueRelation = async (
     db: DBClient,
     relation: RelationParams,

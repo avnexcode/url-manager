@@ -35,7 +35,7 @@ export const useCreateIdentifier = ({
       thumbnail: null,
       visibility: 'PRIVATE',
     },
-    resolver: zodResolver(createIdentifierFormSchema),
+    resolver: zodResolver(createIdentifierFormSchema()),
   })
 
   const { mutateAsync, isPending } = useMutation(

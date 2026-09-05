@@ -4,7 +4,46 @@ import { Skeleton } from '@/components/ui/skeleton'
 import * as m from '@/generated/paraglide/messages'
 import { cn } from '@/lib/utils'
 import type { VariantProps } from 'class-variance-authority'
-import { icons, Loader2 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import {
+  Archive,
+  ArchiveRestore,
+  ArrowRightLeft,
+  Check,
+  CircleCheck,
+  CircleCheckBig,
+  CirclePlus,
+  CircleX,
+  CopyX,
+  DollarSign,
+  Download,
+  Globe,
+  GlobeLock,
+  Link,
+  Loader2,
+  Lock,
+  LockOpen,
+  LogIn,
+  LogOut,
+  Pin,
+  PinOff,
+  Plus,
+  RefreshCcw,
+  RefreshCw,
+  ScanEye,
+  Send,
+  ShieldCheck,
+  ShieldX,
+  Sparkles,
+  SquarePen,
+  Star,
+  StarOff,
+  ToggleLeft,
+  ToggleRight,
+  Trash2,
+  Upload,
+  X,
+} from 'lucide-react'
 import { forwardRef } from 'react'
 
 export type ActionVariant =
@@ -58,7 +97,7 @@ export type ButtonSize = NonNullable<
 
 type ActionVariantConfig = {
   buttonVariant: ButtonVariant
-  defaultIcon?: keyof typeof icons
+  defaultIcon?: LucideIcon
   label: () => string
 }
 
@@ -73,208 +112,209 @@ export const ACTION_VARIANT_CONFIG: Record<ActionVariant, ActionVariantConfig> =
   {
     addNew: {
       buttonVariant: 'default',
-      defaultIcon: 'CirclePlus',
+      defaultIcon: CirclePlus,
       label: m.action_add_new,
     },
     createNew: {
       buttonVariant: 'default',
-      defaultIcon: 'Plus',
+      defaultIcon: Plus,
       label: m.action_create_new,
     },
     detail: {
       buttonVariant: 'neutral',
-      defaultIcon: 'ScanEye',
+      defaultIcon: ScanEye,
       label: m.action_detail,
     },
     visit: {
       buttonVariant: 'neutral',
-      defaultIcon: 'Link',
+      defaultIcon: Link,
       label: m.action_visit,
     },
     edit: {
       buttonVariant: 'neutral',
-      defaultIcon: 'SquarePen',
+      defaultIcon: SquarePen,
       label: m.action_edit,
     },
     delete: {
       buttonVariant: 'destructive',
-      defaultIcon: 'Trash2',
+      defaultIcon: Trash2,
       label: m.action_delete,
     },
     submit: {
       buttonVariant: 'default',
-      defaultIcon: 'Send',
+      defaultIcon: Send,
       label: m.action_submit,
     },
     unsubmit: {
       buttonVariant: 'destructive',
-      defaultIcon: 'X',
+      defaultIcon: X,
       label: m.action_unsubmit,
     },
     require: {
       buttonVariant: 'default',
-      defaultIcon: 'Check',
+      defaultIcon: Check,
       label: m.action_require,
     },
     unrequire: {
       buttonVariant: 'destructive',
-      defaultIcon: 'X',
+      defaultIcon: X,
       label: m.action_unrequire,
     },
     approve: {
       buttonVariant: 'default',
-      defaultIcon: 'CircleCheck',
+      defaultIcon: CircleCheck,
       label: m.action_approve,
     },
     cancel: {
       buttonVariant: 'outline',
-      defaultIcon: 'X',
+      defaultIcon: X,
       label: m.action_cancel,
     },
     close: {
       buttonVariant: 'default',
-      defaultIcon: 'CopyX',
+      defaultIcon: CopyX,
       label: m.action_close,
     },
     disburse: {
       buttonVariant: 'default',
-      defaultIcon: 'DollarSign',
+      defaultIcon: DollarSign,
       label: m.action_disburse,
     },
     verify: {
       buttonVariant: 'default',
-      defaultIcon: 'ShieldCheck',
+      defaultIcon: ShieldCheck,
       label: m.action_verify,
     },
     unverify: {
       buttonVariant: 'destructive',
-      defaultIcon: 'ShieldX',
+      defaultIcon: ShieldX,
       label: m.action_unverify,
     },
     activate: {
       buttonVariant: 'default',
-      defaultIcon: 'CircleCheck',
+      defaultIcon: CircleCheck,
       label: m.action_activate,
     },
     deactivate: {
       buttonVariant: 'destructive',
-      defaultIcon: 'CircleX',
+      defaultIcon: CircleX,
       label: m.action_deactivate,
     },
     complete: {
       buttonVariant: 'default',
-      defaultIcon: 'CircleCheckBig',
+      defaultIcon: CircleCheckBig,
       label: m.action_complete,
     },
     enable: {
       buttonVariant: 'default',
-      defaultIcon: 'ToggleRight',
+      defaultIcon: ToggleRight,
       label: m.action_enable,
     },
     disable: {
       buttonVariant: 'destructive',
-      defaultIcon: 'ToggleLeft',
+      defaultIcon: ToggleLeft,
       label: m.action_disable,
     },
     publish: {
       buttonVariant: 'default',
-      defaultIcon: 'Globe',
+      defaultIcon: Globe,
       label: m.action_publish,
     },
     unpublish: {
       buttonVariant: 'destructive',
-      defaultIcon: 'GlobeLock',
+      defaultIcon: GlobeLock,
       label: m.action_unpublish,
     },
     lock: {
       buttonVariant: 'destructive',
-      defaultIcon: 'Lock',
+      defaultIcon: Lock,
       label: m.action_lock,
     },
     unlock: {
       buttonVariant: 'default',
-      defaultIcon: 'LockOpen',
+      defaultIcon: LockOpen,
       label: m.action_unlock,
     },
     archive: {
       buttonVariant: 'destructive',
-      defaultIcon: 'Archive',
+      defaultIcon: Archive,
       label: m.action_archive,
     },
     unarchive: {
       buttonVariant: 'default',
-      defaultIcon: 'ArchiveRestore',
+      defaultIcon: ArchiveRestore,
       label: m.action_unarchive,
     },
     pin: {
       buttonVariant: 'default',
-      defaultIcon: 'Pin',
+      defaultIcon: Pin,
       label: m.action_pin,
     },
     unpin: {
       buttonVariant: 'outline',
-      defaultIcon: 'PinOff',
+      defaultIcon: PinOff,
       label: m.action_unpin,
     },
     feature: {
       buttonVariant: 'default',
-      defaultIcon: 'Star',
+      defaultIcon: Star,
       label: m.action_feature,
     },
     unfeature: {
       buttonVariant: 'outline',
-      defaultIcon: 'StarOff',
+      defaultIcon: StarOff,
       label: m.action_unfeature,
     },
     upload: {
       buttonVariant: 'default',
-      defaultIcon: 'Upload',
+      defaultIcon: Upload,
       label: m.action_upload,
     },
     download: {
       buttonVariant: 'outline',
-      defaultIcon: 'Download',
+      defaultIcon: Download,
       label: m.action_download,
     },
     process: {
       buttonVariant: 'default',
-      defaultIcon: 'RefreshCw',
+      defaultIcon: RefreshCw,
       label: m.action_process,
     },
     generate: {
       buttonVariant: 'default',
-      defaultIcon: 'Sparkles',
+      defaultIcon: Sparkles,
       label: m.action_generate,
     },
     convert: {
       buttonVariant: 'default',
-      defaultIcon: 'ArrowRightLeft',
+      defaultIcon: ArrowRightLeft,
       label: m.action_convert,
     },
     sync: {
       buttonVariant: 'outline',
-      defaultIcon: 'RefreshCcw',
+      defaultIcon: RefreshCcw,
       label: m.action_sync,
     },
     import: {
       buttonVariant: 'default',
-      defaultIcon: 'LogIn',
+      defaultIcon: LogIn,
       label: m.action_import,
     },
     export: {
       buttonVariant: 'outline',
-      defaultIcon: 'LogOut',
+      defaultIcon: LogOut,
       label: m.action_export,
     },
     reject: {
       buttonVariant: 'destructive',
-      defaultIcon: 'CircleX',
+      defaultIcon: CircleX,
       label: m.action_reject,
     },
   }
 
 type ActionButtonProps = Omit<React.ComponentProps<'button'>, 'children'> & {
   action: ActionVariant
+  icon?: LucideIcon
   isPending?: boolean
   size?: ButtonSize
   hideLabel?: boolean
@@ -286,6 +326,7 @@ export const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
   (
     {
       action,
+      icon,
       isPending = false,
       disabled,
       size = 'default',
@@ -299,7 +340,7 @@ export const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
   ) => {
     const { buttonVariant, defaultIcon, label } = ACTION_VARIANT_CONFIG[action]
 
-    const IconComp = defaultIcon ? icons[defaultIcon] : null
+    const IconComp = icon ?? defaultIcon
     const labelText = label()
 
     const smHideLabel = action === 'download'

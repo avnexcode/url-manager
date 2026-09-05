@@ -39,7 +39,7 @@ export const useUpdatePlatform = (
 
   const form = useForm<UpdatePlatformFormSchema>({
     defaultValues: initialValues,
-    resolver: zodResolver(updatePlatformFormSchema),
+    resolver: zodResolver(updatePlatformFormSchema()),
   })
 
   useEffect(() => {

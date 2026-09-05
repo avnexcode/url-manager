@@ -68,21 +68,6 @@ export class FileService {
     }
   }
 
-  // static mergeImageUrlsByBucket = (
-  //   ...groups: ImageUrlsByBucket[]
-  // ): ImageUrlsByBucket => {
-  //   const bucketNames = new Set(
-  //     groups.flatMap((group) => Object.keys(group)),
-  //   ) as Set<SUPABASE_BUCKET>
-
-  //   return Object.fromEntries(
-  //     [...bucketNames].map((bucket) => {
-  //       const urlsForThisBucket = groups.flatMap((group) => group[bucket] ?? [])
-  //       return [bucket, urlsForThisBucket]
-  //     }),
-  //   )
-  // }
-
   static mergeImageUrlsByBucket = (
     ...groups: ImageUrlsByBucket[]
   ): ImageUrlsByBucket => {

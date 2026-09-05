@@ -1,12 +1,13 @@
 import * as React from 'react'
 
-import { Icon } from '@/components/icon'
 import { Separator } from '@/components/ui/separator'
 import { env } from '@/configs/env'
 import { useLogout } from '@/features/auth/hooks'
+import * as m from '@/generated/paraglide/messages'
 import { useAuth } from '@/hooks'
 import { renderElements } from '@/utils'
 import { Link } from '@tanstack/react-router'
+import { LogOut, Mail, Menu, User } from 'lucide-react'
 import { Button } from '../../ui/button'
 import {
   Sheet,
@@ -18,7 +19,6 @@ import {
   SheetTrigger,
 } from '../../ui/sheet'
 import { routeList } from './menu'
-import * as m from '@/generated/paraglide/messages'
 
 export const MobileNavbar = () => {
   const { user, isAuthenticated } = useAuth()
@@ -33,7 +33,7 @@ export const MobileNavbar = () => {
             aria-label="Open menu"
             className="flex size-10 cursor-pointer items-center justify-center border-2 border-border bg-secondary-background shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
           >
-            <Icon name="Menu" className="size-5" />
+            <Menu className="size-5" />
           </button>
         </SheetTrigger>
 
@@ -70,7 +70,7 @@ export const MobileNavbar = () => {
                     className="h-11 justify-start gap-3 rounded-none border-2 border-transparent px-3 text-base hover:border-border"
                   >
                     <Link preload={false} to={route.href}>
-                      <Icon name={route.icon} className="size-4" />
+                      <route.icon className="size-4" />
                       {route.label}
                     </Link>
                   </Button>
@@ -84,13 +84,13 @@ export const MobileNavbar = () => {
               <>
                 <div className="flex flex-col gap-1 border-2 border-border bg-secondary-background p-1">
                   <div className="flex items-center gap-2 text-sm font-base">
-                    <Icon name="User" className="size-4" />
+                    <User className="size-4" />
                     <span className="truncate">{user.username}</span>
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 border-2 border-border bg-secondary-background p-1">
                   <div className="flex items-center gap-2 text-sm font-base">
-                    <Icon name="Mail" className="size-4" />
+                    <Mail className="size-4" />
                     <span className="truncate">{user.email}</span>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ export const MobileNavbar = () => {
                 onClick={handleLogout}
                 className="w-full justify-start gap-3"
               >
-                <Icon name="LogOut" className="size-4" />
+                <LogOut className="size-4" />
                 {m.action_logout()}
               </Button>
             )}

@@ -22,8 +22,8 @@ export const PublicUrlListSection = ({
 }: PublicUrlListSectionProps) => {
   return (
     <>
-      <header className="my-3">
-        <div className="my-3 flex flex-col justify-between gap-x-10 gap-y-3 sm:flex-row sm:items-center">
+      <header className="my-5">
+        <div className="my-5 flex flex-col justify-between gap-x-10 gap-y-3 sm:flex-row sm:items-center">
           <PageSearch
             value={queryParams.search}
             onSearchChange={(search) => handleUpdateQuery({ search, page: 1 })}

@@ -35,7 +35,7 @@ export const useUpdateAccount = (
 
   const form = useForm<UpdateAccountFormSchema>({
     defaultValues: initialValues,
-    resolver: zodResolver(updateAccountFormSchema),
+    resolver: zodResolver(updateAccountFormSchema()),
   })
 
   useEffect(() => {

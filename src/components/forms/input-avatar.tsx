@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import * as m from '@/generated/paraglide/messages'
 import { cn } from '@/lib/utils'
+import { ImageOff } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import type { FieldValues, Path } from 'react-hook-form'
 import { Controller, useFormContext } from 'react-hook-form'
-import { Icon } from '../icon'
 import { Skeleton } from '../ui/skeleton'
 
 type InputAvatarprops<T extends FieldValues> = {
@@ -89,7 +89,7 @@ export const InputAvatar = <T extends FieldValues>({
                 onClick={handleOpenFileExplorer}
                 className="flex h-full w-full flex-col items-center justify-center gap-1 text-muted-foreground transition-colors hover:bg-muted/70"
               >
-                <Icon name="ImageOff" className="h-20 w-20" />
+                <ImageOff className="h-20 w-20" />
               </button>
             )}
           </div>

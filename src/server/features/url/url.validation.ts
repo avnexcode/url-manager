@@ -41,7 +41,7 @@ export const createUrlRequest = baseCreateUrlRequest.omit({
 export const bulkCreateUrlsRequest = z
   .array(createUrlRequest)
   .min(1)
-  .max(1000)
+  .max(10000)
   .refine((items) => new Set(items.map((i) => i.title)).size === items.length, {
     message: 'Duplicate title found in request',
   })

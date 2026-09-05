@@ -35,7 +35,7 @@ export const useCreateUrl = (
       identifierId: from === 'identifier' ? id : null,
       platformId: from === 'platform' ? id : null,
     },
-    resolver: zodResolver(createUrlFormSchema),
+    resolver: zodResolver(createUrlFormSchema()),
   })
 
   const { mutateAsync, isPending } = useMutation(

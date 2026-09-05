@@ -1,4 +1,3 @@
-import { Icon } from '@/components/icon'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -14,6 +13,7 @@ import * as m from '@/generated//paraglide/messages'
 import { useAuth } from '@/hooks'
 import { renderElements } from '@/utils'
 import { Link } from '@tanstack/react-router'
+import { ChevronDown, LogOut } from 'lucide-react'
 import { routeList } from './menu'
 
 export const DesktopNavbar = () => {
@@ -58,10 +58,7 @@ export const DesktopNavbar = () => {
             {user.username}
           </p>
 
-          <Icon
-            name="ChevronDown"
-            className="size-3 shrink-0 opacity-60 mr-2"
-          />
+          <ChevronDown className="size-3 shrink-0 opacity-60 mr-2" />
         </button>
       </DropdownMenuTrigger>
 
@@ -92,7 +89,7 @@ export const DesktopNavbar = () => {
                   to={route.href}
                   className="flex items-center gap-2"
                 >
-                  <Icon name={route.icon} />
+                  <route.icon className="size-4" />
                   {route.label}
                 </Link>
               </DropdownMenuItem>
@@ -107,7 +104,7 @@ export const DesktopNavbar = () => {
           variant="destructive"
           className="rounded-none cursor-pointer bg-secondary-background"
         >
-          <Icon name="LogOut" />
+          <LogOut />
           {m.action_logout()}
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -30,7 +30,7 @@ export const Route = createFileRoute(
       title: loaderData
         ? `${capitalizeFirstLetter(loaderData.title)}`
         : m.page_url_title(),
-      description: loaderData?.description ? undefined : undefined,
+      description: loaderData?.description ?? undefined,
       image: loaderData?.thumbnail ?? undefined,
       url: `${env.VITE_BASE_URL}/url/${loaderData?.slug ?? params.id}`,
       robots: false,

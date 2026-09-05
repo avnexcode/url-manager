@@ -1,4 +1,3 @@
-import { Icon } from '@/components'
 import { ActionLink, EmptyState } from '@/components/elements'
 import {
   ConfirmDialog,
@@ -12,7 +11,7 @@ import * as m from '@/generated/paraglide/messages'
 import type { SearchParams } from '@/hooks'
 import type { QueryResponse } from '@/interfaces'
 import { renderElements } from '@/utils'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Trash2 } from 'lucide-react'
 import type { useUrlListActions } from '../hooks'
 import type { UrlResponse } from '../types'
 import { UrlCard, UrlCardSkeleton } from './url-card'
@@ -50,8 +49,8 @@ export const UrlListSection = ({
 
   return (
     <>
-      <header className="my-3">
-        <div className="my-3 flex flex-col justify-between gap-x-10 gap-y-3 sm:flex-row sm:items-center">
+      <header className="my-5">
+        <div className="my-5 flex flex-col justify-between gap-x-10 gap-y-3 sm:flex-row sm:items-center">
           <PageSearch
             value={queryParams.search}
             onSearchChange={(search) => handleUpdateQuery({ search, page: 1 })}
@@ -89,7 +88,7 @@ export const UrlListSection = ({
             >
               {!isPending ? (
                 <>
-                  <Icon name="Trash2" />({selectedCount}) {m.action_delete()}
+                  <Trash2 />({selectedCount}) {m.action_delete()}
                 </>
               ) : (
                 <>
@@ -105,7 +104,7 @@ export const UrlListSection = ({
               disabled
               className="h-7 max-w-fit rounded-sm text-xs"
             >
-              <Icon name="Trash2" />({selectedCount}) {m.action_delete()}
+              <Trash2 />({selectedCount}) {m.action_delete()}
             </Button>
           ) : null}
         </div>

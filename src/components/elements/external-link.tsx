@@ -1,10 +1,10 @@
 import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import type { VariantProps } from 'class-variance-authority'
-import { icons } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { forwardRef } from 'react'
 import type { ActionVariant } from './action-button'
-import { ACTION_VARIANT_CONFIG } from './action-button'
+import { ACTION_VARIANT_CONFIG, ICON_SIZE_CLASS } from './action-button'
 import { Skeleton } from '../ui/skeleton'
 
 type ButtonSize = NonNullable<VariantProps<typeof buttonVariants>['size']>
@@ -12,9 +12,11 @@ type ButtonSize = NonNullable<VariantProps<typeof buttonVariants>['size']>
 type ExternalLinkProps = Omit<React.ComponentProps<'a'>, 'children'> & {
   href: string
   action: ActionVariant
+  icon?: LucideIcon
   disabled?: boolean
   size?: ButtonSize
   hideLabel?: boolean
+  iconClassName?: string
   children?: React.ReactNode
 }
 
@@ -22,10 +24,12 @@ export const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
   (
     {
       action,
+      icon,
       disabled = false,
       href,
       size = 'default',
       hideLabel = false,
+      iconClassName,
       className,
       children,
       target = '_blank',
@@ -36,16 +40,17 @@ export const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
   ) => {
     const { buttonVariant, defaultIcon, label } = ACTION_VARIANT_CONFIG[action]
 
-    const IconComp = defaultIcon ? icons[defaultIcon] : null
+    const IconComp = icon ?? defaultIcon
     const labelText = label()
 
     const smHideLabel = action === 'download'
+    const resolvedIconSize = iconClassName ?? ICON_SIZE_CLASS[size]
 
     const content = children ?? (
       <>
         {IconComp && (
           <IconComp
-            className={cn('h-3.5 w-3.5', !hideLabel && 'mr-1.5 sm:mr-0')}
+            className={cn(resolvedIconSize, !hideLabel && 'mr-1.5 sm:mr-0')}
           />
         )}
         {!hideLabel && (

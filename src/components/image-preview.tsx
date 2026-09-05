@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
-import { Icon } from './icon'
+import { ImageOff } from 'lucide-react'
 
 const PREVIEW_SIZE = 'h-40 w-40'
 
@@ -32,7 +32,7 @@ export const ImagePreview = ({
         className="object-cover"
       />
       <AvatarFallback className="bg-primary/20 text-primary rounded-none">
-        <Icon name="ImageOff" className="h-20 w-20" />
+        <ImageOff className="h-20 w-20" />
       </AvatarFallback>
     </Avatar>
   )

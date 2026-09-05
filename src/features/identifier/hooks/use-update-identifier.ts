@@ -40,7 +40,7 @@ export const useUpdateIdentifier = (
 
   const form = useForm<UpdateIdentifierFormSchema>({
     defaultValues: initialValues,
-    resolver: zodResolver(updateIdentifierFormSchema),
+    resolver: zodResolver(updateIdentifierFormSchema()),
   })
 
   useEffect(() => {

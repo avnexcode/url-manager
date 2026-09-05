@@ -1,9 +1,4 @@
-import {
-  Icon,
-  ImagePreview,
-  ImagePreviewSkeleton,
-  QrImageDialog,
-} from '@/components'
+import { ImagePreview, ImagePreviewSkeleton, QrImageDialog } from '@/components'
 import {
   ActionButton,
   ActionButtonSkeleton,
@@ -21,6 +16,7 @@ import * as m from '@/generated/paraglide/messages'
 import { useTRPC } from '@/lib/trpc/react'
 import { cn } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
+import { QrCode } from 'lucide-react'
 import { useState } from 'react'
 import { useDeleteUrl } from '../hooks'
 import type { UrlResponse } from '../types'
@@ -113,7 +109,7 @@ export const UrlView = ({
                 onClick={() => setIsQrOpen(true)}
                 className="w-full gap-2 sm:w-auto"
               >
-                <Icon name="QrCode" className="size-4" />
+                <QrCode className="size-4" />
                 {m.component_view_show_qr()}
               </Button>
             )}

@@ -3,6 +3,9 @@
 
 // export const env = createEnv({
 //   server: {
+// NODE_ENV: z
+//   .enum(['development', 'test', 'production'])
+//   .default('development'),
 //     SERVER_URL: z.string(),
 //     SUPABASE_SERVICE_ROLE_KEY: z.string(),
 //     SUPABASE_SECRET_JWT: z.string(),
@@ -21,6 +24,7 @@
 //   // runtimeEnv: import.meta.env,
 //   runtimeEnv: {
 //     // server
+// NODE_ENV: process.env.NODE_ENV,
 //     SERVER_URL: process.env.SERVER_URL,
 //     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
 //     SUPABASE_SECRET_JWT: process.env.SUPABASE_SECRET_JWT,
@@ -41,9 +45,6 @@ import { z } from 'zod'
 
 export const env = createEnv({
   server: {
-    NODE_ENV: z
-      .enum(['development', 'test', 'production'])
-      .default('development'),
     SERVER_URL: z.string(),
     SUPABASE_SERVICE_ROLE_KEY: z.string(),
     SUPABASE_SECRET_JWT: z.string(),
@@ -61,7 +62,6 @@ export const env = createEnv({
 
   runtimeEnv: {
     // server
-    NODE_ENV: process.env.NODE_ENV,
     SERVER_URL: process.env.SERVER_URL,
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
     SUPABASE_SECRET_JWT: process.env.SUPABASE_SECRET_JWT,

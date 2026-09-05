@@ -1,4 +1,4 @@
-import type { Prisma } from '@/generated/prisma/client'
+import type { Prisma } from '@/generated/prisma/browser'
 import type z from 'zod'
 import type {
   createIdentifierFormSchema,
@@ -6,10 +6,10 @@ import type {
 } from '../schemas'
 
 export type CreateIdentifierFormSchema = z.infer<
-  typeof createIdentifierFormSchema
+  ReturnType<typeof createIdentifierFormSchema>
 >
 export type UpdateIdentifierFormSchema = z.infer<
-  typeof updateIdentifierFormSchema
+  ReturnType<typeof updateIdentifierFormSchema>
 >
 
 export type IdentifierResponse = Prisma.IdentifierGetPayload<{

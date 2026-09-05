@@ -23,14 +23,14 @@ export const useDeleteAccount = ({
     defaultValues: {
       password: '',
     },
-    resolver: zodResolver(deleteAccountFormSchema),
+    resolver: zodResolver(deleteAccountFormSchema()),
   })
 
   const { mutate, isPending } = useMutation(
     trpc.auth.deleteAccount.mutationOptions({
       onSuccess: async () => {
         if (redirect) {
-          void navigate({ to: redirectTo || '/{-$locale}/dashboard/platform' })
+          void navigate({ to: redirectTo || '/{-$locale}/login' })
         }
         form.reset()
         toastMessages.onDelete.onSuccess()

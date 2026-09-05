@@ -1,27 +1,28 @@
 import * as m from '@/generated/paraglide/messages'
 import type { LinkProps } from '@tanstack/react-router'
-import type { IconName } from '@/components/icon'
+import type { LucideIcon } from 'lucide-react'
+import { LayoutDashboard, Settings, UserRoundCog } from 'lucide-react'
 
 export type RouteProps = {
   href: LinkProps['to']
   label: string
-  icon: IconName
+  icon: LucideIcon
 }
 
 export const routeList: RouteProps[] = [
   {
     href: '/{-$locale}/dashboard',
     label: m.component_navbar_item_dashboard(),
-    icon: 'LayoutDashboard',
+    icon: LayoutDashboard,
   },
   {
     href: '/{-$locale}/account',
     label: m.component_navbar_item_account(),
-    icon: 'UserRoundCog',
+    icon: UserRoundCog,
   },
   {
     href: '/{-$locale}/setting',
     label: m.component_navbar_item_setting(),
-    icon: 'Settings',
+    icon: Settings,
   },
 ]

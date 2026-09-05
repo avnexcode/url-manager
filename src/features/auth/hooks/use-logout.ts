@@ -2,6 +2,7 @@ import * as m from '@/generated/paraglide/messages'
 import { useToastMessages } from '@/hooks'
 import type { UseMutationOptions } from '@/interfaces'
 import { signOut } from '@/lib/supabase/auth'
+import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
 
@@ -28,6 +29,7 @@ export const useLogout = ({
 }: UseMutationOptions = {}) => {
   const navigate = useNavigate()
   const router = useRouter()
+  const queryClient = useQueryClient()
   const toastMessages = useToastMessages(m.model_auth_title())
   const [isPending, setIsPending] = useState<boolean>(false)
 
@@ -37,6 +39,7 @@ export const useLogout = ({
 
       await signOut()
       clearClientStorage()
+      queryClient.clear()
 
       await router.invalidate()
 

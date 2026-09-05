@@ -20,7 +20,7 @@ export const useRegister = ({
   const navigate = useNavigate()
 
   const form = useForm<RegisterFormSchema>({
-    resolver: zodResolver(registerFormSchema),
+    resolver: zodResolver(registerFormSchema()),
     defaultValues: {
       email: '',
       password: '',

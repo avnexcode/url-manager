@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
+import { Check, Copy } from 'lucide-react'
 import { forwardRef, useState } from 'react'
-import { Icon } from '../icon'
 
 type CopyTextWrapperProps = {
   iconClassName?: string
@@ -63,8 +63,7 @@ export const CopyTextWrapper = forwardRef<
       </span>
 
       <span className="relative flex size-4 shrink-0 items-center justify-center">
-        <Icon
-          name="Copy"
+        <Copy
           className={cn(
             'absolute size-4 transition-all duration-300',
             copied
@@ -73,8 +72,7 @@ export const CopyTextWrapper = forwardRef<
             iconClassName,
           )}
         />
-        <Icon
-          name="Check"
+        <Check
           className={cn(
             'absolute size-4 text-green-500 transition-all duration-300',
             copied

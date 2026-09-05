@@ -27,9 +27,6 @@ import type {
 import { UrlRepository as Repository } from './url.repository'
 
 export class UrlService extends CommonService {
-  private static bucket = SUPABASE_BUCKET.Url
-  private static file = FileService
-
   protected static override get baseModel() {
     return this.m.model_url_title()
   }
@@ -120,6 +117,15 @@ export class UrlService extends CommonService {
     return this.checkNotNull(url)
   }
 
+  static getIdsByUser = async (
+    db: DBClient,
+    userId: string,
+  ): Promise<string[]> => {
+    const urls = await Repository.findIdsUniqueUser(db, userId)
+
+    return urls.map((identifier) => identifier.id)
+  }
+
   static getIdsByRelation = async (
     db: DBClient,
     relation: RelationParams,
@@ -169,7 +175,7 @@ export class UrlService extends CommonService {
     const { username } = await UserService.getById(db, userId)
 
     const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
-      this.bucket,
+      SUPABASE_BUCKET.Url,
       'URL',
       { username, slug },
     )
@@ -180,7 +186,7 @@ export class UrlService extends CommonService {
       return await Repository.insert(db, requestData)
     } catch (error) {
       try {
-        await this.file.deleteFileByUrls(this.bucket, [qrCodeUrl])
+        await FileService.deleteFileByUrls(SUPABASE_BUCKET.Url, [qrCodeUrl])
       } catch (cleanupError) {
         console.error(
           'failed to cleanup orphan qr code after create failure',
@@ -224,7 +230,7 @@ export class UrlService extends CommonService {
         usedSlugs.add(slug)
 
         const { qrEncodedValue, qrCodeUrl } = await QrCodeService.generate(
-          this.bucket,
+          SUPABASE_BUCKET.Url,
           'URL',
           { username, slug },
         )
@@ -237,7 +243,10 @@ export class UrlService extends CommonService {
     } catch (error) {
       if (generatedQrUrls.length) {
         try {
-          await this.file.deleteFileByUrls(this.bucket, generatedQrUrls)
+          await FileService.deleteFileByUrls(
+            SUPABASE_BUCKET.Url,
+            generatedQrUrls,
+          )
         } catch (cleanupError) {
           console.error(
             'failed to cleanup orphan qr codes after createMany failure',
@@ -293,7 +302,7 @@ export class UrlService extends CommonService {
     let newQrCodeUrl: string | null = null
 
     if (slug !== existingUrl.slug) {
-      const qrCode = await QrCodeService.generate(this.bucket, 'URL', {
+      const qrCode = await QrCodeService.generate(SUPABASE_BUCKET.Url, 'URL', {
         username,
         slug,
       })
@@ -310,7 +319,9 @@ export class UrlService extends CommonService {
 
       if (newQrCodeUrl) {
         try {
-          await this.file.deleteFileByUrls(this.bucket, [existingUrl.qrCodeUrl])
+          await FileService.deleteFileByUrls(SUPABASE_BUCKET.Url, [
+            existingUrl.qrCodeUrl,
+          ])
         } catch (cleanupError) {
           console.error(
             'failed to cleanup old qr code after update',
@@ -323,7 +334,9 @@ export class UrlService extends CommonService {
     } catch (error) {
       if (newQrCodeUrl) {
         try {
-          await this.file.deleteFileByUrls(this.bucket, [newQrCodeUrl])
+          await FileService.deleteFileByUrls(SUPABASE_BUCKET.Url, [
+            newQrCodeUrl,
+          ])
         } catch (cleanupError) {
           console.error(
             'failed to cleanup new qr code after update failure',
@@ -350,7 +363,7 @@ export class UrlService extends CommonService {
 
     if (imageUrls.length) {
       try {
-        await this.file.deleteFileByUrls(this.bucket, imageUrls)
+        await FileService.deleteFileByUrls(SUPABASE_BUCKET.Url, imageUrls)
       } catch (error) {
         console.error('failed to cleanup url images', error)
       }
@@ -377,7 +390,7 @@ export class UrlService extends CommonService {
 
     return {
       urls,
-      imageUrls: imageUrls.length ? { [this.bucket]: imageUrls } : {},
+      imageUrls: imageUrls.length ? { [SUPABASE_BUCKET.Url]: imageUrls } : {},
     }
   }
 
@@ -390,7 +403,7 @@ export class UrlService extends CommonService {
 
     const { urls, imageUrls } = await this.deleteManyCore(db, userId, ids)
 
-    await this.file.deleteImagesByBucket(imageUrls)
+    await FileService.deleteImagesByBucket(imageUrls)
 
     return urls
   }

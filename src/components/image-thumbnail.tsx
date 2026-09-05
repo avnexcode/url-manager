@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
-import { Icon } from './icon'
+import { ImageOff } from 'lucide-react'
 import { Skeleton } from './ui/skeleton'
 
 const THUMBNAIL_SIZE = 'size-14'
@@ -22,7 +22,7 @@ export const ImageThumbnail = ({ thumbnail, title }: ImageThumbnailProps) => {
         className="size-full object-cover"
       />
       <AvatarFallback className="rounded-none bg-muted">
-        <Icon name="ImageOff" size={18} className="text-muted-foreground" />
+        <ImageOff size={18} className="text-muted-foreground" />
       </AvatarFallback>
     </Avatar>
   )
