@@ -22,15 +22,19 @@ import { ZodError } from 'zod'
  * This helper generates the "internals" for a tRPC context. The API handler and RSC clients each
  * wrap this and provides the required context.
  *
+ * Menerima objek `Request` secara eksplisit agar cookie Supabase dapat dibaca
+ * langsung dari header HTTP — tidak bergantung pada AsyncLocalStorage yang
+ * tidak reliabel di lingkungan serverless (Vercel).
+ *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const supabase = createSSRClient()
+export const createTRPCContext = async (request: Request) => {
+  const supabase = createSSRClient({ request })
   const { data } = await supabase.auth.getUser()
   return {
     db,
     user: data.user,
-    ...opts,
+    headers: request.headers,
   }
 }
 
