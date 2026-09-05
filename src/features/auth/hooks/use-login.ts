@@ -55,7 +55,7 @@ export const useLogin = (
               ),
               onClick: () =>
                 navigate({
-                  to: `/verify-email?email=${encodeURIComponent(form.getValues().email)}`,
+                  to: `/verify-email?email=${form.getValues().email}`,
                 }),
             },
           })

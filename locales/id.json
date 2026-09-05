@@ -250,6 +250,13 @@
   "page_auth_form_login_footer_caption": "Belum punya akun?",
   "page_auth_form_login_footer_caption_redirect": "Daftar di sini!",
 
+  "page_auth_form_verify_email_header_title": "Verifikasi Email Anda",
+  "page_auth_form_verify_email_header_description": "Kami telah mengirimkan tautan verifikasi ke alamat email Anda. Silakan periksa kotak masuk Anda dan klik tautan tersebut untuk mengaktifkan akun Anda.",
+  "page_auth_form_verify_email_footer_submit_button": "Kirim Tautan Verifikasi",
+  "page_auth_form_verify_email_footer_submit_button_loading": "Mengirim",
+  "page_auth_form_verify_email_footer_resend_button": "Kirim ulang dalam {time}",
+  "page_auth_form_verify_email_content_caption": "Belum menerima email? Periksa folder spam Anda atau minta tautan verifikasi baru di bawah ini.",
+
   "page_auth_account_title": "Akun",
   "page_auth_form_account_header_title": "Akun",
   "page_auth_form_account_header_description": "Ubah detail akun sesuai kebutuhan.",
@@ -430,6 +437,7 @@
   "regex_special_character": "karakter spesial (@$!%*?&)",
 
   "error_message_register": "Pendaftaran gagal",
+  "error_message_resend_cooldown": "Mohon tunggu {seconds} detik sebelum meminta lagi",
   "error_message_login": "Gagal masuk",
   "error_message_logout": "Terjadi kesalahan saat keluar. Silakan coba lagi",
   "error_message_email_conflict": "Alamat email ini sudah terdaftar",
@@ -519,6 +527,7 @@
   "error_message_supabase_auth_email_conflict_identity_not_deletable": "Identitas email ini tidak dapat dihapus karena konflik",
   "error_message_supabase_auth_email_exists": "Alamat email ini sudah terdaftar",
   "error_message_supabase_auth_email_not_confirmed": "Alamat email Anda belum dikonfirmasi",
+  "error_message_supabase_auth_email_already_confirmed": "Email ini sudah terverifikasi",
   "error_message_supabase_auth_email_provider_disabled": "Penyedia layanan email sedang dinonaktifkan",
   "error_message_supabase_auth_flow_state_expired": "Sesi Anda telah kedaluwarsa. Silakan coba lagi",
   "error_message_supabase_auth_flow_state_not_found": "Status sesi tidak ditemukan. Silakan mulai ulang proses",
@@ -586,6 +595,7 @@
   "error_message_supabase_auth_default": "Terjadi kesalahan yang tidak terduga. Silakan coba lagi nanti",
 
   "success_message_register": "Pendaftaran berhasil. Silakan periksa email Anda untuk mengonfirmasi akun Anda",
+  "success_message_send_verification_email": "Email verifikasi telah dikirim, silakan periksa kotak masuk Anda",
   "success_message_login": "Anda berhasil masuk",
   "success_message_logout": "Anda berhasil keluar",
   "success_message_save": "{field} berhasil disimpan",

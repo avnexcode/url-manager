@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as OauthCallbackRouteImport } from './routes/oauth/callback'
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
 import { Route as Char123LocaleChar125AuthRouteRouteImport } from './routes/{-$locale}/_auth/route'
@@ -17,6 +18,7 @@ import { Route as Char123LocaleChar125PublicRouteRouteImport } from './routes/{-
 import { Route as ApiTrpcSplatRouteImport } from './routes/api.trpc.$'
 import { Route as Char123LocaleChar125AuthLoginRouteImport } from './routes/{-$locale}/_auth/login'
 import { Route as Char123LocaleChar125AuthRegisterRouteImport } from './routes/{-$locale}/_auth/register'
+import { Route as Char123LocaleChar125AuthVerifyEmailRouteImport } from './routes/{-$locale}/_auth/verify-email'
 import { Route as Char123LocaleChar125AuthenticatedAccountRouteImport } from './routes/{-$locale}/_authenticated/account'
 import { Route as Char123LocaleChar125AuthenticatedSettingRouteImport } from './routes/{-$locale}/_authenticated/setting'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/index'
@@ -49,6 +51,11 @@ import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIdIndexRouteImpor
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIdEditRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/$id/edit'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIdViewRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/$id/view'
 
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OauthCallbackRoute = OauthCallbackRouteImport.update({
   id: '/oauth/callback',
   path: '/oauth/callback',
@@ -93,6 +100,12 @@ const Char123LocaleChar125AuthRegisterRoute =
   Char123LocaleChar125AuthRegisterRouteImport.update({
     id: '/register',
     path: '/register',
+    getParentRoute: () => Char123LocaleChar125AuthRouteRoute,
+  } as any)
+const Char123LocaleChar125AuthVerifyEmailRoute =
+  Char123LocaleChar125AuthVerifyEmailRouteImport.update({
+    id: '/verify-email',
+    path: '/verify-email',
     getParentRoute: () => Char123LocaleChar125AuthRouteRoute,
   } as any)
 const Char123LocaleChar125AuthenticatedAccountRoute =
@@ -306,11 +319,13 @@ const Char123LocaleChar125AuthenticatedDashboardUrlIdViewRoute =
 
 export interface FileRoutesByFullPath {
   '/{-$locale}': typeof Char123LocaleChar125PublicRouteRouteWithChildren
+  '/auth/callback': typeof AuthCallbackRoute
   '/oauth/callback': typeof OauthCallbackRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
   '/{-$locale}/login': typeof Char123LocaleChar125AuthLoginRoute
   '/{-$locale}/register': typeof Char123LocaleChar125AuthRegisterRoute
+  '/{-$locale}/verify-email': typeof Char123LocaleChar125AuthVerifyEmailRoute
   '/{-$locale}/account': typeof Char123LocaleChar125AuthenticatedAccountRoute
   '/{-$locale}/setting': typeof Char123LocaleChar125AuthenticatedSettingRoute
   '/{-$locale}/dashboard/identifier': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierRouteRouteWithChildren
@@ -345,10 +360,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/oauth/callback': typeof OauthCallbackRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
   '/{-$locale}/login': typeof Char123LocaleChar125AuthLoginRoute
   '/{-$locale}/register': typeof Char123LocaleChar125AuthRegisterRoute
+  '/{-$locale}/verify-email': typeof Char123LocaleChar125AuthVerifyEmailRoute
   '/{-$locale}/account': typeof Char123LocaleChar125AuthenticatedAccountRoute
   '/{-$locale}/setting': typeof Char123LocaleChar125AuthenticatedSettingRoute
   '/{-$locale}/i/$suffix': typeof Char123LocaleChar125PublicISuffixRoute
@@ -380,11 +397,13 @@ export interface FileRoutesById {
   '/{-$locale}/_auth': typeof Char123LocaleChar125AuthRouteRouteWithChildren
   '/{-$locale}/_authenticated': typeof Char123LocaleChar125AuthenticatedRouteRouteWithChildren
   '/{-$locale}/_public': typeof Char123LocaleChar125PublicRouteRouteWithChildren
+  '/auth/callback': typeof AuthCallbackRoute
   '/oauth/callback': typeof OauthCallbackRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
   '/{-$locale}/_auth/login': typeof Char123LocaleChar125AuthLoginRoute
   '/{-$locale}/_auth/register': typeof Char123LocaleChar125AuthRegisterRoute
+  '/{-$locale}/_auth/verify-email': typeof Char123LocaleChar125AuthVerifyEmailRoute
   '/{-$locale}/_authenticated/account': typeof Char123LocaleChar125AuthenticatedAccountRoute
   '/{-$locale}/_authenticated/setting': typeof Char123LocaleChar125AuthenticatedSettingRoute
   '/{-$locale}/_authenticated/dashboard/identifier': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierRouteRouteWithChildren
@@ -421,11 +440,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/{-$locale}'
+    | '/auth/callback'
     | '/oauth/callback'
     | '/{-$locale}/'
     | '/api/trpc/$'
     | '/{-$locale}/login'
     | '/{-$locale}/register'
+    | '/{-$locale}/verify-email'
     | '/{-$locale}/account'
     | '/{-$locale}/setting'
     | '/{-$locale}/dashboard/identifier'
@@ -460,10 +481,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/{-$locale}'
+    | '/auth/callback'
     | '/oauth/callback'
     | '/api/trpc/$'
     | '/{-$locale}/login'
     | '/{-$locale}/register'
+    | '/{-$locale}/verify-email'
     | '/{-$locale}/account'
     | '/{-$locale}/setting'
     | '/{-$locale}/i/$suffix'
@@ -494,11 +517,13 @@ export interface FileRouteTypes {
     | '/{-$locale}/_auth'
     | '/{-$locale}/_authenticated'
     | '/{-$locale}/_public'
+    | '/auth/callback'
     | '/oauth/callback'
     | '/{-$locale}/'
     | '/api/trpc/$'
     | '/{-$locale}/_auth/login'
     | '/{-$locale}/_auth/register'
+    | '/{-$locale}/_auth/verify-email'
     | '/{-$locale}/_authenticated/account'
     | '/{-$locale}/_authenticated/setting'
     | '/{-$locale}/_authenticated/dashboard/identifier'
@@ -536,6 +561,7 @@ export interface RootRouteChildren {
   Char123LocaleChar125AuthRouteRoute: typeof Char123LocaleChar125AuthRouteRouteWithChildren
   Char123LocaleChar125AuthenticatedRouteRoute: typeof Char123LocaleChar125AuthenticatedRouteRouteWithChildren
   Char123LocaleChar125PublicRouteRoute: typeof Char123LocaleChar125PublicRouteRouteWithChildren
+  AuthCallbackRoute: typeof AuthCallbackRoute
   OauthCallbackRoute: typeof OauthCallbackRoute
   Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
   ApiTrpcSplatRoute: typeof ApiTrpcSplatRoute
@@ -543,6 +569,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/oauth/callback': {
       id: '/oauth/callback'
       path: '/oauth/callback'
@@ -597,6 +630,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/{-$locale}/register'
       preLoaderRoute: typeof Char123LocaleChar125AuthRegisterRouteImport
+      parentRoute: typeof Char123LocaleChar125AuthRouteRoute
+    }
+    '/{-$locale}/_auth/verify-email': {
+      id: '/{-$locale}/_auth/verify-email'
+      path: '/verify-email'
+      fullPath: '/{-$locale}/verify-email'
+      preLoaderRoute: typeof Char123LocaleChar125AuthVerifyEmailRouteImport
       parentRoute: typeof Char123LocaleChar125AuthRouteRoute
     }
     '/{-$locale}/_authenticated/account': {
@@ -822,6 +862,7 @@ declare module '@tanstack/react-router' {
 interface Char123LocaleChar125AuthRouteRouteChildren {
   Char123LocaleChar125AuthLoginRoute: typeof Char123LocaleChar125AuthLoginRoute
   Char123LocaleChar125AuthRegisterRoute: typeof Char123LocaleChar125AuthRegisterRoute
+  Char123LocaleChar125AuthVerifyEmailRoute: typeof Char123LocaleChar125AuthVerifyEmailRoute
 }
 
 const Char123LocaleChar125AuthRouteRouteChildren: Char123LocaleChar125AuthRouteRouteChildren =
@@ -829,6 +870,8 @@ const Char123LocaleChar125AuthRouteRouteChildren: Char123LocaleChar125AuthRouteR
     Char123LocaleChar125AuthLoginRoute: Char123LocaleChar125AuthLoginRoute,
     Char123LocaleChar125AuthRegisterRoute:
       Char123LocaleChar125AuthRegisterRoute,
+    Char123LocaleChar125AuthVerifyEmailRoute:
+      Char123LocaleChar125AuthVerifyEmailRoute,
   }
 
 const Char123LocaleChar125AuthRouteRouteWithChildren =
@@ -1032,6 +1075,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char123LocaleChar125AuthenticatedRouteRouteWithChildren,
   Char123LocaleChar125PublicRouteRoute:
     Char123LocaleChar125PublicRouteRouteWithChildren,
+  AuthCallbackRoute: AuthCallbackRoute,
   OauthCallbackRoute: OauthCallbackRoute,
   Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
   ApiTrpcSplatRoute: ApiTrpcSplatRoute,

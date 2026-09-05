@@ -10,7 +10,7 @@ type CreateUserRequest = {
 
 class SupabaseAuthService {
   static emailVerification = async (email: string) => {
-    const emailRedirectTo = `${env.VITE_BASE_URL}/login`
+    const emailRedirectTo = `${env.VITE_BASE_URL}/auth/callback`
 
     const { error } = await supabase.auth.resend({
       type: 'signup',

@@ -2,10 +2,10 @@ import { Heading } from '@/components'
 import { MainLayout } from '@/components/layouts'
 import * as m from '@/generated/paraglide/messages'
 import { useAuth } from '@/hooks'
-import { useUpdateAccount } from '../../auth/hooks'
 import { DeleteAccountForm, EditAccountForm, EditPasswordForm } from '../forms'
 import { useDeleteAccount } from '../hooks/use-delete-account'
 import { useUpdatePassword } from '../hooks/use-update-password'
+import { useUpdateAccount } from '../hooks'
 
 export const AccountPage = () => {
   const { user } = useAuth()
