@@ -7,6 +7,7 @@ import {
   setCookie,
   setResponseHeader,
 } from '@tanstack/react-start/server'
+import { parse as parseCookies } from 'cookie-es'
 
 const serializeCookie = (
   name: string,
@@ -55,19 +56,14 @@ const createSSRClientExplicit = (
     cookies: {
       getAll() {
         const cookieHeader = request.headers.get('cookie') ?? ''
-        return cookieHeader
-          .split(';')
-          .map((c) => c.trim())
-          .filter(Boolean)
-          .map((c) => {
-            const idx = c.indexOf('=')
-            return {
-              name: decodeURIComponent(c.slice(0, idx).trim()),
-              value: decodeURIComponent(c.slice(idx + 1).trim()),
-            }
-          })
+        const parsed = parseCookies(cookieHeader)
+        return Object.entries(parsed)
+          .filter((entry): entry is [string, string] => entry[1] !== undefined)
+          .map(([name, value]) => ({ name, value }))
       },
-      setAll(cookies) {
+      setAll(
+        cookies: { name: string; value: string; options?: CookieOptions }[],
+      ) {
         cookies.forEach(({ name, value, options }) => {
           responseHeaders.append(
             'Set-Cookie',

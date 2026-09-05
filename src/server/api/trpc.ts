@@ -28,14 +28,14 @@ import { ZodError } from 'zod'
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const supabase = createSSRClient()
+export const createTRPCContext = async (request: Request) => {
+  const supabase = createSSRClient({ request })
 
   const {
     data: { user },
   } = await supabase.auth.getUser()
 
-  return { db, user, ...opts }
+  return { db, user, headers: request.headers }
 }
 
 /**
