@@ -4,21 +4,17 @@ import { createServerClient } from '@supabase/ssr'
 import { createClient } from '@supabase/supabase-js'
 import { getCookies, setCookie } from '@tanstack/react-start/server'
 
+import { parse, serialize } from 'cookie-es'
+
 const serializeCookie = (
   name: string,
   value: string,
   options?: CookieOptions,
 ): string => {
-  let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
-  if (options?.maxAge != null) cookie += `; Max-Age=${options.maxAge}`
-  if (options?.expires)
-    cookie += `; Expires=${new Date(options.expires).toUTCString()}`
-  if (options?.path ?? '/') cookie += `; Path=${options?.path ?? '/'}`
-  if (options?.domain) cookie += `; Domain=${options.domain}`
-  if (options?.secure) cookie += '; Secure'
-  if (options?.httpOnly) cookie += '; HttpOnly'
-  if (options?.sameSite) cookie += `; SameSite=${options.sameSite}`
-  return cookie
+  return serialize(name, value, {
+    ...options,
+    path: options?.path ?? '/',
+  })
 }
 
 const createSSRClientDefault = () => {
@@ -49,17 +45,11 @@ const createSSRClientExplicit = (
     cookies: {
       getAll() {
         const cookieHeader = request.headers.get('cookie') ?? ''
-        return cookieHeader
-          .split(';')
-          .map((c) => c.trim())
-          .filter(Boolean)
-          .map((c) => {
-            const idx = c.indexOf('=')
-            return {
-              name: decodeURIComponent(c.slice(0, idx).trim()),
-              value: decodeURIComponent(c.slice(idx + 1).trim()),
-            }
-          })
+        const parsed = parse(cookieHeader)
+        return Object.entries(parsed).map(([name, value]) => ({
+          name,
+          value: value ?? '',
+        }))
       },
       setAll(cookiesToSet) {
         cookiesToSet.forEach(({ name, value, options }) => {

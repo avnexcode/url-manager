@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
     if (!user) return {}
 
-    await Promise.all([
+    await Promise.allSettled([
       queryClient.ensureQueryData(trpc.auth.getAccount.queryOptions()),
       queryClient.ensureQueryData(trpc.setting.getByUser.queryOptions()),
     ])

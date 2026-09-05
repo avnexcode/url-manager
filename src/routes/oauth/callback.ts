@@ -27,6 +27,7 @@ export const Route = createFileRoute('/oauth/callback')({
             'Location',
             new URL(errorLoginRedirect, url.origin).toString(),
           )
+
           return new Response(null, { status: 302, headers: responseHeaders })
         }
 
@@ -37,6 +38,7 @@ export const Route = createFileRoute('/oauth/callback')({
             'Location',
             new URL(errorLoginRedirect, url.origin).toString(),
           )
+
           return new Response(null, { status: 302, headers: responseHeaders })
         }
 
@@ -44,6 +46,7 @@ export const Route = createFileRoute('/oauth/callback')({
           'Location',
           new URL(next ?? '/dashboard', url.origin).toString(),
         )
+
         return new Response(null, { status: 302, headers: responseHeaders })
       },
     },

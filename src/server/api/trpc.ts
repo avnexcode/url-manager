@@ -33,9 +33,21 @@ export const createTRPCContext = async (request: Request) => {
 
   const supabase = createSSRClient({ request })
 
-  const {
+  let {
     data: { user },
   } = await supabase.auth.getUser()
+
+  if (!user) {
+    try {
+      const defaultClient = createSSRClient()
+      const result = await defaultClient.auth.getUser()
+      if (result.data.user) {
+        user = result.data.user
+      }
+    } catch {
+      // Abaikan jika dipanggil di luar konteks AsyncLocalStorage
+    }
+  }
 
   return { db, user, headers }
 }
