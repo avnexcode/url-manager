@@ -7,24 +7,17 @@ import {
   setCookie,
   setResponseHeader,
 } from '@tanstack/react-start/server'
-import { parse as parseCookies } from 'cookie-es'
+import { parse as parseCookies, serialize as serializeCookies } from 'cookie-es'
 
 const serializeCookie = (
   name: string,
   value: string,
   options?: CookieOptions,
 ): string => {
-  let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
-  if (options?.maxAge != null) cookie += `; Max-Age=${options.maxAge}`
-  if (options?.expires)
-    cookie += `; Expires=${new Date(options.expires).toUTCString()}`
-  if (options?.path ?? '/') cookie += `; Path=${options?.path ?? '/'}`
-  if (options?.domain) cookie += `; Domain=${options.domain}`
-  if (options?.secure) cookie += '; Secure'
-  if (options?.httpOnly) cookie += '; HttpOnly'
-  if (options?.sameSite) cookie += `; SameSite=${options.sameSite}`
-
-  return cookie
+  return serializeCookies(name, value, {
+    ...options,
+    path: options?.path ?? '/',
+  })
 }
 
 const createSSRClientDefault = () => {

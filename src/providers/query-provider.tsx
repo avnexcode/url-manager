@@ -6,8 +6,6 @@ import { createIsomorphicFn } from '@tanstack/react-start'
 import {
   createTRPCClient,
   httpBatchStreamLink,
-  httpLink,
-  splitLink,
   TRPCClientError,
 } from '@trpc/client'
 import { createTRPCOptionsProxy } from '@trpc/tanstack-react-query'
@@ -28,21 +26,10 @@ const getHeaders = createIsomorphicFn()
 
 export const trpcClient = createTRPCClient<AppRouter>({
   links: [
-    // On the server (SSR), use httpLink which executes fetch inline without
-    // setTimeout — this keeps AsyncLocalStorage context intact for cookie reading.
-    // On the browser, use httpBatchStreamLink for efficient request batching.
-    splitLink({
-      condition: () => typeof window === 'undefined',
-      true: httpLink({
-        transformer: superjson,
-        url: getUrl(),
-        headers: getHeaders,
-      }),
-      false: httpBatchStreamLink({
-        transformer: superjson,
-        url: getUrl(),
-        headers: getHeaders,
-      }),
+    httpBatchStreamLink({
+      transformer: superjson,
+      url: getUrl(),
+      headers: getHeaders,
     }),
   ],
 })
