@@ -2,40 +2,50 @@ import { env } from '@/configs/env'
 import type { CookieOptions } from '@supabase/ssr'
 import { createServerClient } from '@supabase/ssr'
 import { createClient } from '@supabase/supabase-js'
-import { getCookies, setCookie } from '@tanstack/react-start/server'
-
-import { parse, serialize } from 'cookie-es'
+import {
+  getCookies,
+  setCookie,
+  setResponseHeader,
+} from '@tanstack/react-start/server'
 
 const serializeCookie = (
   name: string,
   value: string,
   options?: CookieOptions,
 ): string => {
-  return serialize(name, value, {
-    ...options,
-    path: options?.path ?? '/',
-  })
+  let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
+  if (options?.maxAge != null) cookie += `; Max-Age=${options.maxAge}`
+  if (options?.expires)
+    cookie += `; Expires=${new Date(options.expires).toUTCString()}`
+  if (options?.path ?? '/') cookie += `; Path=${options?.path ?? '/'}`
+  if (options?.domain) cookie += `; Domain=${options.domain}`
+  if (options?.secure) cookie += '; Secure'
+  if (options?.httpOnly) cookie += '; HttpOnly'
+  if (options?.sameSite) cookie += `; SameSite=${options.sameSite}`
+
+  return cookie
 }
 
 const createSSRClientDefault = () => {
   return createServerClient(env.VITE_SUPABASE_URL, env.VITE_SUPABASE_ANON_KEY, {
     cookies: {
       getAll() {
-        return Object.entries(getCookies()).map(([name, value]) => ({
-          name,
-          value,
-        }))
+        return Object.entries(getCookies()).map(([name, value]) => {
+          return { name, value }
+        })
       },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
+      setAll(cookies, headers) {
+        cookies.forEach(({ name, value, options }) => {
           setCookie(name, value, options)
+        })
+
+        Object.entries(headers).forEach(([name, value]) => {
+          setResponseHeader(name, value)
         })
       },
     },
   })
 }
-
-// createSSRClientFromRequest
 
 const createSSRClientExplicit = (
   request: Request,
@@ -45,14 +55,20 @@ const createSSRClientExplicit = (
     cookies: {
       getAll() {
         const cookieHeader = request.headers.get('cookie') ?? ''
-        const parsed = parse(cookieHeader)
-        return Object.entries(parsed).map(([name, value]) => ({
-          name,
-          value: value ?? '',
-        }))
+        return cookieHeader
+          .split(';')
+          .map((c) => c.trim())
+          .filter(Boolean)
+          .map((c) => {
+            const idx = c.indexOf('=')
+            return {
+              name: decodeURIComponent(c.slice(0, idx).trim()),
+              value: decodeURIComponent(c.slice(idx + 1).trim()),
+            }
+          })
       },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
+      setAll(cookies) {
+        cookies.forEach(({ name, value, options }) => {
           responseHeaders.append(
             'Set-Cookie',
             serializeCookie(name, value, options),

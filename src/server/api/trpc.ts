@@ -28,28 +28,14 @@ import { ZodError } from 'zod'
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (request: Request) => {
-  const { headers } = request
+export const createTRPCContext = async (opts: { headers: Headers }) => {
+  const supabase = createSSRClient()
 
-  const supabase = createSSRClient({ request })
-
-  let {
+  const {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user) {
-    try {
-      const defaultClient = createSSRClient()
-      const result = await defaultClient.auth.getUser()
-      if (result.data.user) {
-        user = result.data.user
-      }
-    } catch {
-      // Abaikan jika dipanggil di luar konteks AsyncLocalStorage
-    }
-  }
-
-  return { db, user, headers }
+  return { db, user, ...opts }
 }
 
 /**

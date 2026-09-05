@@ -21,6 +21,7 @@ const config = defineConfig({
     tailwindcss(),
     tanstackStart(),
     nitro({
+      preset: 'vercel',
       rollupConfig: {
         external: [/^@sentry\//],
         output: {
