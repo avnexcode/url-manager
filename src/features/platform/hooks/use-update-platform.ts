@@ -14,18 +14,21 @@ import { toast } from 'sonner'
 import { updatePlatformFormSchema } from '../schemas'
 import type { PlatformResponse, UpdatePlatformFormSchema } from '../types'
 
-const toFormValues = (platform: PlatformResponse): UpdatePlatformFormSchema => {
+const toFormValues = (
+  platform?: PlatformResponse,
+): UpdatePlatformFormSchema => {
   return {
-    title: platform.title,
-    description: platform.description,
-    url: platform.url,
-    visibility: platform.visibility,
-    password: platform.password,
+    title: platform?.title ?? '',
+    description: platform?.description,
+    url: platform?.url ?? '',
+    visibility: platform?.visibility ?? 'PRIVATE',
+    password: platform?.password,
   }
 }
 
 export const useUpdatePlatform = (
-  platform: PlatformResponse,
+  id: string,
+  platform?: PlatformResponse,
   { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
 ) => {
   const { user } = useAuth()
@@ -61,7 +64,7 @@ export const useUpdatePlatform = (
       onSuccess: async () => {
         await Promise.allSettled([
           queryClient.invalidateQueries({
-            queryKey: trpc.platform.getById.queryKey({ id: platform.id }),
+            queryKey: trpc.platform.getById.queryKey({ id }),
           }),
           queryClient.invalidateQueries({
             queryKey: trpc.platform.getAll.queryKey(),
@@ -70,7 +73,7 @@ export const useUpdatePlatform = (
         if (redirect) {
           void navigate({
             to: redirectTo || '/{-$locale}/dashboard/platform/$id/view',
-            params: { id: platform.id },
+            params: { id },
           })
         }
         toastMessages.onUpdate.onSuccess()
@@ -84,7 +87,7 @@ export const useUpdatePlatform = (
   )
 
   const onSubmit = async (values: UpdatePlatformFormSchema) => {
-    let thumbnailUrl = platform.thumbnail
+    let thumbnailUrl = platform?.thumbnail
     let newThumbnail = false
 
     try {
@@ -111,10 +114,7 @@ export const useUpdatePlatform = (
     }
 
     try {
-      await mutateAsync({
-        id: platform.id,
-        request: { ...values, thumbnail: thumbnailUrl },
-      })
+      await mutateAsync({ id, request: { ...values, thumbnail: thumbnailUrl } })
     } catch {
       if (thumbnailUrl && newThumbnail) {
         await deleteImageByUrl(SUPABASE_BUCKET.Platform, thumbnailUrl)

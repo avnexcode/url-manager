@@ -15,18 +15,19 @@ import { updateIdentifierFormSchema } from '../schemas'
 import type { IdentifierResponse, UpdateIdentifierFormSchema } from '../types'
 
 const toFormValues = (
-  identifier: IdentifierResponse,
+  identifier?: IdentifierResponse,
 ): UpdateIdentifierFormSchema => {
   return {
-    title: identifier.title,
-    description: identifier.description,
-    visibility: identifier.visibility,
-    password: identifier.password,
+    title: identifier?.title ?? '',
+    description: identifier?.description,
+    visibility: identifier?.visibility ?? 'PRIVATE',
+    password: identifier?.password,
   }
 }
 
 export const useUpdateIdentifier = (
-  identifier: IdentifierResponse,
+  id: string,
+  identifier?: IdentifierResponse,
   { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
 ) => {
   const { user } = useAuth()
@@ -62,7 +63,7 @@ export const useUpdateIdentifier = (
       onSuccess: async () => {
         await Promise.allSettled([
           queryClient.invalidateQueries({
-            queryKey: trpc.identifier.getById.queryKey({ id: identifier.id }),
+            queryKey: trpc.identifier.getById.queryKey({ id }),
           }),
           queryClient.invalidateQueries({
             queryKey: trpc.identifier.getAll.queryKey(),
@@ -71,7 +72,7 @@ export const useUpdateIdentifier = (
         if (redirect) {
           void navigate({
             to: redirectTo || '/{-$locale}/dashboard/identifier/$id/view',
-            params: { id: identifier.id },
+            params: { id },
           })
         }
         toastMessages.onUpdate.onSuccess()
@@ -85,7 +86,7 @@ export const useUpdateIdentifier = (
   )
 
   const onSubmit = async (values: UpdateIdentifierFormSchema) => {
-    let thumbnailUrl = identifier.thumbnail
+    let thumbnailUrl = identifier?.thumbnail
     let newThumbnail = false
 
     try {
@@ -112,10 +113,7 @@ export const useUpdateIdentifier = (
     }
 
     try {
-      await mutateAsync({
-        id: identifier.id,
-        request: { ...values, thumbnail: thumbnailUrl },
-      })
+      await mutateAsync({ id, request: { ...values, thumbnail: thumbnailUrl } })
     } catch {
       if (thumbnailUrl && newThumbnail) {
         await deleteImageByUrl(SUPABASE_BUCKET.Identifier, thumbnailUrl)

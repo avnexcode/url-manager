@@ -14,18 +14,19 @@ import { toast } from 'sonner'
 import { updateUrlFormSchema } from '../schemas'
 import type { UpdateUrlFormSchema, UrlResponse } from '../types'
 
-const toFormValues = (url: UrlResponse): UpdateUrlFormSchema => {
+const toFormValues = (url?: UrlResponse): UpdateUrlFormSchema => {
   return {
-    title: url.title,
-    description: url.description,
-    url: url.url,
-    identifierId: url.identifierId,
-    platformId: url.platformId,
+    title: url?.title ?? '',
+    description: url?.description,
+    url: url?.url ?? '',
+    identifierId: url?.identifierId,
+    platformId: url?.platformId,
   }
 }
 
 export const useUpdateUrl = (
-  url: UrlResponse,
+  id: string,
+  url?: UrlResponse,
   { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
 ) => {
   const { user } = useAuth()
@@ -61,7 +62,7 @@ export const useUpdateUrl = (
       onSuccess: async () => {
         await Promise.allSettled([
           queryClient.invalidateQueries({
-            queryKey: trpc.url.getById.queryKey({ id: url.id }),
+            queryKey: trpc.url.getById.queryKey({ id }),
           }),
           queryClient.invalidateQueries({
             queryKey: trpc.url.getAll.queryKey(),
@@ -70,7 +71,7 @@ export const useUpdateUrl = (
         if (redirect) {
           void navigate({
             to: redirectTo || '/{-$locale}/dashboard/url/$id/view',
-            params: { id: url.id },
+            params: { id },
           })
         }
         toastMessages.onUpdate.onSuccess()
@@ -84,7 +85,7 @@ export const useUpdateUrl = (
   )
 
   const onSubmit = async (values: UpdateUrlFormSchema) => {
-    let thumbnailUrl = url.thumbnail
+    let thumbnailUrl = url?.thumbnail
     let newThumbnail = false
 
     try {
@@ -111,10 +112,7 @@ export const useUpdateUrl = (
     }
 
     try {
-      await mutateAsync({
-        id: url.id,
-        request: { ...values, thumbnail: thumbnailUrl },
-      })
+      await mutateAsync({ id, request: { ...values, thumbnail: thumbnailUrl } })
     } catch {
       if (thumbnailUrl && newThumbnail) {
         await deleteImageByUrl(SUPABASE_BUCKET.Url, thumbnailUrl)

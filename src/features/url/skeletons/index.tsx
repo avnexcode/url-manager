@@ -16,8 +16,8 @@ export const EditUrlFormSkeleton = () => {
   return (
     <FormSkeleton>
       <InputTextSkeleton />
-      <InputTextAreaSkeleton />
       <InputTextSkeleton />
+      <InputTextAreaSkeleton />
       <InputImageSkeleton />
       <InputTextSkeleton />
       <InputTextSkeleton />

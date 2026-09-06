@@ -1,18 +1,10 @@
 import { DetailUrlPage } from '@/features/url/pages'
-import { DetailUrlPageSkeleton } from '@/features/url/skeletons'
-import * as m from '@/generated/paraglide/messages'
-import { seo } from '@/utils'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { urlSearchSchema } from '../create'
 
 export const Route = createFileRoute(
   '/{-$locale}/_authenticated/dashboard/url/$id/view',
 )({
-  head: () =>
-    seo({
-      title: `${m.action_detail()} ${m.page_url_title()}`,
-      robots: false,
-    }),
   validateSearch: urlSearchSchema,
   beforeLoad: ({ search, params }) => {
     const isIncomplete = Boolean(search.from) !== Boolean(search.id)
@@ -28,5 +20,4 @@ export const Route = createFileRoute(
     }
   },
   component: DetailUrlPage,
-  pendingComponent: DetailUrlPageSkeleton,
 })

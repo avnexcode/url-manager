@@ -20,8 +20,8 @@ export const EditPlatformFormSkeleton = () => {
   return (
     <FormSkeleton>
       <InputTextSkeleton />
-      <InputTextAreaSkeleton />
       <InputTextSkeleton />
+      <InputTextAreaSkeleton />
       <InputTextSkeleton />
       <InputImageSkeleton />
       <InputTextSkeleton />

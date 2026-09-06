@@ -1,5 +1,4 @@
 import { DetailIdentifierPage } from '@/features/identifier/pages'
-import { DetailIdentifierPageSkeleton } from '@/features/identifier/skeletons'
 import { searchSchema } from '@/hooks'
 import { createFileRoute } from '@tanstack/react-router'
 
@@ -8,5 +7,4 @@ export const Route = createFileRoute(
 )({
   validateSearch: searchSchema,
   component: DetailIdentifierPage,
-  pendingComponent: DetailIdentifierPageSkeleton,
 })

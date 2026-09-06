@@ -1,12 +1,5 @@
 import { ImagePreview, ImagePreviewSkeleton, QrImageDialog } from '@/components'
-import {
-  ActionButton,
-  ActionButtonSkeleton,
-  ActionLink,
-  ActionLinkSkeleton,
-  ExternalLink,
-  ExternalLinkSkeleton,
-} from '@/components/elements'
+import { ActionButton, ActionLink, ExternalLink } from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
 import { Heading } from '@/components/heading'
 import { Button } from '@/components/ui/button'
@@ -87,14 +80,12 @@ export const UrlView = ({
             <div className="flex shrink-0 items-center gap-2 self-end">
               <ActionLink
                 action="edit"
-                size="sm"
                 to="/{-$locale}/dashboard/url/$id/edit"
                 search={searchParams}
                 hideLabel
               />
               <ActionButton
                 action="delete"
-                size="sm"
                 isPending={isPending}
                 onClick={() => setIsOpen(true)}
                 hideLabel
@@ -109,7 +100,6 @@ export const UrlView = ({
               <Button
                 type="button"
                 variant="neutral"
-                size="sm"
                 onClick={() => setIsQrOpen(true)}
                 className="w-full gap-2 sm:w-auto"
               >
@@ -119,7 +109,6 @@ export const UrlView = ({
             )}
             <ExternalLink
               action="visit"
-              size="sm"
               href={url}
               target="_blank"
               rel="noopener noreferrer"
@@ -190,42 +179,41 @@ export const UrlViewSkeleton = () => {
           <ImagePreviewSkeleton />
 
           <div className="flex min-w-0 flex-1 flex-col gap-2">
-            {/* Heading */}
             <Skeleton className="h-7 w-48 max-w-full" />
 
-            {/* Empty badge row — UrlView renders no badges, kept as spacer to match layout */}
             <div className="flex flex-wrap items-center gap-2" />
 
-            {/* Description (separator + 2 lines) */}
-            <Skeleton className="h-px w-full mt-1" />
-            <Skeleton className="h-4 w-full max-w-md" />
-            <Skeleton className="h-4 w-3/4 max-w-sm" />
+            <div className="flex flex-col gap-1.5 py-1">
+              <Skeleton className="h-4 w-full max-w-md" />
+              <Skeleton className="h-4 w-3/4 max-w-sm" />
+            </div>
           </div>
 
-          {/* Edit + Delete action buttons */}
           <div className="flex shrink-0 items-center gap-2 self-end">
-            <ActionLinkSkeleton size="sm" hideLabel />
-            <ActionButtonSkeleton size="sm" hideLabel />
+            <ActionLink action="edit" hideLabel disabled />
+            <ActionButton action="delete" hideLabel disabled />
           </div>
         </div>
       </div>
 
-      {/* Secondary action: QR + Visit buttons */}
       <div className="px-4 py-4 sm:px-6">
-        <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
-          <Skeleton className="h-9 w-full sm:w-28" />
-          <ExternalLinkSkeleton
-            action="visit"
-            size="sm"
-            className="w-full sm:w-auto"
-            labelWidth="w-16"
-          />
+        <div className="flex flex-col gap-2 sm:flex-row justify-end">
+          <Button
+            type="button"
+            variant="neutral"
+            disabled
+            className="w-full gap-2 sm:w-auto opacity-50"
+          >
+            <QrCode className="size-4" />
+            {m.component_view_show_qr()}
+          </Button>
+
+          <ExternalLink action="visit" href="#" disabled />
         </div>
       </div>
 
       <Separator className="my-5" />
 
-      {/* Platform / Identifier info grid */}
       <div className="grid grid-cols-1 gap-3 px-4 py-4 sm:grid-cols-2 sm:px-6">
         <div className="flex items-center gap-x-2.5 rounded-lg px-3 py-2.5">
           <div className="flex min-w-0 flex-col gap-1">

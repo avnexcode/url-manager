@@ -1,9 +1,7 @@
 import { ImagePreview, ImagePreviewSkeleton, QrImageDialog } from '@/components'
 import {
   ActionButton,
-  ActionButtonSkeleton,
   ActionLink,
-  ActionLinkSkeleton,
   CopyTextWrapper,
 } from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
@@ -123,13 +121,11 @@ export const IdentifierView = ({
             <div className="flex shrink-0 items-center gap-2 self-end">
               <ActionLink
                 action="edit"
-                size="sm"
                 to="/{-$locale}/dashboard/identifier/$id/edit"
                 hideLabel
               />
               <ActionButton
                 action="delete"
-                size="sm"
                 isPending={isPending}
                 onClick={() => setIsOpen(true)}
                 hideLabel
@@ -139,12 +135,11 @@ export const IdentifierView = ({
         </div>
 
         <div className="px-4 py-4 sm:px-6">
-          <div className="flex flex-col gap-2 sm:flex-row justify-end">
+          <div className="flex flex-col gap-3 sm:flex-row justify-end">
             {qrCodeUrl && (
               <Button
                 type="button"
                 variant="neutral"
-                size="sm"
                 onClick={() => setIsQrOpen(true)}
                 className="w-full gap-2 sm:w-auto"
               >
@@ -185,33 +180,37 @@ export const IdentifierViewSkeleton = () => {
           <ImagePreviewSkeleton />
 
           <div className="flex min-w-0 flex-1 flex-col gap-2">
-            {/* Heading */}
             <Skeleton className="h-7 w-48 max-w-full" />
 
-            {/* Lock status + visibility badges */}
             <div className="flex flex-wrap items-center gap-2">
-              <Skeleton className="h-5.5 w-20 rounded-none" />
-              <Skeleton className="h-5.5 w-16 rounded-none" />
+              <Skeleton className="h-6.5 w-24 rounded-none" />
+              <Skeleton className="h-6.5 w-20 rounded-none" />
             </div>
 
-            {/* Description (separator + 2 lines) */}
-            <Skeleton className="h-px w-full" />
-            <Skeleton className="h-4 w-full max-w-md" />
-            <Skeleton className="h-4 w-3/4 max-w-sm" />
+            <div className="flex flex-col gap-1.5 py-1">
+              <Skeleton className="h-4 w-full max-w-md" />
+              <Skeleton className="h-4 w-3/4 max-w-sm" />
+            </div>
           </div>
 
-          {/* Edit + Delete action buttons */}
           <div className="flex shrink-0 items-center gap-2 self-end">
-            <ActionLinkSkeleton size="sm" hideLabel />
-            <ActionButtonSkeleton size="sm" hideLabel />
+            <ActionLink action="edit" hideLabel disabled />
+            <ActionButton action="delete" hideLabel disabled />
           </div>
         </div>
       </div>
 
-      {/* QR button (only shown when qrCodeUrl exists) */}
       <div className="px-4 py-4 sm:px-6">
-        <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
-          <Skeleton className="h-9 w-full sm:w-28" />
+        <div className="flex flex-col gap-3 sm:flex-row justify-end">
+          <Button
+            type="button"
+            variant="neutral"
+            disabled
+            className="w-full gap-2 sm:w-auto opacity-50"
+          >
+            <QrCode className="size-4" />
+            {m.component_view_show_qr()}
+          </Button>
         </div>
       </div>
 

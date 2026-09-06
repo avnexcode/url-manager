@@ -205,7 +205,6 @@ export const PlatformViewSkeleton = () => {
             </div>
           </div>
 
-          {/* Real buttons, disabled — dimensi otomatis identik dengan state loaded */}
           <div className="flex shrink-0 items-center gap-2 self-end">
             <ActionLink action="edit" hideLabel disabled />
             <ActionButton action="delete" hideLabel disabled />

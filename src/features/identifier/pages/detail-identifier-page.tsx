@@ -7,15 +7,15 @@ import * as m from '@/generated/paraglide/messages'
 import { useQueryParams } from '@/hooks'
 import { useTRPC } from '@/lib/trpc/react'
 import { Route } from '@/routes/{-$locale}/_authenticated/dashboard/identifier/$id/view'
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
-import { IdentifierView } from '../components'
+import { useQuery } from '@tanstack/react-query'
+import { IdentifierView, IdentifierViewSkeleton } from '../components'
 
 export const DetailIdentifierPage = () => {
   const { id } = Route.useParams()
 
   const trpc = useTRPC()
 
-  const { data: identifier } = useSuspenseQuery(
+  const { data: identifier, isLoading: isIdentifierLoading } = useQuery(
     trpc.identifier.getById.queryOptions({ id }),
   )
 
@@ -34,7 +34,12 @@ export const DetailIdentifierPage = () => {
     <MainLayout
       headerContent={<Heading size={'h2'}>{m.page_identifier_title()}</Heading>}
     >
-      <IdentifierView identifier={identifier} />
+      {isIdentifierLoading ? (
+        <IdentifierViewSkeleton />
+      ) : (
+        identifier && <IdentifierView identifier={identifier} />
+      )}
+
       <SectionLayout
         headerContent={
           <>
