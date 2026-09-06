@@ -1,12 +1,9 @@
 import { ImagePreview, ImagePreviewSkeleton, QrImageDialog } from '@/components'
 import {
   ActionButton,
-  ActionButtonSkeleton,
   ActionLink,
-  ActionLinkSkeleton,
   CopyTextWrapper,
   ExternalLink,
-  ExternalLinkSkeleton,
 } from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
 import { Heading } from '@/components/heading'
@@ -128,13 +125,11 @@ export const PlatformView = ({
             <div className="flex shrink-0 items-center gap-2 self-end">
               <ActionLink
                 action="edit"
-                size="sm"
                 to="/{-$locale}/dashboard/platform/$id/edit"
                 hideLabel
               />
               <ActionButton
                 action="delete"
-                size="sm"
                 isPending={isPending}
                 onClick={() => setIsOpen(true)}
                 hideLabel
@@ -144,12 +139,11 @@ export const PlatformView = ({
         </div>
 
         <div className="px-4 py-4 sm:px-6">
-          <div className="flex flex-col gap-2 sm:flex-row justify-end">
+          <div className="flex flex-col gap-3 sm:flex-row justify-end">
             {qrCodeUrl && (
               <Button
                 type="button"
                 variant="neutral"
-                size="sm"
                 onClick={() => setIsQrOpen(true)}
                 className="w-full gap-2 sm:w-auto"
               >
@@ -160,7 +154,6 @@ export const PlatformView = ({
 
             <ExternalLink
               action="visit"
-              size="sm"
               href={url}
               target="_blank"
               rel="noopener noreferrer"
@@ -202,33 +195,37 @@ export const PlatformViewSkeleton = () => {
             <Skeleton className="h-7 w-48 max-w-full" />
 
             <div className="flex flex-wrap items-center gap-2">
-              <Skeleton className="h-5.5 w-20 rounded-none" />
-              <Skeleton className="h-5.5 w-16 rounded-none" />
+              <Skeleton className="h-6.5 w-24 rounded-none" />
+              <Skeleton className="h-6.5 w-20 rounded-none" />
             </div>
 
-            <Skeleton className="h-px w-full mt-1" />
-            <Skeleton className="h-4 w-full max-w-md" />
-            <Skeleton className="h-4 w-3/4 max-w-sm" />
+            <div className="flex flex-col gap-1.5 py-1">
+              <Skeleton className="h-4 w-full max-w-md" />
+              <Skeleton className="h-4 w-3/4 max-w-sm" />
+            </div>
           </div>
 
-          {/* Edit + Delete action buttons */}
+          {/* Real buttons, disabled — dimensi otomatis identik dengan state loaded */}
           <div className="flex shrink-0 items-center gap-2 self-end">
-            <ActionLinkSkeleton size="sm" hideLabel />
-            <ActionButtonSkeleton size="sm" hideLabel />
+            <ActionLink action="edit" hideLabel disabled />
+            <ActionButton action="delete" hideLabel disabled />
           </div>
         </div>
       </div>
 
-      {/* QR + Visit buttons */}
       <div className="px-4 py-4 sm:px-6">
-        <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
-          <Skeleton className="h-9 w-full sm:w-28" />
-          <ExternalLinkSkeleton
-            action="visit"
-            size="sm"
-            className="w-full sm:w-auto"
-            labelWidth="w-16"
-          />
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <Button
+            type="button"
+            variant="neutral"
+            disabled
+            className="w-full gap-2 sm:w-auto opacity-50"
+          >
+            <QrCode className="size-4 capitalize" />
+            {m.component_view_show_qr()}
+          </Button>
+
+          <ExternalLink action="visit" href="#" disabled />
         </div>
       </div>
 
