@@ -15,6 +15,7 @@ export const Route = createFileRoute(
       const url = await queryClient.ensureQueryData(
         trpc.url.getById.queryOptions({ id }),
       )
+
       return url
     } catch (error) {
       if (

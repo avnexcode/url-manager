@@ -5,40 +5,38 @@ import { usePublicAccess } from '../hooks'
 import { SettingsCard } from './settings-card'
 
 export const PublicAccessSwitcher = () => {
-  const { setting } = useAuth()
+  const { setting, isLoading } = useAuth()
   const { handlePublicAccessChange, isPending } = usePublicAccess()
-
-  if (!setting) return null
 
   return (
     <>
       <SettingsCard label={m.page_setting_card_public_access_label()}>
         <Switch
-          checked={setting.publicAccess}
+          checked={setting?.publicAccess}
           onCheckedChange={(checked) =>
             handlePublicAccessChange('publicAccess', checked)
           }
-          disabled={isPending}
+          disabled={isPending || isLoading}
         />
       </SettingsCard>
       <SettingsCard label={m.page_setting_card_public_platform_access_label()}>
         <Switch
-          checked={setting.publicPlatformAccess}
+          checked={setting?.publicPlatformAccess}
           onCheckedChange={(checked) =>
             handlePublicAccessChange('publicPlatformAccess', checked)
           }
-          disabled={isPending}
+          disabled={isPending || isLoading}
         />
       </SettingsCard>
       <SettingsCard
         label={m.page_setting_card_public_identifier_access_label()}
       >
         <Switch
-          checked={setting.publicIdentifierAccess}
+          checked={setting?.publicIdentifierAccess}
           onCheckedChange={(checked) =>
             handlePublicAccessChange('publicIdentifierAccess', checked)
           }
-          disabled={isPending}
+          disabled={isPending || isLoading}
         />
       </SettingsCard>
     </>

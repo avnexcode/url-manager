@@ -3,15 +3,15 @@ import { TRPCClientError } from '@trpc/client'
 
 export const Route = createFileRoute('/{-$locale}/_public/s/$suffix')({
   loader: async ({ context, params }) => {
-    const { trpc, queryClient } = context
+    const { queryClient, trpc } = context
     const { suffix } = params
 
     try {
-      const url = await queryClient.ensureQueryData(
+      const { url } = await queryClient.ensureQueryData(
         trpc.url.getPublicBySlugSuffix.queryOptions({ suffix }),
       )
 
-      throw redirect({ href: url.url })
+      throw redirect({ href: url })
     } catch (error) {
       if (
         error instanceof TRPCClientError &&

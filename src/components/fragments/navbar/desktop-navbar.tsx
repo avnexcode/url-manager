@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useLogout } from '@/features/auth/hooks'
 import * as m from '@/generated//paraglide/messages'
 import { useAuth } from '@/hooks'
@@ -17,7 +18,7 @@ import { ChevronDown, LogOut } from 'lucide-react'
 import { routeList } from './menu'
 
 export const DesktopNavbar = () => {
-  const { user, isAuthenticated } = useAuth()
+  const { isAuthenticated, user, isLoading } = useAuth()
   const { handleLogout } = useLogout()
 
   if (!isAuthenticated) {
@@ -39,26 +40,32 @@ export const DesktopNavbar = () => {
     )
   }
 
-  if (!user) return null
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="group relative flex w-40 cursor-pointer items-center gap-2 border-2 border-border bg-secondary-background p-1 pr-1 shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2">
           <Avatar className="size-8 shrink-0 rounded-none">
             <AvatarImage
-              src={user.image ?? user.avatar ?? ''}
+              src={user?.image ?? user?.avatar ?? ''}
               crossOrigin="anonymous"
               referrerPolicy="no-referrer"
             />
-            <AvatarFallback className="rounded-none bg-main text-secondary-foreground font-heading text-sm">
-              {user.email.charAt(0).toUpperCase()}
-            </AvatarFallback>
+            {isLoading ? (
+              <Skeleton className="w-full border-none" />
+            ) : (
+              <AvatarFallback className="rounded-none bg-main text-secondary-foreground font-heading text-sm">
+                {user?.email.charAt(0).toUpperCase()}
+              </AvatarFallback>
+            )}
           </Avatar>
 
-          <p className="min-w-0 flex-1 truncate font-heading text-secondary-foreground text-left">
-            {user.username}
-          </p>
+          {isLoading ? (
+            <Skeleton className="w-full h-3" />
+          ) : (
+            <p className="min-w-0 flex-1 truncate font-heading text-secondary-foreground text-left">
+              {user?.username}
+            </p>
+          )}
 
           <ChevronDown className="size-3 shrink-0 opacity-60 mr-2" />
         </button>
@@ -70,9 +77,13 @@ export const DesktopNavbar = () => {
         align="end"
       >
         <DropdownMenuLabel className="border-b-2 border-border pb-2">
-          <p className="font-heading truncate text-secondary-foreground">
-            {user.email}
-          </p>
+          {isLoading ? (
+            <Skeleton className="w-full h-5" />
+          ) : (
+            <p className="font-heading truncate text-secondary-foreground">
+              {user?.email}
+            </p>
+          )}
         </DropdownMenuLabel>
 
         <DropdownMenuGroup className="pt-1">

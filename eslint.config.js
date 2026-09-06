@@ -23,6 +23,7 @@ export default [
       // Build output & caches
       'dist/**',
       '.output/**',
+      '.vercel/**',
       '.tanstack/**',
       '.nitro/**',
       '.vinxi/**',

@@ -10,11 +10,10 @@ export const Route = createFileRoute(
   '/{-$locale}/_public/$username/identifier/',
 )({
   loader: async ({ context, params }) => {
-    const { trpc } = context
+    const { queryClient, trpc } = context
     const { username } = params
-
     try {
-      const identifiers = await context.queryClient.ensureQueryData(
+      const identifiers = await queryClient.ensureQueryData(
         trpc.identifier.getPubllicAll.queryOptions({ username, params: {} }),
       )
 

@@ -73,9 +73,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     return { user: user ?? undefined }
   },
   loader: async () => {
-    // Auth queries (getAccount, setting.getByUser) are intentionally
-    // fetched client-side in AuthProvider to avoid SSR loopback HTTP
-    // requests on Vercel that lose session cookies and cause UNAUTHORIZED.
     return {}
   },
   head: () => ({

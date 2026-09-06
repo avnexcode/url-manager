@@ -19,13 +19,16 @@ export class QrCodeService {
 
   private static readonly OPTIONS: QRCode.QRCodeToBufferOptions = {
     type: 'png',
-    errorCorrectionLevel: 'H', // wajib H karena logo menutupi bagian tengah
+    errorCorrectionLevel: 'H',
     margin: 2,
     width: 512,
   }
 
-  // cache buffer logo di memory, supaya tidak fetch ulang setiap generate
   private static logoBufferPromise: Promise<Buffer> | null = null
+
+  private static normalizeBaseUrl = (baseUrl: string): string => {
+    return baseUrl.replace(/^https?:\/\/(www\.)?/i, '')
+  }
 
   private static buildQrEncodedValue = (
     type: BuildQrEncodedValueType,
@@ -33,7 +36,7 @@ export class QrCodeService {
   ): string => {
     const prefix = extractSlugId({ slug })
 
-    const baseUrl = env.VITE_BASE_URL
+    const baseUrl = this.normalizeBaseUrl(env.VITE_BASE_URL)
 
     if (type === 'IDENTIFIER') return `${baseUrl}/i/${prefix}`
 
@@ -59,7 +62,6 @@ export class QrCodeService {
           return Buffer.from(arrayBuffer)
         })
         .catch((error) => {
-          // reset cache supaya percobaan berikutnya fetch ulang, bukan stuck di promise gagal
           this.logoBufferPromise = null
 
           throw error
@@ -81,7 +83,6 @@ export class QrCodeService {
     const padding = Math.round(logoSize * 0.12)
     const paddedSize = logoSize + padding * 2
 
-    // background putih di belakang logo biar kontras terhadap dots QR
     const logoWithBackground = await sharp({
       create: {
         width: paddedSize,
@@ -120,7 +121,6 @@ export class QrCodeService {
     try {
       finalBuffer = await this.composeLogo(rawBuffer)
     } catch {
-      // non-fatal: kalau logo gagal diambil/di-composite, tetap lanjut pakai QR polos
       finalBuffer = rawBuffer
     }
 

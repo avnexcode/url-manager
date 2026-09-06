@@ -6,6 +6,7 @@ export type AuthContextProps = {
   isAuthenticated: boolean
   user?: UserResponse
   setting?: SettingResponse
+  isLoading: boolean
 }
 
 export const AuthContext = createContext<AuthContextProps | undefined>(

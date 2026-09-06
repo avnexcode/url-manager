@@ -26,7 +26,7 @@ export const useUpdatePassword = (
       password: '',
       confirmPassword: '',
     },
-    resolver: zodResolver(updatePasswordFormSchema(providers ?? [])),
+    resolver: zodResolver(updatePasswordFormSchema(providers)),
   })
 
   const { mutate, isPending } = useMutation(

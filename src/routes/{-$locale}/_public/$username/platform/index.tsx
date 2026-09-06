@@ -9,11 +9,10 @@ import { TRPCClientError } from '@trpc/client'
 export const Route = createFileRoute('/{-$locale}/_public/$username/platform/')(
   {
     loader: async ({ context, params }) => {
-      const { trpc } = context
+      const { queryClient, trpc } = context
       const { username } = params
-
       try {
-        const platforms = await context.queryClient.ensureQueryData(
+        const platforms = await queryClient.ensureQueryData(
           trpc.platform.getPubllicAll.queryOptions({ username, params: {} }),
         )
 

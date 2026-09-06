@@ -22,7 +22,7 @@ const localToDbTheme = (t: LocalTheme): DbTheme => {
 
 export const ThemeSelect = () => {
   const { theme, setTheme, setThemeLocal } = useDefaultTheme()
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, isLoading } = useAuth()
   const { handleThemeChange, isPending } = useTheme()
 
   const LABEL: Record<LocalTheme, string> = {
@@ -51,7 +51,7 @@ export const ThemeSelect = () => {
     <Select
       value={theme}
       onValueChange={handleChangeTheme}
-      disabled={isPending}
+      disabled={isPending || isLoading}
     >
       <SelectTrigger
         aria-label={`Theme: ${LABEL[theme]}`}

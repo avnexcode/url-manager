@@ -13,15 +13,12 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
 
   const isAuthenticated = !!user
 
-  // Fetch account and setting client-side only.
-  // These are NOT prefetched on the server to avoid SSR HTTP loopback
-  // requests on Vercel that lose session cookies and throw UNAUTHORIZED.
-  const { data: account } = useQuery({
+  const { data: account, isLoading: isAccountLoading } = useQuery({
     ...trpc.auth.getAccount.queryOptions(),
     enabled: isAuthenticated,
   })
 
-  const { data: setting } = useQuery({
+  const { data: setting, isLoading: isSettingLoading } = useQuery({
     ...trpc.setting.getByUser.queryOptions(),
     enabled: isAuthenticated,
   })
@@ -30,6 +27,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
     isAuthenticated,
     user: account,
     setting,
+    isLoading: isAccountLoading || isSettingLoading,
   }
 
   return <AuthContext.Provider value={context}>{children}</AuthContext.Provider>

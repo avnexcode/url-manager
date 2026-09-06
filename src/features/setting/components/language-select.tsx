@@ -4,24 +4,20 @@ import {
   SelectItem,
   SelectTrigger,
 } from '@/components/ui/select'
-import { AuthContext } from '@/contexts'
 import { m } from '@/generated/paraglide/messages'
 import type { Locale } from '@/generated/paraglide/runtime'
 import { getLocale, locales, setLocale } from '@/generated/paraglide/runtime'
 import type { Language } from '@/generated/prisma/enums'
+import { useAuth } from '@/hooks'
 import { saveLocaleToStorage } from '@/providers'
 import { renderElements } from '@/utils'
 import * as Flag from 'country-flag-icons/react/3x2'
 import { Globe } from 'lucide-react'
-import { useContext } from 'react'
 import { useLanguage } from '../hooks'
 
 export const ParaglideLocaleSelect = () => {
   const currentLocale = getLocale()
-
-  const authCtx = useContext(AuthContext)
-  const isAuthenticated = authCtx?.isAuthenticated ?? false
-  const setting = authCtx?.setting
+  const { isAuthenticated, setting, isLoading } = useAuth()
 
   const { handleLanguageChange, isPending } = useLanguage()
 
@@ -52,7 +48,7 @@ export const ParaglideLocaleSelect = () => {
     <Select
       value={currentLocale}
       onValueChange={handleSelectChange}
-      disabled={isPending}
+      disabled={isPending || isLoading}
     >
       <SelectTrigger
         aria-label={m.action_select({ model: m.common_language() })}

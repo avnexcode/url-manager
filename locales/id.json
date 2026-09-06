@@ -492,6 +492,7 @@
   "error_message_hide": "Gagal menyembunyikan {field}",
   "error_message_set_default": "Gagal menetapkan {field} sebagai default",
   "error_message_unset_default": "Gagal menghapus {field} dari default",
+  "error_message_default": "Terjadi kesalahan!",
   "error_message_set_primary": "Gagal menetapkan {field} sebagai utama",
   "error_message_unset_primary": "Gagal menghapus {field} dari utama",
   "error_message_trpc_bad_request": "permintaan tidak valid untuk {field}",

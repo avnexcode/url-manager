@@ -1,4 +1,5 @@
 import { env } from '@/configs/env'
+import * as m from '@/generated/paraglide/messages'
 import { TRPCProvider } from '@/lib/trpc/react'
 import type { AppRouter } from '@/server/api/root'
 import { QueryClient } from '@tanstack/react-query'
@@ -51,14 +52,14 @@ export const getContext = () => {
           ) {
             return false
           }
-          return failureCount < 3
+          return failureCount < 2
         },
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
       },
       mutations: {
         onError: () => {
-          alert('Something went wrong!')
+          alert(m.error_message_default())
         },
       },
     },
