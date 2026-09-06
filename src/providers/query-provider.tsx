@@ -56,6 +56,15 @@ export const getContext = () => {
         },
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
+        throwOnError: (error) => {
+          if (
+            error instanceof TRPCClientError &&
+            error.data?.code === 'UNAUTHORIZED'
+          ) {
+            return true
+          }
+          return false
+        },
       },
       mutations: {
         onError: () => {
