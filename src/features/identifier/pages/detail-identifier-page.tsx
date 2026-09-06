@@ -12,6 +12,7 @@ import { IdentifierView } from '../components'
 
 export const DetailIdentifierPage = () => {
   const { id } = Route.useParams()
+
   const trpc = useTRPC()
 
   const { data: identifier } = useSuspenseQuery(
@@ -55,7 +56,7 @@ export const DetailIdentifierPage = () => {
           queryParams={queryParams}
           handleUpdateQuery={handleUpdateQuery}
           actions={urlListActions}
-          createLinkSearch={{ from: 'identifier', id }}
+          searchParams={{ from: 'identifier', id }}
         />
       </SectionLayout>
     </MainLayout>

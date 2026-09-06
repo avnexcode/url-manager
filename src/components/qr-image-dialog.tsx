@@ -9,11 +9,15 @@ import { Download, ExternalLink } from 'lucide-react'
 import { CopyTextWrapper } from './elements'
 import { Button } from './ui/button'
 
+const ensureAbsoluteUrl = (value: string) => {
+  return /^https?:\/\//i.test(value) ? value : `https://${value}`
+}
+
 type QrImageDialogProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
   title?: string
-  qrCodeUrl: string
+  qrCodeUrl?: string
   qrEncodedValue?: string
 }
 
@@ -44,7 +48,7 @@ export const QrImageDialog = ({
             <div className="flex w-full flex-col items-center gap-2">
               <CopyTextWrapper>{qrEncodedValue}</CopyTextWrapper>
               <a
-                href={qrEncodedValue}
+                href={ensureAbsoluteUrl(qrEncodedValue)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline"

@@ -26,7 +26,7 @@ export const Route = createFileRoute('/{-$locale}/_public/p/$suffix')({
       ) {
         throw notFound()
       }
-      throw error
+      throw error instanceof TRPCClientError ? new Error(error.message) : error
     }
   },
 })

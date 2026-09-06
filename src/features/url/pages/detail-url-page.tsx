@@ -8,6 +8,9 @@ import { UrlView } from '../components'
 
 export const DetailUrlPage = () => {
   const { id } = Route.useParams()
+
+  const { from, id: fromId } = Route.useSearch()
+
   const trpc = useTRPC()
 
   const { data: url } = useSuspenseQuery(trpc.url.getById.queryOptions({ id }))
@@ -16,7 +19,7 @@ export const DetailUrlPage = () => {
     <MainLayout
       headerContent={<Heading size={'h2'}>{m.page_url_title()}</Heading>}
     >
-      <UrlView url={url} />
+      <UrlView url={url} searchParams={{ from, id: fromId }} />
     </MainLayout>
   )
 }

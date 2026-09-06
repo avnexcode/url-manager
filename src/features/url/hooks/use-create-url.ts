@@ -4,20 +4,35 @@ import type { UseMutationOptions } from '@/interfaces'
 import { SUPABASE_BUCKET } from '@/lib/supabase/bucket'
 import { deleteImageByUrl, uploadImage } from '@/lib/supabase/image-upload'
 import { useTRPC } from '@/lib/trpc/react'
-import type { CreateUrlSearchSchema } from '@/routes/{-$locale}/_authenticated/dashboard/url/create'
+import type { UrlSearchSchema } from '@/routes/{-$locale}/_authenticated/dashboard/url/create'
 import { generateSlug } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
+import type { DefaultValues } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { createUrlFormSchema } from '../schemas'
 import type { CreateUrlFormSchema } from '../types'
 
+const getDefaultFormValues = ({
+  from,
+  id,
+}: UrlSearchSchema): DefaultValues<CreateUrlFormSchema> => {
+  return {
+    title: '',
+    url: '',
+    description: '',
+    thumbnail: null,
+    identifierId: from === 'identifier' ? id : null,
+    platformId: from === 'platform' ? id : null,
+  }
+}
+
 export const useCreateUrl = (
   { redirect = true, redirectTo, onSuccess, onError }: UseMutationOptions = {},
-  { from, id }: CreateUrlSearchSchema,
+  { from, id }: UrlSearchSchema,
 ) => {
   const { user } = useAuth()
   const toastMessages = useToastMessages(m.model_url_title())
@@ -27,14 +42,7 @@ export const useCreateUrl = (
   const [isUploading, setIsUploading] = useState(false)
 
   const form = useForm<CreateUrlFormSchema>({
-    defaultValues: {
-      title: '',
-      url: '',
-      description: '',
-      thumbnail: null,
-      identifierId: from === 'identifier' ? id : null,
-      platformId: from === 'platform' ? id : null,
-    },
+    defaultValues: getDefaultFormValues({ from, id }),
     resolver: zodResolver(createUrlFormSchema()),
   })
 
@@ -47,7 +55,11 @@ export const useCreateUrl = (
         if (redirect) {
           void navigate({ to: redirectTo || '/{-$locale}/dashboard/url' })
         }
-        form.reset()
+        form.reset({
+          ...getDefaultFormValues({ from, id }),
+          identifierId: form.watch('identifierId'),
+          platformId: form.watch('platformId'),
+        })
         toastMessages.onCreate.onSuccess()
         onSuccess?.()
       },

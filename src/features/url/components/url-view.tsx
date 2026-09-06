@@ -15,6 +15,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import * as m from '@/generated/paraglide/messages'
 import { useTRPC } from '@/lib/trpc/react'
 import { cn } from '@/lib/utils'
+import type { UrlSearchSchema } from '@/routes/{-$locale}/_authenticated/dashboard/url/create'
 import { useQueryClient } from '@tanstack/react-query'
 import { QrCode } from 'lucide-react'
 import { useState } from 'react'
@@ -23,6 +24,7 @@ import type { UrlResponse } from '../types'
 
 type UrlViewProps = {
   url: UrlResponse
+  searchParams?: UrlSearchSchema
 }
 
 export const UrlView = ({
@@ -37,6 +39,7 @@ export const UrlView = ({
     platform,
     identifier,
   },
+  searchParams,
 }: UrlViewProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isQrOpen, setIsQrOpen] = useState<boolean>(false)
@@ -86,6 +89,7 @@ export const UrlView = ({
                 action="edit"
                 size="sm"
                 to="/{-$locale}/dashboard/url/$id/edit"
+                search={searchParams}
                 hideLabel
               />
               <ActionButton

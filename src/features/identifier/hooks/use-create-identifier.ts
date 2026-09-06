@@ -9,10 +9,19 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
+import type { DefaultValues } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { createIdentifierFormSchema } from '../schemas'
 import type { CreateIdentifierFormSchema } from '../types'
+
+const DEFAULT_FORM_VALUES: DefaultValues<CreateIdentifierFormSchema> = {
+  title: '',
+  description: '',
+  password: '',
+  thumbnail: null,
+  visibility: 'PRIVATE',
+}
 
 export const useCreateIdentifier = ({
   redirect = true,
@@ -28,13 +37,7 @@ export const useCreateIdentifier = ({
   const [isUploading, setIsUploading] = useState(false)
 
   const form = useForm<CreateIdentifierFormSchema>({
-    defaultValues: {
-      title: '',
-      description: '',
-      password: '',
-      thumbnail: null,
-      visibility: 'PRIVATE',
-    },
+    defaultValues: DEFAULT_FORM_VALUES,
     resolver: zodResolver(createIdentifierFormSchema()),
   })
 
@@ -49,7 +52,10 @@ export const useCreateIdentifier = ({
             to: redirectTo || '/{-$locale}/dashboard/identifier',
           })
         }
-        form.reset()
+        form.reset({
+          ...DEFAULT_FORM_VALUES,
+          visibility: form.watch('visibility'),
+        })
         toastMessages.onCreate.onSuccess()
         onSuccess?.()
       },

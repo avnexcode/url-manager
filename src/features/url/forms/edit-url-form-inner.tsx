@@ -36,11 +36,11 @@ export const EditUrlFormInner = ({
       className="space-y-5"
     >
       <InputText name="title" label={m.model_url_field_title()} required />
+      <InputText name="url" label={m.model_url_field_url()} required />
       <InputTextArea
         name="description"
         label={m.model_url_field_description()}
       />
-      <InputText name="url" label={m.model_url_field_url()} required />
       <InputImage
         name="thumbnail"
         label={m.model_url_field_thumbnail()}

@@ -9,10 +9,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
+import type { DefaultValues } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { createPlatformFormSchema } from '../schemas'
 import type { CreatePlatformFormSchema } from '../types'
+
+const DEFAULT_FORM_VALUES: DefaultValues<CreatePlatformFormSchema> = {
+  title: '',
+  description: '',
+  url: '',
+  password: '',
+  thumbnail: null,
+  visibility: 'PRIVATE',
+}
 
 export const useCreatePlatform = ({
   redirect = true,
@@ -28,14 +38,7 @@ export const useCreatePlatform = ({
   const [isUploading, setIsUploading] = useState(false)
 
   const form = useForm<CreatePlatformFormSchema>({
-    defaultValues: {
-      title: '',
-      description: '',
-      url: '',
-      password: '',
-      thumbnail: null,
-      visibility: 'PRIVATE',
-    },
+    defaultValues: DEFAULT_FORM_VALUES,
     resolver: zodResolver(createPlatformFormSchema()),
   })
 
@@ -48,7 +51,10 @@ export const useCreatePlatform = ({
         if (redirect) {
           void navigate({ to: redirectTo || '/{-$locale}/dashboard/platform' })
         }
-        form.reset()
+        form.reset({
+          ...DEFAULT_FORM_VALUES,
+          visibility: form.watch('visibility'),
+        })
         toastMessages.onCreate.onSuccess()
         onSuccess?.()
       },

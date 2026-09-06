@@ -16,7 +16,7 @@ export const Route = createFileRoute(
         trpc.url.getById.queryOptions({ id }),
       )
 
-      return url
+      return { url }
     } catch (error) {
       if (
         error instanceof TRPCClientError &&
@@ -24,17 +24,17 @@ export const Route = createFileRoute(
       ) {
         throw notFound()
       }
-      throw error
+      throw error instanceof TRPCClientError ? new Error(error.message) : error
     }
   },
   head: ({ loaderData, params }) =>
     seo({
       title: loaderData
-        ? `${capitalizeFirstLetter(loaderData.title)}`
+        ? `${capitalizeFirstLetter(loaderData.url.title)}`
         : m.page_url_title(),
-      description: loaderData?.description ?? undefined,
-      image: loaderData?.thumbnail ?? undefined,
-      url: `${env.VITE_BASE_URL}/url/${loaderData?.slug ?? params.id}`,
+      description: loaderData?.url.description ?? undefined,
+      image: loaderData?.url.thumbnail ?? undefined,
+      url: `${env.VITE_BASE_URL}/url/${loaderData?.url.slug ?? params.id}`,
       robots: false,
     }),
   component: () => <Outlet />,

@@ -9,6 +9,7 @@ import { useUpdatePlatform } from '../hooks'
 
 export const EditPlatformPage = () => {
   const { id } = Route.useParams()
+
   const trpc = useTRPC()
 
   const { data: platform } = useSuspenseQuery(

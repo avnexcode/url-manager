@@ -57,7 +57,7 @@ export const DetailPlatformPage = () => {
           queryParams={queryParams}
           handleUpdateQuery={handleUpdateQuery}
           actions={urlListActions}
-          createLinkSearch={{ from: 'platform', id }}
+          searchParams={{ from: 'platform', id }}
         />
       </SectionLayout>
     </MainLayout>

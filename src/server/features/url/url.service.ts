@@ -6,6 +6,8 @@ import type { ImageUrlsByBucket } from '@/server/services'
 import { FileService, QrCodeService } from '@/server/services'
 import { generateSlug } from '@/utils'
 import { CommonService } from '../common'
+import { IdentifierService } from '../identifier'
+import { PlatformService } from '../platform'
 import { UserService } from '../user'
 import type {
   BaseCreateUrlRequest,
@@ -87,6 +89,18 @@ export class UrlService extends CommonService {
     params: QueryParams,
   ): Promise<QueryResponse<PublicUrlResponse>> => {
     const { page, limit, search } = params
+
+    if (!relation) this.throwError('FORBIDDEN')
+
+    const { identifierSlug, platformSlug } = relation
+
+    if (identifierSlug) {
+      await IdentifierService.getPublicBySlug(db, username, identifierSlug)
+    }
+
+    if (platformSlug) {
+      await PlatformService.getPublicBySlug(db, username, platformSlug)
+    }
 
     const [total, data] = await Promise.all([
       Repository.countPublicAll(db, username, relation, search),

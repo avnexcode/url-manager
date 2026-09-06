@@ -32,7 +32,7 @@ export const Route = createFileRoute(
       ) {
         throw notFound()
       }
-      throw error
+      throw error instanceof TRPCClientError ? new Error(error.message) : error
     }
   },
   head: ({ loaderData, params }) =>

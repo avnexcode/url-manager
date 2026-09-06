@@ -42,10 +42,10 @@ export class UrlRepository extends CommonRepository {
   private static getPublicRelationWhereClause = (
     relation: PublicRelationParams,
   ) => ({
-    ...(relation?.platformSlug && {
+    ...(relation.platformSlug && {
       platform: { slug: relation.platformSlug },
     }),
-    ...(relation?.identifierSlug && {
+    ...(relation.identifierSlug && {
       identifier: { slug: relation.identifierSlug },
     }),
   })

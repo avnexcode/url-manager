@@ -72,9 +72,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
     return { user: user ?? undefined }
   },
-  loader: async () => {
-    return {}
-  },
+
   head: () => ({
     meta: [
       { charSet: 'utf-8' },

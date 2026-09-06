@@ -7,7 +7,7 @@ const PREVIEW_SIZE = 'h-40 w-40'
 
 type ImagePreviewProps = {
   thumbnail?: string | null
-  title: string
+  title?: string
   className?: string
 }
 

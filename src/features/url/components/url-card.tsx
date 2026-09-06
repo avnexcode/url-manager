@@ -5,6 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { Link } from '@tanstack/react-router'
 import type { UrlResponse } from '../types'
+import type { UrlSearchSchema } from '@/routes/{-$locale}/_authenticated/dashboard/url/create'
 
 type UrlCardProps = {
   url: UrlResponse
@@ -12,6 +13,7 @@ type UrlCardProps = {
   onCheckedChange: (checked: boolean) => void
   className?: string
   isPending: boolean
+  searchParams?: UrlSearchSchema
 }
 
 export const UrlCard = ({
@@ -20,6 +22,7 @@ export const UrlCard = ({
   onCheckedChange,
   className,
   isPending,
+  searchParams,
 }: UrlCardProps) => {
   return (
     <div
@@ -39,6 +42,7 @@ export const UrlCard = ({
           preload={false}
           to={`/{-$locale}/dashboard/url/$id/view`}
           params={{ id }}
+          search={searchParams}
           className={cn(
             'block w-full',
             isPending && 'pointer-events-none cursor-not-allowed',

@@ -9,6 +9,7 @@ import { useUpdateIdentifier } from '../hooks'
 
 export const EditIdentifierPage = () => {
   const { id } = Route.useParams()
+
   const trpc = useTRPC()
 
   const { data: identifier } = useSuspenseQuery(

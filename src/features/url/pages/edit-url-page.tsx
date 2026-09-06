@@ -4,16 +4,25 @@ import * as m from '@/generated/paraglide/messages'
 import { useTRPC } from '@/lib/trpc/react'
 import { Route } from '@/routes/{-$locale}/_authenticated/dashboard/url/$id/edit'
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import { EditUrlForm } from '../forms'
 import { useUpdateUrl } from '../hooks'
+import { getRedirectTo } from '../utils'
 
 export const EditUrlPage = () => {
   const { id } = Route.useParams()
+
   const trpc = useTRPC()
 
   const { data: url } = useSuspenseQuery(trpc.url.getById.queryOptions({ id }))
 
-  const { form, onSubmit, hasChanges, isPending } = useUpdateUrl(url)
+  const search = Route.useSearch()
+
+  const redirectTo = useMemo(() => getRedirectTo(search), [search])
+
+  const { form, onSubmit, hasChanges, isPending } = useUpdateUrl(url, {
+    redirectTo,
+  })
 
   return (
     <MainLayout
@@ -25,7 +34,7 @@ export const EditUrlPage = () => {
         hasChanges={hasChanges}
         isPending={isPending}
         thumbnail={url.thumbnail}
-        urlId={url.id}
+        urlId={id}
       />
     </MainLayout>
   )

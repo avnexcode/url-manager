@@ -44,7 +44,39 @@ export const PagePagination = ({
 
   return (
     <Pagination className={cn(className)}>
-      <PaginationContent>
+      {/* Mobile view: Previous - Current Page - Next */}
+      <PaginationContent className="flex xl:hidden">
+        <PaginationItem>
+          <PaginationPrevious
+            className={
+              currentPage === 1
+                ? 'pointer-events-none opacity-50'
+                : 'cursor-pointer'
+            }
+            onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
+          />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink isActive className="cursor-default">
+            {currentPage}
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext
+            className={
+              currentPage === totalPages
+                ? 'pointer-events-none opacity-50'
+                : 'cursor-pointer'
+            }
+            onClick={() =>
+              currentPage < totalPages && onPageChange(currentPage + 1)
+            }
+          />
+        </PaginationItem>
+      </PaginationContent>
+
+      {/* Desktop view: full pagination */}
+      <PaginationContent className="hidden xl:flex">
         <PaginationItem>
           <PaginationPrevious
             className={
@@ -100,7 +132,23 @@ export const PagePagination = ({
 export const PagePaginationSkeleton = () => {
   return (
     <Pagination>
-      <PaginationContent>
+      {/* Mobile skeleton */}
+      <PaginationContent className="flex xl:hidden">
+        <PaginationItem>
+          <PaginationPrevious className="pointer-events-none opacity-50" />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink className="pointer-events-none opacity-50">
+            1
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext className="pointer-events-none opacity-50" />
+        </PaginationItem>
+      </PaginationContent>
+
+      {/* Desktop skeleton */}
+      <PaginationContent className="hidden xl:flex">
         <PaginationItem>
           <PaginationPrevious className="pointer-events-none opacity-50" />
         </PaginationItem>

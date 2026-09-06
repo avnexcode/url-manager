@@ -10,6 +10,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import * as m from '@/generated/paraglide/messages'
 import type { SearchParams } from '@/hooks'
 import type { QueryResponse } from '@/interfaces'
+import type { UrlSearchSchema } from '@/routes/{-$locale}/_authenticated/dashboard/url/create'
 import { renderElements } from '@/utils'
 import { Loader2, Trash2 } from 'lucide-react'
 import type { useUrlListActions } from '../hooks'
@@ -22,7 +23,7 @@ type UrlListSectionProps = {
   queryParams: SearchParams
   handleUpdateQuery: (params: Partial<SearchParams>) => void
   actions: ReturnType<typeof useUrlListActions>
-  createLinkSearch?: { from: 'platform' | 'identifier'; id: string }
+  searchParams?: UrlSearchSchema
 }
 
 export const UrlListSection = ({
@@ -31,7 +32,7 @@ export const UrlListSection = ({
   queryParams,
   handleUpdateQuery,
   actions,
-  createLinkSearch,
+  searchParams,
 }: UrlListSectionProps) => {
   const {
     toggle,
@@ -125,6 +126,7 @@ export const UrlListSection = ({
                 onCheckedChange={(checked) => toggle(url.id, checked)}
                 checked={isSelected(url.id)}
                 isPending={isUrlPending(url.id)}
+                searchParams={searchParams}
               />
             ),
             isLoading: isUrlsLoading,
@@ -135,7 +137,7 @@ export const UrlListSection = ({
                   <ActionLink
                     action="createNew"
                     to="/{-$locale}/dashboard/url/create"
-                    search={createLinkSearch}
+                    search={searchParams}
                   />
                 }
               />

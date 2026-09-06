@@ -4,25 +4,19 @@ import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import * as m from '@/generated/paraglide/messages'
 import { Route } from '@/routes/{-$locale}/_authenticated/dashboard/url/create'
-import type { LinkProps } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import { CreateUrlForm } from '../forms'
 import { useCreateUrl } from '../hooks'
+import { getRedirectTo } from '../utils'
 
 export const CreateUrlPage = () => {
   const [redirect, setRedirect] = useState<boolean>(true)
 
-  const { from, id } = Route.useSearch()
+  const search = Route.useSearch()
 
-  const redirectTo = useMemo(() => {
-    if (from === 'platform' && id) {
-      return `/{-$locale}/dashboard/platform/${id}/view`
-    }
-    if (from === 'identifier' && id) {
-      return `/{-$locale}/dashboard/identifier/${id}/view`
-    }
-    return '/{-$locale}/dashboard/url'
-  }, [from, id]) as LinkProps['to']
+  const { from, id } = search
+
+  const redirectTo = useMemo(() => getRedirectTo(search), [search])
 
   const { form, onSubmit, isPending } = useCreateUrl(
     { redirect, redirectTo },
