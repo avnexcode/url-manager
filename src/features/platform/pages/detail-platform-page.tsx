@@ -8,16 +8,23 @@ import { useQueryParams } from '@/hooks'
 import { useTRPC } from '@/lib/trpc/react'
 import { Route } from '@/routes/{-$locale}/_authenticated/dashboard/platform/$id/view'
 import { useQuery } from '@tanstack/react-query'
-import { PlatformView, PlatformViewSkeleton } from '../components'
+import { getRouteApi } from '@tanstack/react-router'
+import { PlatformView } from '../components'
+
+const parentRoute = getRouteApi(
+  '/{-$locale}/_authenticated/dashboard/platform/$id',
+)
 
 export const DetailPlatformPage = () => {
   const { id } = Route.useParams()
 
   const trpc = useTRPC()
 
-  const { data: platform, isLoading: isPlatformLoading } = useQuery(
-    trpc.platform.getById.queryOptions({ id }),
-  )
+  const { platform } = parentRoute.useLoaderData()
+
+  // const { data: platform } = useSuspenseQuery(
+  //   trpc.platform.getById.queryOptions({ id }),
+  // )
 
   const { queryParams, handleUpdateQuery } = useQueryParams()
 
@@ -34,11 +41,7 @@ export const DetailPlatformPage = () => {
     <MainLayout
       headerContent={<Heading size={'h2'}>{m.page_platform_title()}</Heading>}
     >
-      {isPlatformLoading ? (
-        <PlatformViewSkeleton />
-      ) : (
-        platform && <PlatformView platform={platform} />
-      )}
+      <PlatformView platform={platform} />
 
       <SectionLayout
         headerContent={
