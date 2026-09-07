@@ -78,7 +78,7 @@ export const InputImage = <T extends FieldValues>({
             {required && <span className="text-destructive">*</span>}
           </FieldLabel>
 
-          <div className="relative mt-2 max-h-100 w-full max-w-2xl overflow-x-hidden overflow-y-auto rounded-base border-2 border-border shadow-shadow">
+          <div className="relative max-h-100 w-full max-w-2xl overflow-x-hidden overflow-y-auto rounded-base border-2 border-border shadow-shadow">
             {previewSrc ? (
               <img
                 src={previewSrc}
@@ -178,12 +178,12 @@ export const InputImageSkeleton = ({
   withRemoveButton = false,
 }: InputImageSkeletonProps = {}) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <Skeleton className="h-5 w-44" />
       <Skeleton className="h-100 w-full max-w-2xl rounded-base" />
       <div className="flex gap-2">
-        <Skeleton className="h-9 w-32" />
-        {withRemoveButton && <Skeleton className="h-9 w-32" />}
+        <Skeleton className="h-8 w-32" />
+        {withRemoveButton && <Skeleton className="h-8 w-32" />}
       </div>
     </div>
   )

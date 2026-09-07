@@ -1,8 +1,7 @@
 import { AppProvider } from '@/components/layouts'
 import { Error404Page, Error500Page } from '@/features/error/pages'
-import { getLocale, isLocale, localizeUrl } from '@/generated/paraglide/runtime'
+import { getLocale } from '@/generated/paraglide/runtime'
 import { getUser } from '@/lib/supabase/auth'
-import { getStoredLocale } from '@/providers'
 import type { AppRouter } from '@/server/api/root'
 import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, redirect } from '@tanstack/react-router'
@@ -50,24 +49,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
     if (user && PATHS.PUBLIC_ROUTES.includes(pathname)) {
       throw redirect({ to: PATHS.DEFAULT_REDIRECT })
-    }
-
-    if (!user && typeof window !== 'undefined') {
-      const storedLocale = getStoredLocale()
-      const currentLocale = getLocale()
-
-      if (
-        storedLocale &&
-        isLocale(storedLocale) &&
-        storedLocale !== currentLocale
-      ) {
-        const localized = localizeUrl(window.location.href, {
-          locale: storedLocale,
-        })
-        if (localized.href !== window.location.href) {
-          throw redirect({ href: localized.href })
-        }
-      }
     }
 
     return { user: user ?? undefined }
