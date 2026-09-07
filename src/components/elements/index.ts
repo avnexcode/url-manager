@@ -1,5 +1,6 @@
 export * from './action-button'
 export * from './action-link'
+export * from './clampable-description'
 export * from './copy-text-button'
 export * from './copy-text-wrapper'
 export * from './empty-state'

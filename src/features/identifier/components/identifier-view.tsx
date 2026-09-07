@@ -2,6 +2,7 @@ import { ImagePreview, ImagePreviewSkeleton, QrImageDialog } from '@/components'
 import {
   ActionButton,
   ActionLink,
+  ClampableDescription,
   CopyTextWrapper,
 } from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
@@ -100,21 +101,21 @@ export const IdentifierView = ({
                   {getVisibility({ visibility })}
                 </Badge>
               </div>
-              {password ? (
-                <div className="flex items-center gap-x-1 text-sm py-2">
-                  <h1 className="capitalize">
-                    {m.model_identifier_field_password()}:
-                  </h1>
+
+              <div className="flex items-center gap-x-1 text-sm py-2">
+                <h1 className="capitalize">
+                  {m.model_identifier_field_password()}:
+                </h1>
+                {password ? (
                   <CopyTextWrapper>{password}</CopyTextWrapper>
-                </div>
-              ) : null}
+                ) : (
+                  <p>-</p>
+                )}
+              </div>
+
+              <Separator />
               {description && (
-                <>
-                  <Separator />
-                  <p className="text-sm text-muted-foreground line-clamp-2 py-1">
-                    {description}
-                  </p>
-                </>
+                <ClampableDescription description={description} maxLines={2} />
               )}
             </div>
 
@@ -180,16 +181,25 @@ export const IdentifierViewSkeleton = () => {
           <ImagePreviewSkeleton />
 
           <div className="flex min-w-0 flex-1 flex-col gap-2">
-            <Skeleton className="h-7 w-48 max-w-full" />
+            <Skeleton className="h-7 lg:h-9 w-1/2 max-w-full" />
 
             <div className="flex flex-wrap items-center gap-2">
-              <Skeleton className="h-6.5 w-24 rounded-none" />
+              <Skeleton className="h-6.5 w-42 rounded-none" />
               <Skeleton className="h-6.5 w-20 rounded-none" />
             </div>
 
+            <div className="flex items-center gap-x-1 text-sm py-2">
+              <h1 className="capitalize">
+                {m.model_identifier_field_password()}:
+              </h1>
+
+              <Skeleton className="h-4 w-1/2 rounded-none" />
+            </div>
+
+            <Separator />
+
             <div className="flex flex-col gap-1.5 py-1">
-              <Skeleton className="h-4 w-full max-w-md" />
-              <Skeleton className="h-4 w-3/4 max-w-sm" />
+              <Skeleton className="h-14 w-full" />
             </div>
           </div>
 
