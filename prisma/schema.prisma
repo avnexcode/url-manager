@@ -89,7 +89,7 @@ model Identifier {
   id             String     @id @default(uuid()) @map("id_250fa511_ccb3_4273_9f47_458b90e5f636") @db.VarChar(36)
   title          String     @map("title_aab07847_aaea_4178_8059_4257e1c3d1c6") @db.VarChar(100)
   slug           String     @unique @map("slug_f0c9912e_ad63_4b8f_9227_2199b9f3a999") @db.VarChar(150)
-  description    String?    @map("description_27d2939a_29f0_44e3_bcd3_9ba0995198d9") @db.VarChar(255)
+  description    String?    @map("description_27d2939a_29f0_44e3_bcd3_9ba0995198d9") @db.Text
   visibility     Visibility @default(PRIVATE) @map("visibility_d9b0a2ce_f6d1_4e01_9df8_4b1295bd5b3b")
   password       String?    @map("password_5fa51ab3_8893_4405_bf62_5b5cb9a65128") @db.VarChar(255)
   thumbnail      String?    @map("thumbnail_f6f84bb0_dd74_4719_abbe_aaecc543f2d2") @db.Text
@@ -117,7 +117,7 @@ model Platform {
   title          String     @map("title_b3257e01_2a8e_4b35_ad7b_732d9cba0793") @db.VarChar(100)
   slug           String     @unique @map("slug_1e1bf633_7296_4262_bdb7_463519949ff1") @db.VarChar(150)
   url            String     @map("url_d6b433d9_627b_48ee_8886_ed4578e5b24d") @db.Text
-  description    String?    @map("description_4adb7f0b_8864_4e03_bea4_5083265555a9") @db.VarChar(255)
+  description    String?    @map("description_4adb7f0b_8864_4e03_bea4_5083265555a9") @db.Text
   visibility     Visibility @default(PRIVATE) @map("visibility_95c98420_69f5_408b_ac16_f46c0a8216e2")
   password       String?    @map("password_532aa8c5_e64c_4844_905f_c94618b5da3b") @db.VarChar(255)
   thumbnail      String?    @map("thumbnail_8dca2fdd_163a_4bb7_9dbe_efbf6feee5ba") @db.Text

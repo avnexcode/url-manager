@@ -19,7 +19,7 @@ export const baseCreateUrlRequest = z.object({
     .min(1)
     .max(150)
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-  description: z.string().max(255).trim().optional().nullable(),
+  description: z.string().max(2500).trim().optional().nullable(),
   url: z.url().min(1).trim(),
   thumbnail: z.url().optional().nullable().default(null),
   qrCodeUrl: z.url(),

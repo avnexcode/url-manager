@@ -51,6 +51,24 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       throw redirect({ to: PATHS.DEFAULT_REDIRECT })
     }
 
+    // if (!user && typeof window !== 'undefined') {
+    //   const storedLocale = getStoredLocale()
+    //   const currentLocale = getLocale()
+
+    //   if (
+    //     storedLocale &&
+    //     isLocale(storedLocale) &&
+    //     storedLocale !== currentLocale
+    //   ) {
+    //     const localized = localizeUrl(window.location.href, {
+    //       locale: storedLocale,
+    //     })
+    //     if (localized.href !== window.location.href) {
+    //       throw redirect({ href: localized.href })
+    //     }
+    //   }
+    // }
+
     return { user: user ?? undefined }
   },
 

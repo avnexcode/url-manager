@@ -8,7 +8,7 @@ export const baseCreateIdentifierRequest = z.object({
     .min(1)
     .max(150)
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-  description: z.string().max(255).trim().optional().nullable(),
+  description: z.string().max(2500).trim().optional().nullable(),
   visibility: z.enum(visibility).default('PRIVATE'),
   password: z.string().max(255).trim().optional().nullable().default(null),
   thumbnail: z.url().optional().nullable().default(null),

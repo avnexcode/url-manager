@@ -11,7 +11,7 @@ export const baseCreatePlatformRequest = z.object({
   description: z.string().max(255).trim().optional().nullable(),
   url: z.url().min(1).trim(),
   visibility: z.enum(visibility).default('PRIVATE'),
-  password: z.string().max(255).trim().optional().nullable().default(null),
+  password: z.string().max(2500).trim().optional().nullable().default(null),
   thumbnail: z.url().optional().nullable().default(null),
   qrCodeUrl: z.url(),
   qrEncodedValue: z.url(),

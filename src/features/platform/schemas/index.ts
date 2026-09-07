@@ -27,11 +27,11 @@ export const createPlatformFormSchema = () => {
     description: z
       .string()
       .max(
-        255,
+        2500,
         capitalizeSentence(
           m.schema_validation_string_max({
             field: m.model_url_field_description(),
-            max: 255,
+            max: 2500,
           }),
         ),
       )

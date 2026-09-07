@@ -27,11 +27,11 @@ export const createIdentifierFormSchema = () => {
     description: z
       .string()
       .max(
-        255,
+        2500,
         capitalizeSentence(
           m.schema_validation_string_max({
             field: m.model_identifier_field_description(),
-            max: 255,
+            max: 2500,
           }),
         ),
       )

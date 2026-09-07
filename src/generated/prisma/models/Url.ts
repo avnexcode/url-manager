@@ -28,8 +28,8 @@ export type UrlMinAggregateOutputType = {
   id: string | null
   title: string | null
   slug: string | null
-  description: string | null
   url: string | null
+  description: string | null
   thumbnail: string | null
   qrCodeUrl: string | null
   qrEncodedValue: string | null
@@ -44,8 +44,8 @@ export type UrlMaxAggregateOutputType = {
   id: string | null
   title: string | null
   slug: string | null
-  description: string | null
   url: string | null
+  description: string | null
   thumbnail: string | null
   qrCodeUrl: string | null
   qrEncodedValue: string | null
@@ -60,8 +60,8 @@ export type UrlCountAggregateOutputType = {
   id: number
   title: number
   slug: number
-  description: number
   url: number
+  description: number
   thumbnail: number
   qrCodeUrl: number
   qrEncodedValue: number
@@ -78,8 +78,8 @@ export type UrlMinAggregateInputType = {
   id?: true
   title?: true
   slug?: true
-  description?: true
   url?: true
+  description?: true
   thumbnail?: true
   qrCodeUrl?: true
   qrEncodedValue?: true
@@ -94,8 +94,8 @@ export type UrlMaxAggregateInputType = {
   id?: true
   title?: true
   slug?: true
-  description?: true
   url?: true
+  description?: true
   thumbnail?: true
   qrCodeUrl?: true
   qrEncodedValue?: true
@@ -110,8 +110,8 @@ export type UrlCountAggregateInputType = {
   id?: true
   title?: true
   slug?: true
-  description?: true
   url?: true
+  description?: true
   thumbnail?: true
   qrCodeUrl?: true
   qrEncodedValue?: true
@@ -199,8 +199,8 @@ export type UrlGroupByOutputType = {
   id: string
   title: string
   slug: string
-  description: string | null
   url: string
+  description: string | null
   thumbnail: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -236,8 +236,8 @@ export type UrlWhereInput = {
   id?: Prisma.StringFilter<"Url"> | string
   title?: Prisma.StringFilter<"Url"> | string
   slug?: Prisma.StringFilter<"Url"> | string
-  description?: Prisma.StringNullableFilter<"Url"> | string | null
   url?: Prisma.StringFilter<"Url"> | string
+  description?: Prisma.StringNullableFilter<"Url"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Url"> | string | null
   qrCodeUrl?: Prisma.StringFilter<"Url"> | string
   qrEncodedValue?: Prisma.StringFilter<"Url"> | string
@@ -255,8 +255,8 @@ export type UrlOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
   qrEncodedValue?: Prisma.SortOrder
@@ -277,8 +277,8 @@ export type UrlWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UrlWhereInput[]
   NOT?: Prisma.UrlWhereInput | Prisma.UrlWhereInput[]
   title?: Prisma.StringFilter<"Url"> | string
-  description?: Prisma.StringNullableFilter<"Url"> | string | null
   url?: Prisma.StringFilter<"Url"> | string
+  description?: Prisma.StringNullableFilter<"Url"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Url"> | string | null
   qrCodeUrl?: Prisma.StringFilter<"Url"> | string
   qrEncodedValue?: Prisma.StringFilter<"Url"> | string
@@ -296,8 +296,8 @@ export type UrlOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   thumbnail?: Prisma.SortOrderInput | Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
   qrEncodedValue?: Prisma.SortOrder
@@ -318,8 +318,8 @@ export type UrlScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Url"> | string
   title?: Prisma.StringWithAggregatesFilter<"Url"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Url"> | string
-  description?: Prisma.StringNullableWithAggregatesFilter<"Url"> | string | null
   url?: Prisma.StringWithAggregatesFilter<"Url"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Url"> | string | null
   thumbnail?: Prisma.StringNullableWithAggregatesFilter<"Url"> | string | null
   qrCodeUrl?: Prisma.StringWithAggregatesFilter<"Url"> | string
   qrEncodedValue?: Prisma.StringWithAggregatesFilter<"Url"> | string
@@ -334,8 +334,8 @@ export type UrlCreateInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -350,8 +350,8 @@ export type UrlUncheckedCreateInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -366,8 +366,8 @@ export type UrlUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -382,8 +382,8 @@ export type UrlUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -398,8 +398,8 @@ export type UrlCreateManyInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -414,8 +414,8 @@ export type UrlUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -427,8 +427,8 @@ export type UrlUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -453,8 +453,8 @@ export type UrlCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
   qrEncodedValue?: Prisma.SortOrder
@@ -469,8 +469,8 @@ export type UrlMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
   qrEncodedValue?: Prisma.SortOrder
@@ -485,8 +485,8 @@ export type UrlMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   thumbnail?: Prisma.SortOrder
   qrCodeUrl?: Prisma.SortOrder
   qrEncodedValue?: Prisma.SortOrder
@@ -627,8 +627,8 @@ export type UrlCreateWithoutUserInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -642,8 +642,8 @@ export type UrlUncheckedCreateWithoutUserInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -686,8 +686,8 @@ export type UrlScalarWhereInput = {
   id?: Prisma.StringFilter<"Url"> | string
   title?: Prisma.StringFilter<"Url"> | string
   slug?: Prisma.StringFilter<"Url"> | string
-  description?: Prisma.StringNullableFilter<"Url"> | string | null
   url?: Prisma.StringFilter<"Url"> | string
+  description?: Prisma.StringNullableFilter<"Url"> | string | null
   thumbnail?: Prisma.StringNullableFilter<"Url"> | string | null
   qrCodeUrl?: Prisma.StringFilter<"Url"> | string
   qrEncodedValue?: Prisma.StringFilter<"Url"> | string
@@ -702,8 +702,8 @@ export type UrlCreateWithoutIdentifierInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -717,8 +717,8 @@ export type UrlUncheckedCreateWithoutIdentifierInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -758,8 +758,8 @@ export type UrlCreateWithoutPlatformInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -773,8 +773,8 @@ export type UrlUncheckedCreateWithoutPlatformInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -814,8 +814,8 @@ export type UrlCreateManyUserInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -829,8 +829,8 @@ export type UrlUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -844,8 +844,8 @@ export type UrlUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -859,8 +859,8 @@ export type UrlUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -874,8 +874,8 @@ export type UrlCreateManyIdentifierInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -889,8 +889,8 @@ export type UrlUpdateWithoutIdentifierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -904,8 +904,8 @@ export type UrlUncheckedUpdateWithoutIdentifierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -919,8 +919,8 @@ export type UrlUncheckedUpdateManyWithoutIdentifierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -934,8 +934,8 @@ export type UrlCreateManyPlatformInput = {
   id?: string
   title: string
   slug: string
-  description?: string | null
   url: string
+  description?: string | null
   thumbnail?: string | null
   qrCodeUrl: string
   qrEncodedValue: string
@@ -949,8 +949,8 @@ export type UrlUpdateWithoutPlatformInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -964,8 +964,8 @@ export type UrlUncheckedUpdateWithoutPlatformInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -979,8 +979,8 @@ export type UrlUncheckedUpdateManyWithoutPlatformInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrCodeUrl?: Prisma.StringFieldUpdateOperationsInput | string
   qrEncodedValue?: Prisma.StringFieldUpdateOperationsInput | string
@@ -996,8 +996,8 @@ export type UrlSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   id?: boolean
   title?: boolean
   slug?: boolean
-  description?: boolean
   url?: boolean
+  description?: boolean
   thumbnail?: boolean
   qrCodeUrl?: boolean
   qrEncodedValue?: boolean
@@ -1015,8 +1015,8 @@ export type UrlSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   id?: boolean
   title?: boolean
   slug?: boolean
-  description?: boolean
   url?: boolean
+  description?: boolean
   thumbnail?: boolean
   qrCodeUrl?: boolean
   qrEncodedValue?: boolean
@@ -1034,8 +1034,8 @@ export type UrlSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   id?: boolean
   title?: boolean
   slug?: boolean
-  description?: boolean
   url?: boolean
+  description?: boolean
   thumbnail?: boolean
   qrCodeUrl?: boolean
   qrEncodedValue?: boolean
@@ -1053,8 +1053,8 @@ export type UrlSelectScalar = {
   id?: boolean
   title?: boolean
   slug?: boolean
-  description?: boolean
   url?: boolean
+  description?: boolean
   thumbnail?: boolean
   qrCodeUrl?: boolean
   qrEncodedValue?: boolean
@@ -1065,7 +1065,7 @@ export type UrlSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UrlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "url" | "thumbnail" | "qrCodeUrl" | "qrEncodedValue" | "userId" | "platformId" | "identifierId" | "createdAt" | "updatedAt", ExtArgs["result"]["url"]>
+export type UrlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "url" | "description" | "thumbnail" | "qrCodeUrl" | "qrEncodedValue" | "userId" | "platformId" | "identifierId" | "createdAt" | "updatedAt", ExtArgs["result"]["url"]>
 export type UrlInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   platform?: boolean | Prisma.Url$platformArgs<ExtArgs>
@@ -1093,8 +1093,8 @@ export type $UrlPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     id: string
     title: string
     slug: string
-    description: string | null
     url: string
+    description: string | null
     thumbnail: string | null
     qrCodeUrl: string
     qrEncodedValue: string
@@ -1532,8 +1532,8 @@ export interface UrlFieldRefs {
   readonly id: Prisma.FieldRef<"Url", 'String'>
   readonly title: Prisma.FieldRef<"Url", 'String'>
   readonly slug: Prisma.FieldRef<"Url", 'String'>
-  readonly description: Prisma.FieldRef<"Url", 'String'>
   readonly url: Prisma.FieldRef<"Url", 'String'>
+  readonly description: Prisma.FieldRef<"Url", 'String'>
   readonly thumbnail: Prisma.FieldRef<"Url", 'String'>
   readonly qrCodeUrl: Prisma.FieldRef<"Url", 'String'>
   readonly qrEncodedValue: Prisma.FieldRef<"Url", 'String'>
