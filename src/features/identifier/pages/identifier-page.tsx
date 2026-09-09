@@ -5,6 +5,7 @@ import {
   PageLimit,
   PagePagination,
   PageSearch,
+  PageSort,
 } from '@/components/fragments'
 import { MainLayout } from '@/components/layouts'
 import { Button } from '@/components/ui/button'
@@ -68,7 +69,7 @@ export const IdentifierPage = () => {
         </>
       }
     >
-      <header className="my-5">
+      <header className="my-5 space-y-5">
         <div className="my-5 flex flex-col justify-between gap-x-10 gap-y-3 sm:flex-row sm:items-center">
           <PageSearch
             value={queryParams.search}
@@ -76,11 +77,20 @@ export const IdentifierPage = () => {
             placeholder={`${m.model_identifier_field_title()}, ${m.model_identifier_field_slug()}`}
           />
         </div>
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex items-end xl:items-end justify-end gap-2 flex-col xl:flex-row">
           <PageLimit
             totalData={identifiers?.meta.total ?? 0}
             currentLimit={queryParams.limit}
             onLimitChange={(limit) => handleUpdateQuery({ limit })}
+          />
+          <PageSort
+            options={[
+              { id: 'title', label: m.model_identifier_field_title() },
+              { id: 'createdAt', label: m.model_identifier_field_created_at() },
+              { id: 'updatedAt', label: m.model_identifier_field_updated_at() },
+            ]}
+            sort={queryParams.sort}
+            onSortChange={(sort) => handleUpdateQuery({ sort })}
           />
         </div>
         <div className="flex items-center gap-x-3 sm:gap-x-5">

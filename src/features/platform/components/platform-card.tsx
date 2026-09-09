@@ -9,6 +9,8 @@ import { Link } from '@tanstack/react-router'
 import { LockKeyhole, LockOpen } from 'lucide-react'
 import type { PlatformResponse } from '../types'
 
+const CARD_WIDTH = 'w-90 sm:w-120 md:w-150 lg:w-200 xl:w-250 2xl:w-full'
+
 type PlatformCardProps = {
   platform: PlatformResponse
   checked: boolean
@@ -53,7 +55,12 @@ export const PlatformCard = ({
           }}
         >
           <Card className="relative w-full bg-secondary-background py-2">
-            <CardContent className="flex w-72 items-center gap-3 truncate text-lg font-semibold capitalize sm:w-96 md:w-full">
+            <CardContent
+              className={cn(
+                CARD_WIDTH,
+                'flex items-center gap-3 truncate text-lg font-semibold capitalize',
+              )}
+            >
               <ImageThumbnail thumbnail={thumbnail} title={title} />
               <div className="flex min-w-0 items-center gap-1">
                 {password ? (

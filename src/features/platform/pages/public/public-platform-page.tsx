@@ -1,6 +1,11 @@
 import { Heading } from '@/components'
 import { EmptyState } from '@/components/elements'
-import { PageLimit, PagePagination, PageSearch } from '@/components/fragments'
+import {
+  PageLimit,
+  PagePagination,
+  PageSearch,
+  PageSort,
+} from '@/components/fragments'
 import { PublicLayout } from '@/components/layouts'
 import * as m from '@/generated/paraglide/messages'
 import { useQueryParams } from '@/hooks'
@@ -15,7 +20,9 @@ export const PlatformPage = () => {
 
   const trpc = useTRPC()
 
-  const { queryParams, handleUpdateQuery } = useQueryParams()
+  const { queryParams, handleUpdateQuery } = useQueryParams([
+    { id: 'title', desc: false },
+  ])
 
   const { data: platforms } = useSuspenseQuery(
     trpc.platform.getPubllicAll.queryOptions({
@@ -28,7 +35,7 @@ export const PlatformPage = () => {
     <PublicLayout
       headerContent={<Heading size={'h2'}>{m.page_platform_title()}</Heading>}
     >
-      <header className="my-5">
+      <header className="my-5 space-y-5">
         <div className="my-5 flex flex-col justify-between gap-x-10 gap-y-3 sm:flex-row sm:items-center">
           <PageSearch
             value={queryParams.search}
@@ -36,11 +43,16 @@ export const PlatformPage = () => {
             placeholder={`${m.model_platform_field_title()}, ${m.model_platform_field_slug()}`}
           />
         </div>
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex items-end xl:items-end justify-end gap-2 flex-col xl:flex-row">
           <PageLimit
             totalData={platforms.meta.total}
             currentLimit={queryParams.limit}
             onLimitChange={(limit) => handleUpdateQuery({ limit })}
+          />
+          <PageSort
+            options={[{ id: 'title', label: m.model_platform_field_title() }]}
+            sort={queryParams.sort}
+            onSortChange={(sort) => handleUpdateQuery({ sort })}
           />
         </div>
       </header>

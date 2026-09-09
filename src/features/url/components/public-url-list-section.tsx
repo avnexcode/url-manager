@@ -1,5 +1,10 @@
 import { EmptyState } from '@/components/elements'
-import { PageLimit, PagePagination, PageSearch } from '@/components/fragments'
+import {
+  PageLimit,
+  PagePagination,
+  PageSearch,
+  PageSort,
+} from '@/components/fragments'
 import * as m from '@/generated/paraglide/messages'
 import type { SearchParams } from '@/hooks'
 import type { QueryResponse } from '@/interfaces'
@@ -22,7 +27,7 @@ export const PublicUrlListSection = ({
 }: PublicUrlListSectionProps) => {
   return (
     <>
-      <header className="my-5">
+      <header className="my-5 space-y-5">
         <div className="my-5 flex flex-col justify-between gap-x-10 gap-y-3 sm:flex-row sm:items-center">
           <PageSearch
             value={queryParams.search}
@@ -30,11 +35,16 @@ export const PublicUrlListSection = ({
             placeholder={`${m.model_url_field_title()}, ${m.model_url_field_slug()}`}
           />
         </div>
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex items-end xl:items-end justify-end gap-2 flex-col xl:flex-row">
           <PageLimit
             totalData={urls?.meta.total ?? 0}
             currentLimit={queryParams.limit}
             onLimitChange={(limit) => handleUpdateQuery({ limit })}
+          />
+          <PageSort
+            options={[{ id: 'title', label: m.model_url_field_title() }]}
+            sort={queryParams.sort}
+            onSortChange={(sort) => handleUpdateQuery({ sort })}
           />
         </div>
       </header>

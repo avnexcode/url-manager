@@ -322,6 +322,11 @@
   "component_page_limit_item": "Batas {limit}",
   "component_page_limit_skeleton": "Batas 15",
 
+  "component_page_sort_placeholder": "Urutkan berdasarkan",
+  "component_page_sort_skeleton": "Mengurutkan...",
+  "action_sort_asc": "Urutkan menaik",
+  "action_sort_desc": "Urutkan menurun",
+
   "component_select_pagination_page": "Halaman",
   "component_select_pagination_of": "dari",
 

@@ -321,6 +321,11 @@
   "component_page_limit_item": "Limit {limit}",
   "component_page_limit_skeleton": "Limit 15",
 
+  "component_page_sort_placeholder": "Sort by",
+  "component_page_sort_skeleton": "Sorting...",
+  "action_sort_asc": "Sort ascending",
+  "action_sort_desc": "Sort descending",
+
   "component_select_pagination_page": "Page",
   "component_select_pagination_of": "of",
 

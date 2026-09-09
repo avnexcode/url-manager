@@ -1,4 +1,5 @@
 import { useNavigate, useSearch } from '@tanstack/react-router'
+import { useMemo } from 'react'
 import z from 'zod'
 
 const sortItemSchema = z.object({
@@ -6,22 +7,32 @@ const sortItemSchema = z.object({
   desc: z.boolean(),
 })
 
-export const searchSchema = z.object({
-  search: z.string().default(''),
-  page: z.number().int().default(1),
-  sort: z.array(sortItemSchema).default([{ id: 'createdAt', desc: true }]),
-  limit: z.number().int().default(15),
-})
+export type SortItem = z.infer<typeof sortItemSchema>
 
-export type SearchParams = z.infer<typeof searchSchema>
+const DEFAULT_SORT: SortItem[] = [{ id: 'createdAt', desc: true }]
 
-export const useQueryParams = () => {
+export const createSearchSchema = (defaultSort: SortItem[] = DEFAULT_SORT) =>
+  z.object({
+    search: z.string().default(''),
+    page: z.number().int().default(1),
+    sort: z.array(sortItemSchema).default(defaultSort),
+    limit: z.number().int().default(15),
+  })
+
+export type SearchParams = z.infer<ReturnType<typeof createSearchSchema>>
+
+export const searchSchema = createSearchSchema()
+
+export const useQueryParams = (defaultSort?: SortItem[]) => {
+  const schema = useMemo(() => createSearchSchema(defaultSort), [defaultSort])
+
   const params = useSearch({ strict: false })
-  const queryParams = searchSchema.parse(params)
+  const queryParams = schema.parse(params)
   const navigate = useNavigate()
 
   const handleUpdateQuery = (newParams: Partial<SearchParams>) => {
-    const shouldResetPage = 'limit' in newParams && !('page' in newParams)
+    const shouldResetPage =
+      ('limit' in newParams || 'sort' in newParams) && !('page' in newParams)
 
     void navigate({
       search: ((prev: SearchParams) => ({

@@ -22,7 +22,9 @@ export const DetailPlatformPage = () => {
     trpc.platform.getPublicBySlug.queryOptions({ username, slug }),
   )
 
-  const { queryParams, handleUpdateQuery } = useQueryParams()
+  const { queryParams, handleUpdateQuery } = useQueryParams([
+    { id: 'title', desc: false },
+  ])
 
   const { data: urls, isLoading: isUrlsLoading } = useQuery(
     trpc.url.getPublicAll.queryOptions({
