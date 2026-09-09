@@ -73,6 +73,7 @@ export const useUpdateIdentifier = (
           void navigate({
             to: redirectTo || '/{-$locale}/dashboard/identifier/$id/view',
             params: { id },
+            replace: true,
           })
         }
         toastMessages.onUpdate.onSuccess()

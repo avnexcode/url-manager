@@ -181,11 +181,11 @@ export const IdentifierViewSkeleton = () => {
           <ImagePreviewSkeleton />
 
           <div className="flex min-w-0 flex-1 flex-col gap-2">
-            <Skeleton className="h-7 lg:h-9 w-1/2 max-w-full" />
+            <Skeleton className="h-7.5 lg:h-9.5 w-1/2 max-w-full" />
 
             <div className="flex flex-wrap items-center gap-2">
-              <Skeleton className="h-6.5 w-42 rounded-none" />
-              <Skeleton className="h-6.5 w-20 rounded-none" />
+              <Skeleton className="h-6 w-42 rounded-none" />
+              <Skeleton className="h-6 w-20 rounded-none" />
             </div>
 
             <div className="flex items-center gap-x-1 text-sm py-2">

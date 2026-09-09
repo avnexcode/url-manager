@@ -74,6 +74,7 @@ export const useUpdatePlatform = (
           void navigate({
             to: redirectTo || '/{-$locale}/dashboard/platform/$id/view',
             params: { id },
+            replace: true,
           })
         }
         toastMessages.onUpdate.onSuccess()

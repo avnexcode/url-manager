@@ -1,5 +1,10 @@
 import { ImagePreview, ImagePreviewSkeleton, QrImageDialog } from '@/components'
-import { ActionButton, ActionLink, ExternalLink } from '@/components/elements'
+import {
+  ActionButton,
+  ActionLink,
+  ClampableDescription,
+  ExternalLink,
+} from '@/components/elements'
 import { ConfirmDialog } from '@/components/fragments'
 import { Heading } from '@/components/heading'
 import { Button } from '@/components/ui/button'
@@ -65,15 +70,11 @@ export const UrlView = ({
                 {title}
               </Heading>
 
-              <div className="flex flex-wrap items-center gap-2"></div>
+              {/* <div className="flex flex-wrap items-center gap-2"></div> */}
 
+              <Separator />
               {description && (
-                <>
-                  <Separator />
-                  <p className="text-sm text-muted-foreground line-clamp-2 py-1">
-                    {description}
-                  </p>
-                </>
+                <ClampableDescription description={description} maxLines={2} />
               )}
             </div>
 
@@ -119,7 +120,7 @@ export const UrlView = ({
         <Separator className="my-5" />
         <div className="grid grid-cols-1 gap-3 px-4 py-4 sm:grid-cols-2 sm:px-6">
           <div className="flex items-center gap-x-2.5 rounded-lg px-3 py-2.5">
-            <div className="flex min-w-0 flex-col">
+            <div className="flex min-w-0 flex-col w-full">
               <span className="text-xs text-muted-foreground capitalize">
                 {m.model_platform_title()}
               </span>
@@ -135,7 +136,7 @@ export const UrlView = ({
           </div>
 
           <div className="flex items-center gap-x-2.5 rounded-lg px-3 py-2.5">
-            <div className="flex min-w-0 flex-col">
+            <div className="flex min-w-0 flex-col w-full">
               <span className="text-xs text-muted-foreground capitalize">
                 {m.model_identifier_title()}
               </span>
@@ -179,13 +180,14 @@ export const UrlViewSkeleton = () => {
           <ImagePreviewSkeleton />
 
           <div className="flex min-w-0 flex-1 flex-col gap-2">
-            <Skeleton className="h-7 w-48 max-w-full" />
+            <Skeleton className="h-7.5 lg:h-9.5 w-1/2 max-w-full" />
 
-            <div className="flex flex-wrap items-center gap-2" />
+            {/* <div className="flex flex-wrap items-center gap-2"></div> */}
+
+            <Separator />
 
             <div className="flex flex-col gap-1.5 py-1">
-              <Skeleton className="h-4 w-full max-w-md" />
-              <Skeleton className="h-4 w-3/4 max-w-sm" />
+              <Skeleton className="h-14 w-full" />
             </div>
           </div>
 
@@ -216,16 +218,20 @@ export const UrlViewSkeleton = () => {
 
       <div className="grid grid-cols-1 gap-3 px-4 py-4 sm:grid-cols-2 sm:px-6">
         <div className="flex items-center gap-x-2.5 rounded-lg px-3 py-2.5">
-          <div className="flex min-w-0 flex-col gap-1">
-            <Skeleton className="h-3 w-14" />
-            <Skeleton className="h-4 w-24" />
+          <div className="flex min-w-0 flex-col gap-1 w-full">
+            <span className="text-xs text-muted-foreground capitalize">
+              {m.model_platform_title()}
+            </span>
+            <Skeleton className="h-4 w-1/2" />
           </div>
         </div>
 
         <div className="flex items-center gap-x-2.5 rounded-lg px-3 py-2.5">
-          <div className="flex min-w-0 flex-col gap-1">
-            <Skeleton className="h-3 w-16" />
-            <Skeleton className="h-4 w-24" />
+          <div className="flex min-w-0 flex-col gap-1 w-full">
+            <span className="text-xs text-muted-foreground capitalize">
+              {m.model_identifier_title()}
+            </span>
+            <Skeleton className="h-4 w-1/2" />
           </div>
         </div>
       </div>

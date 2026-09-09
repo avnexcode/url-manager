@@ -72,6 +72,7 @@ export const useUpdateUrl = (
           void navigate({
             to: redirectTo || '/{-$locale}/dashboard/url/$id/view',
             params: { id },
+            replace: true,
           })
         }
         toastMessages.onUpdate.onSuccess()

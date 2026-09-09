@@ -10,7 +10,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton'
 import * as m from '@/generated/paraglide/messages'
 import { cn } from '@/lib/utils'
-import { capitalizeWords } from '@/utils'
+import { capitalizeFirstLetter } from '@/utils'
 import { renderElements } from '@/utils/render-elements'
 import { Loader2 } from 'lucide-react'
 import type { FieldValues, Path } from 'react-hook-form'
@@ -86,7 +86,7 @@ export const SelectIdentifierForm = <T extends FieldValues>({
               <SelectValue
                 placeholder={m.form_placeholder_select({ field: label })}
               >
-                {capitalizeWords(selectedItem?.title ?? '') ||
+                {capitalizeFirstLetter(selectedItem?.title ?? '') ||
                   m.form_placeholder_select({ field: label })}
               </SelectValue>
             </SelectTrigger>

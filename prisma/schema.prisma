@@ -144,8 +144,8 @@ model Url {
   id             String  @id @default(uuid()) @map("id_c748cbdb_7c8f_48e1_b756_0fe4cfc605b0") @db.VarChar(36)
   title          String  @map("title_e0a74b3d_b6d9_4092_9d77_7a7cb9ba9b67") @db.VarChar(100)
   slug           String  @unique @map("slug_c0fd9426_32d5_450a_bbba_48fd8ee30b57") @db.VarChar(150)
-  url            String  @map("url_009003c8_1114_43d1_bdd1_f8abf6473c4a")
-  description    String? @map("description_fabd75a3_ad74_4a12_97f0_b6b365a20f13") @db.VarChar(255)
+  url            String  @map("url_009003c8_1114_43d1_bdd1_f8abf6473c4a") @db.Text
+  description    String? @map("description_fabd75a3_ad74_4a12_97f0_b6b365a20f13") @db.Text
   thumbnail      String? @map("thumbnail_b01f565a_b46e_4a44_81b3_012600fecc82") @db.Text
   qrCodeUrl      String  @map("qr_code_url_0ddbcd34_b050_47c0_8a52_383076855fd9") @db.Text
   qrEncodedValue String  @map("qr_encoded_value_6b075fe4_6b2d_45ea_a341_4187609353c1") @db.Text
