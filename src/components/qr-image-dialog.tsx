@@ -8,6 +8,7 @@ import * as m from '@/generated/paraglide/messages'
 import { Download, ExternalLink } from 'lucide-react'
 import { CopyTextWrapper } from './elements'
 import { Button } from './ui/button'
+import { handleDownload } from '@/lib/supabase/image-download'
 
 const ensureAbsoluteUrl = (value: string) => {
   return /^https?:\/\//i.test(value) ? value : `https://${value}`
@@ -59,17 +60,16 @@ export const QrImageDialog = ({
             </div>
           )}
 
-          <a href={qrCodeUrl} download className="w-full">
-            <Button
-              type="button"
-              variant="default"
-              size="sm"
-              className="w-full gap-2"
-            >
-              <Download className="size-4" />
-              {m.action_download()}
-            </Button>
-          </a>
+          <Button
+            type="button"
+            variant="default"
+            size="sm"
+            className="w-full gap-2"
+            onClick={() => handleDownload(qrCodeUrl)}
+          >
+            <Download className="size-4" />
+            {m.action_download()}
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
