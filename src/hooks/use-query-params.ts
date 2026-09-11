@@ -16,7 +16,7 @@ export const createSearchSchema = (defaultSort: SortItem[] = DEFAULT_SORT) =>
     search: z.string().default(''),
     page: z.number().int().default(1),
     sort: z.array(sortItemSchema).default(defaultSort),
-    limit: z.number().int().default(15),
+    limit: z.number().int().default(30),
   })
 
 export type SearchParams = z.infer<ReturnType<typeof createSearchSchema>>
