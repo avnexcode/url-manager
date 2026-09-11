@@ -20,27 +20,27 @@ import z from 'zod'
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc'
 
 export const identifierRouter = createTRPCRouter({
-  getPubllicAll: publicProcedure
-    .input(z.object({ username: z.string().min(1), params: queryParams }))
-    .query(
-      async ({
-        ctx,
-        input,
-      }): Promise<QueryResponse<PublicIdentifierResponse>> => {
-        const { db } = ctx
-        const { username, params } = input
-        try {
-          const identifiers = await IdentifierService.getPublicAll(
-            db,
-            username,
-            params,
-          )
-          return identifiers
-        } catch (error) {
-          return errorFilter(error)
-        }
-      },
-    ),
+  // getPubllicAll: publicProcedure
+  //   .input(z.object({ username: z.string().min(1), params: queryParams }))
+  //   .query(
+  //     async ({
+  //       ctx,
+  //       input,
+  //     }): Promise<QueryResponse<PublicIdentifierResponse>> => {
+  //       const { db } = ctx
+  //       const { username, params } = input
+  //       try {
+  //         const identifiers = await IdentifierService.getPublicAll(
+  //           db,
+  //           username,
+  //           params,
+  //         )
+  //         return identifiers
+  //       } catch (error) {
+  //         return errorFilter(error)
+  //       }
+  //     },
+  //   ),
 
   getPublicBySlug: publicProcedure
     .input(z.object({ username: z.string().min(1), slug: z.string().min(1) }))
