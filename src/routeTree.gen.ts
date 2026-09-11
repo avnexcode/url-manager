@@ -34,9 +34,7 @@ import { Route as Char123LocaleChar125AuthenticatedDashboardPlatformIndexRouteIm
 import { Route as Char123LocaleChar125AuthenticatedDashboardPlatformCreateRouteImport } from './routes/{-$locale}/_authenticated/dashboard/platform/create'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/index'
 import { Route as Char123LocaleChar125AuthenticatedDashboardUrlCreateRouteImport } from './routes/{-$locale}/_authenticated/dashboard/url/create'
-import { Route as Char123LocaleChar125PublicUsernameIdentifierIndexRouteImport } from './routes/{-$locale}/_public/$username/identifier/index'
 import { Route as Char123LocaleChar125PublicUsernameIdentifierSlugRouteImport } from './routes/{-$locale}/_public/$username/identifier/$slug'
-import { Route as Char123LocaleChar125PublicUsernamePlatformIndexRouteImport } from './routes/{-$locale}/_public/$username/platform/index'
 import { Route as Char123LocaleChar125PublicUsernamePlatformSlugRouteImport } from './routes/{-$locale}/_public/$username/platform/$slug'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIdIndexRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/$id/index'
 import { Route as Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRouteImport } from './routes/{-$locale}/_authenticated/dashboard/identifier/$id/edit'
@@ -201,22 +199,10 @@ const Char123LocaleChar125AuthenticatedDashboardUrlCreateRoute =
     getParentRoute: () =>
       Char123LocaleChar125AuthenticatedDashboardUrlRouteRoute,
   } as any)
-const Char123LocaleChar125PublicUsernameIdentifierIndexRoute =
-  Char123LocaleChar125PublicUsernameIdentifierIndexRouteImport.update({
-    id: '/$username/identifier/',
-    path: '/$username/identifier/',
-    getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
-  } as any)
 const Char123LocaleChar125PublicUsernameIdentifierSlugRoute =
   Char123LocaleChar125PublicUsernameIdentifierSlugRouteImport.update({
     id: '/$username/identifier/$slug',
     path: '/$username/identifier/$slug',
-    getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
-  } as any)
-const Char123LocaleChar125PublicUsernamePlatformIndexRoute =
-  Char123LocaleChar125PublicUsernamePlatformIndexRouteImport.update({
-    id: '/$username/platform/',
-    path: '/$username/platform/',
     getParentRoute: () => Char123LocaleChar125PublicRouteRoute,
   } as any)
 const Char123LocaleChar125PublicUsernamePlatformSlugRoute =
@@ -317,8 +303,6 @@ export interface FileRoutesByFullPath {
   '/{-$locale}/dashboard/identifier/': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIndexRoute
   '/{-$locale}/dashboard/platform/': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIndexRoute
   '/{-$locale}/dashboard/url/': typeof Char123LocaleChar125AuthenticatedDashboardUrlIndexRoute
-  '/{-$locale}/$username/identifier/': typeof Char123LocaleChar125PublicUsernameIdentifierIndexRoute
-  '/{-$locale}/$username/platform/': typeof Char123LocaleChar125PublicUsernamePlatformIndexRoute
   '/{-$locale}/dashboard/identifier/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute
   '/{-$locale}/dashboard/identifier/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute
   '/{-$locale}/dashboard/platform/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute
@@ -351,8 +335,6 @@ export interface FileRoutesByTo {
   '/{-$locale}/dashboard/identifier': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIndexRoute
   '/{-$locale}/dashboard/platform': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIndexRoute
   '/{-$locale}/dashboard/url': typeof Char123LocaleChar125AuthenticatedDashboardUrlIndexRoute
-  '/{-$locale}/$username/identifier': typeof Char123LocaleChar125PublicUsernameIdentifierIndexRoute
-  '/{-$locale}/$username/platform': typeof Char123LocaleChar125PublicUsernamePlatformIndexRoute
   '/{-$locale}/dashboard/identifier/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute
   '/{-$locale}/dashboard/identifier/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute
   '/{-$locale}/dashboard/platform/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute
@@ -392,8 +374,6 @@ export interface FileRoutesById {
   '/{-$locale}/_authenticated/dashboard/identifier/': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIndexRoute
   '/{-$locale}/_authenticated/dashboard/platform/': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIndexRoute
   '/{-$locale}/_authenticated/dashboard/url/': typeof Char123LocaleChar125AuthenticatedDashboardUrlIndexRoute
-  '/{-$locale}/_public/$username/identifier/': typeof Char123LocaleChar125PublicUsernameIdentifierIndexRoute
-  '/{-$locale}/_public/$username/platform/': typeof Char123LocaleChar125PublicUsernamePlatformIndexRoute
   '/{-$locale}/_authenticated/dashboard/identifier/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdEditRoute
   '/{-$locale}/_authenticated/dashboard/identifier/$id/view': typeof Char123LocaleChar125AuthenticatedDashboardIdentifierIdViewRoute
   '/{-$locale}/_authenticated/dashboard/platform/$id/edit': typeof Char123LocaleChar125AuthenticatedDashboardPlatformIdEditRoute
@@ -432,8 +412,6 @@ export interface FileRouteTypes {
     | '/{-$locale}/dashboard/identifier/'
     | '/{-$locale}/dashboard/platform/'
     | '/{-$locale}/dashboard/url/'
-    | '/{-$locale}/$username/identifier/'
-    | '/{-$locale}/$username/platform/'
     | '/{-$locale}/dashboard/identifier/$id/edit'
     | '/{-$locale}/dashboard/identifier/$id/view'
     | '/{-$locale}/dashboard/platform/$id/edit'
@@ -466,8 +444,6 @@ export interface FileRouteTypes {
     | '/{-$locale}/dashboard/identifier'
     | '/{-$locale}/dashboard/platform'
     | '/{-$locale}/dashboard/url'
-    | '/{-$locale}/$username/identifier'
-    | '/{-$locale}/$username/platform'
     | '/{-$locale}/dashboard/identifier/$id/edit'
     | '/{-$locale}/dashboard/identifier/$id/view'
     | '/{-$locale}/dashboard/platform/$id/edit'
@@ -506,8 +482,6 @@ export interface FileRouteTypes {
     | '/{-$locale}/_authenticated/dashboard/identifier/'
     | '/{-$locale}/_authenticated/dashboard/platform/'
     | '/{-$locale}/_authenticated/dashboard/url/'
-    | '/{-$locale}/_public/$username/identifier/'
-    | '/{-$locale}/_public/$username/platform/'
     | '/{-$locale}/_authenticated/dashboard/identifier/$id/edit'
     | '/{-$locale}/_authenticated/dashboard/identifier/$id/view'
     | '/{-$locale}/_authenticated/dashboard/platform/$id/edit'
@@ -706,25 +680,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlCreateRouteImport
       parentRoute: typeof Char123LocaleChar125AuthenticatedDashboardUrlRouteRoute
     }
-    '/{-$locale}/_public/$username/identifier/': {
-      id: '/{-$locale}/_public/$username/identifier/'
-      path: '/$username/identifier'
-      fullPath: '/{-$locale}/$username/identifier/'
-      preLoaderRoute: typeof Char123LocaleChar125PublicUsernameIdentifierIndexRouteImport
-      parentRoute: typeof Char123LocaleChar125PublicRouteRoute
-    }
     '/{-$locale}/_public/$username/identifier/$slug': {
       id: '/{-$locale}/_public/$username/identifier/$slug'
       path: '/$username/identifier/$slug'
       fullPath: '/{-$locale}/$username/identifier/$slug'
       preLoaderRoute: typeof Char123LocaleChar125PublicUsernameIdentifierSlugRouteImport
-      parentRoute: typeof Char123LocaleChar125PublicRouteRoute
-    }
-    '/{-$locale}/_public/$username/platform/': {
-      id: '/{-$locale}/_public/$username/platform/'
-      path: '/$username/platform'
-      fullPath: '/{-$locale}/$username/platform/'
-      preLoaderRoute: typeof Char123LocaleChar125PublicUsernamePlatformIndexRouteImport
       parentRoute: typeof Char123LocaleChar125PublicRouteRoute
     }
     '/{-$locale}/_public/$username/platform/$slug': {
@@ -937,8 +897,6 @@ interface Char123LocaleChar125PublicRouteRouteChildren {
   Char123LocaleChar125PublicSSuffixRoute: typeof Char123LocaleChar125PublicSSuffixRoute
   Char123LocaleChar125PublicUsernameIdentifierSlugRoute: typeof Char123LocaleChar125PublicUsernameIdentifierSlugRoute
   Char123LocaleChar125PublicUsernamePlatformSlugRoute: typeof Char123LocaleChar125PublicUsernamePlatformSlugRoute
-  Char123LocaleChar125PublicUsernameIdentifierIndexRoute: typeof Char123LocaleChar125PublicUsernameIdentifierIndexRoute
-  Char123LocaleChar125PublicUsernamePlatformIndexRoute: typeof Char123LocaleChar125PublicUsernamePlatformIndexRoute
 }
 
 const Char123LocaleChar125PublicRouteRouteChildren: Char123LocaleChar125PublicRouteRouteChildren =
@@ -953,10 +911,6 @@ const Char123LocaleChar125PublicRouteRouteChildren: Char123LocaleChar125PublicRo
       Char123LocaleChar125PublicUsernameIdentifierSlugRoute,
     Char123LocaleChar125PublicUsernamePlatformSlugRoute:
       Char123LocaleChar125PublicUsernamePlatformSlugRoute,
-    Char123LocaleChar125PublicUsernameIdentifierIndexRoute:
-      Char123LocaleChar125PublicUsernameIdentifierIndexRoute,
-    Char123LocaleChar125PublicUsernamePlatformIndexRoute:
-      Char123LocaleChar125PublicUsernamePlatformIndexRoute,
   }
 
 const Char123LocaleChar125PublicRouteRouteWithChildren =
