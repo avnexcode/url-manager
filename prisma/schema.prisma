@@ -15,7 +15,7 @@ enum LoginProvider {
 }
 
 model User {
-  id        String          @id @default(cuid()) @map("id_16ce4b6f_c166_42fc_ba6d_e342d3fde687") @db.VarChar(36)
+  id        String          @id @default(uuid()) @map("id_16ce4b6f_c166_42fc_ba6d_e342d3fde687") @db.VarChar(36)
   username  String          @unique @map("username_bbe03405_5ecc_48f3_9c4d_cff1cf0c86e5") @db.VarChar(100)
   email     String          @unique @map("email_77a585f7_dd89_4be1_ac6a_fd3107ab8db7") @db.VarChar(150)
   avatar    String?         @map("avatar_7716d491_9fd9_4b7e_bbe3_01fad228b7b3") @db.Text

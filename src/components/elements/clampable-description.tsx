@@ -33,7 +33,7 @@ export const ClampableDescription = ({
       <p
         ref={textRef}
         className={cn(
-          'text-sm text-muted-foreground',
+          'text-sm text-muted-foreground text-justify',
           !isExpanded && `line-clamp-${maxLines}`,
         )}
       >

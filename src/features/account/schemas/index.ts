@@ -36,7 +36,7 @@ export const updateAccountFormSchema = () => {
       .instanceof(File, {
         message: capitalizeSentence(
           m.schema_validation_file_invalid_type({
-            field: m.model_platform_field_thumbnail(),
+            field: m.model_user_field_image(),
             allowedTypes: 'image/*',
           }),
         ),
@@ -46,7 +46,7 @@ export const updateAccountFormSchema = () => {
         {
           message: capitalizeSentence(
             m.schema_validation_file_max_size({
-              field: m.model_platform_field_thumbnail(),
+              field: m.model_user_field_image(),
               maxSize: 2,
             }),
           ),
@@ -57,7 +57,7 @@ export const updateAccountFormSchema = () => {
         {
           message: capitalizeSentence(
             m.schema_validation_file_invalid_type({
-              field: m.model_platform_field_thumbnail(),
+              field: m.model_user_field_image(),
               allowedTypes: 'JPEG, PNG, or WEBP',
             }),
           ),

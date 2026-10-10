@@ -1,9 +1,10 @@
 import { Heading } from '@/components'
-import { FormSkeleton, InputImageSkeleton } from '@/components/forms'
 import {
+  FormSkeleton,
+  InputImageSkeleton,
   InputTextAreaSkeleton,
   InputTextSkeleton,
-} from '@/components/forms/input-skeleton'
+} from '@/components/forms'
 import {
   MainLayout,
   PageContainer,
