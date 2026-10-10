@@ -9,17 +9,12 @@ export const Route = createFileRoute('/{-$locale}/_public/p/$suffix')({
     const { suffix } = params
 
     try {
-      const platform = await queryClient.ensureQueryData(
+      const platform = await queryClient.query(
         trpc.platform.getPublicBySlugSuffix.queryOptions({ suffix }),
       )
 
-      const {
-        user: { username },
-        slug,
-      } = platform
-
       throw redirect({
-        href: `${env.VITE_BASE_URL}/${username}/platform/${slug}`,
+        href: `${env.VITE_BASE_URL}/${platform.user.username}/platform/${platform.slug}`,
       })
     } catch (error) {
       if (

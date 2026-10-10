@@ -4,10 +4,11 @@ import { TRPCClientError } from '@trpc/client'
 export const Route = createFileRoute('/{-$locale}/_public/s/$suffix')({
   loader: async ({ context, params }) => {
     const { queryClient, trpc } = context
+
     const { suffix } = params
 
     try {
-      const { url } = await queryClient.ensureQueryData(
+      const { url } = await queryClient.query(
         trpc.url.getPublicBySlugSuffix.queryOptions({ suffix }),
       )
 

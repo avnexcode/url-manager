@@ -7,17 +7,12 @@ export const Route = createFileRoute('/{-$locale}/_public/i/$suffix')({
     const { queryClient, trpc } = context
     const { suffix } = params
     try {
-      const identifier = await queryClient.ensureQueryData(
+      const identifier = await queryClient.query(
         trpc.identifier.getPublicBySlugSuffix.queryOptions({ suffix }),
       )
 
-      const {
-        user: { username },
-        slug,
-      } = identifier
-
       throw redirect({
-        href: `${env.VITE_BASE_URL}/${username}/identifier/${slug}`,
+        href: `${env.VITE_BASE_URL}/${identifier.user.username}/identifier/${identifier.slug}`,
       })
     } catch (error) {
       if (

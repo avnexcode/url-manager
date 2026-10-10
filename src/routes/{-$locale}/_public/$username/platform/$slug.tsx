@@ -18,9 +18,11 @@ export const Route = createFileRoute(
   validateSearch: publicSearchSchema,
   loader: async ({ context, params }) => {
     const { queryClient, trpc } = context
+
     const { username, slug } = params
+
     try {
-      const platform = await queryClient.ensureQueryData(
+      const platform = await queryClient.query(
         trpc.platform.getPublicBySlug.queryOptions({ username, slug }),
       )
 

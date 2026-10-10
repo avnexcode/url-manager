@@ -12,9 +12,11 @@ export const Route = createFileRoute(
 )({
   loader: async ({ context, params }) => {
     const { queryClient, trpc } = context
+
     const { username, slug } = params
+
     try {
-      const identifier = await queryClient.ensureQueryData(
+      const identifier = await queryClient.query(
         trpc.identifier.getPublicBySlug.queryOptions({ username, slug }),
       )
 
