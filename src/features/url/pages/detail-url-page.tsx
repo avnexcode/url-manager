@@ -9,7 +9,7 @@ import { UrlView, UrlViewSkeleton } from '../components'
 export const DetailUrlPage = () => {
   const { id } = Route.useParams()
 
-  const { from, id: fromId } = Route.useSearch()
+  const search = Route.useSearch()
 
   const trpc = useTRPC()
 
@@ -24,7 +24,7 @@ export const DetailUrlPage = () => {
       {isUrlLoading ? (
         <UrlViewSkeleton />
       ) : (
-        url && <UrlView url={url} searchParams={{ from, id: fromId }} />
+        url && <UrlView url={url} searchParams={search} />
       )}
     </MainLayout>
   )

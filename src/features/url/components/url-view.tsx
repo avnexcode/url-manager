@@ -16,13 +16,14 @@ import { cn } from '@/lib/utils'
 import type { UrlSearchSchema } from '@/routes/{-$locale}/_authenticated/dashboard/url/create'
 import { useQueryClient } from '@tanstack/react-query'
 import { QrCode } from 'lucide-react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useDeleteUrl } from '../hooks'
 import type { UrlResponse } from '../types'
+import { getRedirectTo } from '../utils'
 
 type UrlViewProps = {
   url: UrlResponse
-  searchParams?: UrlSearchSchema
+  searchParams: UrlSearchSchema
 }
 
 export const UrlView = ({
@@ -43,7 +44,10 @@ export const UrlView = ({
   const [isQrOpen, setIsQrOpen] = useState<boolean>(false)
 
   const trpc = useTRPC()
+
   const queryClient = useQueryClient()
+
+  const redirectTo = useMemo(() => getRedirectTo(searchParams), [searchParams])
 
   const { onDelete, isPending } = useDeleteUrl({
     onSuccess: () => {
@@ -51,6 +55,7 @@ export const UrlView = ({
         queryKey: trpc.url.getAll.queryKey(),
       })
     },
+    redirectTo,
   })
 
   const handleDelete = () => onDelete({ id })
